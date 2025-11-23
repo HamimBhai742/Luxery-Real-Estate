@@ -4,7 +4,7 @@ import { userService } from './user.services';
 import { sendResponse } from '../../utils/send.response';
 import httpStatusCodes from 'http-status-codes';
 const registerUser = createAsyncFn(async (req: Request, res: Response) => {
-  const user = await userService.registerUser();
+  const user = await userService.registerUser(req.body);
   sendResponse(res, {
     success: true,
     statusCode: httpStatusCodes.CREATED,
