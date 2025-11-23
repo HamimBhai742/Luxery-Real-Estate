@@ -5,6 +5,8 @@ let server: Server;
 const PORT = ENV.PORT;
 const startServer = async () => {
   server = app.listen(PORT, () => {
-    console.log('Server is running on http://localhost:3000');
+    console.log(`Server running on http://localhost:${PORT}`);
   });
 };
+
+startServer();
