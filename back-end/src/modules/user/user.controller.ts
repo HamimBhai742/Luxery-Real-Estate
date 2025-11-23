@@ -1,4 +1,19 @@
-import { Request, Response } from "express";
-import { createAsyncFn } from "../../utils/create.async.fn";
+import { Request, Response } from 'express';
+import { createAsyncFn } from '../../utils/create.async.fn';
+import { userService } from './user.services';
+import { sendResponse } from '../../utils/send.response';
+import httpStatusCodes from 'http-status-codes';
+const registerUser = createAsyncFn(async (req: Request, res: Response) => {
+  const user = await userService.registerUser();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.CREATED,
+    message: 'User created successfully',
+    data: user,
+  });
+});
 
-const registerUser=createAsyncFn(async (req: Request, res: Response) => {});
+
+export const userController = {
+  registerUser
+};
