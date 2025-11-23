@@ -1,10 +1,8 @@
 import { Server } from 'http';
 import { app } from './app';
 import { ENV } from './config/env';
-import { prisma } from './config/prisma.config';
 import { connectDB } from './config/conneect.db';
 import { seedAdmin } from './utils/seedAdmin';
-import { notFound } from './middleware/not.found';
 let server: Server;
 const PORT = ENV.PORT;
 
@@ -19,4 +17,3 @@ const startServer = async () => {
   seedAdmin();
 })();
 
-app.use(notFound);
