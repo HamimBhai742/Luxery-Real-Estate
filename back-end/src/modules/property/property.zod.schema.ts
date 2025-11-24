@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const propertyCreateSchema = z.object({
+export const propertyZodSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   description: z.string().optional().nullable(),
   location: z.string().min(1, 'Location is required'),
