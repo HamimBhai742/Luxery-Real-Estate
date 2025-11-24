@@ -6,7 +6,7 @@ import httpStatusCodes from 'http-status-codes';
 import { ENV } from '../../config/env';
 
 const createPayment = createAsyncFn(async (req: Request, res: Response) => {
-  const payment = await paymentServices.initPayment(req.body);
+  const payment = await paymentServices.initPayment(req.body.bookingId as string);
   sendResponse(res, {
     success: true,
     statusCode: httpStatusCodes.CREATED,

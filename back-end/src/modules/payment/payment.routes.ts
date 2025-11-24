@@ -11,6 +11,6 @@ router.post(
   paymentController.createPayment
 );
 
-router.post('/success', checkAuth(Role.USER), paymentController.successPayment);
+router.post('/success', paymentController.successPayment);
 
 export const paymentRoutes = router;

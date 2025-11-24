@@ -5,7 +5,9 @@ import { BookingStatus, PaymentStatus } from '@prisma/client';
 import { sslCommerzServices } from '../sslcommerz/sslcommerz.services';
 
 const initPayment = async (bookingId: string) => {
+  console.log(bookingId)
   const payment = await prisma.payment.findUnique({ where: { bookingId } });
+  console.log(payment)
   if (!payment) {
     throw new AppError('Payment Not Found', httpStatusCode.NOT_FOUND);
   }
@@ -31,6 +33,7 @@ const initPayment = async (bookingId: string) => {
   };
 
   const sslPayment = await sslCommerzServices.paymentInit(sslPayload);
+  console.log(sslPayment)
   return {
     paymentUrl: sslPayment.GatewayPageURL,
   };

@@ -10,7 +10,7 @@ const paymentInit = async (payload: ISSLPayment) => {
       store_id: ENV.SSL_STORE_ID,
       store_passwd: ENV.SSL_STORE_PASSWORD,
       total_amount: payload.amount,
-      currency: 'BDT',
+      currency: 'USD',
       tran_id: payload.transactionId,
       success_url: `${ENV.SSL_SUCCESS_BACK_END_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=succeeded`,
       fail_url: `${ENV.SSL_FAILED_BACK_END_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=failed`,
@@ -43,7 +43,7 @@ const paymentInit = async (payload: ISSLPayment) => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
-
+console.log(res)
     return res.data;
   } catch (error: any) {
     console.log(error);
