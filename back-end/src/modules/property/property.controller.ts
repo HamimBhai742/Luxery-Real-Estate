@@ -13,8 +13,8 @@ const createProperty = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
-const getProperties = createAsyncFn(async (req: Request, res: Response) => {
-  const properties = await propertyServices.getProperty();
+const getMyProperties = createAsyncFn(async (req: Request, res: Response) => {
+  const properties = await propertyServices.getMyProperty();
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -23,7 +23,21 @@ const getProperties = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const updateProperty = createAsyncFn(async (req: Request, res: Response) => {
+  const property = await propertyServices.updateProperty(
+    req.params.id,
+    req.body
+  );
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Property updated successfully',
+    data: property,
+  });
+});
+
 export const propertyController = {
   createProperty,
-  getProperties,
+  getMyProperties,
+  updateProperty,
 };
