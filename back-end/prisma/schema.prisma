@@ -20,6 +20,13 @@ model User {
   email     String   @unique
   password  String
   role      Role     @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+@@index([email])
+  @@map("users")
+
 }
 
 enum Role {
@@ -46,4 +53,9 @@ model Property {
 
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([location])
+  @@index([price])
+  @@map("properties")
 }

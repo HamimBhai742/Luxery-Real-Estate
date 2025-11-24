@@ -13,6 +13,17 @@ const createProperty = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const getProperties = createAsyncFn(async (req: Request, res: Response) => {
+  const properties = await propertyServices.getProperty();
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Properties Retrived Successfully',
+    data: properties,
+  });
+});
+
 export const propertyController = {
   createProperty,
+  getProperties,
 };

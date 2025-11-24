@@ -9,7 +9,11 @@ const createProperty = async (payload: Prisma.PropertyCreateInput) => {
   const property = await prisma.property.create({ data: payload });
   return property;
 };
-const getProperty = async () => {};
+const getProperty = async () => {
+  const properties = await prisma.property.findMany();
+  return properties;
+};
+
 const updateProperty = async () => {};
 const deleteProperty = async () => {};
 

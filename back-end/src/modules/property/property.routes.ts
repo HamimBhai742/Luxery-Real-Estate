@@ -14,4 +14,10 @@ router.post(
   propertyController.createProperty
 );
 
+router.get(
+  '/my-properties',
+  checkAuth(Role.ADMIN),
+  propertyController.getProperties
+);
+
 export const propertyRoutes = router;
