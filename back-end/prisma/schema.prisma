@@ -89,10 +89,10 @@ payment      Payment?
 
 model Payment {
   id             String            @id @default(uuid())
-  bookingId      String @unique
+  bookingId      String  @unique
   booking        Booking        @relation(fields: [bookingId], references: [id])
   provider       PaymentProvider
-  transactionId  String
+  transactionId  String  @unique
   status         PaymentStatus  @default(pending)
   rawResponse    Json?
 
@@ -113,7 +113,7 @@ enum PaymentStatus {
   pending
   succeeded
   failed
-  refunded
+  canceled
 }
 
 
