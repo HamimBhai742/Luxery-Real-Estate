@@ -15,6 +15,11 @@ const getMyProperty = async () => {
   return properties;
 };
 
+const getAllProperties = async () => {
+  const properties = await prisma.property.findMany();
+  return properties;
+};
+
 const updateProperty = async (
   id: string,
   payload: Prisma.PropertyUpdateInput
@@ -47,5 +52,5 @@ export const propertyServices = {
   getMyProperty,
   updateProperty,
   deleteProperty,
-  
+  getAllProperties,
 };
