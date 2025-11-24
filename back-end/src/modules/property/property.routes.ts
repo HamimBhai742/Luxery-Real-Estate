@@ -14,20 +14,19 @@ router.post(
   propertyController.createProperty
 );
 
-
 router.get(
   '/my-properties',
   checkAuth(Role.ADMIN),
   propertyController.getMyProperties
 );
 
+router.get('/', propertyController.getAllProperties);
 
 router.put(
   '/update-property/:id',
   checkAuth(Role.ADMIN),
   propertyController.updateProperty
 );
-
 
 router.delete(
   '/delete-property/:id',
