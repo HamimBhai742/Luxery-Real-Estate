@@ -3,8 +3,11 @@ import 'dotenv/config';
 import { router } from './routes/routes';
 import { notFound } from './middleware/not.found';
 import { globalErrorHandel } from './middleware/global.error';
+import cookieParser from 'cookie-parser';
+
 export const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

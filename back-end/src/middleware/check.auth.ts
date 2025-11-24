@@ -3,14 +3,16 @@ import httpStatusCode from 'http-status-codes';
 import { verifyJwtToken } from '../utils/create.token';
 import { ENV } from '../config/env';
 import { AppError } from '../error/coustom.error';
+import { IJwt } from '../types/user.interface';
 export const checkAuth =
   (...roles: string[]) =>
-  async (req: Request & { user?: any }, res: Response, next: NextFunction) => {
+  async (req: Request & { user?: IJwt }, res: Response, next: NextFunction) => {
     try {
       const token = req?.cookies?.accessToken || req?.headers?.authorization;
+      console.log(token);
       if (!token) {
         throw new AppError(
-          'Access token is missing or not provided',
+          'You are not login, please login first',
           httpStatusCode.UNAUTHORIZED
         );
       }
@@ -23,7 +25,7 @@ export const checkAuth =
         );
       }
 
-      req.user = decod;
+      req.user = decod as IJwt;
       next();
     } catch (error) {
       next(error);
