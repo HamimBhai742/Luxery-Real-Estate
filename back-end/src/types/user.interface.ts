@@ -6,3 +6,9 @@ export interface IUser {
   password: string;
   role: Role;
 }
+
+export interface IJwt {
+  userId: string;
+  email: string;
+  role: Role;
+}
