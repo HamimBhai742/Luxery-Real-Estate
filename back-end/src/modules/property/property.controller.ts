@@ -36,8 +36,19 @@ const updateProperty = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const deleteProperty = createAsyncFn(async (req: Request, res: Response) => {
+  const property = await propertyServices.deleteProperty(req.params.id);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Property deleted successfully',
+    data: property,
+  });
+});
+
 export const propertyController = {
   createProperty,
   getMyProperties,
   updateProperty,
+  deleteProperty,
 };

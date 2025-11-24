@@ -33,11 +33,19 @@ const updateProperty = async (
   });
   return updatedProperty;
 };
-const deleteProperty = async () => {};
+const deleteProperty = async (id: string) => {
+  const property = await prisma.property.findUnique({ where: { id } });
+  if (!property) {
+    throw new AppError('Property not found', httpStatusCode.NOT_FOUND);
+  }
+  const deletedProperty = await prisma.property.delete({ where: { id } });
+  return deletedProperty;
+};
 
 export const propertyServices = {
   createProperty,
   getMyProperty,
   updateProperty,
   deleteProperty,
+  
 };

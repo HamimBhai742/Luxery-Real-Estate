@@ -28,4 +28,11 @@ router.put(
   propertyController.updateProperty
 );
 
+
+router.delete(
+  '/delete-property/:id',
+  checkAuth(Role.ADMIN),
+  propertyController.deleteProperty
+);
+
 export const propertyRoutes = router;
