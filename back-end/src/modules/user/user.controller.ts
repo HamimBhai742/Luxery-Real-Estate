@@ -21,7 +21,7 @@ const getMe = createAsyncFn(
     sendResponse(res, {
       success: true,
       statusCode: httpStatusCodes.OK,
-      message: 'User fetched successfully',
+      message: 'User Retrived Successfully',
       data: user,
     });
   }

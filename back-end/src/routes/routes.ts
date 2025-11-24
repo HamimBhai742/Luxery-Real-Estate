@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { userRoutes } from '../modules/user/user.routes';
 import { authRoutes } from '../modules/auth/auth.routes';
+import { propertyRoutes } from '../modules/property/property.routes';
 export const router = Router();
 const routes = [
   {
@@ -10,7 +11,11 @@ const routes = [
   {
     path: '/auth',
     route: authRoutes,
-  }
+  },
+  {
+    path: '/property',
+    route: propertyRoutes,
+  },
 ];
 
 routes.forEach((route) => {
