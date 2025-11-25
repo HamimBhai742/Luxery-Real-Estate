@@ -3,14 +3,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  FiHome, 
-  FiPlus, 
-  FiGrid, 
-  FiUsers, 
-  FiMenu, 
+import {
+  FiHome,
+  FiPlus,
+  FiGrid,
+  FiUsers,
+  FiMenu,
   FiX,
-  FiChevronRight 
+  FiChevronRight
 } from 'react-icons/fi';
 
 interface MenuItem {
@@ -77,7 +77,7 @@ const Sidebar = () => {
         className={`
           fixed top-0 left-0 h-screen z-40
           w-72 lg:w-80
-          bg-gradient-to-br from-white/10 via-white/5 to-transparent
+          bg-linear-to-br from-white/10 via-white/5 to-transparent
           backdrop-blur-2xl
           border-r border-white/20
           shadow-2xl
@@ -86,15 +86,15 @@ const Sidebar = () => {
         `}
       >
         {/* Glassmorphic Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 pointer-events-none" />
 
         {/* Content Container */}
         <div className="relative h-full flex flex-col p-6">
           {/* Logo Section */}
           <div className="mb-12 mt-4">
-            <Link href="/dashboard" className="group block">
+            <Link href="/" className="group block">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                   <span className="text-white font-bold text-xl">L</span>
                 </div>
                 <div>
@@ -126,14 +126,14 @@ const Sidebar = () => {
               >
                 {/* Active Indicator */}
                 {isActive(item.href) && (
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-r-full" />
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-linear-to-b from-blue-500 to-purple-600 rounded-r-full" />
                 )}
 
                 {/* Icon */}
                 <div className={`
                   flex-shrink-0 transition-all duration-300
-                  ${isActive(item.href) 
-                    ? 'text-white scale-110' 
+                  ${isActive(item.href)
+                    ? 'text-white scale-110'
                     : 'text-white/70 group-hover:text-white group-hover:scale-110'
                   }
                 `}>
@@ -143,8 +143,8 @@ const Sidebar = () => {
                 {/* Label */}
                 <span className={`
                   flex-1 font-medium transition-all duration-300
-                  ${isActive(item.href) 
-                    ? 'text-white' 
+                  ${isActive(item.href)
+                    ? 'text-white'
                     : 'text-white/70 group-hover:text-white'
                   }
                 `}>
@@ -161,14 +161,14 @@ const Sidebar = () => {
                 `} />
 
                 {/* Hover Glow Effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500 pointer-events-none" />
+                <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500 pointer-events-none" />
               </Link>
             ))}
           </nav>
 
           {/* Bottom Section */}
           <div className="mt-auto pt-6 border-t border-white/10">
-            <div className="px-5 py-4 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/10">
+            <div className="px-5 py-4 rounded-2xl bg-linear-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/10">
               <p className="text-white/60 text-xs mb-1">Need Help?</p>
               <p className="text-white text-sm font-medium">Contact Support</p>
             </div>

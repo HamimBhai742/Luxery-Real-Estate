@@ -8,7 +8,15 @@ import { TbBrandBooking } from 'react-icons/tb';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState({ success: false });
+  const [user, setUser] = useState({
+    success: false,
+    data: {
+      id: null,
+      email: null,
+      name: null,
+      role: null,
+    },
+  });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathName = usePathname();
 
@@ -46,7 +54,7 @@ const Navbar = () => {
     { name: 'Services', href: '/services' },
     { name: 'Contact', href: '/contact' },
   ];
-  console.log(user.success, 'kdcfv');
+  console.log(user, 'kdcfv');
   return (
     <div
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -107,13 +115,15 @@ const Navbar = () => {
                   className='absolute right-0 z-10 mt-3 w-56 origin-top-right rounded-2xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl py-2 shadow-2xl border border-gray-200/20 dark:border-gray-700/20 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in'
                 >
                   <MenuItem>
-                    <Link
-                      href='/bookings'
-                      className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
-                    >
-                     <TbBrandBooking/>
-                      Booking
-                    </Link>
+                    {user?.data?.role === 'ADMIN' && (
+                      <Link
+                        href='/dashboard'
+                        className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
+                      >
+                        <TbBrandBooking />
+                        Dashboard
+                      </Link>
+                    )}
                   </MenuItem>
 
                   <MenuItem>
