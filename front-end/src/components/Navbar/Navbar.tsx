@@ -1,8 +1,10 @@
 'use client';
-
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { MdManageAccounts } from 'react-icons/md';
+import { TbBrandBooking } from 'react-icons/tb';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +38,7 @@ const Navbar = () => {
     };
     fetchData();
   }, [setUser]);
-
+  const handleSignOutBtn = async () => {};
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Properties', href: '/properties' },
@@ -44,7 +46,7 @@ const Navbar = () => {
     { name: 'Services', href: '/services' },
     { name: 'Contact', href: '/contact' },
   ];
-
+  console.log(user.success, 'kdcfv');
   return (
     <div
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -93,17 +95,64 @@ const Navbar = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className='hidden md:flex items-center space-x-4'>
-            <Link
-              href='/login'
-              className='px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors'
-            >
-              Sign In
-            </Link>
-            <button className='relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group'>
-              <div className='absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 transition-transform group-hover:scale-105' />
-              <span className='relative'>Get Started</span>
-            </button>
+          <div>
+            {user?.success ? (
+              <Menu as='div' className='relative ml-3'>
+                <MenuButton className='relative'>
+                  <MdManageAccounts className='w-8 h-8 border-none' />
+                </MenuButton>
+
+                <MenuItems
+                  transition
+                  className='absolute right-0 z-10 mt-3 w-56 origin-top-right rounded-2xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl py-2 shadow-2xl border border-gray-200/20 dark:border-gray-700/20 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in'
+                >
+                  <MenuItem>
+                    <Link
+                      href='/bookings'
+                      className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
+                    >
+                     <TbBrandBooking/>
+                      Booking
+                    </Link>
+                  </MenuItem>
+
+                  <MenuItem>
+                    <button
+                      onClick={handleSignOutBtn}
+                      className='flex items-center   px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 data-focus:bg-red-50 dark:data-focus:bg-red-900/20 rounded-lg mx-2 transition-colors'
+                    >
+                      <svg
+                        className='w-4 h-4 mr-3'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'
+                        />
+                      </svg>
+                      Sign out
+                    </button>
+                  </MenuItem>
+                </MenuItems>
+              </Menu>
+            ) : (
+              <div className='hidden md:flex items-center space-x-4'>
+                <Link
+                  href='/login'
+                  className='px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors'
+                >
+                  Sign In
+                </Link>
+                <button className='relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group'>
+                  <div className='absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 transition-transform group-hover:scale-105' />
+                  <span className='relative'>Get Started</span>
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -154,13 +203,73 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <div className='pt-4 space-y-2'>
-            <button className='w-full px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors'>
-              Sign In
-            </button>
-            <button className='w-full px-4 py-3 text-base font-semibold text-white bg-linear-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
-              Get Started
-            </button>
+          <div>
+            {user?.success === true ? (
+              <Menu as='div' className='relative ml-3'>
+                <MenuButton className='relative hover:cursor-pointer flex rounded-full ring-2 ring-transparent hover:ring-blue-500/30 transition-all duration-300'>
+                  <span className='absolute -inset-1.5' />
+                  <span className='sr-only'>Open user menu</span>
+                </MenuButton>
+
+                <MenuItems
+                  transition
+                  className='absolute right-0 z-10 mt-3 w-56 origin-top-right rounded-2xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl py-2 shadow-2xl border border-gray-200/20 dark:border-gray-700/20 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in'
+                >
+                  <MenuItem>
+                    <Link
+                      href='/dashboard'
+                      className='flex items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
+                    >
+                      <svg
+                        className='w-4 h-4 mr-3'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z'
+                        />
+                      </svg>
+                      Dashboard
+                    </Link>
+                  </MenuItem>
+
+                  <MenuItem>
+                    <button
+                      onClick={handleSignOutBtn}
+                      className='flex items-center   px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 data-focus:bg-red-50 dark:data-focus:bg-red-900/20 rounded-lg mx-2 transition-colors'
+                    >
+                      <svg
+                        className='w-4 h-4 mr-3'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'
+                        />
+                      </svg>
+                      Sign out
+                    </button>
+                  </MenuItem>
+                </MenuItems>
+              </Menu>
+            ) : (
+              <div className='pt-4 space-y-2'>
+                <button className='w-full px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors'>
+                  Sign In
+                </button>
+                <button className='w-full px-4 py-3 text-base font-semibold text-white bg-linear-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
+                  Get Started
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
