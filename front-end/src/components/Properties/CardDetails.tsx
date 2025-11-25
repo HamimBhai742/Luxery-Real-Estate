@@ -20,6 +20,7 @@ const CardDetails = ({ property }: { property: Property }) => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify({ propertyId: id }),
         }
       );
@@ -186,14 +187,21 @@ const CardDetails = ({ property }: { property: Property }) => {
                 Book This Property
               </h2>
               <button
-                onClick={() => handleSubmit(property.id)}
-                className='w-full bg-linear-to-r from-amber-500 to-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all duration-300 shadow-lg hover:shadow-xl'
+                disabled={loading || property?.isBooked}
+                onClick={() => handleSubmit(property?.id)}
+                className={`w-full bg-linear-to-r ${
+                  property?.isBooked
+                    ? 'bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
+                    : 'bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700'
+                } text-white px-6 py-3 rounded-lg font-semibold  transition-all duration-300 shadow-lg hover:shadow-xl`}
               >
                 {loading ? (
                   <span className='flex items-center justify-center gap-2'>
                     <ImSpinner9 className='animate-spin ' />
                     Booking...
                   </span>
+                ) : property?.isBooked ? (
+                  'Booked'
                 ) : (
                   'Book Now'
                 )}
