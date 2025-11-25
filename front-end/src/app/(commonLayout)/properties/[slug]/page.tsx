@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
 import PropertyCard from '@/components/PropertyCard';
 import { Property } from '@/types/property';
 
@@ -56,7 +55,7 @@ const relatedProperties: Property[] = [
 ];
 
 export default function PropertyDetailsPage() {
-  const params = useParams();
+  // const params = useParams();
   const [activeImage, setActiveImage] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
 
@@ -69,11 +68,11 @@ export default function PropertyDetailsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-20">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Image Gallery */}
         <div className="mb-12">
-          <div className="relative h-[500px] bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4">
+          <div className="relative h-[500px] bg-linear-to-br from-amber-100 to-amber-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4">
             <div className="absolute inset-0 flex items-center justify-center text-amber-600 dark:text-amber-400">
               <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -88,7 +87,7 @@ export default function PropertyDetailsPage() {
               <button
                 key={idx}
                 onClick={() => setActiveImage(idx)}
-                className={`h-24 bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
+                className={`h-24 bg-linear-to-br from-amber-100 to-amber-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
                   activeImage === idx ? 'ring-4 ring-amber-500' : ''
                 }`}
               />
@@ -103,7 +102,7 @@ export default function PropertyDetailsPage() {
               <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 {mockProperty.name}
               </h1>
-              
+
               <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-6">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -112,7 +111,7 @@ export default function PropertyDetailsPage() {
                 {mockProperty.location}
               </div>
 
-              <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600 mb-8">
+              <div className="text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-amber-600 mb-8">
                 ${mockProperty.price.toLocaleString()}
               </div>
 
@@ -200,7 +199,7 @@ export default function PropertyDetailsPage() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="w-full bg-linear-to-r from-amber-500 to-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   Submit Request
                 </button>

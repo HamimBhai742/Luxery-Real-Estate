@@ -63,14 +63,14 @@ export default function PropertiesPage() {
     return mockProperties.filter((property) => {
       const matchesSearch = property.name.toLowerCase().includes(search.toLowerCase()) ||
                            property.location.toLowerCase().includes(search.toLowerCase());
-      
+
       const matchesPrice = priceRange === 'all' ||
         (priceRange === 'under5m' && property.price < 5000000) ||
         (priceRange === '5m-10m' && property.price >= 5000000 && property.price <= 10000000) ||
         (priceRange === 'over10m' && property.price > 10000000);
-      
+
       const matchesBedrooms = bedrooms === 'all' || property.bedrooms === parseInt(bedrooms);
-      
+
       const matchesStatus = statusFilter === 'all' ||
         (statusFilter === 'available' && property.status === 'active' && !property.isBooked) ||
         (statusFilter === 'booked' && property.isBooked) ||
@@ -81,7 +81,7 @@ export default function PropertiesPage() {
   }, [search, priceRange, bedrooms, statusFilter]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-20">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
