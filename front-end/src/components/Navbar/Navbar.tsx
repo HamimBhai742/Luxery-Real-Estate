@@ -64,9 +64,9 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+            <Link href="/login" className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
               Sign In
-            </button>
+            </Link>
             <button className="relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group">
               <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 transition-transform group-hover:scale-105" />
               <span className="relative">Get Started</span>
