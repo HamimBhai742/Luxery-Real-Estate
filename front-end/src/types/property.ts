@@ -8,7 +8,7 @@ export interface Property {
   bedrooms: number;
   bathrooms: number;
   amenities: string[];
-  status: 'active' | 'inactive' | 'sold';
+  status: 'active' | 'inactive' ;
   isBooked: boolean;
   createdAt: string;
   updatedAt: string;

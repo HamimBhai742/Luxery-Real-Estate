@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import ServiceCard from '@/components/ServiceCard';
 import ProcessTimeline from '@/components/ProcessTimeline';
 

@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MdManageAccounts } from 'react-icons/md';
+import { MdDashboard, MdManageAccounts } from 'react-icons/md';
 import { TbBrandBooking } from 'react-icons/tb';
 
 const Navbar = () => {
@@ -114,17 +114,29 @@ const Navbar = () => {
                   transition
                   className='absolute right-0 z-10 mt-3 w-56 origin-top-right rounded-2xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl py-2 shadow-2xl border border-gray-200/20 dark:border-gray-700/20 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in'
                 >
-                  <MenuItem>
-                    {user?.data?.role === 'ADMIN' && (
+                  {user?.data?.role === 'ADMIN' && (
+                    <MenuItem>
                       <Link
                         href='/dashboard'
                         className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
                       >
-                        <TbBrandBooking />
+                        <MdDashboard />
                         Dashboard
                       </Link>
-                    )}
-                  </MenuItem>
+                    </MenuItem>
+                  )}
+
+                  {user?.data?.role === 'USER' && (
+                    <MenuItem>
+                      <Link
+                        href='/my-bookings'
+                        className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
+                      >
+                        <TbBrandBooking />
+                        My Bookings
+                      </Link>
+                    </MenuItem>
+                  )}
 
                   <MenuItem>
                     <button
