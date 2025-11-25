@@ -7,7 +7,6 @@ import { Role } from '@prisma/client';
 
 const router = Router();
 router.post('/login', validateRequest(loginZodSchema), authController.login);
-router.get('/me', checkAuth(...Object.values(Role)), authController.getMe);
 router.post(
   '/verify',
   checkAuth(...Object.values(Role)),

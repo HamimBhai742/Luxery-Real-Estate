@@ -13,5 +13,10 @@ router.post(
   userController.registerUser
 );
 
+router.get(
+  '/me',
+  checkAuth(...Object.values(Role)),
+  userController.getMe
+);
 
 export const userRoutes = router;

@@ -24,18 +24,7 @@ const login = createAsyncFn(async (req: Request, res: Response) => {
   }
 });
 
-const getMe = createAsyncFn(
-  async (req: Request & { user?: IJwt }, res: Response) => {
-    const email = req?.user?.email;
-    const user = await authService.getMe(email as string);
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatusCodes.OK,
-      message: 'User Retrived Successfully',
-      data: user,
-    });
-  }
-);
+
 
 const verifyUser = createAsyncFn(
   async (req: Request & { user?: IJwt }, res: Response) => {
@@ -50,6 +39,5 @@ const verifyUser = createAsyncFn(
 
 export const authController = {
   login,
-  getMe,
   verifyUser,
 };
