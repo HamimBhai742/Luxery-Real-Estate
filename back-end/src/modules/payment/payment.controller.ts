@@ -28,7 +28,35 @@ const successPayment = createAsyncFn(async (req: Request, res: Response) => {
   }
 });
 
+//failed payment
+const failedPayment = createAsyncFn(async (req: Request, res: Response) => {
+  const query = req.query;
+  const payment = await paymentServices.failedPayment(query as Record<string, string>);
+
+  if (payment.success) {
+    res.redirect(
+      `${ENV.SSL_FAIL_FRONT_END_URL}?transactionId=${query.transactionId}&message=${payment.message}&amount=${query.amount}&status=${query.status}`
+    );
+  }
+});
+
+
+//cancel payment
+const cancelPayment = createAsyncFn(async (req: Request, res: Response) => {
+  const query = req.query;
+  console.log(query);
+  const payment = await paymentServices.cancelPayment(query as Record<string, string>);
+
+  if (payment.success) {
+    res.redirect(
+      `${ENV.SSL_CANCEL_FRONT_END_URL}?transactionId=${query.transactionId}&message=${payment.message}&amount=${query.amount}&status=${query.status}`
+    );
+  }
+});
+
 export const paymentController = {
   createPayment,
   successPayment,
+  failedPayment,
+  cancelPayment
 };
