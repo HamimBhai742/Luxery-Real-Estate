@@ -1,4 +1,4 @@
-import { prisma } from "../config/prisma.config";
+import { prisma } from "../config/prisma.configs";
 
 export const generateUniqueSlug = async (title: string) => {
   const baseSlug: string = title.toLowerCase().split(' ').join('-');

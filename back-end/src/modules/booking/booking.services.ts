@@ -1,5 +1,5 @@
 import httpStatusCode from 'http-status-codes';
-import { prisma } from '../../config/prisma.config';
+import { prisma } from '../../config/prisma.configs';
 import crypto from 'crypto';
 import { AppError } from '../../error/coustom.error';
 

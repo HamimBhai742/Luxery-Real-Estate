@@ -16,11 +16,13 @@ router.post(
 
 router.get(
   '/my-properties',
-  checkAuth(Role.ADMIN),
+  // checkAuth(Role.ADMIN),
   propertyController.getMyProperties
 );
 
 router.get('/', propertyController.getAllProperties);
+
+router.get('/:slug', propertyController.getSingleProperty);
 
 router.put(
   '/update-property/:id',

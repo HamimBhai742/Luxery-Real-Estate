@@ -1,11 +1,10 @@
 import { Role } from '@prisma/client';
 import { ENV } from '../config/env';
-import { prisma } from '../config/prisma.config';
+import { prisma } from '../config/prisma.configs';
 import bcrypt from 'bcrypt';
 export const seedAdmin = async () => {
   try {
     const email = ENV.ADMIN_EMAIL;
-    console.log(email,'lldksjc')
     const admin = await prisma.user.findUnique({ where: { email } });
     if (admin) {
       console.error('Admin already exists');

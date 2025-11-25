@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { ENV } from '../config/env';
 import httpStatusCode from 'http-status-codes';
-import { prisma } from '../config/prisma.config';
+import { prisma } from '../config/prisma.configs';
 import { createJwtToken } from './create.token';
 
 export const createUserToken = (payload: any) => {

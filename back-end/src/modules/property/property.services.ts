@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { generateUniqueSlug } from '../../utils/generate.uniqe.slug';
-import { prisma } from '../../config/prisma.config';
+import { prisma } from '../../config/prisma.configs';
 import { AppError } from '../../error/coustom.error';
 import httpStatusCode from 'http-status-codes';
 const createProperty = async (payload: Prisma.PropertyCreateInput) => {
@@ -38,6 +38,15 @@ const updateProperty = async (
   });
   return updatedProperty;
 };
+
+const getSingleProperty = async (slug: string) => {
+  console.log(slug)
+  const property = await prisma.property.findUnique({ where: { slug } });
+  if (!property) {
+    throw new AppError('Property not found', httpStatusCode.NOT_FOUND);
+  }
+  return property;
+};
 const deleteProperty = async (id: string) => {
   const property = await prisma.property.findUnique({ where: { id } });
   if (!property) {
@@ -53,4 +62,5 @@ export const propertyServices = {
   updateProperty,
   deleteProperty,
   getAllProperties,
+  getSingleProperty,
 };

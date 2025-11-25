@@ -1,5 +1,5 @@
 import httpStatusCode from 'http-status-codes';
-import { prisma } from '../../config/prisma.config';
+import { prisma } from '../../config/prisma.configs';
 import { AppError } from '../../error/coustom.error';
 import { BookingStatus, PaymentStatus } from '@prisma/client';
 import { sslCommerzServices } from '../sslcommerz/sslcommerz.services';

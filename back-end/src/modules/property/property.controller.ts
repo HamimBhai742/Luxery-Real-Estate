@@ -33,6 +33,15 @@ const getAllProperties = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleProperty = createAsyncFn(async (req: Request, res: Response) => {
+  const property = await propertyServices.getSingleProperty(req.params.slug);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Property Retrived Successfully',
+    data: property,
+  });
+});
 const updateProperty = createAsyncFn(async (req: Request, res: Response) => {
   const property = await propertyServices.updateProperty(
     req.params.id,
@@ -62,4 +71,5 @@ export const propertyController = {
   updateProperty,
   deleteProperty,
   getAllProperties,
+  getSingleProperty,
 };

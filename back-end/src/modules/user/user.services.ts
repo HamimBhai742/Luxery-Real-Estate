@@ -1,5 +1,5 @@
 import { ENV } from '../../config/env';
-import { prisma } from '../../config/prisma.config';
+import { prisma } from '../../config/prisma.configs';
 import { AppError } from '../../error/coustom.error';
 import { IUser } from '../../types/user.interface';
 import httpStatusCode from 'http-status-codes';
