@@ -33,7 +33,7 @@ const failedPayment = createAsyncFn(async (req: Request, res: Response) => {
   const query = req.query;
   const payment = await paymentServices.failedPayment(query as Record<string, string>);
 
-  if (payment.success) {
+  if (payment.failed) {
     res.redirect(
       `${ENV.SSL_FAIL_FRONT_END_URL}?transactionId=${query.transactionId}&message=${payment.message}&amount=${query.amount}&status=${query.status}`
     );
@@ -47,7 +47,7 @@ const cancelPayment = createAsyncFn(async (req: Request, res: Response) => {
   console.log(query);
   const payment = await paymentServices.cancelPayment(query as Record<string, string>);
 
-  if (payment.success) {
+  if (payment.canceled) {
     res.redirect(
       `${ENV.SSL_CANCEL_FRONT_END_URL}?transactionId=${query.transactionId}&message=${payment.message}&amount=${query.amount}&status=${query.status}`
     );

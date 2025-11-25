@@ -78,7 +78,7 @@ const failedPayment = async (query: Record<string, string>) => {
       },
     });
     return {
-      success: false,
+      failed: true,
       message: 'Payment Failed & Booking Failed',
     };
   });
@@ -100,7 +100,7 @@ const cancelPayment = async (query: Record<string, string>) => {
       },
     });
     return {
-      success: false,
+      canceled: true,
       message: 'Payment Canceled & Booking Canceled',
     };
   });
