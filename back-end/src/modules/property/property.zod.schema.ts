@@ -8,7 +8,8 @@ export const propertyCreateZodSchema = z.object({
   bedrooms: z.number().int().nonnegative('Bedrooms must be an integer >= 0'),
   bathrooms: z.number().int().nonnegative('Bathrooms must be an integer >= 0'),
   amenities: z.array(z.string().min(1)).optional().default([]),
-  status: z.enum(['active', 'inactive']).default('active'),
+  status: z.enum(['active', 'inactive']).default('active').optional(),
+  isBooked: z.boolean().default(false).optional(),
 });
 
 export const propertyUpdateZodSchema = z.object({

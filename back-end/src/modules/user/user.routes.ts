@@ -13,7 +13,7 @@ router.post(
   userController.registerUser
 );
 
-router.get(
+router.post(
   '/me',
   checkAuth(...Object.values(Role)),
   userController.getMe

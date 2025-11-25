@@ -21,7 +21,6 @@ const registerUser = async (payload: IUser) => {
   };
 };
 
-
 const getMe = async (email: string) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) {
@@ -32,9 +31,9 @@ const getMe = async (email: string) => {
     name: user.name,
     email: user.email,
     role: user.role,
+    id: user.id,
   };
 };
-
 
 export const userService = {
   registerUser,
