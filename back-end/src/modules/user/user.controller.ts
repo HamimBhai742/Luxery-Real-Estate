@@ -14,20 +14,8 @@ const registerUser = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
-const getMe = createAsyncFn(
-  async (req: Request & { user?: IJwt }, res: Response) => {
-    const email = req?.user?.email;
-    const user = await userService.getMe(email as string);
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatusCodes.OK,
-      message: 'User Retrived Successfully',
-      data: user,
-    });
-  }
-);
+
 
 export const userController = {
   registerUser,
-  getMe,
 };
