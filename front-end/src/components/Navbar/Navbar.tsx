@@ -36,14 +36,14 @@ const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-              <div className="relative bg-gradient-to-br from-amber-500 to-amber-600 p-2 rounded-lg">
+              <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
+              <div className="relative bg-linear-to-br from-amber-500 to-amber-600 p-2 rounded-lg">
                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
                 </svg>
               </div>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-800 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-linear-to-r from-amber-600 to-amber-800 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent">
               LUXE
             </span>
           </Link>
@@ -57,7 +57,7 @@ const Navbar = () => {
                 className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors group"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
           </div>
@@ -68,7 +68,7 @@ const Navbar = () => {
               Sign In
             </button>
             <button className="relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-600 transition-transform group-hover:scale-105" />
+              <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 transition-transform group-hover:scale-105" />
               <span className="relative">Get Started</span>
             </button>
           </div>
@@ -110,7 +110,7 @@ const Navbar = () => {
             <button className="w-full px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors">
               Sign In
             </button>
-            <button className="w-full px-4 py-3 text-base font-semibold text-white bg-gradient-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow">
+            <button className="w-full px-4 py-3 text-base font-semibold text-white bg-linear-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow">
               Get Started
             </button>
           </div>
