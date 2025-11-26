@@ -1,7 +1,7 @@
 import { prisma } from '../../config/prisma.configs';
 import { AppError } from '../../error/coustom.error';
 import httpStatusCode from 'http-status-codes';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const login = async ({
   email,

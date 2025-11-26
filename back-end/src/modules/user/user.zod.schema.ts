@@ -10,6 +10,10 @@ export const userZodSchema = z.object({
     .email('Invalid email')
     .min(1, 'Email is required')
     .max(50, 'Email must be at most 50 characters'),
+  phone: z
+    .string()
+    .min(1, 'Phone is required')
+    .min(11, 'Phone must be at least 11 characters'),
   password: z
     .string()
     .min(1, 'Password is required')

@@ -16,7 +16,6 @@ router.post(
 
 router.get(
   '/my-properties',
-  // checkAuth(Role.ADMIN),
   propertyController.getMyProperties
 );
 

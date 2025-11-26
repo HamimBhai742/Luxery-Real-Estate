@@ -1,7 +1,7 @@
 import { Role } from '@prisma/client';
 import { ENV } from '../config/env';
 import { prisma } from '../config/prisma.configs';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 export const seedAdmin = async () => {
   try {
     const email = ENV.ADMIN_EMAIL;
