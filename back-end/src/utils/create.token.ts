@@ -2,7 +2,7 @@ import { JwtPayload, SignOptions } from 'jsonwebtoken';
 import jwt from 'jsonwebtoken';
 
 interface IPayload {
-  userId: string;
+  userId: number;
   email: string;
   role: string;
 }

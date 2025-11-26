@@ -22,7 +22,12 @@ const login = async ({
     throw new AppError('Invalid password', httpStatusCode.UNAUTHORIZED);
   }
 
-  return user;
+  return {
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    id: user.id,
+  };
 };
 
 

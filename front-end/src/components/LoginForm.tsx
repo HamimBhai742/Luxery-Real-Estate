@@ -34,8 +34,7 @@ export default function LoginForm() {
         console.log(user.data);
         if (user?.data?.role === 'ADMIN') {
           router.push('/dashboard');
-        }
-        if (user?.data?.role === 'USER') {
+        } else {
           router.push('/');
         }
       }

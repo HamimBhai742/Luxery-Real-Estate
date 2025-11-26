@@ -12,4 +12,6 @@ router.post(
   checkAuth(...Object.values(Role)),
   authController.verifyUser
 );
+
+router.post('/logout', authController.logout);
 export const authRoutes = router;

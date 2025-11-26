@@ -8,7 +8,8 @@ const tranx = (): string => {
   return `tran_${id}`;
 };
 
-const createBooking = async (userId: string, propertyId: string) => {
+const createBooking = async (userId: number, propertyId: string) => {
+  console.log(userId, propertyId);
   const property = await prisma.property.findUnique({
     where: { id: propertyId },
   });
@@ -42,6 +43,16 @@ const createBooking = async (userId: string, propertyId: string) => {
   });
 };
 
+const getMyBookings = async (userId: number) => {
+  return await prisma.booking.findMany({
+    where: { userId },
+    include: {
+      property: true,
+    },
+  });
+};
+
 export const bookingServices = {
   createBooking,
+  getMyBookings,
 };

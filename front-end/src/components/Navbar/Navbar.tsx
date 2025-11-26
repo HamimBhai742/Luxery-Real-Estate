@@ -194,10 +194,13 @@ const Navbar = () => {
                 >
                   Sign In
                 </Link>
-                <button className='relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group'>
+                <Link
+                  href='/register'
+                  className='relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group'
+                >
                   <div className='absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 transition-transform group-hover:scale-105' />
                   <span className='relative'>Get Started</span>
-                </button>
+                </Link>
               </div>
             )}
           </div>
@@ -309,12 +312,10 @@ const Navbar = () => {
               </Menu>
             ) : (
               <div className='pt-4 space-y-2'>
-                <button className='w-full px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors'>
+                <Link href='/login' className='w-full px-4 py-3 text-base font-semibold text-white bg-linear-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
                   Sign In
-                </button>
-                <button className='w-full px-4 py-3 text-base font-semibold text-white bg-linear-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
-                  Get Started
-                </button>
+                </Link>
+              
               </div>
             )}
           </div>

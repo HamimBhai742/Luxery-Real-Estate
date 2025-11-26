@@ -33,6 +33,7 @@ const CardDetails = ({ property }: { property: Property }) => {
       console.log(data);
       if (data.success) {
         toast.success('Property booked successfully!');
+        window.location.reload();
       }
       if (!data.success) {
         toast.error(
@@ -139,7 +140,11 @@ const CardDetails = ({ property }: { property: Property }) => {
                 </div>
                 <div className='text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg'>
                   <div className='text-2xl font-bold text-gray-900 dark:text-white'>
-                    {property?.status === 'active' ? 'Available' : 'Booked'}
+                    {property?.isBooked
+                      ? 'Booked'
+                      : property?.status === 'active'
+                      ? 'Available'
+                      : 'Unavailable'}
                   </div>
                   <div className='text-sm text-gray-600 dark:text-gray-400'>
                     Status
