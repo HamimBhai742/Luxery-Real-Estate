@@ -30,8 +30,14 @@ export default function LoginForm() {
         toast.error(user?.message);
       }
       if (user?.success) {
-        router.push('/');
         toast.success(user?.message);
+        console.log(user.data);
+        if (user?.data?.role === 'ADMIN') {
+          router.push('/dashboard');
+        }
+        if (user?.data?.role === 'USER') {
+          router.push('/');
+        }
       }
     } catch (error) {
       console.log(error);
@@ -183,7 +189,6 @@ export default function LoginForm() {
 
         {/* Remember Me & Forgot Password */}
         <div className='flex items-center'>
-          
           <Link
             href='/forgot-password'
             className='text-sm text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300 font-medium transition-colors'

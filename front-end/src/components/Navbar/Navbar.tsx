@@ -2,12 +2,15 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { MdDashboard, MdManageAccounts } from 'react-icons/md';
 import { TbBrandBooking } from 'react-icons/tb';
+import { logout } from '@/helpers/logOut';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const router = useRouter();
   const [user, setUser] = useState({
     success: false,
     data: {
@@ -46,7 +49,29 @@ const Navbar = () => {
     };
     fetchData();
   }, [setUser]);
-  const handleSignOutBtn = async () => {};
+
+  const handleSignOutBtn = async () => {
+    try {
+      const data = await logout();
+      if (data?.success) {
+        toast.success(data?.message);
+        router.replace('/');
+        setUser({
+          success: false,
+          data: {
+            id: null,
+            email: null,
+            name: null,
+            role: null,
+          },
+        });
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Properties', href: '/properties' },
