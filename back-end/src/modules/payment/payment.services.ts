@@ -5,9 +5,9 @@ import { BookingStatus, PaymentStatus } from '@prisma/client';
 import { sslCommerzServices } from '../sslcommerz/sslcommerz.services';
 
 const initPayment = async (bookingId: string) => {
-  console.log(bookingId)
+  console.log(bookingId);
   const payment = await prisma.payment.findUnique({ where: { bookingId } });
-  console.log(payment)
+  console.log(payment);
   if (!payment) {
     throw new AppError('Payment Not Found', httpStatusCode.NOT_FOUND);
   }
@@ -33,7 +33,7 @@ const initPayment = async (bookingId: string) => {
   };
 
   const sslPayment = await sslCommerzServices.paymentInit(sslPayload);
-  console.log(sslPayment)
+  console.log(sslPayment);
   return {
     paymentUrl: sslPayment.GatewayPageURL,
   };
@@ -71,10 +71,17 @@ const failedPayment = async (query: Record<string, string>) => {
         status: PaymentStatus.failed,
       },
     });
-    await tx.booking.update({
+    const booking = await tx.booking.update({
       where: { id: updatePayment.bookingId },
       data: {
         status: BookingStatus.canceled,
+      },
+    });
+
+    await tx.property.update({
+      where: { id: booking.propertyId },
+      data: {
+        isBooked: false,
       },
     });
     return {
@@ -93,10 +100,17 @@ const cancelPayment = async (query: Record<string, string>) => {
         status: PaymentStatus.canceled,
       },
     });
-    await tx.booking.update({
+    const booking = await tx.booking.update({
       where: { id: updatePayment.bookingId },
       data: {
         status: BookingStatus.canceled,
+      },
+    });
+
+    await tx.property.update({
+      where: { id: booking.propertyId },
+      data: {
+        isBooked: false,
       },
     });
     return {
