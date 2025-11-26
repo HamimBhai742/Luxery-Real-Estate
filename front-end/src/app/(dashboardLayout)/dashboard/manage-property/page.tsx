@@ -1,38 +1,57 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
 import { FiHome, FiTrendingUp, FiDollarSign, FiEye } from 'react-icons/fi';
 import PropertyTable from '@/components/PropertyTable';
 import PropertyFilters from '@/components/PropertyFilters';
+import { useEffect, useState } from 'react';
+import ManagePropertiesSkeleton from '@/components/Loding';
 
-const ManagePropertyPage = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/property/my-properties`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  const data = await res.json();
+const ManagePropertyPage =  () => {
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/property/my-properties`
+        );
+        const json = await res.json();
+        setData(json.data);
+      } catch (err) {
+        console.error('Fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) return <ManagePropertiesSkeleton />;
   const stats = [
     {
       icon: FiHome,
       label: 'Total Properties',
-      value: data.data.length.toString(),
+      value: data.length.toString(),
       change: '+12%',
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: FiTrendingUp,
       label: 'Active Listings',
-      value: data.data.filter((property:any) => property.status === 'active').length.toString(),
+      value: data
+        .filter((property: any) => property.status === 'active')
+        .length.toString(),
       change: '+8%',
       color: 'from-purple-500 to-pink-500',
     },
     {
       icon: FiDollarSign,
       label: 'Total Value',
-      value: `$${data.data.reduce((sum: number, p: { price: number; }) => sum + p.price, 0)}`,
+      value: `$${data.reduce(
+        (sum: number, p: { price: number }) => sum + p.price,
+        0
+      )}`,
       change: '+15%',
       color: 'from-green-500 to-emerald-500',
     },
@@ -96,7 +115,7 @@ const ManagePropertyPage = async () => {
 
       {/* Properties Table */}
       <div className='relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 lg:p-8'>
-        <PropertyTable properties={data.data} />
+        <PropertyTable properties={data} />
       </div>
     </div>
   );

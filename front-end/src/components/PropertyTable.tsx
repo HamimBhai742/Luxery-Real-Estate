@@ -116,7 +116,7 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
             </tr>
           </thead>
           <tbody>
-            {properties.map((property, index) => (
+            {properties?.map((property, index) => (
               <tr
                 key={property.id}
                 className='border-b border-white/5 hover:bg-white/5 transition-all duration-300 group'

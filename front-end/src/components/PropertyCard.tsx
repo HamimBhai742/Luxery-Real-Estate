@@ -23,11 +23,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               Booked
             </div>
           )}
-          {property.status === 'sold' && (
-            <div className="absolute top-4 right-4 bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-semibold">
-              Sold
-            </div>
-          )}
+        
         </div>
 
         {/* Content */}

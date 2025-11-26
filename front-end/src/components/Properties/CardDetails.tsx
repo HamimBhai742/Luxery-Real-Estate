@@ -1,4 +1,5 @@
 import { Property } from '@/types/property';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
@@ -8,7 +9,7 @@ const CardDetails = ({ property }: { property: Property }) => {
   const [activeImage, setActiveImage] = useState(0);
   const [loading, setLoading] = useState(false);
   const images = [0, 1, 2, 3]; // Mock image indices
-
+  const router = useRouter();
   const handleSubmit = async (id: string) => {
     console.log(id);
     try {
@@ -33,7 +34,7 @@ const CardDetails = ({ property }: { property: Property }) => {
       console.log(data);
       if (data.success) {
         toast.success('Property booked successfully!');
-        window.location.reload();
+        router.push('/my-bookings');
       }
       if (!data.success) {
         toast.error(

@@ -79,7 +79,6 @@ const Navbar = () => {
     { name: 'Services', href: '/services' },
     { name: 'Contact', href: '/contact' },
   ];
-  console.log(user, 'kdcfv');
   return (
     <div
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -315,7 +314,7 @@ const Navbar = () => {
                 <Link href='/login' className='w-full px-4 py-3 text-base font-semibold text-white bg-linear-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
                   Sign In
                 </Link>
-              
+
               </div>
             )}
           </div>

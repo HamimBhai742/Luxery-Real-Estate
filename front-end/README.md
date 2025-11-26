@@ -1,36 +1,185 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏰 Luxury Real Estate Platform
 
-## Getting Started
+A modern, luxury real estate platform built with Next.js 16, React 19, and Tailwind CSS v4. Features glassmorphic design, smooth animations, and a premium user experience.
 
-First, run the development server:
+## 🌐 Live Demo
 
+**[https://luxery-real-estate-742.vercel.app/](https://luxery-real-estate-742.vercel.app/)**
+
+## ✨ Features
+
+### 🎨 Modern UI/UX
+- Glassmorphic card designs with backdrop blur effects
+- Smooth animations and transitions
+- Parallax scrolling effects
+- Responsive design for all devices
+- Dark theme with gradient accents
+
+### 🏠 Property Management
+- Browse luxury properties with detailed information
+- Property listings with images, amenities, and pricing
+- Dynamic property pages with slug-based routing
+- Property search and filtering
+
+### 👤 User Features
+- User authentication (Login/Register)
+- My Bookings page with booking management
+- View booking status (Pending, Confirmed, Cancelled)
+- Pay Now functionality for pending bookings
+
+### 💳 Payment System
+- Payment success page with confetti animation
+- Payment cancelled page
+- Payment failed page with error details
+- Transaction details display
+
+### 🛡️ Admin Dashboard
+- Create and manage properties
+- Manage users
+- Property table with CRUD operations
+- Protected admin routes
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16.0.3
+- **UI Library:** React 19.2.0
+- **Styling:** Tailwind CSS v4
+- **Language:** TypeScript
+- **UI Components:** Headless UI
+- **Icons:** React Icons
+- **Notifications:** React Hot Toast, SweetAlert2
+- **Font:** Geist (Vercel)
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── (authLayout)/          # Authentication pages
+│   │   ├── login/
+│   │   └── register/
+│   ├── (commonLayout)/        # Public pages
+│   │   ├── about/
+│   │   ├── services/
+│   │   ├── properties/
+│   │   ├── contact/
+│   │   └── my-bookings/
+│   ├── (dashboardLayout)/     # Admin dashboard
+│   │   └── dashboard/
+│   │       ├── create-property/
+│   │       ├── manage-property/
+│   │       └── manage-users/
+│   └── (paymentLayout)/       # Payment pages
+│       ├── success/
+│       ├── cancel/
+│       └── failed/
+├── components/                # Reusable components
+├── types/                     # TypeScript type definitions
+└── middleware/                # Route protection
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ installed
+- npm, yarn, pnpm, or bun package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd front-end
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Create `.env.local` file:
+```env
+NEXT_PUBLIC_API_URL=your_api_url_here
+```
+
+4. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Key Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Public Pages
+- **Home** (`/`) - Landing page with hero section
+- **About** (`/about`) - About the platform
+- **Services** (`/services`) - Services offered
+- **Properties** (`/properties`) - Property listings
+- **Property Details** (`/properties/[slug]`) - Individual property page
+- **Contact** (`/contact`) - Contact form
 
-## Learn More
+### User Pages
+- **Login** (`/login`) - User authentication
+- **Register** (`/register`) - User registration
+- **My Bookings** (`/my-bookings`) - User's booking history
 
-To learn more about Next.js, take a look at the following resources:
+### Admin Pages
+- **Dashboard** (`/dashboard`) - Admin overview
+- **Create Property** (`/dashboard/create-property`) - Add new properties
+- **Manage Properties** (`/dashboard/manage-property`) - Edit/delete properties
+- **Manage Users** (`/dashboard/manage-users`) - User management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Payment Pages
+- **Success** (`/success`) - Payment successful
+- **Cancel** (`/cancel`) - Payment cancelled
+- **Failed** (`/failed`) - Payment failed
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔐 Authentication
 
-## Deploy on Vercel
+The platform uses token-based authentication stored in cookies. Protected routes include:
+- `/dashboard/*` - Admin routes
+- `/properties/[id]` - Property details
+- `/my-bookings/*` - User bookings
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Design Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Glassmorphism:** Backdrop blur effects with transparent backgrounds
+- **Gradient Text:** Multi-color gradient text animations
+- **Hover Effects:** Scale, shadow, and border glow on hover
+- **Status Badges:** Color-coded status indicators
+- **Smooth Transitions:** 300-500ms duration transitions
+- **Custom Animations:** Pulse, float, fade-in, confetti effects
+
+## 📱 Responsive Design
+
+- Mobile-first approach
+- Breakpoints: sm, md, lg, xl, 2xl
+- Flexible grid layouts
+- Touch-friendly interactions
+
+## 🚢 Deployment
+
+The project is deployed on Vercel. To deploy your own instance:
+
+```bash
+npm run build
+```
+
+Then deploy to Vercel or your preferred hosting platform.
+
+## 📄 License
+
+This project is private and proprietary.
+
+## 🤝 Support
+
+For support, contact the development team or open an issue in the repository.

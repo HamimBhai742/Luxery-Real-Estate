@@ -131,7 +131,7 @@ const Sidebar = () => {
 
                 {/* Icon */}
                 <div className={`
-                  flex-shrink-0 transition-all duration-300
+                  shrink-0 transition-all duration-300
                   ${isActive(item.href)
                     ? 'text-white scale-110'
                     : 'text-white/70 group-hover:text-white group-hover:scale-110'
@@ -181,7 +181,7 @@ const Sidebar = () => {
       </aside>
 
       {/* Spacer for Desktop */}
-      <div className="hidden lg:block w-80 flex-shrink-0" />
+      <div className="hidden lg:block w-80 shrink-0" />
 
       <style jsx>{`
         @keyframes slideIn {
