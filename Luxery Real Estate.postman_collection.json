@@ -1,0 +1,377 @@
+{
+	"info": {
+		"_postman_id": "b6f2ef41-cbad-4da9-8501-2245711f93ac",
+		"name": "Luxery Real Estate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39080894"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n {\n    \"email\":\"mdhamim5088@gmail.com\",\n    \"password\":\"658742\"\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Property",
+			"item": [
+				{
+					"name": "Create property",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"scheduleIds\":[\n    \"04372eb5-9cb7-41a2-bf5e-7a37b360c32d\",\n    \"22be6487-116e-484f-b659-f9f6b3491335\",\n    \"259f0564-d9fe-42a6-becd-75fcba39c613\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/property/create-property",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"property",
+								"create-property"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My property(admin)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"scheduleIds\":[\n    \"04372eb5-9cb7-41a2-bf5e-7a37b360c32d\",\n    \"22be6487-116e-484f-b659-f9f6b3491335\",\n    \"259f0564-d9fe-42a6-becd-75fcba39c613\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/property/my-properties",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"property",
+								"my-properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all property",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"scheduleIds\":[\n    \"04372eb5-9cb7-41a2-bf5e-7a37b360c32d\",\n    \"22be6487-116e-484f-b659-f9f6b3491335\",\n    \"259f0564-d9fe-42a6-becd-75fcba39c613\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/property",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"property"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all property Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"scheduleIds\":[\n    \"04372eb5-9cb7-41a2-bf5e-7a37b360c32d\",\n    \"22be6487-116e-484f-b659-f9f6b3491335\",\n    \"259f0564-d9fe-42a6-becd-75fcba39c613\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/property",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"property"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n  {\n    \"startDates\":\"2025-10-20\",\n    \"endDate\":\"2025-10-23\",\n    \"startTime\":\"10:00\",\n    \"endTime\":\"17:00\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/booking/create-booking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"booking",
+								"create-booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Bookings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n  {\n    \"startDates\":\"2025-10-20\",\n    \"endDate\":\"2025-10-23\",\n    \"startTime\":\"10:00\",\n    \"endTime\":\"17:00\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/booking/my-bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"booking",
+								"my-bookings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Create payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "- GET api/a5/wallet/me → Get my wallet details",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/payment/initiate-payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"payment",
+								"initiate-payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
