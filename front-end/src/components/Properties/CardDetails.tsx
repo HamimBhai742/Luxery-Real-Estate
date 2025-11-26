@@ -13,6 +13,11 @@ const CardDetails = ({ property }: { property: Property }) => {
     console.log(id);
     try {
       setLoading(true);
+      if (property.status === 'inactive') {
+        toast.error('This property is not available for booking.');
+        setLoading(false);
+        return;
+      }
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/booking/create-booking`,
         {

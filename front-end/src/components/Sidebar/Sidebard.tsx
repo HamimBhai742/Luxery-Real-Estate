@@ -44,10 +44,10 @@ const Sidebar = () => {
       href: '/dashboard/manage-property'
     },
     {
-      id: 'manage-user',
-      label: 'Manage User',
+      id: 'manage-users',
+      label: 'Manage Users',
       icon: <FiUsers className="w-5 h-5" />,
-      href: '/dashboard/manage-user'
+      href: '/dashboard/manage-users'
     }
   ];
 

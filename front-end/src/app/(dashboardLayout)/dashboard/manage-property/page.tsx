@@ -1,27 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FiHome, FiTrendingUp, FiDollarSign, FiEye } from 'react-icons/fi';
 import PropertyTable from '@/components/PropertyTable';
 import PropertyFilters from '@/components/PropertyFilters';
 
 const ManagePropertyPage = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/property/my-properties`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  const data = await res.json();
   const stats = [
     {
       icon: FiHome,
       label: 'Total Properties',
-      value: '24',
+      value: data.data.length.toString(),
       change: '+12%',
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: FiTrendingUp,
       label: 'Active Listings',
-      value: '18',
+      value: data.data.filter((property:any) => property.status === 'active').length.toString(),
       change: '+8%',
       color: 'from-purple-500 to-pink-500',
     },
     {
       icon: FiDollarSign,
       label: 'Total Value',
-      value: '$12.5M',
+      value: `$${data.data.reduce((sum: number, p: { price: number; }) => sum + p.price, 0)}`,
       change: '+15%',
       color: 'from-green-500 to-emerald-500',
     },
@@ -33,20 +44,6 @@ const ManagePropertyPage = async () => {
       color: 'from-orange-500 to-red-500',
     },
   ];
-
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/property/my-properties`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }
-
-  );
-
-  const data = await res.json();
-  console.log(data);
   return (
     <div className='min-h-screen p-6 lg:p-8 space-y-8'>
       {/* Header */}
