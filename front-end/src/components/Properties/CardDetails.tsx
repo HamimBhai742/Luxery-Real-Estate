@@ -50,12 +50,12 @@ const CardDetails = ({ property }: { property: Property }) => {
   };
 
   return (
-    <div className='min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-20'>
+    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Image Gallery */}
         <div className='mb-12'>
-          <div className='relative h-[500px] bg-linear-to-br from-amber-100 to-amber-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4'>
-            <div className='absolute inset-0 flex items-center justify-center text-amber-600 dark:text-amber-400'>
+          <div className='relative h-[500px] bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4'>
+            <div className='absolute inset-0 flex items-center justify-center text-blue-600 dark:text-amber-400'>
               <svg
                 className='w-32 h-32'
                 fill='none'
@@ -70,7 +70,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                 />
               </svg>
             </div>
-            <div className='absolute top-4 right-4 bg-white/90 dark:bg-black/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold'>
+            <div className='absolute top-4 right-4 bg-white dark:bg-black/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold text-gray-900 dark:text-white'>
               {activeImage + 1} / {images.length}
             </div>
           </div>
@@ -79,8 +79,8 @@ const CardDetails = ({ property }: { property: Property }) => {
               <button
                 key={idx}
                 onClick={() => setActiveImage(idx)}
-                className={`h-24 bg-linear-to-br from-amber-100 to-amber-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
-                  activeImage === idx ? 'ring-4 ring-amber-500' : ''
+                className={`h-24 bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
+                  activeImage === idx ? 'ring-4 ring-blue-500 dark:ring-amber-500' : ''
                 }`}
               />
             ))}
@@ -90,12 +90,12 @@ const CardDetails = ({ property }: { property: Property }) => {
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {/* Main Content */}
           <div className='lg:col-span-2'>
-            <div className='bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg p-8'>
+            <div className='bg-white dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 p-8'>
               <h1 className='sm:text-4xl text-3xl font-bold text-gray-900 dark:text-white mb-4'>
                 {property?.name}
               </h1>
 
-              <div className='flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-6'>
+              <div className='flex items-center gap-2 text-gray-700 dark:text-gray-400 mb-6'>
                 <svg
                   className='w-5 h-5'
                   fill='none'
@@ -118,28 +118,28 @@ const CardDetails = ({ property }: { property: Property }) => {
                 {property?.location}
               </div>
 
-              <div className='sm:text-4xl text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-amber-600 mb-8'>
+              <div className='sm:text-4xl text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 mb-8'>
                 ${property?.price}
               </div>
 
               <div className='grid grid-cols-3 gap-4 mb-8'>
-                <div className='text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg'>
+                <div className='text-center p-4 bg-slate-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700'>
                   <div className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white'>
                     {property?.bedrooms}
                   </div>
-                  <div className='text-sm text-gray-600 dark:text-gray-400'>
+                  <div className='text-sm text-gray-700 dark:text-gray-400'>
                     Bedrooms
                   </div>
                 </div>
-                <div className='text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg'>
+                <div className='text-center p-4 bg-slate-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700'>
                   <div className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white'>
                     {property?.bathrooms}
                   </div>
-                  <div className='text-sm text-gray-600 dark:text-gray-400'>
+                  <div className='text-sm text-gray-700 dark:text-gray-400'>
                     Bathrooms
                   </div>
                 </div>
-                <div className='text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg'>
+                <div className='text-center p-4 bg-slate-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700'>
                   <div className='sm:text-2xl text-xl font-medium text-gray-900 dark:text-white'>
                     {property?.isBooked
                       ? 'Booked'
@@ -147,7 +147,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                       ? 'Available'
                       : 'Unavailable'}
                   </div>
-                  <div className='text-sm text-gray-600 dark:text-gray-400'>
+                  <div className='text-sm text-gray-700 dark:text-gray-400'>
                     Status
                   </div>
                 </div>
@@ -157,7 +157,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                 <h2 className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white mb-4'>
                   Description
                 </h2>
-                <p className='text-gray-600 dark:text-gray-400 leading-relaxed'>
+                <p className='text-gray-700 dark:text-gray-400 leading-relaxed'>
                   {property?.description}
                 </p>
               </div>
@@ -170,10 +170,10 @@ const CardDetails = ({ property }: { property: Property }) => {
                   {property?.amenities?.map((amenity) => (
                     <div
                       key={amenity}
-                      className='flex items-center gap-2 text-gray-700 dark:text-gray-300'
+                      className='flex items-center gap-2 text-gray-800 dark:text-gray-300'
                     >
                       <svg
-                        className='w-5 h-5 text-amber-500'
+                        className='w-5 h-5 text-blue-600 dark:text-amber-500'
                         fill='currentColor'
                         viewBox='0 0 20 20'
                       >
@@ -193,18 +193,18 @@ const CardDetails = ({ property }: { property: Property }) => {
 
           {/* Booking Form */}
           <div className='lg:col-span-1'>
-            <div className='bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg p-6 sticky top-24'>
+            <div className='bg-white dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 p-6 sticky top-24'>
               <h2 className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white mb-6'>
                 Book This Property
               </h2>
               <button
                 disabled={loading || property?.isBooked}
                 onClick={() => handleSubmit(property?.id)}
-                className={`w-full bg-linear-to-r ${
+                className={`w-full ${
                   property?.isBooked
-                    ? 'bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
-                    : 'bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700'
-                } text-white px-6 py-3 rounded-lg font-semibold  transition-all duration-300 shadow-lg hover:shadow-xl`}
+                    ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 hover:from-blue-700 hover:to-indigo-700 dark:hover:from-amber-600 dark:hover:to-amber-700'
+                } text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl`}
               >
                 {loading ? (
                   <span className='flex items-center justify-center gap-2'>

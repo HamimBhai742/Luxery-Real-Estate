@@ -27,9 +27,9 @@ export default async function MyBookingsPage() {
   const data = await getBookings();
   console.log(data)
   return (
-    <div className='min-h-screen bg-slate-950 py-16'>
+    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white dark:bg-slate-950 py-16'>
       <div className='container mx-auto px-4'>
-        <h1 className='text-4xl font-bold text-white mb-8'>My Bookings</h1>
+        <h1 className='text-4xl font-bold text-gray-900 dark:text-white mb-8'>My Bookings</h1>
         <BookingsTable bookings={data.data} />
       </div>
     </div>
