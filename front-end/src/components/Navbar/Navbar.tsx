@@ -7,6 +7,7 @@ import { MdDashboard, MdManageAccounts } from 'react-icons/md';
 import { TbBrandBooking } from 'react-icons/tb';
 import { logout } from '@/helpers/logOut';
 import toast from 'react-hot-toast';
+import { ModeToggle } from '../toggole-mode';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -128,6 +129,7 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div>
+            <ModeToggle />
             {user?.success ? (
               <Menu as='div' className='relative ml-3'>
                 <MenuButton className='relative'>

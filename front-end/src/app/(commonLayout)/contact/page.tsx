@@ -76,7 +76,7 @@ export default function ContactPage() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center pt-20">
           <div className="inline-block mb-6 px-6 py-2 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-full border border-white/20 dark:border-gray-800/20 shadow-lg">
             <span className="text-amber-600 dark:text-amber-400 font-semibold">Get In Touch</span>
           </div>

@@ -25,6 +25,7 @@ async function getBookings() {
 
 export default async function MyBookingsPage() {
   const data = await getBookings();
+  console.log(data)
   return (
     <div className='min-h-screen bg-slate-950 py-16'>
       <div className='container mx-auto px-4'>

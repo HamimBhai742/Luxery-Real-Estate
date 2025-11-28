@@ -124,10 +124,8 @@ export default function ServicesPage() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-block mb-6 px-6 py-2 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-full border border-white/20 dark:border-gray-800/20 shadow-lg">
-            <span className="text-amber-600 dark:text-amber-400 font-semibold">Our Services</span>
-          </div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center pt-20">
+
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Premium Real Estate
             <br />

@@ -7,7 +7,7 @@ export default async function PropertiesPage() {
   });
 
   const data = await res.json();
-  const properties: Property[] = data.data;
+  const properties: Property[] = data?.data;
   console.log(properties)
   return (
     <div>

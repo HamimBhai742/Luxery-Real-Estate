@@ -91,7 +91,7 @@ const CardDetails = ({ property }: { property: Property }) => {
           {/* Main Content */}
           <div className='lg:col-span-2'>
             <div className='bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg p-8'>
-              <h1 className='text-4xl font-bold text-gray-900 dark:text-white mb-4'>
+              <h1 className='sm:text-4xl text-3xl font-bold text-gray-900 dark:text-white mb-4'>
                 {property?.name}
               </h1>
 
@@ -118,13 +118,13 @@ const CardDetails = ({ property }: { property: Property }) => {
                 {property?.location}
               </div>
 
-              <div className='text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-amber-600 mb-8'>
+              <div className='sm:text-4xl text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-amber-600 mb-8'>
                 ${property?.price}
               </div>
 
               <div className='grid grid-cols-3 gap-4 mb-8'>
                 <div className='text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg'>
-                  <div className='text-2xl font-bold text-gray-900 dark:text-white'>
+                  <div className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white'>
                     {property?.bedrooms}
                   </div>
                   <div className='text-sm text-gray-600 dark:text-gray-400'>
@@ -132,7 +132,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                   </div>
                 </div>
                 <div className='text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg'>
-                  <div className='text-2xl font-bold text-gray-900 dark:text-white'>
+                  <div className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white'>
                     {property?.bathrooms}
                   </div>
                   <div className='text-sm text-gray-600 dark:text-gray-400'>
@@ -140,7 +140,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                   </div>
                 </div>
                 <div className='text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg'>
-                  <div className='text-2xl font-bold text-gray-900 dark:text-white'>
+                  <div className='sm:text-2xl text-xl font-medium text-gray-900 dark:text-white'>
                     {property?.isBooked
                       ? 'Booked'
                       : property?.status === 'active'
@@ -154,7 +154,7 @@ const CardDetails = ({ property }: { property: Property }) => {
               </div>
 
               <div className='mb-8'>
-                <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-4'>
+                <h2 className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white mb-4'>
                   Description
                 </h2>
                 <p className='text-gray-600 dark:text-gray-400 leading-relaxed'>
@@ -163,7 +163,7 @@ const CardDetails = ({ property }: { property: Property }) => {
               </div>
 
               <div>
-                <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-4'>
+                <h2 className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white mb-4'>
                   Amenities
                 </h2>
                 <div className='grid grid-cols-2 gap-3'>
@@ -194,7 +194,7 @@ const CardDetails = ({ property }: { property: Property }) => {
           {/* Booking Form */}
           <div className='lg:col-span-1'>
             <div className='bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg p-6 sticky top-24'>
-              <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-6'>
+              <h2 className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white mb-6'>
                 Book This Property
               </h2>
               <button
