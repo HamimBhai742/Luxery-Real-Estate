@@ -84,7 +84,7 @@ const Navbar = () => {
     <div
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/80 dark:bg-black/80 backdrop-blur-xl shadow-lg'
+          ? 'bg-white/90 dark:bg-black/80 backdrop-blur-xl shadow-lg border-b border-gray-200 dark:border-gray-800'
           : 'bg-transparent'
       }`}
     >
@@ -93,8 +93,8 @@ const Navbar = () => {
           {/* Logo */}
           <Link href='/' className='flex items-center space-x-2 group'>
             <div className='relative'>
-              <div className='absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity' />
-              <div className='relative bg-linear-to-br from-amber-500 to-amber-600 p-2 rounded-lg'>
+              <div className='absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity' />
+              <div className='relative bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 p-2 rounded-lg'>
                 <svg
                   className='w-6 h-6 text-white'
                   fill='currentColor'
@@ -104,7 +104,7 @@ const Navbar = () => {
                 </svg>
               </div>
             </div>
-            <span className='text-2xl font-bold bg-linear-to-r from-amber-600 to-amber-800 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent'>
+            <span className='text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent'>
               LUXE
             </span>
           </Link>
@@ -115,14 +115,14 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative px-4 py-2 text-sm  transition-colors group ${
+                className={`relative px-4 py-2 text-sm transition-colors group ${
                   pathName === link.href
-                    ? 'font-semibold text-amber-500 border-b-2 hover:border-none'
-                    : 'text-gray-700 font-medium   dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400  '
+                    ? 'font-semibold text-blue-600 dark:text-amber-500 border-b-2 border-b-blue-600 dark:border-b-amber-600 hover:border-none'
+                    : 'text-gray-800 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-amber-400'
                 }`}
               >
                 {link.name}
-                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-amber-500 to-amber-600 group-hover:w-full transition-all duration-300' />
+                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 group-hover:w-full transition-all duration-300' />
               </Link>
             ))}
           </div>
@@ -144,7 +144,7 @@ const Navbar = () => {
                     <MenuItem>
                       <Link
                         href='/dashboard'
-                        className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
+                        className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
                       >
                         <MdDashboard />
                         Dashboard
@@ -156,7 +156,7 @@ const Navbar = () => {
                     <MenuItem>
                       <Link
                         href='/my-bookings'
-                        className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
+                        className='flex gap-3 items-center px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
                       >
                         <TbBrandBooking />
                         My Bookings
@@ -191,7 +191,7 @@ const Navbar = () => {
               <div className='hidden md:flex items-center space-x-4'>
                 <Link
                   href='/login'
-                  className='px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors'
+                  className='px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-amber-400 transition-colors'
                 >
                   Sign In
                 </Link>
@@ -199,7 +199,7 @@ const Navbar = () => {
                   href='/register'
                   className='relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group'
                 >
-                  <div className='absolute inset-0 bg-linear-to-r from-amber-500 to-amber-600 transition-transform group-hover:scale-105' />
+                  <div className='absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 transition-transform group-hover:scale-105' />
                   <span className='relative'>Get Started</span>
                 </Link>
               </div>
@@ -209,7 +209,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className='md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
+            className='md:hidden p-2 rounded-lg text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
           >
             <svg
               className='w-6 h-6'
@@ -249,7 +249,7 @@ const Navbar = () => {
               key={link.name}
               href={link.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className='block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors'
+              className='block px-4 py-3 text-base font-medium text-gray-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-amber-400 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors'
             >
               {link.name}
             </Link>
@@ -269,7 +269,7 @@ const Navbar = () => {
                   <MenuItem>
                     <Link
                       href='/dashboard'
-                      className='flex items-center px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
+                      className='flex items-center px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-300 data-focus:bg-blue-50 dark:data-focus:bg-blue-900/20 data-focus:text-blue-600 dark:data-focus:text-blue-400 rounded-lg mx-2 transition-colors'
                     >
                       <svg
                         className='w-4 h-4 mr-3'
@@ -313,7 +313,7 @@ const Navbar = () => {
               </Menu>
             ) : (
               <div className='pt-4 space-y-2'>
-                <Link href='/login' className='w-full px-4 py-3 text-base font-semibold text-white bg-linear-to-r from-amber-500 to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
+                <Link href='/login' className='block w-full px-4 py-3 text-center text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
                   Sign In
                 </Link>
 

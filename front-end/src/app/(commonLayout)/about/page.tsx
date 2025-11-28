@@ -65,17 +65,17 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className='min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black'>
+    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black'>
       {/* Hero Section with Parallax */}
       <section className='relative min-h-[70vh] flex items-center justify-center overflow-hidden'>
         {/* Parallax Background */}
         <div className='absolute inset-0'>
-          <div className='absolute top-20 left-10 w-72 h-72 bg-amber-300/20 dark:bg-amber-600/10 rounded-full blur-3xl animate-parallax-float'></div>
+          <div className='absolute top-20 left-10 w-72 h-72 bg-blue-300/30 dark:bg-amber-600/10 rounded-full blur-3xl animate-parallax-float'></div>
           <div
-            className='absolute bottom-20 right-10 w-96 h-96 bg-amber-400/20 dark:bg-amber-500/10 rounded-full blur-3xl animate-parallax-float'
+            className='absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/30 dark:bg-amber-500/10 rounded-full blur-3xl animate-parallax-float'
             style={{ animationDelay: '2s' }}
           ></div>
-          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-linear-to-r from-amber-200/10 to-orange-200/10 dark:from-amber-900/5 dark:to-orange-900/5 rounded-full blur-3xl'></div>
+          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-200/20 to-indigo-200/20 dark:from-amber-900/5 dark:to-orange-900/5 rounded-full blur-3xl'></div>
         </div>
 
         {/* Content */}
@@ -84,11 +84,11 @@ export default function AboutPage() {
           <h1 className='text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight'>
             Redefining Luxury
             <br />
-            <span className='bg-linear-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent'>
+            <span className='bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent'>
               Real Estate
             </span>
           </h1>
-          <p className='text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto'>
+          <p className='text-xl md:text-2xl text-gray-700 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto'>
             For over 15 years, we&apos;ve been connecting discerning clients with the
             world&apos;s most exceptional properties.
           </p>
@@ -97,7 +97,7 @@ export default function AboutPage() {
         {/* Decorative Elements */}
         <div className='absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce'>
           <svg
-            className='w-6 h-6 text-amber-500'
+            className='w-6 h-6 text-blue-600 dark:text-amber-500'
             fill='none'
             stroke='currentColor'
             viewBox='0 0 24 24'
@@ -127,7 +127,7 @@ export default function AboutPage() {
               <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white'>
                 Our Story
               </h2>
-              <div className='space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed'>
+              <div className='space-y-4 text-gray-700 dark:text-gray-400 leading-relaxed'>
                 <p>
                   Founded in 2010, Luxury Real Estate began with a simple
                   vision: to transform the way people experience premium
@@ -148,10 +148,10 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className='relative h-[500px] bg-linear-to-br from-amber-100 to-amber-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-3xl overflow-hidden shadow-2xl'>
+            <div className='relative h-[500px] bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-3xl overflow-hidden shadow-2xl'>
               <div className='absolute inset-0 flex items-center justify-center'>
                 <svg
-                  className='w-32 h-32 text-amber-600 dark:text-amber-400'
+                  className='w-32 h-32 text-blue-600 dark:text-amber-400'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -170,13 +170,13 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className='py-20 px-4 bg-linear-to-b from-white to-gray-50 dark:from-black dark:to-gray-900'>
+      <section className='py-20 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'>
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-16'>
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
               Our Core Values
             </h2>
-            <p className='text-xl text-gray-600 dark:text-gray-400'>
+            <p className='text-xl text-gray-700 dark:text-gray-400'>
               The principles that guide everything we do
             </p>
           </div>
@@ -184,7 +184,7 @@ export default function AboutPage() {
             {values.map((value, idx) => (
               <div
                 key={idx}
-                className='group bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-white/20 dark:border-gray-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2'
+                className='group bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200 dark:border-gray-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2'
               >
                 <div className='text-5xl mb-4 group-hover:scale-110 transition-transform'>
                   {value.icon}
@@ -192,7 +192,7 @@ export default function AboutPage() {
                 <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-3'>
                   {value.title}
                 </h3>
-                <p className='text-gray-600 dark:text-gray-400 leading-relaxed'>
+                <p className='text-gray-700 dark:text-gray-400 leading-relaxed'>
                   {value.description}
                 </p>
               </div>
@@ -208,7 +208,7 @@ export default function AboutPage() {
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
               Meet Our Team
             </h2>
-            <p className='text-xl text-gray-600 dark:text-gray-400'>
+            <p className='text-xl text-gray-700 dark:text-gray-400'>
               Expert professionals dedicated to your success
             </p>
           </div>
@@ -223,7 +223,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className='py-20 px-4'>
         <div className='max-w-4xl mx-auto'>
-          <div className='bg-linear-to-r from-amber-500 to-amber-600 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden'>
+          <div className='bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden'>
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
             <div className='relative z-10'>
               <h2 className='text-3xl md:text-4xl font-bold text-white mb-4'>
@@ -235,13 +235,13 @@ export default function AboutPage() {
               <div className='flex flex-col sm:flex-row gap-4 justify-center'>
                 <a
                   href='/properties'
-                  className='px-8 py-4 bg-white text-amber-600 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1'
+                  className='px-8 py-4 bg-white text-blue-600 dark:text-amber-600 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1'
                 >
                   Browse Properties
                 </a>
                 <a
                   href='/contact'
-                  className='px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1'
+                  className='px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-blue-600 dark:hover:text-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1'
                 >
                   Contact Us
                 </a>

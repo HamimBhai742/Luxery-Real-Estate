@@ -5,7 +5,7 @@ import StatsSection from '@/components/StatsSection/StatsSection';
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-linear-to-br from-gray-50 via-white to-amber-50 dark:from-black dark:via-gray-900 dark:to-black'>
+    <div className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-black dark:via-gray-900 dark:to-black'>
       {/* Hero Section */}
       <HeroSection />
 

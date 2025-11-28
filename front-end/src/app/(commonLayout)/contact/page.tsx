@@ -66,28 +66,28 @@ const faqs = [
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black">
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-amber-300/20 dark:bg-amber-600/10 rounded-full blur-3xl animate-parallax-float"></div>
-          <div className="absolute bottom-10 left-10 w-96 h-96 bg-amber-400/20 dark:bg-amber-500/10 rounded-full blur-3xl animate-parallax-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-20 right-10 w-72 h-72 bg-blue-300/30 dark:bg-amber-600/10 rounded-full blur-3xl animate-parallax-float"></div>
+          <div className="absolute bottom-10 left-10 w-96 h-96 bg-indigo-400/30 dark:bg-amber-500/10 rounded-full blur-3xl animate-parallax-float" style={{ animationDelay: '2s' }}></div>
         </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center pt-20">
-          <div className="inline-block mb-6 px-6 py-2 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-full border border-white/20 dark:border-gray-800/20 shadow-lg">
-            <span className="text-amber-600 dark:text-amber-400 font-semibold">Get In Touch</span>
+          <div className="inline-block mb-6 px-6 py-2 bg-white dark:bg-gray-900/80 backdrop-blur-xl rounded-full border border-gray-200 dark:border-gray-800/20 shadow-lg">
+            <span className="text-blue-600 dark:text-amber-400 font-semibold">Get In Touch</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Let&apos;s Start a
             <br />
-            <span className="bg-linear-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
               Conversation
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto">
             Our team of experts is ready to help you find your perfect luxury property
           </p>
         </div>
@@ -101,18 +101,18 @@ export default function ContactPage() {
               <a
                 key={idx}
                 href={method.link}
-                className="group bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white/20 dark:border-gray-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center"
+                className="group bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-gray-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center"
               >
-                <div className="w-16 h-16 bg-linear-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/50">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-amber-400 dark:to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/50 dark:shadow-amber-500/50">
                   {method.icon}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                   {method.title}
                 </h3>
-                <p className="text-amber-600 dark:text-amber-400 font-semibold mb-1">
+                <p className="text-blue-600 dark:text-amber-400 font-semibold mb-1">
                   {method.value}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-700 dark:text-gray-400">
                   {method.description}
                 </p>
               </a>
@@ -127,11 +127,11 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             {/* Contact Form */}
             <div className="lg:col-span-3">
-              <div className="bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-white/20 dark:border-gray-800/20 shadow-2xl">
+              <div className="bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-gray-200 dark:border-gray-800/20 shadow-2xl">
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                   Send us a Message
                 </h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-8">
+                <p className="text-gray-700 dark:text-gray-400 mb-8">
                   Fill out the form below and we&apos;ll get back to you shortly
                 </p>
                 <ContactForm />
@@ -141,7 +141,7 @@ export default function ContactPage() {
             {/* Quick Info */}
             <div className="lg:col-span-2 space-y-6">
               {/* Office Hours */}
-              <div className="bg-linear-to-br from-amber-500 to-amber-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+              <div className="bg-gradient-to-br from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
                 <div className="relative z-10">
                   <h3 className="text-2xl font-bold mb-4">Office Hours</h3>
@@ -163,7 +163,7 @@ export default function ContactPage() {
               </div>
 
               {/* Social Media */}
-              <div className="bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-3xl p-8 border border-white/20 dark:border-gray-800/20 shadow-lg">
+              <div className="bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-gray-800/20 shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   Follow Us
                 </h3>
@@ -172,7 +172,7 @@ export default function ContactPage() {
                     <a
                       key={social}
                       href="#"
-                      className="w-12 h-12 bg-linear-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg shadow-amber-500/50"
+                      className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-amber-400 dark:to-amber-600 rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg shadow-blue-500/50 dark:shadow-amber-500/50"
                     >
                       <span className="text-xl capitalize">{social[0]}</span>
                     </a>
@@ -181,11 +181,11 @@ export default function ContactPage() {
               </div>
 
               {/* Emergency Contact */}
-              <div className="bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-3xl p-8 border border-white/20 dark:border-gray-800/20 shadow-lg">
+              <div className="bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-gray-800/20 shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   Emergency?
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-gray-700 dark:text-gray-400 mb-4">
                   For urgent property matters, call our 24/7 hotline
                 </p>
                 <a
@@ -201,13 +201,13 @@ export default function ContactPage() {
       </section>
 
       {/* Interactive Map */}
-      <section id="map" className="py-20 px-4 bg-linear-to-b from-white to-gray-50 dark:from-black dark:to-gray-900">
+      <section id="map" className="py-20 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-black dark:to-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Our Locations
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
+            <p className="text-xl text-gray-700 dark:text-gray-400">
               Visit us at any of our offices nationwide
             </p>
           </div>
@@ -222,7 +222,7 @@ export default function ContactPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
+            <p className="text-xl text-gray-700 dark:text-gray-400">
               Quick answers to common questions
             </p>
           </div>
@@ -230,13 +230,13 @@ export default function ContactPage() {
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white/20 dark:border-gray-800/20 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-gray-800/20 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-start gap-3">
-                  <span className="text-amber-500 shrink-0">Q:</span>
+                  <span className="text-blue-600 dark:text-amber-500 shrink-0">Q:</span>
                   {faq.question}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed pl-8">
+                <p className="text-gray-700 dark:text-gray-400 leading-relaxed pl-8">
                   {faq.answer}
                 </p>
               </div>

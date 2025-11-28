@@ -1,7 +1,7 @@
 'use client';
 import { Property } from '@/types/property';
 import { useState } from 'react';
-import PropertyCard from '../PropertyCard';
+import PropertyCard from './PropertyCard';
 
 const Properties = ({ properties }: { properties: Property[] }) => {
   const [search, setSearch] = useState('');
@@ -9,24 +9,24 @@ const Properties = ({ properties }: { properties: Property[] }) => {
   const [bedrooms, setBedrooms] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
   return (
-    <div className='min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black py-20'>
+    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='text-center mb-12'>
           <h1 className='text-5xl font-bold text-gray-900 dark:text-white mb-4'>
             Luxury Properties
           </h1>
-          <p className='text-xl text-gray-600 dark:text-gray-400'>
+          <p className='text-xl text-gray-700 dark:text-gray-400'>
             Discover your dream home from our exclusive collection
           </p>
         </div>
 
         {/* Filters */}
-        <div className='bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg p-6 mb-8'>
+        <div className='bg-white dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 p-6 mb-8'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
             {/* Search */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
+              <label className='block text-sm font-medium text-gray-800 dark:text-gray-300 mb-2'>
                 Search
               </label>
               <input
@@ -34,19 +34,19 @@ const Properties = ({ properties }: { properties: Property[] }) => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder='Location or name...'
-                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent'
+                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-amber-500 focus:border-transparent'
               />
             </div>
 
             {/* Price Range */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
+              <label className='block text-sm font-medium text-gray-800 dark:text-gray-300 mb-2'>
                 Price Range
               </label>
               <select
                 value={priceRange}
                 onChange={(e) => setPriceRange(e.target.value)}
-                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent'
+                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-amber-500 focus:border-transparent'
               >
                 <option value='all'>All Prices</option>
                 <option value='under5m'>Under $5M</option>
@@ -57,13 +57,13 @@ const Properties = ({ properties }: { properties: Property[] }) => {
 
             {/* Bedrooms */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
+              <label className='block text-sm font-medium text-gray-800 dark:text-gray-300 mb-2'>
                 Bedrooms
               </label>
               <select
                 value={bedrooms}
                 onChange={(e) => setBedrooms(e.target.value)}
-                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent'
+                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-amber-500 focus:border-transparent'
               >
                 <option value='all'>Any</option>
                 <option value='3'>3+</option>
@@ -75,13 +75,13 @@ const Properties = ({ properties }: { properties: Property[] }) => {
 
             {/* Status */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
+              <label className='block text-sm font-medium text-gray-800 dark:text-gray-300 mb-2'>
                 Status
               </label>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent'
+                className='w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-amber-500 focus:border-transparent'
               >
                 <option value='all'>All</option>
                 <option value='available'>Available</option>

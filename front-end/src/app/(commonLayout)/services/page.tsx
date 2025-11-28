@@ -113,14 +113,14 @@ const benefits = [
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black">
       {/* Hero Section with Parallax */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 right-20 w-64 h-64 bg-amber-300/30 dark:bg-amber-600/20 rounded-full blur-3xl animate-parallax-float"></div>
-          <div className="absolute bottom-10 left-20 w-80 h-80 bg-amber-400/20 dark:bg-amber-500/10 rounded-full blur-3xl animate-parallax-float" style={{ animationDelay: '3s' }}></div>
-          <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-orange-300/20 dark:bg-orange-600/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute top-10 right-20 w-64 h-64 bg-blue-300/40 dark:bg-amber-600/20 rounded-full blur-3xl animate-parallax-float"></div>
+          <div className="absolute bottom-10 left-20 w-80 h-80 bg-indigo-400/30 dark:bg-amber-500/10 rounded-full blur-3xl animate-parallax-float" style={{ animationDelay: '3s' }}></div>
+          <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-blue-300/30 dark:bg-orange-600/10 rounded-full blur-3xl animate-float"></div>
         </div>
 
         {/* Content */}
@@ -129,18 +129,18 @@ export default function ServicesPage() {
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Premium Real Estate
             <br />
-            <span className="bg-linear-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
               Solutions
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto">
             Comprehensive services tailored to meet every aspect of your luxury real estate journey
           </p>
         </div>
 
         {/* Decorative Shapes */}
-        <div className="absolute top-20 left-10 w-20 h-20 border-4 border-amber-400/20 rounded-full animate-spin-slow"></div>
-        <div className="absolute bottom-20 right-10 w-16 h-16 border-4 border-amber-500/30 rounded-lg rotate-45 animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 border-4 border-blue-400/30 dark:border-amber-400/20 rounded-full animate-spin-slow"></div>
+        <div className="absolute bottom-20 right-10 w-16 h-16 border-4 border-indigo-500/40 dark:border-amber-500/30 rounded-lg rotate-45 animate-pulse"></div>
       </section>
 
       {/* Services Grid */}
@@ -155,7 +155,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Benefits Bar */}
-      <section className="py-16 px-4 bg-linear-to-r from-amber-500 to-amber-600 relative overflow-hidden">
+      <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -181,7 +181,7 @@ export default function ServicesPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Our Process
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
+            <p className="text-xl text-gray-700 dark:text-gray-400">
               A seamless journey from consultation to closing
             </p>
           </div>
@@ -190,13 +190,13 @@ export default function ServicesPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 px-4 bg-linear-to-b from-white to-gray-50 dark:from-black dark:to-gray-900">
+      <section className="py-20 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-black dark:to-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Why Choose Us
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
+            <p className="text-xl text-gray-700 dark:text-gray-400">
               The advantages that set us apart
             </p>
           </div>
@@ -220,13 +220,13 @@ export default function ServicesPage() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-white/20 dark:border-gray-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center"
+                className="bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-8 border border-gray-200 dark:border-gray-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center"
               >
                 <div className="text-5xl mb-4">{item.icon}</div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-400 leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -238,8 +238,8 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-linear-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-black rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-linear-to-r from-amber-500/10 to-orange-500/10"></div>
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-black rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 dark:from-amber-500/10 dark:to-orange-500/10"></div>
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Ready to Get Started?
@@ -250,7 +250,7 @@ export default function ServicesPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="/contact"
-                  className="px-8 py-4 bg-linear-to-r from-amber-500 to-amber-600 text-white rounded-xl font-semibold hover:from-amber-600 hover:to-amber-700 transition-all duration-300 shadow-lg shadow-amber-500/50 hover:shadow-xl hover:-translate-y-1"
+                  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 dark:hover:from-amber-600 dark:hover:to-amber-700 transition-all duration-300 shadow-lg shadow-blue-500/50 dark:shadow-amber-500/50 hover:shadow-xl hover:-translate-y-1"
                 >
                   Book Consultation
                 </a>
