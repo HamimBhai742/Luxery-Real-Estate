@@ -11,6 +11,9 @@ import {
   FiMenu,
   FiX,
   FiChevronRight,
+  FiCalendar,
+  FiHelpCircle,
+  FiCreditCard,
 } from 'react-icons/fi';
 
 interface MenuItem {
@@ -85,8 +88,15 @@ const Sidebar = () => {
     {
       id: 'my-bookings',
       label: 'My Bookings',
-      icon: <FiGrid className='w-5 h-5' />,
+      icon: <FiCalendar className='w-5 h-5' />,
       href: '/dashboard/my-bookings',
+      role: 'USER',
+    },
+    {
+      id: 'payment-history',
+      label: 'Payment History',
+      icon: <FiCreditCard className='w-5 h-5' />,
+      href: '/dashboard/payment-history',
       role: 'USER',
     },
   ];
