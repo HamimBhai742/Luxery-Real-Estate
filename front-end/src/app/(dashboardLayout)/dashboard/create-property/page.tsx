@@ -3,7 +3,7 @@ import React from 'react';
 
 const CreateProperty = () => {
   return (
-    <div>
+    <div className='p-5'>
       <CreatePropertyForm />
     </div>
   );

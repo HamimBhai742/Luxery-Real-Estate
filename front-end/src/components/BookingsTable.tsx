@@ -67,13 +67,13 @@ export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
       {/* Filters */}
       <div className='flex flex-col sm:flex-row gap-4'>
         <div className='flex-1 relative'>
-          <FiSearch className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-400' />
+          <FiSearch className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-200' />
           <input
             type='text'
             placeholder='Search by property or location...'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className='w-full pl-12 pr-4 py-3 bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all'
+            className='w-full pl-12 pr-4 py-3 bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all'
           />
         </div>
         <div className='flex gap-2'>
@@ -98,7 +98,7 @@ export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
         {filteredBookings?.map((booking) => (
           <div
             key={booking.id}
-            className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-500'
+            className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-500'
           >
             <div className='absolute inset-0 bg-linear-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
 
