@@ -39,6 +39,7 @@ const initPayment = async (bookingId: string) => {
   };
 };
 
+
 //success Payment
 const successPayment = async (query: Record<string, string>) => {
   return await prisma.$transaction(async (tx) => {
@@ -125,10 +126,16 @@ const getAllPayments = async () => {
   return payments;
 };
 
+const getMyPayments = async (userId: number) => {
+  const payments = await prisma.payment.findMany({ where: { userId } });
+  return payments;
+};
+
 export const paymentServices = {
   successPayment,
   failedPayment,
   cancelPayment,
   getAllPayments,
   initPayment,
+  getMyPayments,
 };

@@ -37,6 +37,8 @@ const createBooking = async (userId: number, propertyId: string) => {
       data: {
         bookingId: booking.id,
         transactionId: tranx(),
+        userId,
+        amount: property?.price as number,
       },
     });
     return booking;

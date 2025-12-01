@@ -4,9 +4,12 @@ import { paymentServices } from './payment.services';
 import { sendResponse } from '../../utils/send.response';
 import httpStatusCodes from 'http-status-codes';
 import { ENV } from '../../config/env';
+import { IJwt } from '../../types/user.interface';
 
 const createPayment = createAsyncFn(async (req: Request, res: Response) => {
-  const payment = await paymentServices.initPayment(req.body.bookingId as string);
+  const payment = await paymentServices.initPayment(
+    req.body.bookingId as string
+  );
   sendResponse(res, {
     success: true,
     statusCode: httpStatusCodes.CREATED,
@@ -19,7 +22,9 @@ const createPayment = createAsyncFn(async (req: Request, res: Response) => {
 const successPayment = createAsyncFn(async (req: Request, res: Response) => {
   const query = req.query;
   console.log(query);
-  const payment = await paymentServices.successPayment(query as Record<string, string>);
+  const payment = await paymentServices.successPayment(
+    query as Record<string, string>
+  );
 
   if (payment.success) {
     res.redirect(
@@ -31,7 +36,9 @@ const successPayment = createAsyncFn(async (req: Request, res: Response) => {
 //failed payment
 const failedPayment = createAsyncFn(async (req: Request, res: Response) => {
   const query = req.query;
-  const payment = await paymentServices.failedPayment(query as Record<string, string>);
+  const payment = await paymentServices.failedPayment(
+    query as Record<string, string>
+  );
 
   if (payment.failed) {
     res.redirect(
@@ -40,12 +47,13 @@ const failedPayment = createAsyncFn(async (req: Request, res: Response) => {
   }
 });
 
-
 //cancel payment
 const cancelPayment = createAsyncFn(async (req: Request, res: Response) => {
   const query = req.query;
   console.log(query);
-  const payment = await paymentServices.cancelPayment(query as Record<string, string>);
+  const payment = await paymentServices.cancelPayment(
+    query as Record<string, string>
+  );
 
   if (payment.canceled) {
     res.redirect(
@@ -54,9 +62,35 @@ const cancelPayment = createAsyncFn(async (req: Request, res: Response) => {
   }
 });
 
+const getAllPayments = createAsyncFn(async (req: Request, res: Response) => {
+  const payments = await paymentServices.getAllPayments();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'All Payments',
+    data: payments,
+  });
+});
+
+const getMyPayments = createAsyncFn(
+  async (req: Request & { user?: IJwt }, res: Response) => {
+    const payments = await paymentServices.getMyPayments(
+      Number(req?.user?.userId) as number
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatusCodes.OK,
+      message: 'My Payments',
+      data: payments,
+    });
+  }
+);
+
 export const paymentController = {
   createPayment,
   successPayment,
   failedPayment,
-  cancelPayment
+  cancelPayment,
+  getAllPayments,
+  getMyPayments,
 };

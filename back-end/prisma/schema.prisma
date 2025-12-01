@@ -22,6 +22,7 @@ model User {
   password  String
   role      Role    @default(USER)
   bookings  Booking[]
+  payments  Payment[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -92,9 +93,12 @@ model Payment {
   id             String            @id @default(uuid())
   bookingId      String  @unique
   booking        Booking        @relation(fields: [bookingId], references: [id])
-  provider       PaymentProvider @default(stripe)
+  provider       PaymentProvider @default(ssl_commerz)
   transactionId  String  @unique
   status         PaymentStatus  @default(pending)
+  amount         Decimal       @db.Decimal(12, 2)
+  userId         Int
+  user           User          @relation(fields: [userId], references: [id])
   rawResponse    Json?
 
   createdAt      DateTime       @default(now())
@@ -107,7 +111,7 @@ model Payment {
 
 enum PaymentProvider {
   stripe
-  bkash
+  ssl_commerz
 }
 
 enum PaymentStatus {

@@ -17,4 +17,8 @@ router.post('/failed', paymentController.failedPayment);
 
 router.post('/cancel', paymentController.cancelPayment);
 
+router.get('/', paymentController.getAllPayments);
+
+router.get('/my-payments', checkAuth(Role.USER), paymentController.getMyPayments);
+
 export const paymentRoutes = router;
