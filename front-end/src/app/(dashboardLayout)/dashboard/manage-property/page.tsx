@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { FiHome, FiTrendingUp, FiDollarSign, FiEye } from 'react-icons/fi';
+import { FiHome, FiTrendingUp, FiDollarSign, FiEye, FiPlus } from 'react-icons/fi';
 import PropertyTable from '@/components/PropertyTable';
 import PropertyFilters from '@/components/PropertyFilters';
 import { useEffect, useState } from 'react';
 import ManagePropertiesSkeleton from '@/components/Loding';
+import Link from 'next/link';
 
-const ManagePropertyPage =  () => {
+const ManagePropertyPage = () => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,6 +29,7 @@ const ManagePropertyPage =  () => {
   }, []);
 
   if (loading) return <ManagePropertiesSkeleton />;
+
   const stats = [
     {
       icon: FiHome,
@@ -63,59 +65,69 @@ const ManagePropertyPage =  () => {
       color: 'from-orange-500 to-red-500',
     },
   ];
+
   return (
-    <div className='min-h-screen p-6 lg:p-8 space-y-8'>
-      {/* Header */}
-      <div className='space-y-2'>
-        <h1 className='text-4xl lg:text-5xl font-bold text-white'>
-          Manage Properties
-        </h1>
-        <p className='text-white/60 text-lg'>
-          View, edit, and manage all your property listings
-        </p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                Manage Properties
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
+                View, edit, and manage all your property listings
+              </p>
+            </div>
+            <Link
+              href="/dashboard/create-property"
+              className="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold hover:shadow-xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300"
+            >
+              <FiPlus className="w-5 h-5" />
+              Add Property
+            </Link>
+          </div>
+        </div>
 
-      {/* Stats Grid */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className='group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20'
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            {/* linear Orb */}
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
             <div
-              className={`absolute -top-10 -right-10 w-32 h-32 bg-linear-to-br ${stat.color} rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-500`}
-            />
-
-            <div className='relative z-10 space-y-4'>
-              <div className='flex items-center justify-between'>
-                <div
-                  className={`p-3 rounded-2xl bg-linear-to-br ${stat.color} bg-opacity-20`}
-                >
-                  <stat.icon className='w-6 h-6 text-white' />
+              key={index}
+              className="group backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 hover:bg-white dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl dark:shadow-none dark:hover:shadow-2xl dark:hover:shadow-purple-500/20"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} group-hover:scale-110 transition-transform duration-300`}>
+                  <stat.icon className="w-6 h-6 text-white" />
                 </div>
-                <span className='text-green-400 text-sm font-semibold'>
+                <span className="text-green-600 dark:text-green-400 text-sm font-semibold">
                   {stat.change}
                 </span>
               </div>
               <div>
-                <p className='text-white/60 text-sm'>{stat.label}</p>
-                <p className='text-3xl font-bold text-white mt-1'>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">{stat.label}</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white">
                   {stat.value}
                 </p>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Filters Section */}
+        <PropertyFilters />
+
+        {/* Properties Table */}
+        <div className="backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 lg:p-8 shadow-lg dark:shadow-none">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Property Listings</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+              {data.length} {data.length === 1 ? 'property' : 'properties'} found
+            </p>
           </div>
-        ))}
-      </div>
-
-      {/* Filters Section */}
-      <PropertyFilters />
-
-      {/* Properties Table */}
-      <div className='relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 lg:p-8'>
-        <PropertyTable properties={data} />
+          <PropertyTable properties={data} />
+        </div>
       </div>
     </div>
   );

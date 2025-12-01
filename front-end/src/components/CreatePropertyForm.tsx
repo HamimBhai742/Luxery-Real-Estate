@@ -1,16 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { FaBed, FaBath, FaCheckCircle } from 'react-icons/fa';
 import { FaBuildingColumns } from 'react-icons/fa6';
-
-import {
-  FiHome,
-  FiMapPin,
-  FiDollarSign,
-  FiDroplet,
-  FiCheck,
-  FiX,
-} from 'react-icons/fi';
+import { FiHome, FiMapPin, FiDollarSign, FiX } from 'react-icons/fi';
 import { ImSpinner9 } from 'react-icons/im';
 
 interface PropertyFormData {
@@ -115,187 +108,190 @@ const CreatePropertyForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='space-y-6'>
-      {/* Property Name */}
-      <div className='group'>
-        <label className='block text-white/80 text-sm font-medium mb-2'>
-          Property Name
-        </label>
-        <div className='relative'>
-          <FiHome className='absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5' />
-          <input
-            type='text'
-            name='name'
-            value={formData.name}
-            onChange={handleChange}
-            className='w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/30 focus:bg-white/10 focus:border-blue-500/50 focus:outline-none transition-all duration-300'
-            placeholder='Enter property name'
-            required
-          />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 mb-6 shadow-lg dark:shadow-none">
+          <div className="flex items-center gap-4">
+            <div className="p-4 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500">
+              <FaBuildingColumns className="text-white text-2xl" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                Create New Property
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">Add a luxury property to your portfolio</p>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Description */}
-      <div className='group'>
-        <label className='block text-white/80 text-sm font-medium mb-2'>
-          Description
-        </label>
-        <textarea
-          name='description'
-          value={formData.description}
-          onChange={handleChange}
-          rows={4}
-          className='w-full px-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/30 focus:bg-white/10 focus:border-blue-500/50 focus:outline-none transition-all duration-300 resize-none'
-          placeholder='Describe the property...'
-          required
-        />
-      </div>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-8 space-y-6 shadow-lg dark:shadow-none">
+          {/* Property Name */}
+          <div className="group">
+            <label className="block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2">
+              <FiHome className="text-blue-600 dark:text-blue-400" />
+              Property Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+              placeholder="e.g., Luxury Penthouse Suite"
+              required
+            />
+          </div>
 
-      {/* Location */}
-      <div className='group'>
-        <label className='block text-white/80 text-sm font-medium mb-2'>
-          Location
-        </label>
-        <div className='relative'>
-          <FiMapPin className='absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5' />
-          <input
-            type='text'
-            name='location'
-            value={formData.location}
-            onChange={handleChange}
-            className='w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/30 focus:bg-white/10 focus:border-blue-500/50 focus:outline-none transition-all duration-300'
-            placeholder='Enter location'
-            required
-          />
-        </div>
-      </div>
+          {/* Description */}
+          <div className="group">
+            <label className="block text-gray-900 dark:text-white font-medium mb-3">Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows={5}
+              className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 resize-none"
+              placeholder="Describe the property features, location highlights, and unique selling points..."
+              required
+            />
+          </div>
 
-      {/* Price */}
-      <div className='group'>
-        <label className='block text-white/80 text-sm font-medium mb-2'>
-          Price
-        </label>
-        <div className='relative'>
-          <FiDollarSign className='absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5' />
-          <input
-            type='number'
-            name='price'
-            value={formData.price}
-            onChange={handleChange}
-            className='w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/30 focus:bg-white/10 focus:border-blue-500/50 focus:outline-none transition-all duration-300'
-            placeholder='Enter price'
-            required
-          />
-        </div>
-      </div>
-
-      {/* Bedrooms & Bathrooms */}
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-        <div className='group'>
-          <label className='block text-white/80 text-sm font-medium mb-2'>
-            Bedrooms
-          </label>
-          <div className='relative'>
-            <svg
-              className='absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+          {/* Location & Price Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="group">
+              <label className="block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2">
+                <FiMapPin className="text-green-600 dark:text-green-400" />
+                Location
+              </label>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                placeholder="e.g., Beverly Hills, CA"
+                required
               />
-            </svg>
+            </div>
 
-            <input
-              type='number'
-              name='bedrooms'
-              value={formData.bedrooms}
-              onChange={handleChange}
-              className='w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/30 focus:bg-white/10 focus:border-blue-500/50 focus:outline-none transition-all duration-300'
-              placeholder='0'
-              required
-            />
+            <div className="group">
+              <label className="block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2">
+                <FiDollarSign className="text-yellow-600 dark:text-yellow-400" />
+                Price
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                placeholder="0"
+                required
+              />
+            </div>
           </div>
-        </div>
 
-        <div className='group'>
-          <label className='block text-white/80 text-sm font-medium mb-2'>
-            Bathrooms
-          </label>
-          <div className='relative'>
-            <FiDroplet className='absolute left-4 top-1/2 -translate-y-1/2 text-white/40 w-5 h-5' />
-            <input
-              type='number'
-              name='bathrooms'
-              value={formData.bathrooms}
-              onChange={handleChange}
-              className='w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-white/30 focus:bg-white/10 focus:border-blue-500/50 focus:outline-none transition-all duration-300'
-              placeholder='0'
-              required
-            />
+          {/* Bedrooms & Bathrooms */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="group">
+              <label className="block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2">
+                <FaBed className="text-purple-600 dark:text-purple-400" />
+                Bedrooms
+              </label>
+              <input
+                type="number"
+                name="bedrooms"
+                value={formData.bedrooms}
+                onChange={handleChange}
+                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                placeholder="0"
+                required
+              />
+            </div>
+
+            <div className="group">
+              <label className="block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2">
+                <FaBath className="text-cyan-600 dark:text-cyan-400" />
+                Bathrooms
+              </label>
+              <input
+                type="number"
+                name="bathrooms"
+                value={formData.bathrooms}
+                onChange={handleChange}
+                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                placeholder="0"
+                required
+              />
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* Amenities */}
-      <div className='group'>
-        <label className='block text-white/80 text-sm font-medium mb-2'>
-          Amenities
-        </label>
-        <div className='w-full px-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus-within:bg-white/10 focus-within:border-blue-500/50 transition-all duration-300'>
-          <div className='flex flex-wrap gap-2 mb-2'>
-            {formData.amenities.map((amenity, index) => (
-              <span
-                key={index}
-                className='inline-flex items-center gap-1 px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-lg text-white text-sm'
-              >
-                {amenity}
-                <button
-                  type='button'
-                  onClick={() => handleRemoveAmenity(index)}
-                  className='hover:text-red-400 transition-colors'
-                >
-                  <FiX className='w-4 h-4' />
-                </button>
+          {/* Amenities */}
+          <div className="group">
+            <label className="block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2">
+              <FaCheckCircle className="text-green-600 dark:text-green-400" />
+              Amenities
+            </label>
+            <div className="p-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl focus-within:bg-white dark:focus-within:bg-white/10 focus-within:border-purple-500 dark:focus-within:border-purple-500/50 focus-within:ring-2 focus-within:ring-purple-500/20 transition-all duration-300">
+              {formData.amenities.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {formData.amenities.map((amenity, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-500/20 dark:to-blue-500/20 border border-purple-300 dark:border-purple-500/30 rounded-lg text-gray-900 dark:text-white text-sm font-medium hover:from-purple-200 hover:to-blue-200 dark:hover:from-purple-500/30 dark:hover:to-blue-500/30 transition-all duration-300"
+                    >
+                      {amenity}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveAmenity(index)}
+                        className="hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                      >
+                        <FiX className="w-4 h-4" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
+              <input
+                type="text"
+                value={amenityInput}
+                onChange={(e) => setAmenityInput(e.target.value)}
+                onKeyDown={handleAddAmenity}
+                className="w-full bg-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none"
+                placeholder="Type amenity and press Enter (e.g., Pool, Gym, Parking)"
+              />
+            </div>
+            <p className="text-gray-600 dark:text-gray-500 text-sm mt-2">Press Enter to add each amenity</p>
+          </div>
+
+          {/* Submit Button */}
+          <div className="pt-4">
+            <button
+              type="submit"
+              disabled={loading}
+              className="group relative w-full py-4 px-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                {loading ? (
+                  <>
+                    <ImSpinner9 className="w-5 h-5 animate-spin" />
+                    Creating Property...
+                  </>
+                ) : (
+                  <>
+                    <FaBuildingColumns className="w-5 h-5" />
+                    Create Property
+                  </>
+                )}
               </span>
-            ))}
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </button>
           </div>
-          <input
-            type='text'
-            value={amenityInput}
-            onChange={(e) => setAmenityInput(e.target.value)}
-            onKeyDown={handleAddAmenity}
-            className='w-full bg-transparent text-white placeholder-white/30 focus:outline-none'
-            placeholder='Type amenity and press Enter'
-          />
-        </div>
+        </form>
       </div>
-
-      {/* Submit Button */}
-      <button
-        type='submit'
-        className='group relative w-full py-4 px-6 bg-linear-to-r from-blue-500 to-purple-600 rounded-2xl text-white font-semibold overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-[1.02]'
-      >
-        <div>
-          {loading ? (
-            <span className='relative z-10 flex items-center justify-center gap-2'>
-              <ImSpinner9 className='w-5 h-5 animate-spin' />
-              Creating Property...
-            </span>
-          ) : (
-            <span className='relative z-10 flex items-center justify-center gap-2'>
-              <FaBuildingColumns className='w-5 h-5' />
-              Create Property
-            </span>
-          )}
-        </div>
-        <div className='absolute inset-0 bg-linear-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-      </button>
-    </form>
+    </div>
   );
 };
 

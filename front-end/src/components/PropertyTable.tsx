@@ -1,13 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  FiEdit2,
-  FiTrash2,
-  FiEye,
-  FiMoreVertical,
-  FiHome,
-} from 'react-icons/fi';
+import { FiEdit2, FiTrash2, FiHome, FiMapPin } from 'react-icons/fi';
 import EditPropertyModal from './EditPropertyModal';
 import Swal from 'sweetalert2';
 
@@ -22,28 +16,25 @@ interface Property {
 }
 
 const PropertyTable = ({ properties }: { properties: Property[] }) => {
-  console.log(properties);
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(
-    null
-  );
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const handleEdit = (property: Property) => {
     setSelectedProperty(property);
     setShowEditModal(true);
-    setActiveMenu(null);
   };
 
   const handleDelete = (id: string) => {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You want to delete this!',
+      text: 'You want to delete this property!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete!',
+      confirmButtonColor: '#8b5cf6',
+      cancelButtonColor: '#ef4444',
+      confirmButtonText: 'Yes, delete it!',
+      background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+      color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#000000',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -51,26 +42,37 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
             `${process.env.NEXT_PUBLIC_API_URL}/property/delete-property/${id}`,
             {
               method: 'DELETE',
-              headers: {
-                'Content-Type': 'application/json',
-              },
+              headers: { 'Content-Type': 'application/json' },
               credentials: 'include',
             }
           );
           const data = await res.json();
           if (data.success) {
-            Swal.fire('Deleted!', data.message, 'success');
+            Swal.fire({
+              title: 'Deleted!',
+              text: data.message,
+              icon: 'success',
+              background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+              color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#000000',
+            });
             window.location.reload();
-          }
-          if (!data.success) {
-            Swal.fire('Error!', data.message, 'error');
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: data.message,
+              icon: 'error',
+              background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+              color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#000000',
+            });
           }
         } catch (error) {
-          Swal.fire(
-            'Error!',
-            'An error occurred while deleting the property.',
-            'error'
-          );
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while deleting the property.',
+            icon: 'error',
+            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+            color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#000000',
+          });
           console.error('Error deleting property:', error);
         }
       }
@@ -80,68 +82,81 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active':
-        return 'bg-green-500/20 text-green-400 border-green-500/30';
+        return 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 border-green-200 dark:border-green-500/30';
       case 'inactive':
-        return 'bg-red-500/20 text-red-400 border-red-500/30';
+        return 'bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400 border-red-200 dark:border-red-500/30';
       default:
-        return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+        return 'bg-gray-100 dark:bg-gray-500/20 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-500/30';
     }
   };
+
+  if (!properties || properties.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <FiHome className="w-16 h-16 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
+        <p className="text-gray-600 dark:text-gray-400 text-lg">No properties found</p>
+      </div>
+    );
+  }
 
   return (
     <>
       {/* Desktop Table View */}
-      <div className='hidden lg:block '>
-        <table className='w-full'>
+      <div className="hidden lg:block overflow-x-auto">
+        <table className="w-full">
           <thead>
-            <tr className='border-b border-white/10'>
-              <th className='text-left py-4 px-4 text-white/60 font-semibold text-sm'>
+            <tr className="border-b border-gray-200 dark:border-white/10">
+              <th className="text-left py-4 px-4 text-gray-600 dark:text-gray-400 font-semibold text-sm">
                 Property
               </th>
-              <th className='text-left py-4 px-4 text-white/60 font-semibold text-sm'>
+              <th className="text-left py-4 px-4 text-gray-600 dark:text-gray-400 font-semibold text-sm">
                 Location
               </th>
-              <th className='text-left py-4 px-4 text-white/60 font-semibold text-sm'>
+              <th className="text-left py-4 px-4 text-gray-600 dark:text-gray-400 font-semibold text-sm">
                 Price
               </th>
-              <th className='text-left py-4 px-4 text-white/60 font-semibold text-sm'>
+              <th className="text-left py-4 px-4 text-gray-600 dark:text-gray-400 font-semibold text-sm">
                 Beds/Baths
               </th>
-              <th className='text-left py-4 px-4 text-white/60 font-semibold text-sm'>
+              <th className="text-left py-4 px-4 text-gray-600 dark:text-gray-400 font-semibold text-sm">
                 Status
               </th>
-              <th className='text-right py-4 px-4 text-white/60 font-semibold text-sm'>
+              <th className="text-right py-4 px-4 text-gray-600 dark:text-gray-400 font-semibold text-sm">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody>
-            {properties?.map((property, index) => (
+            {properties.map((property) => (
               <tr
                 key={property.id}
-                className='border-b border-white/5 hover:bg-white/5 transition-all duration-300 group'
-                style={{ animationDelay: `${index * 50}ms` }}
+                className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 transition-all duration-300 group"
               >
-                <td className='py-4 px-4'>
-                  <div className='flex items-center gap-3'>
-                    <div className='w-16 h-16 rounded-xl bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden'>
-                      <FiHome className='w-8 h-8 text-white/60' />
+                <td className="py-4 px-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                      <FiHome className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <p className='text-white font-semibold'>
+                      <p className="text-gray-900 dark:text-white font-semibold">
                         {property.name}
                       </p>
                     </div>
                   </div>
                 </td>
-                <td className='py-4 px-4 text-white/80'>{property.location}</td>
-                <td className='py-4 px-4 text-white font-semibold'>
-                  ${property.price}
+                <td className="py-4 px-4">
+                  <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                    <FiMapPin className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    {property.location}
+                  </div>
                 </td>
-                <td className='py-4 px-4 text-white/80'>
+                <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">
+                  ${property.price.toLocaleString()}
+                </td>
+                <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
                   {property.bedrooms} / {property.bathrooms}
                 </td>
-                <td className='py-4 px-4'>
+                <td className="py-4 px-4">
                   <span
                     className={`px-3 py-1 rounded-lg text-xs font-semibold border capitalize ${getStatusColor(
                       property.status
@@ -150,19 +165,21 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
                     {property.status}
                   </span>
                 </td>
-                <td className='py-4 px-4'>
-                  <div className='flex items-center justify-end gap-2'>
+                <td className="py-4 px-4">
+                  <div className="flex items-center justify-end gap-2">
                     <button
                       onClick={() => handleEdit(property)}
-                      className='p-2 rounded-xl bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-all duration-300 hover:scale-110'
+                      className="p-2 rounded-lg bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-500/20 transition-all duration-300 hover:scale-110"
+                      title="Edit"
                     >
-                      <FiEdit2 className='w-4 h-4' />
+                      <FiEdit2 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(property.id)}
-                      className='p-2 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-300 hover:scale-110'
+                      className="p-2 rounded-lg bg-red-100 dark:bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-500/20 transition-all duration-300 hover:scale-110"
+                      title="Delete"
                     >
-                      <FiTrash2 className='w-4 h-4' />
+                      <FiTrash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </td>
@@ -173,52 +190,30 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
       </div>
 
       {/* Mobile Card View */}
-      <div className='lg:hidden space-y-4'>
-        {properties.map((property, index) => (
+      <div className="lg:hidden space-y-4">
+        {properties.map((property) => (
           <div
             key={property.id}
-            className='relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 hover:bg-white/10 transition-all duration-300'
-            style={{ animationDelay: `${index * 50}ms` }}
+            className="backdrop-blur-xl bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 p-5 hover:bg-white dark:hover:bg-white/10 transition-all duration-300 shadow dark:shadow-none"
           >
-            <div className='space-y-4'>
-              <div className='flex items-start justify-between'>
-                <div className='flex items-center gap-3'>
-                  <div className='w-12 h-12 rounded-xl bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center'>
-                    <FiHome className='w-6 h-6 text-white/60' />
+            <div className="space-y-4">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3 flex-1">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
+                    <FiHome className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <div>
-                    <p className='text-white font-semibold'>{property.name}</p>
-                    <p className='text-white/40 text-sm'>{property.location}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-gray-900 dark:text-white font-semibold truncate">
+                      {property.name}
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center gap-1">
+                      <FiMapPin className="w-3 h-3" />
+                      {property.location}
+                    </p>
                   </div>
                 </div>
-                <button
-                  onClick={() =>
-                    setActiveMenu(
-                      activeMenu === property.id ? null : property.id
-                    )
-                  }
-                  className='p-2 rounded-xl bg-white/5 text-white/60 hover:bg-white/10 transition-all'
-                >
-                  <FiMoreVertical className='w-5 h-5' />
-                </button>
-              </div>
-
-              <div className='grid grid-cols-2 gap-4'>
-                <div>
-                  <p className='text-white/40 text-xs'>Price</p>
-                  <p className='text-white font-semibold'>{property.price}</p>
-                </div>
-                <div>
-                  <p className='text-white/40 text-xs'>Beds/Baths</p>
-                  <p className='text-white font-semibold'>
-                    {property.bedrooms} / {property.bathrooms}
-                  </p>
-                </div>
-              </div>
-
-              <div className='flex items-center justify-between'>
                 <span
-                  className={`px-3 py-1 rounded-lg text-xs font-semibold border capitalize ${getStatusColor(
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold border capitalize flex-shrink-0 ${getStatusColor(
                     property.status
                   )}`}
                 >
@@ -226,25 +221,37 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
                 </span>
               </div>
 
-              {/* Mobile Actions Menu */}
-              {activeMenu === property.id && (
-                <div className='flex gap-2 pt-2 border-t border-white/10 animate-slideDown'>
-                  <button
-                    onClick={() => handleEdit(property)}
-                    className='flex-1 py-2 px-4 rounded-xl bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-all duration-300 flex items-center justify-center gap-2'
-                  >
-                    <FiEdit2 className='w-4 h-4' />
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(property.id)}
-                    className='flex-1 py-2 px-4 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-300 flex items-center justify-center gap-2'
-                  >
-                    <FiTrash2 className='w-4 h-4' />
-                    Delete
-                  </button>
+              <div className="grid grid-cols-2 gap-4 pt-3 border-t border-gray-200 dark:border-white/10">
+                <div>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">Price</p>
+                  <p className="text-gray-900 dark:text-white font-semibold">
+                    ${property.price.toLocaleString()}
+                  </p>
                 </div>
-              )}
+                <div>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">Beds/Baths</p>
+                  <p className="text-gray-900 dark:text-white font-semibold">
+                    {property.bedrooms} / {property.bathrooms}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-2 pt-3 border-t border-gray-200 dark:border-white/10">
+                <button
+                  onClick={() => handleEdit(property)}
+                  className="flex-1 py-2 px-4 rounded-lg bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-500/20 transition-all duration-300 font-medium text-sm flex items-center justify-center gap-2"
+                >
+                  <FiEdit2 className="w-4 h-4" />
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(property.id)}
+                  className="flex-1 py-2 px-4 rounded-lg bg-red-100 dark:bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-500/20 transition-all duration-300 font-medium text-sm flex items-center justify-center gap-2"
+                >
+                  <FiTrash2 className="w-4 h-4" />
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         ))}
