@@ -1,3 +1,4 @@
+import AdminDashboard from '@/components/Dashboard/AdminDashboard';
 import UserDashboard from '@/components/Dashboard/UserDashboard';
 import { cookies } from 'next/headers';
 
@@ -27,7 +28,7 @@ const Dashboard = async () => {
     <div>
       <h1 className='sm:text-7xl text-4xl font-bold'>Comming Soon.........</h1>
       {me.role === 'ADMIN' && (
-        <p className='text-lg mt-4'>You are logged in as an Admin.</p>
+       <AdminDashboard/>
       )}
       {me.role === 'USER' && (
        <UserDashboard/>
