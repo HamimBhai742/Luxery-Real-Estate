@@ -54,7 +54,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
       >
         {/* Icon */}
         <div className="mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/50 group-hover:scale-110 transition-transform">
+          <div className="w-16 h-16 bg-linear-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/50 group-hover:scale-110 transition-transform">
             <span className="text-3xl">{service.icon}</span>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
         <div
           className="absolute inset-0 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
           style={{
-            background: `radial-gradient(circle at ${rotateY * 5 + 50}% ${rotateX * 5 + 50}%, rgba(251, 191, 36, 0.1), transparent 50%)`,
+            background: `radial-linear(circle at ${rotateY * 5 + 50}% ${rotateX * 5 + 50}%, rgba(251, 191, 36, 0.1), transparent 50%)`,
           }}
         />
       </div>

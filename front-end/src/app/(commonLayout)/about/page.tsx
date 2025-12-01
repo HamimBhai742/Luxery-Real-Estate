@@ -65,7 +65,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black'>
+    <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black'>
       {/* Hero Section with Parallax */}
       <section className='relative min-h-[70vh] flex items-center justify-center overflow-hidden'>
         {/* Parallax Background */}
@@ -75,7 +75,7 @@ export default function AboutPage() {
             className='absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/30 dark:bg-amber-500/10 rounded-full blur-3xl animate-parallax-float'
             style={{ animationDelay: '2s' }}
           ></div>
-          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-200/20 to-indigo-200/20 dark:from-amber-900/5 dark:to-orange-900/5 rounded-full blur-3xl'></div>
+          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-linear-to-r from-blue-200/20 to-indigo-200/20 dark:from-amber-900/5 dark:to-orange-900/5 rounded-full blur-3xl'></div>
         </div>
 
         {/* Content */}
@@ -84,7 +84,7 @@ export default function AboutPage() {
           <h1 className='text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight'>
             Redefining Luxury
             <br />
-            <span className='bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent'>
+            <span className='bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent'>
               Real Estate
             </span>
           </h1>
@@ -148,7 +148,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className='relative h-[500px] bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-3xl overflow-hidden shadow-2xl'>
+            <div className='relative h-[500px] bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-3xl overflow-hidden shadow-2xl'>
               <div className='absolute inset-0 flex items-center justify-center'>
                 <svg
                   className='w-32 h-32 text-blue-600 dark:text-amber-400'
@@ -170,7 +170,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className='py-20 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'>
+      <section className='py-20 px-4 bg-linear-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'>
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-16'>
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
@@ -223,7 +223,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className='py-20 px-4'>
         <div className='max-w-4xl mx-auto'>
-          <div className='bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden'>
+          <div className='bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden'>
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
             <div className='relative z-10'>
               <h2 className='text-3xl md:text-4xl font-bold text-white mb-4'>

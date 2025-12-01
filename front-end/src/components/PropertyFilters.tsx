@@ -55,7 +55,7 @@ const PropertyFilters = () => {
                   onClick={() => setSelectedStatus(status)}
                   className={`px-6 py-2 rounded-xl font-medium capitalize transition-all duration-300 ${
                     selectedStatus === status
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/50'
+                      ? 'bg-linear-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/50'
                       : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
                   }`}
                 >

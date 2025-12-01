@@ -93,8 +93,8 @@ const Navbar = () => {
           {/* Logo */}
           <Link href='/' className='flex items-center space-x-2 group'>
             <div className='relative'>
-              <div className='absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity' />
-              <div className='relative bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 p-2 rounded-lg'>
+              <div className='absolute inset-0 bg-linear-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity' />
+              <div className='relative bg-linear-to-br from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 p-2 rounded-lg'>
                 <svg
                   className='w-6 h-6 text-white'
                   fill='currentColor'
@@ -104,7 +104,7 @@ const Navbar = () => {
                 </svg>
               </div>
             </div>
-            <span className='text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent'>
+            <span className='text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent'>
               LUXE
             </span>
           </Link>
@@ -122,14 +122,15 @@ const Navbar = () => {
                 }`}
               >
                 {link.name}
-                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 group-hover:w-full transition-all duration-300' />
+                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 group-hover:w-full transition-all duration-300' />
               </Link>
             ))}
           </div>
 
           {/* CTA Buttons */}
-          <div>
-            <ModeToggle />
+           <ModeToggle />
+          <div className='max-sm:hidden'>
+
             {user?.success ? (
               <Menu as='div' className='relative ml-3'>
                 <MenuButton className='relative'>
@@ -199,7 +200,7 @@ const Navbar = () => {
                   href='/register'
                   className='relative px-6 py-2.5 text-sm font-semibold text-white rounded-full overflow-hidden group'
                 >
-                  <div className='absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 transition-transform group-hover:scale-105' />
+                  <div className='absolute inset-0 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 transition-transform group-hover:scale-105' />
                   <span className='relative'>Get Started</span>
                 </Link>
               </div>
@@ -313,7 +314,7 @@ const Navbar = () => {
               </Menu>
             ) : (
               <div className='pt-4 space-y-2'>
-                <Link href='/login' className='block w-full px-4 py-3 text-center text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
+                <Link href='/login' className='block w-full px-4 py-3 text-center text-base font-semibold text-white bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-lg hover:shadow-lg transition-shadow'>
                   Sign In
                 </Link>
 

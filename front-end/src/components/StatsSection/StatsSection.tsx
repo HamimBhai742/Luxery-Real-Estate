@@ -15,7 +15,7 @@ const StatsSection = () => {
               key={index}
               className='relative p-8 rounded-2xl bg-white dark:bg-black/60 backdrop-blur-xl border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300'
             >
-              <div className='text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent mb-2'>
+              <div className='text-4xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent mb-2'>
                 {stat.value}
               </div>
               <div className='text-sm text-gray-700 dark:text-gray-400 font-medium'>

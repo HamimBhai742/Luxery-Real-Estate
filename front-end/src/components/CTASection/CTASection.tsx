@@ -4,7 +4,7 @@ const CTASection = () => {
   return (
     <section className='relative py-20 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-4xl mx-auto text-center'>
-        <div className='relative p-12 rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 overflow-hidden shadow-2xl'>
+        <div className='relative p-12 rounded-3xl bg-linear-to-br from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 overflow-hidden shadow-2xl'>
           <div className='absolute inset-0 bg-black/10' />
           <div className='relative'>
             <h2 className='text-3xl sm:text-4xl font-bold text-white mb-4'>

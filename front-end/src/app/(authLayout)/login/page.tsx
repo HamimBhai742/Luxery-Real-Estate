@@ -4,8 +4,8 @@ export default function LoginPage() {
   return (
     <div className='min-h-screen relative overflow-hidden'>
       {/* Animated Background - Different from Register */}
-      <div className='absolute inset-0 bg-gradient-to-tr from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-amber-950 dark:to-black'>
-        {/* Animated Mesh Gradient */}
+      <div className='absolute inset-0 bg-linear-to-tr from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-amber-950 dark:to-black'>
+        {/* Animated Mesh linear */}
         <div className='absolute inset-0 opacity-30'>
           <div className='absolute top-0 left-1/4 w-96 h-96 bg-blue-400/40 dark:bg-amber-500/40 rounded-full blur-3xl animate-pulse-slow'></div>
           <div
@@ -16,10 +16,10 @@ export default function LoginPage() {
         </div>
 
         {/* Diagonal Lines Pattern */}
-        <div className='absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(59,130,246,0.05)_25%,rgba(59,130,246,0.05)_50%,transparent_50%,transparent_75%,rgba(59,130,246,0.05)_75%)] dark:bg-[linear-gradient(45deg,transparent_25%,rgba(251,191,36,0.05)_25%,rgba(251,191,36,0.05)_50%,transparent_50%,transparent_75%,rgba(251,191,36,0.05)_75%)] bg-[length:60px_60px]'></div>
+        <div className='absolute inset-0 bg-[linear-linear(45deg,transparent_25%,rgba(59,130,246,0.05)_25%,rgba(59,130,246,0.05)_50%,transparent_50%,transparent_75%,rgba(59,130,246,0.05)_75%)] dark:bg-[linear-linear(45deg,transparent_25%,rgba(251,191,36,0.05)_25%,rgba(251,191,36,0.05)_50%,transparent_50%,transparent_75%,rgba(251,191,36,0.05)_75%)] bg-[length:60px_60px]'></div>
 
-        {/* Radial Gradient Overlay */}
-        <div className='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(255,255,255,0.3)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]'></div>
+        {/* Radial linear Overlay */}
+        <div className='absolute inset-0 bg-[radial-linear(circle_at_center,transparent_0%,rgba(255,255,255,0.3)_100%)] dark:bg-[radial-linear(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]'></div>
       </div>
 
       {/* Content */}
@@ -38,7 +38,7 @@ export default function LoginPage() {
       <div className='absolute bottom-20 right-20 w-12 h-12 border-2 border-indigo-500/20 dark:border-amber-500/20 rounded-lg rotate-45 animate-pulse'></div>
 
       {/* Spotlight Effect */}
-      <div className='absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-blue-400/10 dark:from-amber-500/10 to-transparent blur-3xl pointer-events-none'></div>
+      <div className='absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-linear-to-b from-blue-400/10 dark:from-amber-500/10 to-transparent blur-3xl pointer-events-none'></div>
     </div>
   );
 }

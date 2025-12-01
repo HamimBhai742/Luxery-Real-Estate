@@ -13,7 +13,7 @@ A modern, luxury real estate platform built with Next.js 16, React 19, and Tailw
 - Smooth animations and transitions
 - Parallax scrolling effects
 - Responsive design for all devices
-- Dark theme with gradient accents
+- Dark theme with linear accents
 
 ### 🏠 Property Management
 - Browse luxury properties with detailed information
@@ -153,7 +153,7 @@ The platform uses token-based authentication stored in cookies. Protected routes
 ## 🎨 Design Features
 
 - **Glassmorphism:** Backdrop blur effects with transparent backgrounds
-- **Gradient Text:** Multi-color gradient text animations
+- **linear Text:** Multi-color linear text animations
 - **Hover Effects:** Scale, shadow, and border glow on hover
 - **Status Badges:** Color-coded status indicators
 - **Smooth Transitions:** 300-500ms duration transitions

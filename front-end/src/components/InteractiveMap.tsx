@@ -42,7 +42,7 @@ export default function InteractiveMap() {
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
   return (
-    <div className="relative w-full h-[500px] bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl overflow-hidden border border-white/20 dark:border-gray-700/20 shadow-2xl">
+    <div className="relative w-full h-[500px] bg-linear-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl overflow-hidden border border-white/20 dark:border-gray-700/20 shadow-2xl">
       {/* Map Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -76,7 +76,7 @@ export default function InteractiveMap() {
           </div>
 
           {/* Marker Pin */}
-          <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/50 group-hover:scale-125 transition-transform duration-300">
+          <div className="relative z-10 w-12 h-12 bg-linear-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/50 group-hover:scale-125 transition-transform duration-300">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />

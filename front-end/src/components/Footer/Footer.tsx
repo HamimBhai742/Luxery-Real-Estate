@@ -46,7 +46,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-100 via-slate-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-900 text-gray-900 dark:text-white">
+    <footer className="relative bg-linear-to-br from-gray-100 via-slate-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-900 text-gray-900 dark:text-white">
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 dark:bg-amber-500/5 rounded-full blur-3xl" />
@@ -60,14 +60,14 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2 group mb-6">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 p-2 rounded-lg">
+                <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
+                <div className="relative bg-linear-to-br from-blue-500 to-indigo-600 dark:from-amber-500 dark:to-amber-600 p-2 rounded-lg">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
                   </svg>
                 </div>
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent">
                 LUXE
               </span>
             </Link>
@@ -88,7 +88,7 @@ const Footer = () => {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  className="px-6 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
                 >
                   Subscribe
                 </button>

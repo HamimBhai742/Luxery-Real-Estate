@@ -68,7 +68,7 @@ export default function StatsCounter({ stats }: StatsCounterProps) {
           key={idx}
           className="text-center p-6 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-800/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
         >
-          <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent mb-2">
+          <div className="text-4xl md:text-5xl font-bold bg-linear-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent mb-2">
             {stat.prefix}{counts[idx]}{stat.suffix}
           </div>
           <div className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium">

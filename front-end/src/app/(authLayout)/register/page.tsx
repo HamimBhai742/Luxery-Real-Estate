@@ -5,14 +5,14 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-slate-50 dark:from-gray-900 dark:via-black dark:to-amber-950">
+      <div className="absolute inset-0 bg-linear-to-br from-blue-50 via-indigo-50 to-slate-50 dark:from-gray-900 dark:via-black dark:to-amber-950">
         {/* Floating Orbs */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-300/30 dark:bg-amber-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/20 dark:bg-amber-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-200/20 to-indigo-200/20 dark:from-amber-900/10 dark:to-orange-900/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-linear-to-r from-blue-200/20 to-indigo-200/20 dark:from-amber-900/10 dark:to-orange-900/10 rounded-full blur-3xl animate-float"></div>
 
         {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div className="absolute inset-0 bg-[linear-linear(to_right,#80808012_1px,transparent_1px),linear-linear(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       </div>
 
       {/* Content */}
@@ -27,7 +27,7 @@ export default function RegisterPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
                 </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent">
+                <span className="text-xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-400 dark:to-amber-600 bg-clip-text text-transparent">
                   Luxury Real Estate
                 </span>
               </Link>
@@ -35,7 +35,7 @@ export default function RegisterPage() {
               <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                 Your Dream Home
                 <br />
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
                   Awaits You
                 </span>
               </h2>
@@ -81,7 +81,7 @@ export default function RegisterPage() {
                   key={idx}
                   className="text-center p-4 bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-xl border border-gray-200 dark:border-gray-800/20"
                 >
-                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
+                  <div className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
                   <div className="text-sm text-gray-700 dark:text-gray-400 mt-1">

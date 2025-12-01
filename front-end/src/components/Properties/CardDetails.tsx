@@ -50,11 +50,11 @@ const CardDetails = ({ property }: { property: Property }) => {
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
+    <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Image Gallery */}
         <div className='mb-12'>
-          <div className='relative h-[500px] bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4'>
+          <div className='relative h-[500px] bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4'>
             <div className='absolute inset-0 flex items-center justify-center text-blue-600 dark:text-amber-400'>
               <svg
                 className='w-32 h-32'
@@ -79,7 +79,7 @@ const CardDetails = ({ property }: { property: Property }) => {
               <button
                 key={idx}
                 onClick={() => setActiveImage(idx)}
-                className={`h-24 bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
+                className={`h-24 bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
                   activeImage === idx ? 'ring-4 ring-blue-500 dark:ring-amber-500' : ''
                 }`}
               />
@@ -118,7 +118,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                 {property?.location}
               </div>
 
-              <div className='sm:text-4xl text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 mb-8'>
+              <div className='sm:text-4xl text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 mb-8'>
                 ${property?.price}
               </div>
 
@@ -202,8 +202,8 @@ const CardDetails = ({ property }: { property: Property }) => {
                 onClick={() => handleSubmit(property?.id)}
                 className={`w-full ${
                   property?.isBooked
-                    ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 hover:from-blue-700 hover:to-indigo-700 dark:hover:from-amber-600 dark:hover:to-amber-700'
+                    ? 'bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
+                    : 'bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 hover:from-blue-700 hover:to-indigo-700 dark:hover:from-amber-600 dark:hover:to-amber-700'
                 } text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl`}
               >
                 {loading ? (

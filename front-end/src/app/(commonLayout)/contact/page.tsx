@@ -66,7 +66,7 @@ const faqs = [
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black">
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
         {/* Animated Background */}
@@ -83,7 +83,7 @@ export default function ContactPage() {
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Let&apos;s Start a
             <br />
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent">
               Conversation
             </span>
           </h1>
@@ -103,7 +103,7 @@ export default function ContactPage() {
                 href={method.link}
                 className="group bg-white dark:bg-gray-900/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-gray-800/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-amber-400 dark:to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/50 dark:shadow-amber-500/50">
+                <div className="w-16 h-16 bg-linear-to-br from-blue-500 to-indigo-600 dark:from-amber-400 dark:to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/50 dark:shadow-amber-500/50">
                   {method.icon}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
@@ -141,7 +141,7 @@ export default function ContactPage() {
             {/* Quick Info */}
             <div className="lg:col-span-2 space-y-6">
               {/* Office Hours */}
-              <div className="bg-gradient-to-br from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+              <div className="bg-linear-to-br from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
                 <div className="relative z-10">
                   <h3 className="text-2xl font-bold mb-4">Office Hours</h3>
@@ -172,7 +172,7 @@ export default function ContactPage() {
                     <a
                       key={social}
                       href="#"
-                      className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-amber-400 dark:to-amber-600 rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg shadow-blue-500/50 dark:shadow-amber-500/50"
+                      className="w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 dark:from-amber-400 dark:to-amber-600 rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg shadow-blue-500/50 dark:shadow-amber-500/50"
                     >
                       <span className="text-xl capitalize">{social[0]}</span>
                     </a>
@@ -201,7 +201,7 @@ export default function ContactPage() {
       </section>
 
       {/* Interactive Map */}
-      <section id="map" className="py-20 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-black dark:to-gray-900">
+      <section id="map" className="py-20 px-4 bg-linear-to-b from-white to-slate-50 dark:from-black dark:to-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">

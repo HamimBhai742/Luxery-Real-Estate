@@ -38,7 +38,7 @@ export default function ProcessTimeline({ steps }: ProcessTimelineProps) {
   return (
     <div ref={timelineRef} className="relative">
       {/* Timeline Line */}
-      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-500 via-amber-400 to-amber-300 dark:from-amber-600 dark:via-amber-500 dark:to-amber-400"></div>
+      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-amber-500 via-amber-400 to-amber-300 dark:from-amber-600 dark:via-amber-500 dark:to-amber-400"></div>
 
       {/* Steps */}
       <div className="space-y-16">
@@ -68,7 +68,7 @@ export default function ProcessTimeline({ steps }: ProcessTimelineProps) {
                 <div
                   className={`w-16 h-16 rounded-full flex items-center justify-center font-bold text-xl transition-all duration-500 ${
                     activeStep >= idx
-                      ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-white scale-110 shadow-lg shadow-amber-500/50'
+                      ? 'bg-linear-to-br from-amber-400 to-amber-600 text-white scale-110 shadow-lg shadow-amber-500/50'
                       : 'bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
                   }`}
                 >

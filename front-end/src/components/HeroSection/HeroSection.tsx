@@ -13,7 +13,7 @@ const HeroSection = () => {
           <span className='block text-gray-900 dark:text-white'>
             Discover Your
           </span>
-          <span className='block bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent'>
+          <span className='block bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent'>
             Dream Property
           </span>
         </h1>
@@ -22,7 +22,7 @@ const HeroSection = () => {
           properties in the most exclusive locations worldwide.
         </p>
         <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-          <button className='px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 text-white font-semibold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300'>
+          <button className='px-8 py-4 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 text-white font-semibold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300'>
             Explore Properties
           </button>
           <button className='px-8 py-4 bg-white dark:bg-black/80 backdrop-blur-xl border border-gray-300 dark:border-gray-800 text-gray-900 dark:text-white font-semibold rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300'>
