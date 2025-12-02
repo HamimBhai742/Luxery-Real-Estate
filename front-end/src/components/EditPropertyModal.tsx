@@ -205,7 +205,7 @@ const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             >
               {loading ? (
                 <span className='flex items-center gap-2'>
-                  <ImSpinner9 />
+                  <ImSpinner9 className='animate-spin' />
                   <span> Changing....</span>
                 </span>
               ) : (

@@ -3,37 +3,48 @@
 import React, { useState } from 'react';
 import { FiSearch, FiFilter, FiX } from 'react-icons/fi';
 
-const PropertyFilters = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('all');
+interface PropertyFiltersProps {
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
+  selectedStatus: string;
+  setSelectedStatus: (value: string) => void;
+}
+
+const PropertyFilters = ({
+  searchTerm,
+  setSearchTerm,
+  selectedStatus,
+  setSelectedStatus,
+}: PropertyFiltersProps) => {
   const [showFilters, setShowFilters] = useState(false);
 
   const statuses = [
     { value: 'all', label: 'All Properties' },
-    { value: 'active', label: 'Active' },
-    { value: 'pending', label: 'Pending' },
+    { value: 'available', label: 'Available' },
+    { value: 'unavailable', label: 'Unavailable' },
     { value: 'sold', label: 'Sold' },
+    { value: 'booked', label: 'Booked' },
   ];
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col lg:flex-row gap-4">
+    <div className='space-y-4'>
+      <div className='flex flex-col lg:flex-row gap-4'>
         {/* Search Bar */}
-        <div className="flex-1 relative group">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-white/40 w-5 h-5 group-focus-within:text-purple-600 dark:group-focus-within:text-purple-400 transition-colors" />
+        <div className='flex-1 relative group'>
+          <FiSearch className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-white/40 w-5 h-5 group-focus-within:text-purple-600 dark:group-focus-within:text-purple-400 transition-colors' />
           <input
-            type="text"
+            type='text'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search properties by name, location..."
-            className="w-full pl-12 pr-12 py-4 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/30 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 shadow-lg dark:shadow-none"
+            placeholder='Search properties by name, location...'
+            className='w-full pl-12 pr-12 py-4 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/30 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 shadow-lg dark:shadow-none'
           />
           {searchTerm && (
             <button
               onClick={() => setSearchTerm('')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-white/40 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className='absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-white/40 hover:text-gray-900 dark:hover:text-white transition-colors'
             >
-              <FiX className="w-5 h-5" />
+              <FiX className='w-5 h-5' />
             </button>
           )}
         </div>
@@ -47,17 +58,19 @@ const PropertyFilters = () => {
               : 'bg-white/80 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-white/10 hover:border-purple-500 dark:hover:border-purple-500/50'
           }`}
         >
-          <FiFilter className="w-5 h-5" />
+          <FiFilter className='w-5 h-5' />
           <span>Filters</span>
         </button>
       </div>
 
       {/* Filter Options */}
       {showFilters && (
-        <div className="backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none animate-slideDown">
-          <div className="space-y-4">
-            <h3 className="text-gray-900 dark:text-white font-semibold text-lg">Filter by Status</h3>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none animate-slideDown'>
+          <div className='space-y-4'>
+            <h3 className='text-gray-900 dark:text-white font-semibold text-lg'>
+              Filter by Status
+            </h3>
+            <div className='grid grid-cols-2 lg:grid-cols-5 gap-3'>
               {statuses.map((status) => (
                 <button
                   key={status.value}
