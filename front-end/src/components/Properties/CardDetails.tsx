@@ -1,4 +1,5 @@
 import { Property } from '@/types/property';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -14,7 +15,7 @@ const CardDetails = ({ property }: { property: Property }) => {
     console.log(id);
     try {
       setLoading(true);
-      if (property.status === 'inactive') {
+      if (property.status === 'unavailable' || property.isBooked) {
         toast.error('This property is not available for booking.');
         setLoading(false);
         return;
@@ -34,7 +35,7 @@ const CardDetails = ({ property }: { property: Property }) => {
       console.log(data);
       if (data.success) {
         toast.success('Property booked successfully!');
-        router.push('/my-bookings');
+        router.push('/dashboard/my-bookings');
       }
       if (!data.success) {
         toast.error(
@@ -48,7 +49,6 @@ const CardDetails = ({ property }: { property: Property }) => {
       setLoading(false);
     }
   };
-
   return (
     <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -56,34 +56,34 @@ const CardDetails = ({ property }: { property: Property }) => {
         <div className='mb-12'>
           <div className='relative h-[500px] bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4'>
             <div className='absolute inset-0 flex items-center justify-center text-blue-600 dark:text-amber-400'>
-              <svg
-                className='w-32 h-32'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={1.5}
-                  d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
-                />
-              </svg>
+              <Image
+                src={
+                  property?.images[activeImage] || '/placeholder-image.png'
+                }
+                alt={`Property Image ${activeImage + 1}`}
+                fill
+                className='object-cover'
+              />
             </div>
             <div className='absolute top-4 right-4 bg-white dark:bg-black/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold text-gray-900 dark:text-white'>
-              {activeImage + 1} / {images.length}
+              {activeImage + 1} / {property?.images?.length}
             </div>
           </div>
           <div className='grid grid-cols-4 gap-4'>
-            {images.map((_, idx) => (
-              <button
+            {property?.images.map((_, idx) => (
+              <Image
+                src={property?.images[idx]|| '/placeholder-image.png'}
+                width={100}
+                height={100}
+                alt={`Property Image ${idx + 1}`}
                 key={idx}
                 onClick={() => setActiveImage(idx)}
-                className={`h-24 bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
+                className={`h-24 w-full bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
                   activeImage === idx ? 'ring-4 ring-blue-500 dark:ring-amber-500' : ''
                 }`}
               />
             ))}
+
           </div>
         </div>
 
@@ -141,11 +141,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                 </div>
                 <div className='text-center p-4 bg-slate-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700'>
                   <div className='sm:text-2xl text-xl font-medium text-gray-900 dark:text-white'>
-                    {property?.isBooked
-                      ? 'Booked'
-                      : property?.status === 'active'
-                      ? 'Available'
-                      : 'Unavailable'}
+                    {property?.status}
                   </div>
                   <div className='text-sm text-gray-700 dark:text-gray-400'>
                     Status

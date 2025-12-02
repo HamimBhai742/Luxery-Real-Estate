@@ -85,6 +85,7 @@ const Properties = ({ properties }: { properties: Property[] }) => {
               >
                 <option value='all'>All</option>
                 <option value='available'>Available</option>
+                
                 <option value='booked'>Booked</option>
                 <option value='sold'>Sold</option>
               </select>

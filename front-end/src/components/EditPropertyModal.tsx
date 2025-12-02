@@ -1,18 +1,9 @@
 'use client';
 
+import { Property } from '@/types/property';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FiX } from 'react-icons/fi';
-
-interface Property {
-  id: string;
-  name: string;
-  location: string;
-  price: number;
-  bedrooms: number;
-  bathrooms: number;
-  status: 'active' | 'inactive';
-}
 
 interface EditPropertyModalProps {
   property: Property;
@@ -169,16 +160,26 @@ const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  status: e.target.value as 'active' | 'inactive',
+                  status: e.target.value as
+                    | 'available'
+                    | 'unavailable'
+                    | 'booked'
+                    | 'sold',
                 })
               }
               className='w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-blue-500/50 transition-all'
             >
-              <option value='active' className='bg-gray-900'>
-                Active
+              <option value='available' className='bg-gray-900'>
+                Available
               </option>
-              <option value='inactive' className='bg-gray-900'>
-                Inactive
+              <option value='unavailable' className='bg-gray-900'>
+                Unavailable
+              </option>
+              <option value='booked' className='bg-gray-900'>
+                Booked
+              </option>
+              <option value='sold' className='bg-gray-900'>
+                Sold
               </option>
             </select>
           </div>

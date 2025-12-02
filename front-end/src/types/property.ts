@@ -1,6 +1,7 @@
 export interface Property {
   id: string;
   name: string;
+  images: string[];
   slug: string;
   description: string;
   location: string;
@@ -8,7 +9,7 @@ export interface Property {
   bedrooms: number;
   bathrooms: number;
   amenities: string[];
-  status: 'active' | 'inactive' ;
+  status: 'available' | 'unavailable' | 'booked' | 'sold';
   isBooked: boolean;
   createdAt: string;
   updatedAt: string;

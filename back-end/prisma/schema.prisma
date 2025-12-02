@@ -51,6 +51,7 @@ enum PropertyStatus {
 model Property {
   id          String   @id @default(uuid())
   name        String
+  images      String[]
   slug        String    @unique
   description String?
   location    String

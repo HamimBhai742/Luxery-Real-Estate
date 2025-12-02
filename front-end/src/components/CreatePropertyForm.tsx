@@ -28,14 +28,44 @@ const CreatePropertyForm = () => {
     amenities: [],
     status: 'active',
   });
+  const [errors, setErrors] = useState({
+    name: '',
+    description: '',
+    location: '',
+    price: '',
+    bedrooms: '',
+    bathrooms: '',
+  });
   const [amenityInput, setAmenityInput] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'name':
+        return !value ? 'Property name is required' : value.length < 3 ? 'Name must be at least 3 characters' : '';
+      case 'description':
+        return !value ? 'Description is required' : value.length < 10 ? 'Description must be at least 10 characters' : '';
+      case 'location':
+        return !value ? 'Location is required' : '';
+      case 'price':
+        return !value ? 'Price is required' : Number(value) <= 0 ? 'Price must be greater than 0' : '';
+      case 'bedrooms':
+        return !value ? 'Bedrooms is required' : Number(value) < 0 ? 'Bedrooms cannot be negative' : '';
+      case 'bathrooms':
+        return !value ? 'Bathrooms is required' : Number(value) < 0 ? 'Bathrooms cannot be negative' : '';
+      default:
+        return '';
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' });
   };
 
   const handleAddAmenity = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -58,6 +88,23 @@ const CreatePropertyForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors = {
+      name: validateField('name', formData.name),
+      description: validateField('description', formData.description),
+      location: validateField('location', formData.location),
+      price: validateField('price', formData.price),
+      bedrooms: validateField('bedrooms', formData.bedrooms),
+      bathrooms: validateField('bathrooms', formData.bathrooms),
+    };
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some(error => error !== '')) {
+      toast.error('Please fix all errors before submitting');
+      return;
+    }
+
     const { bathrooms, price, bedrooms, ...rest } = formData;
     const payload = {
       ...rest,
@@ -91,6 +138,14 @@ const CreatePropertyForm = () => {
           bathrooms: '',
           amenities: [],
           status: 'active',
+        });
+        setErrors({
+          name: '',
+          description: '',
+          location: '',
+          price: '',
+          bedrooms: '',
+          bathrooms: '',
         });
         setLoading(false);
         toast.success('Property created successfully');
@@ -138,10 +193,12 @@ const CreatePropertyForm = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+              className={`w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border ${
+                errors.name ? 'border-red-500' : 'border-gray-300 dark:border-white/10'
+              } rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300`}
               placeholder="e.g., Luxury Penthouse Suite"
-              required
             />
+            {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
           </div>
 
           {/* Description */}
@@ -152,10 +209,12 @@ const CreatePropertyForm = () => {
               value={formData.description}
               onChange={handleChange}
               rows={5}
-              className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 resize-none"
+              className={`w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border ${
+                errors.description ? 'border-red-500' : 'border-gray-300 dark:border-white/10'
+              } rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 resize-none`}
               placeholder="Describe the property features, location highlights, and unique selling points..."
-              required
             />
+            {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description}</p>}
           </div>
 
           {/* Location & Price Grid */}
@@ -170,10 +229,12 @@ const CreatePropertyForm = () => {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                className={`w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border ${
+                  errors.location ? 'border-red-500' : 'border-gray-300 dark:border-white/10'
+                } rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300`}
                 placeholder="e.g., Beverly Hills, CA"
-                required
               />
+              {errors.location && <p className="mt-1 text-sm text-red-500">{errors.location}</p>}
             </div>
 
             <div className="group">
@@ -186,10 +247,12 @@ const CreatePropertyForm = () => {
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                className={`w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border ${
+                  errors.price ? 'border-red-500' : 'border-gray-300 dark:border-white/10'
+                } rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300`}
                 placeholder="0"
-                required
               />
+              {errors.price && <p className="mt-1 text-sm text-red-500">{errors.price}</p>}
             </div>
           </div>
 
@@ -205,10 +268,12 @@ const CreatePropertyForm = () => {
                 name="bedrooms"
                 value={formData.bedrooms}
                 onChange={handleChange}
-                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                className={`w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border ${
+                  errors.bedrooms ? 'border-red-500' : 'border-gray-300 dark:border-white/10'
+                } rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300`}
                 placeholder="0"
-                required
               />
+              {errors.bedrooms && <p className="mt-1 text-sm text-red-500">{errors.bedrooms}</p>}
             </div>
 
             <div className="group">
@@ -221,10 +286,12 @@ const CreatePropertyForm = () => {
                 name="bathrooms"
                 value={formData.bathrooms}
                 onChange={handleChange}
-                className="w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
+                className={`w-full px-4 py-4 bg-gray-50 dark:bg-white/5 border ${
+                  errors.bathrooms ? 'border-red-500' : 'border-gray-300 dark:border-white/10'
+                } rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:bg-white dark:focus:bg-white/10 focus:border-purple-500 dark:focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300`}
                 placeholder="0"
-                required
               />
+              {errors.bathrooms && <p className="mt-1 text-sm text-red-500">{errors.bathrooms}</p>}
             </div>
           </div>
 

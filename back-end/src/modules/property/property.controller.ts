@@ -4,7 +4,11 @@ import { sendResponse } from '../../utils/send.response';
 import { propertyServices } from './property.services';
 
 const createProperty = createAsyncFn(async (req: Request, res: Response) => {
-  const property = await propertyServices.createProperty(req.body);
+  const payload = {
+    ...req.body,
+    images: (req.files as Express.Multer.File[])?.map((file) => file.path),
+  };
+  const property = await propertyServices.createProperty(payload);
   sendResponse(res, {
     success: true,
     statusCode: 200,

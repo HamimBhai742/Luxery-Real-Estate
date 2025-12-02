@@ -25,4 +25,9 @@ export const ENV = {
   SSL_SUCCESS_FRONT_END_URL: process.env.SSL_SUCCESS_FRONT_END_URL as string,
   SSL_FAIL_FRONT_END_URL: process.env.SSL_FAIL_FRONT_END_URL as string,
   SSL_CANCEL_FRONT_END_URL: process.env.SSL_CANCEL_FRONT_END_URL as string,
+
+  CLOUDINARY_API_NAME: process.env.CLOUDINARY_API_NAME as string,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY as string,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET as string,
+  CLOUDINARY_API_URL: process.env.CLOUDINARY_API_URL as string,
 };

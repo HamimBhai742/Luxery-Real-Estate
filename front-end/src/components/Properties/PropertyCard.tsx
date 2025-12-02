@@ -1,6 +1,7 @@
 'use client';
 
 import { Property } from '@/types/property';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface PropertyCardProps {
@@ -14,9 +15,12 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         {/* Image Placeholder */}
         <div className="relative h-64 bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20">
           <div className="absolute inset-0 flex items-center justify-center text-blue-600 dark:text-amber-400">
-            <svg className="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
+            <Image
+              src={property.images[0] || '/placeholder-image.png'}
+              alt={property.name}
+              fill
+              className="object-cover"
+            />
           </div>
           {property.isBooked && (
             <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
