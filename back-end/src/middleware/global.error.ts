@@ -47,7 +47,7 @@ export const globalErrorHandel = (
   if (err.name === 'ZodError') {
     handelZodError(err);
   }
-  console.log(err.name);
+
   res.status(statusCode).json({
     success: false,
     message,

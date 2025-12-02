@@ -13,7 +13,8 @@ export const userZodSchema = z.object({
   phone: z
     .string()
     .min(1, 'Phone is required')
-    .min(11, 'Phone must be at least 11 characters'),
+    .min(11, 'Phone must be at least 11 characters')
+    .max(11, 'Phone must be at most 11 characters'),
   password: z
     .string()
     .min(1, 'Password is required')

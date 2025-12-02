@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -21,6 +15,7 @@ model User {
   phone     String?
   password  String
   role      Role    @default(USER)
+  status    Status   @default(active)
   bookings  Booking[]
   payments  Payment[]
   createdAt DateTime @default(now())
@@ -46,6 +41,13 @@ enum Status {
   inactive
 }
 
+enum PropertyStatus {
+  available
+  unavailable
+  booked
+  sold
+}
+
 model Property {
   id          String   @id @default(uuid())
   name        String
@@ -56,7 +58,7 @@ model Property {
   bedrooms    Int
   bathrooms   Int
   amenities   String[]
-  status      Status    @default(active)
+  status      PropertyStatus    @default(available)
   isBooked    Boolean   @default(false)
   booking     Booking[]
 
