@@ -7,12 +7,33 @@ import { ImSpinner9 } from 'react-icons/im';
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const validateEmail = (email: string) => {
+    if (!email) return 'Email is required';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Invalid email format';
+    return '';
+  };
+
+  const validatePassword = (password: string) => {
+    if (!password) return 'Password is required';
+    if (password.length < 6) return 'Password must be at least 6 characters';
+    return '';
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
+    
+    setErrors({ email: emailError, password: passwordError });
+    
+    if (emailError || passwordError) return;
+
     setIsLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
@@ -99,15 +120,22 @@ export default function LoginForm() {
             </div>
             <input
               type='email'
-              required
               value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              className='w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 dark:focus:ring-amber-500 focus:border-transparent transition-all duration-300 group-hover:border-blue-400 dark:group-hover:border-amber-400 group-hover:shadow-lg'
+              onChange={(e) => {
+                setFormData({ ...formData, email: e.target.value });
+                setErrors({ ...errors, email: '' });
+              }}
+              className={`w-full pl-12 pr-4 py-3 rounded-xl border ${
+                errors.email 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-amber-500'
+              } bg-white dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:border-transparent transition-all duration-300 group-hover:border-blue-400 dark:group-hover:border-amber-400 group-hover:shadow-lg`}
               placeholder='john@example.com'
             />
           </div>
+          {errors.email && (
+            <p className='mt-1 text-sm text-red-500'>{errors.email}</p>
+          )}
         </div>
 
         {/* Password */}
@@ -133,12 +161,16 @@ export default function LoginForm() {
             </div>
             <input
               type={showPassword ? 'text' : 'password'}
-              required
               value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-              className='w-full pl-12 pr-12 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 dark:focus:ring-amber-500 focus:border-transparent transition-all duration-300 group-hover:border-blue-400 dark:group-hover:border-amber-400 group-hover:shadow-lg'
+              onChange={(e) => {
+                setFormData({ ...formData, password: e.target.value });
+                setErrors({ ...errors, password: '' });
+              }}
+              className={`w-full pl-12 pr-12 py-3 rounded-xl border ${
+                errors.password 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-amber-500'
+              } bg-white dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:border-transparent transition-all duration-300 group-hover:border-blue-400 dark:group-hover:border-amber-400 group-hover:shadow-lg`}
               placeholder='••••••••'
             />
             <button
@@ -183,6 +215,9 @@ export default function LoginForm() {
               )}
             </button>
           </div>
+          {errors.password && (
+            <p className='mt-1 text-sm text-red-500'>{errors.password}</p>
+          )}
         </div>
 
         {/* Remember Me & Forgot Password */}
