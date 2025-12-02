@@ -73,6 +73,24 @@ const ManageUserClient = () => {
   ) => {
     try {
       console.log(newStatus)
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/user/update-status/${userId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ status: newStatus }),
+        }
+      );
+      const data = await response.json();
+      console.log(data)
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, status: newStatus } : user
+        )
+      )
       toast.success(`Status updated to ${newStatus}`);
     } catch (error) {
       toast.error('Failed to update status');
