@@ -40,12 +40,18 @@ const updateProperty = async (
 };
 
 const getSingleProperty = async (slug: string) => {
-  console.log(slug)
-  const property = await prisma.property.findUnique({ where: { slug } });
-  if (!property) {
-    throw new AppError('Property not found', httpStatusCode.NOT_FOUND);
-  }
-  return property;
+  return await prisma.$transaction(async (tx) => {
+    await tx.property.update({
+      where: { slug },
+      data: {
+        views: {
+          increment: 1,
+        },
+      },
+    });
+
+    return await tx.property.findUnique({ where: { slug } });
+  });
 };
 const deleteProperty = async (id: string) => {
   const property = await prisma.property.findUnique({ where: { id } });
