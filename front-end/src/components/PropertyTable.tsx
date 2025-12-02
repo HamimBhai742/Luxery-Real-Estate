@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 import Image from 'next/image';
 import { Property } from '@/types/property';
 
-
 const PropertyTable = ({ properties }: { properties: Property[] }) => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(
     null
@@ -92,10 +91,14 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active':
+      case 'available':
         return 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 border-green-200 dark:border-green-500/30';
-      case 'inactive':
+      case 'unavailable':
         return 'bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400 border-red-200 dark:border-red-500/30';
+      case 'sold':
+        return 'bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-500/30';
+      case 'booked':
+        return 'bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-500/30';
       default:
         return 'bg-gray-100 dark:bg-gray-500/20 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-500/30';
     }
@@ -149,7 +152,7 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
                   <div className='flex items-center gap-3'>
                     <div className='w-14 h-14 rounded-xl bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center'>
                       <Image
-                        src={property.images[0]}
+                        src={property.images[0] || ''}
                         alt='property'
                         width={50}
                         height={50}

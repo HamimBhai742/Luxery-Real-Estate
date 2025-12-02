@@ -1,9 +1,11 @@
 'use client';
 
 import { Property } from '@/types/property';
+import { SaveIcon } from 'lucide-react';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FiX } from 'react-icons/fi';
+import { ImSpinner9 } from 'react-icons/im';
 
 interface EditPropertyModalProps {
   property: Property;
@@ -22,10 +24,11 @@ const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
     bathrooms: Number(property.bathrooms),
     status: property.status,
   });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Updated property:', { ...property, ...formData });
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/property/update-property/${property.id}`,
@@ -49,8 +52,10 @@ const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
     } catch (error) {
       console.error('Error updating property:', error);
       toast.error('An error occurred while updating the property.');
+    } finally {
+      setLoading(false);
+      onClose();
     }
-    onClose();
   };
 
   return (
@@ -195,9 +200,20 @@ const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             </button>
             <button
               type='submit'
+              disabled={loading}
               className='flex-1 py-3 px-6 rounded-xl bg-linear-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 font-semibold'
             >
-              Save Changes
+              {loading ? (
+                <span className='flex items-center gap-2'>
+                  <ImSpinner9 />
+                  <span> Changing....</span>
+                </span>
+              ) : (
+                <span className='flex items-center gap-2'>
+                  <SaveIcon />
+                  <span> Save Changes</span>
+                </span>
+              )}
             </button>
           </div>
         </form>
