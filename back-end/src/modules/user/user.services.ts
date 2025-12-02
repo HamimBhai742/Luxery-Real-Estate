@@ -51,7 +51,7 @@ const getAllUsers = async (filters: any, options: any) => {
   const where: any = {
     AND: [
       filters && Object.keys(filters).length ? filters : undefined,
-      search && {OR:searchTerm},
+      search && { OR: searchTerm },
       {
         isDeleted: false,
         role: 'USER',
@@ -81,8 +81,19 @@ const getAllUsers = async (filters: any, options: any) => {
   };
 };
 
+const updateUser = async (id: number, status: 'active' | 'inactive') => {
+  const user = await prisma.user.update({
+    where: { id },
+    data: {
+      status,
+    },
+  });
+  return user;
+};
+
 export const userService = {
   registerUser,
   getMe,
   getAllUsers,
+  updateUser,
 };

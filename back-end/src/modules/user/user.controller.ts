@@ -30,7 +30,7 @@ const getMe = createAsyncFn(
 );
 
 const getAllUsers = createAsyncFn(async (req: Request, res: Response) => {
-  console.log(req.query)
+  console.log(req.query);
   const options = pickQuery(req.query, [
     'limit',
     'page',
@@ -49,8 +49,22 @@ const getAllUsers = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const updateUser = createAsyncFn(async (req: Request, res: Response) => {
+  const user = await userService.updateUser(
+    Number(req.params.id),
+    req.body.status
+  );
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'User updated successfully',
+    data: user,
+  });
+});
+
 export const userController = {
   registerUser,
   getMe,
   getAllUsers,
+  updateUser,
 };

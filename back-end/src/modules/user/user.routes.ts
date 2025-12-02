@@ -17,4 +17,10 @@ router.post('/me', checkAuth(...Object.values(Role)), userController.getMe);
 
 router.get('/', checkAuth(Role.ADMIN), userController.getAllUsers);
 
+router.patch(
+  '/update-user/:id',
+  checkAuth(Role.ADMIN),
+  userController.updateUser
+);
+
 export const userRoutes = router;
