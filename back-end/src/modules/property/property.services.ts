@@ -3,6 +3,8 @@ import { generateUniqueSlug } from '../../utils/generate.uniqe.slug';
 import { prisma } from '../../config/prisma.configs';
 import { AppError } from '../../error/coustom.error';
 import httpStatusCode from 'http-status-codes';
+import { pagination } from '../../utils/pagination';
+import { propertiesSearchField } from './properties.constain';
 const createProperty = async (payload: Prisma.PropertyCreateInput) => {
   const slug = await generateUniqueSlug(payload.name);
   payload.slug = slug;
@@ -10,8 +12,31 @@ const createProperty = async (payload: Prisma.PropertyCreateInput) => {
   const property = await prisma.property.create({ data: payload });
   return property;
 };
-const getMyProperty = async () => {
-  const properties = await prisma.property.findMany();
+const getMyProperty = async (filters: any, options: any) => {
+  const { page, limit, skip, sortBy, sortOrder } = pagination(options);
+  const { search } = options;
+  console.log(filters, options);
+  const searchTerm = propertiesSearchField.map((field) => ({
+    [field]: {
+      contains: search,
+      mode: 'insensitive',
+    },
+  }));
+console.log(searchTerm)
+  const where: any = {
+    AND: [
+      filters && Object.keys(filters).length ? filters : undefined,
+      search && { OR: searchTerm },
+    ].filter(Boolean),
+  };
+  const properties = await prisma.property.findMany({
+    where,
+    skip,
+    take: limit,
+    orderBy: {
+      [sortBy]: sortOrder,
+    },
+  });
   return properties;
 };
 

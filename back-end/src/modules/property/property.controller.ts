@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { createAsyncFn } from '../../utils/create.async.fn';
 import { sendResponse } from '../../utils/send.response';
 import { propertyServices } from './property.services';
+import { pickQuery } from '../../utils/pick.query';
 
 const createProperty = createAsyncFn(async (req: Request, res: Response) => {
   const payload = {
@@ -18,7 +19,16 @@ const createProperty = createAsyncFn(async (req: Request, res: Response) => {
 });
 
 const getMyProperties = createAsyncFn(async (req: Request, res: Response) => {
-  const properties = await propertyServices.getMyProperty();
+  const options = pickQuery(req.query, [
+    'limit',
+    'page',
+    'search',
+    'sortBy',
+    'sortOrder',
+  ]);
+
+  const filters = pickQuery(req.query, [ 'status']);
+  const properties = await propertyServices.getMyProperty(filters, options);
   sendResponse(res, {
     success: true,
     statusCode: 200,
