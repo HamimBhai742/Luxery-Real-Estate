@@ -4,6 +4,8 @@ import { AppError } from '../../error/coustom.error';
 import { IUser } from '../../types/user.interface';
 import httpStatusCode from 'http-status-codes';
 import bcrypt from 'bcryptjs';
+import { pagination } from '../../utils/pagination';
+import { userSearchFileds } from './user.contain';
 const registerUser = async (payload: IUser) => {
   const { password, ...rest } = payload;
   const hashedPass = await bcrypt.hash(password, ENV.BCRYPT_SALT_ROUNDS);
@@ -35,10 +37,52 @@ const getMe = async (email: string) => {
   };
 };
 
+const getAllUsers = async (filters: any, options: any) => {
+  const { page, limit, skip, sortBy, sortOrder } = pagination(options);
+  const { search } = options;
+  console.log(filters, options);
+  const searchTerm = userSearchFileds.map((field) => ({
+    [field]: {
+      contains: search,
+      mode: 'insensitive',
+    },
+  }));
 
+  const where: any = {
+    AND: [
+      filters && Object.keys(filters).length ? filters : undefined,
+      search && {OR:searchTerm},
+      {
+        isDeleted: false,
+        role: 'USER',
+      },
+    ].filter(Boolean),
+  };
+  const patients = await prisma.user.findMany({
+    where,
+    skip,
+    take: limit,
+    orderBy: {
+      [sortBy]: sortOrder,
+    },
+  });
 
+  const total = await prisma.user.count({
+    where,
+  });
+  return {
+    data: patients,
+    metaData: {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+};
 
 export const userService = {
   registerUser,
   getMe,
+  getAllUsers,
 };

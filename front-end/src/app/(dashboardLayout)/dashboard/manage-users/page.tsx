@@ -1,11 +1,12 @@
-import React from 'react';
+import ManageUserClient from '@/components/ManageUserClient';
+import { cookies } from 'next/headers';
 
-const ManageUsers = () => {
-  return (
-    <div>
-      <h1 className='text-4xl sm:text-7xl font-bold'>Comming Soon.........</h1>
-    </div>
-  );
+export const metadata = {
+  title: 'Manage Users - Dashboard',
+  description: 'Manage users in the dashboard',
+};
+const ManageUsers = async () => {
+  return <ManageUserClient/>;
 };
 
 export default ManageUsers;
