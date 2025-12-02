@@ -8,6 +8,7 @@ export interface Property {
   price: number;
   bedrooms: number;
   bathrooms: number;
+  views: number;
   amenities: string[];
   status: 'available' | 'unavailable' | 'booked' | 'sold';
   isBooked: boolean;

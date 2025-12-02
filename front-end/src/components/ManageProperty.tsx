@@ -12,9 +12,28 @@ import PropertyFilters from '@/components/PropertyFilters';
 import { useEffect, useState } from 'react';
 import ManagePropertiesSkeleton from '@/components/ManagePropertiesSkeleton';
 import Link from 'next/link';
+import { Property } from '@/types/property';
+
+interface IData {
+  metaData: {
+    total: number;
+    totalPages: number;
+    page: number;
+    limit: number;
+  };
+  properties: Property[];
+}
 
 const ManageProperty = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<IData>({
+    metaData: {
+      total: 0,
+      totalPages: 0,
+      page: 0,
+      limit: 0,
+    },
+    properties: [],
+  });
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -23,7 +42,11 @@ const ManageProperty = () => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/property/my-properties`
+          `${
+            process.env.NEXT_PUBLIC_API_URL
+          }/property/my-properties?search=${searchTerm}&${
+            selectedStatus === 'all' ? '' : `status=${selectedStatus}`
+          }`
         );
         const json = await res.json();
         setData(json.data);
@@ -34,22 +57,23 @@ const ManageProperty = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [searchTerm, selectedStatus]);
 
   if (loading) return <ManagePropertiesSkeleton />;
+  console.log(data);
 
   const stats = [
     {
       icon: FiHome,
       label: 'Total Properties',
-      value: data.length.toString(),
+      value: data.metaData.total.toString(),
       change: '+12%',
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: FiTrendingUp,
       label: 'Active Listings',
-      value: data
+      value: data.properties
         .filter((property: any) => property.status === 'available')
         .length.toString(),
       change: '+8%',
@@ -58,7 +82,7 @@ const ManageProperty = () => {
     {
       icon: FiDollarSign,
       label: 'Total Value',
-      value: `$${data.reduce(
+      value: `$${data.properties.reduce(
         (sum: number, p: { price: number }) => sum + p.price,
         0
       )}`,
@@ -68,14 +92,13 @@ const ManageProperty = () => {
     {
       icon: FiEye,
       label: 'Total Views',
-      value: data
+      value: data.properties
         .reduce((sum: number, p: { views: number }) => sum + p.views, 0)
         .toString(),
       change: '+23%',
       color: 'from-orange-500 to-red-500',
     },
   ];
-
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6 lg:p-8'>
       <div className='max-w-7xl mx-auto space-y-6'>
@@ -148,7 +171,7 @@ const ManageProperty = () => {
               found
             </p>
           </div>
-          <PropertyTable properties={data} />
+          <PropertyTable properties={data.properties} />
         </div>
       </div>
     </div>
