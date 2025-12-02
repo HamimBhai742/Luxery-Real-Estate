@@ -58,7 +58,7 @@ const getAllUsers = async (filters: any, options: any) => {
       },
     ].filter(Boolean),
   };
-  const patients = await prisma.user.findMany({
+  const users = await prisma.user.findMany({
     where,
     skip,
     take: limit,
@@ -71,7 +71,7 @@ const getAllUsers = async (filters: any, options: any) => {
     where,
   });
   return {
-    data: patients,
+    data: users,
     metaData: {
       page,
       limit,

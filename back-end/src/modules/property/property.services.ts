@@ -15,14 +15,12 @@ const createProperty = async (payload: Prisma.PropertyCreateInput) => {
 const getMyProperty = async (filters: any, options: any) => {
   const { page, limit, skip, sortBy, sortOrder } = pagination(options);
   const { search } = options;
-  console.log(filters, options);
   const searchTerm = propertiesSearchField.map((field) => ({
     [field]: {
       contains: search,
       mode: 'insensitive',
     },
   }));
-console.log(searchTerm)
   const where: any = {
     AND: [
       filters && Object.keys(filters).length ? filters : undefined,
@@ -37,7 +35,19 @@ console.log(searchTerm)
       [sortBy]: sortOrder,
     },
   });
-  return properties;
+
+  const total = await prisma.property.count({
+    where,
+  });
+  return {
+    properties,
+    metaData: {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
 };
 
 const getAllProperties = async () => {
