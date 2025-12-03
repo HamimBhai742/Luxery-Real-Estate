@@ -12,6 +12,7 @@ import { HiOutlineUserGroup } from 'react-icons/hi';
 import { MdAdminPanelSettings, MdVerified } from 'react-icons/md';
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import toast from 'react-hot-toast';
+import ManageUsersSkeleton from './ManageUserSkeleton';
 
 interface User {
   id: string;
@@ -27,6 +28,8 @@ interface IMetaDta {
   totalPages: number;
   page: number;
   limit: number;
+  totalActive: number;
+  totalInactive: number;
 }
 
 interface ManageUserClientProps {
@@ -35,36 +38,50 @@ interface ManageUserClientProps {
 
 const ManageUserClient = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [metaData, setMetaData] = useState<IMetaDta>();
   const [statusFilter, setStatusFilter] = useState<
     'ALL' | 'active' | 'inactive'
   >('ALL');
   const [currentPage, setCurrentPage] = useState(1);
-  console.log(currentPage,"hgjhghjghjgj");
   useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user?page=${currentPage}&limit=10`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      const data = await response.json();
-      console.log(data);
-      setUsers(data.data.data);
-      setMetaData(data.data.metaData);
-    };
-    fetchUsers();
+    try {
+      const fetchUsers = async () => {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/user?page=${currentPage}&limit=10`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          }
+        );
+        const data = await response.json();
+        if (data.success) {
+          setUsers(data.data.data);
+          console.log(data)
+          setMetaData(data.data.metaData);
+        }
+        if (!data.success) {
+          toast.error(data.message);
+        }
+      };
+      fetchUsers();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, [currentPage]);
   console.log(users, metaData);
 
   // Stats
   const stats = {
     total: metaData?.total || 0,
-    active: users.filter((u) => u.status === 'active').length,
-    inactive: users.filter((u) => u.status === 'inactive').length,
+    active: metaData?.totalActive || 0,
+    inactive: metaData?.totalInactive || 0,
   };
 
   const handleStatusChange = async (
@@ -72,7 +89,7 @@ const ManageUserClient = () => {
     newStatus: 'active' | 'inactive'
   ) => {
     try {
-      console.log(newStatus)
+      console.log(newStatus);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/user/update-status/${userId}`,
         {
@@ -85,18 +102,21 @@ const ManageUserClient = () => {
         }
       );
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user.id === userId ? { ...user, status: newStatus } : user
         )
-      )
+      );
       toast.success(`Status updated to ${newStatus}`);
     } catch (error) {
       toast.error('Failed to update status');
     }
   };
 
+  if (loading) {
+    return <ManageUsersSkeleton />;
+  }
   return (
     <div className='min-h-screen bg-linear-to-br from-gray-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-black p-4 md:p-6 lg:p-8'>
       <div className='max-w-7xl mx-auto space-y-6'>
@@ -200,7 +220,7 @@ const ManageUserClient = () => {
 
           {/* Results count */}
           <div className='mt-3 text-sm text-gray-600 dark:text-gray-400'>
-            Showing {users?.length}  of {metaData?.total} users
+            Showing {users?.length} of {metaData?.total} users
           </div>
         </div>
 

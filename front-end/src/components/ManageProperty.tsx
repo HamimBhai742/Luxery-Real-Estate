@@ -37,7 +37,6 @@ const ManageProperty = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
-  console.log(selectedStatus, searchTerm);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -167,7 +166,7 @@ const ManageProperty = () => {
               Property Listings
             </h2>
             <p className='text-gray-600 dark:text-gray-400 text-sm mt-1'>
-              {data.length} {data.length === 1 ? 'property' : 'properties'}{' '}
+              {data.properties.length} {data.properties.length === 1 ? 'property' : 'properties'}{' '}
               found
             </p>
           </div>
