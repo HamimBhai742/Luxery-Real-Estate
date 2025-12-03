@@ -31,6 +31,7 @@ const createBooking = async (userId: number, propertyId: string) => {
       where: { id: propertyId },
       data: {
         isBooked: true,
+        status: 'booked',
       },
     });
     await tx.payment.create({

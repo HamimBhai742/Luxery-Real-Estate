@@ -39,7 +39,6 @@ const initPayment = async (bookingId: string) => {
   };
 };
 
-
 //success Payment
 const successPayment = async (query: Record<string, string>) => {
   return await prisma.$transaction(async (tx) => {
@@ -50,10 +49,18 @@ const successPayment = async (query: Record<string, string>) => {
       },
     });
 
-    await tx.booking.update({
+    const booking = await tx.booking.update({
       where: { id: updatePayment.bookingId },
       data: {
         status: BookingStatus.paid,
+      },
+    });
+
+    await tx.property.update({
+      where: { id: booking.propertyId },
+      data: {
+        isBooked: true,
+        status: 'sold',
       },
     });
     return {
@@ -75,7 +82,7 @@ const failedPayment = async (query: Record<string, string>) => {
     const booking = await tx.booking.update({
       where: { id: updatePayment.bookingId },
       data: {
-        status: BookingStatus.canceled,
+        status: 'canceled',
       },
     });
 
@@ -83,6 +90,7 @@ const failedPayment = async (query: Record<string, string>) => {
       where: { id: booking.propertyId },
       data: {
         isBooked: false,
+        status: 'available',
       },
     });
     return {
@@ -112,6 +120,7 @@ const cancelPayment = async (query: Record<string, string>) => {
       where: { id: booking.propertyId },
       data: {
         isBooked: false,
+        status: 'available',
       },
     });
     return {

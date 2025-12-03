@@ -55,7 +55,28 @@ const getAdminStats = async () => {
     };
   });
 
-  console.log(chartData);
+
+  const paymentCounts = await prisma.payment.groupBy({
+  by: ['status'],
+  _count: {
+    status: true,
+  },
+});
+
+const paymentData = paymentCounts.map(p => {
+  let color = '';
+  if (p.status === 'succeeded') color = '#16a34a';
+  else if (p.status === 'failed') color = '#dc2626';
+  else if (p.status === 'canceled') color = '#f59e0b';
+
+  return {
+    name: p.status === 'succeeded' ? 'Success' : p.status === 'failed' ? 'Failed' : 'Canceled',
+    value: p._count.status,
+    color,
+  };
+});
+
+
 
   const recentProperties = await prisma.property.findMany({
     orderBy: {
@@ -63,6 +84,7 @@ const getAdminStats = async () => {
     },
     take: 5,
   });
+
   return {
     totalProperties,
     totalUsers,
@@ -70,5 +92,10 @@ const getAdminStats = async () => {
     totalRevenue,
     recentProperties,
     chartData,
+    paymentData
   };
+};
+
+export const statsServices = {
+  getAdminStats,
 };
