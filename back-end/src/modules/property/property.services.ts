@@ -39,6 +39,25 @@ const getMyProperty = async (filters: any, options: any) => {
   const total = await prisma.property.count({
     where,
   });
+
+  const availableProperties = await prisma.property.count({
+    where: {
+      isBooked: false,
+      status: 'available',
+    },
+  });
+
+  const totalValue = await prisma.property.aggregate({
+    _sum: {
+      price: true,
+    },
+  });
+
+  const totalviews = await prisma.property.aggregate({
+    _sum: {
+      views: true,
+    },
+  });
   return {
     properties,
     metaData: {
@@ -46,6 +65,9 @@ const getMyProperty = async (filters: any, options: any) => {
       limit,
       total,
       totalPages: Math.ceil(total / limit),
+      totalProperties: availableProperties,
+      totalValue: totalValue._sum.price,
+      totalViews: totalviews._sum.views,
     },
   };
 };
