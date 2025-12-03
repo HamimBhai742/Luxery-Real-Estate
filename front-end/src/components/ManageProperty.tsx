@@ -37,15 +37,23 @@ const ManageProperty = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit] = useState(10);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedStatus]);
+
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const res = await fetch(
           `${
             process.env.NEXT_PUBLIC_API_URL
           }/property/my-properties?search=${searchTerm}&${
             selectedStatus === 'all' ? '' : `status=${selectedStatus}`
-          }`
+          }&page=${currentPage}&limit=${limit}`
         );
         const json = await res.json();
         setData(json.data);
@@ -56,7 +64,7 @@ const ManageProperty = () => {
       }
     };
     fetchData();
-  }, [searchTerm, selectedStatus]);
+  }, [searchTerm, selectedStatus, currentPage, limit]);
 
   if (loading) return <ManagePropertiesSkeleton />;
   console.log(data);
@@ -171,6 +179,46 @@ const ManageProperty = () => {
             </p>
           </div>
           <PropertyTable properties={data.properties} />
+
+          {/* Pagination */}
+          {data.metaData.totalPages > 1 && (
+            <div className='mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-200 dark:border-white/10'>
+              <p className='text-sm text-gray-600 dark:text-gray-400'>
+                Showing {((currentPage - 1) * limit) + 1} to {Math.min(currentPage * limit, data.metaData.total)} of {data.metaData.total} properties
+              </p>
+              <div className='flex items-center gap-2'>
+                <button
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className='px-4 py-2 rounded-lg bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                >
+                  Previous
+                </button>
+                <div className='flex gap-1'>
+                  {Array.from({ length: data.metaData.totalPages }, (_, i) => i + 1).map(page => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-10 h-10 rounded-lg font-medium transition-all ${
+                        currentPage === page
+                          ? 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-lg'
+                          : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setCurrentPage(prev => Math.min(data.metaData.totalPages, prev + 1))}
+                  disabled={currentPage === data.metaData.totalPages}
+                  className='px-4 py-2 rounded-lg bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

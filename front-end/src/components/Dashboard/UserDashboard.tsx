@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { 
-  FiCalendar, 
-  FiCreditCard, 
-  FiHome, 
+import {
+  FiCalendar,
+  FiCreditCard,
+  FiHome,
   FiTrendingUp,
   FiArrowRight,
   FiCheckCircle,
@@ -81,7 +82,7 @@ const UserDashboard = () => {
               Welcome back, {data.user?.name || 'User'}! 👋
             </h1>
             <p className='text-blue-100 text-lg'>
-              Here's what's happening with your properties today
+              Here&lsquo;s what&lsquo;s happening with your properties today
             </p>
           </div>
           <div className='absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl'></div>

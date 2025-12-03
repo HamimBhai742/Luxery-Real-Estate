@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FaHome,
   FaUsers,
@@ -12,34 +13,63 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 import DashboardCharts from '../Chart/Chart';
+import { DashboardData } from '@/types/admin.dashboard';
 
 const AdminDashboard = () => {
+  const [loading, setLoading] = useState(false);
+  const [statsData, setStatsData] = useState<DashboardData>();
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        setLoading(true);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/stats/admin`,
+          {
+            method: 'GET',
+            credentials: 'include',
+          }
+        );
+        const data = await res.json();
+        if (data.success) {
+          setStatsData(data.data);
+          setLoading(false);
+        }
+      };
+      fetchData();
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+  console.log(statsData);
   const stats = [
     {
       icon: FaHome,
       label: 'Total Properties',
-      value: '156',
+      value: statsData?.totalProperties,
       change: '+12%',
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: FaUsers,
       label: 'Total Users',
-      value: '2,847',
+      value: statsData?.totalUsers,
       change: '+8%',
       color: 'from-purple-500 to-pink-500',
     },
     {
       icon: FaCalendarCheck,
       label: 'Active Bookings',
-      value: '89',
+      value: statsData?.totalBookings,
       change: '+23%',
       color: 'from-green-500 to-emerald-500',
     },
     {
       icon: FaDollarSign,
       label: 'Revenue',
-      value: '$124K',
+      value: `$${statsData?.totalRevenue}`,
       change: '+15%',
       color: 'from-orange-500 to-red-500',
     },
@@ -72,27 +102,20 @@ const AdminDashboard = () => {
     },
   ];
 
-  const recentProperties = [
-    {
-      name: 'Luxury Villa',
-      location: 'Beverly Hills',
-      price: '$2.5M',
-      status: 'Active',
-    },
-    {
-      name: 'Modern Apartment',
-      location: 'Manhattan',
-      price: '$1.2M',
-      status: 'Active',
-    },
-    {
-      name: 'Beach House',
-      location: 'Malibu',
-      price: '$3.8M',
-      status: 'Pending',
-    },
-  ];
-
+  const getStatus = (status: string) => {
+    switch (status) {
+      case 'available':
+        return 'bg-green-500/20 text-green-500 border border-green-500';
+      case 'booked':
+        return 'bg-red-500/20 text-red-500 border border-red-500';
+      case 'sold':
+        return 'bg-amber-500/20 text-amber-500 border border-amber-500';
+      case 'unavailable':
+        return 'bg-gray-500/20 text-gray-500 border border-gray-500';
+      default:
+        return 'bg-gray-500';
+    }
+  };
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6'>
       <div className='max-w-7xl mx-auto space-y-6'>
@@ -135,7 +158,10 @@ const AdminDashboard = () => {
           ))}
         </div>
 
-        <DashboardCharts/>
+        <DashboardCharts
+          paymentData={statsData?.paymentData || []}
+          chartData={statsData?.chartData || []}
+        />
 
         {/* Quick Actions */}
         <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none'>
@@ -194,7 +220,7 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {recentProperties.map((property, idx) => (
+                {statsData?.recentProperties.map((property, idx) => (
                   <tr
                     key={idx}
                     className='border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors'
@@ -207,15 +233,13 @@ const AdminDashboard = () => {
                       {property.location}
                     </td>
                     <td className='py-4 px-4 text-gray-900 dark:text-white font-semibold'>
-                      {property.price}
+                      ${property.price}
                     </td>
                     <td className='py-4 px-4'>
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          property.status === 'Active'
-                            ? 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/30'
-                            : 'bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-500/30'
-                        }`}
+                        className={`text-sm font-medium  py-1 px-2 rounded-full ${getStatus(
+                          property.status
+                        )}`}
                       >
                         {property.status}
                       </span>

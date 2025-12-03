@@ -18,18 +18,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import { DailyRevenue } from '@/types/admin.dashboard';
 
 export const description = 'An interactive area chart';
-
-const chartData = [
-  { date: '2024-04-01', revenue: 2226545 },
-  { date: '2024-04-02', revenue: 975455 },
-  { date: '2024-04-03', revenue: 1672064 },
-  { date: '2024-04-04', revenue: 24260545 },
-  { date: '2024-04-05', revenue: 373290 },
-  { date: '2024-04-06', revenue: 301340 },
-  { date: '2024-04-07', revenue: 245180 },
-];
 
 const chartConfig = {
   visitors: {
@@ -41,7 +32,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartAreaInteractive() {
+export function ChartAreaInteractive({ chartData }: { chartData: DailyRevenue[] }) {
   const [timeRange, setTimeRange] = React.useState('90d');
 
   const filteredData = chartData.filter((item) => {

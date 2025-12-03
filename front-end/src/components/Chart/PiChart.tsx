@@ -1,20 +1,12 @@
 'use client';
-import {
-PieChart,
-Pie,
-Cell,
-Tooltip,
-ResponsiveContainer,
+import { PaymentStatus } from '@/types/admin.dashboard';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
-} from "recharts";
-
-export const ChartPieLabelList = () => {
- const paymentData = [
-{ name: "Success", value: 275, color: "#16a34a" },
-{ name: "Failed", value: 200, color: "#dc2626" },
-{ name: "Canceled", value: 187, color: "#f59e0b" },
-];
-
+export const ChartPieLabelList = ({
+  paymentData,
+}: {
+  paymentData: PaymentStatus[];
+}) => {
   return (
     <div className='bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 backdrop-blur-xl bg-opacity-80 dark:bg-opacity-60 h-[480px] flex flex-col'>
       <h2 className='text-2xl font-bold mb-6 tracking-wide'>Payment Status</h2>
