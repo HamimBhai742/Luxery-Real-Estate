@@ -72,9 +72,81 @@ const getMyProperty = async (filters: any, options: any) => {
   };
 };
 
-const getAllProperties = async () => {
-  const properties = await prisma.property.findMany();
-  return properties;
+const getAllProperties = async (filters: any, options: any) => {
+  const { page, limit, skip, sortBy, sortOrder } = pagination(options);
+  const { search, prices, bedrooms } = options;
+  if (prices === 'under2k') {
+    filters.price = {
+      lte: 2000,
+    };
+  } else if (prices === '2kto5k') {
+    filters.price = {
+      gte: 2000,
+      lte: 5000,
+    };
+  } else if (prices === '5kto10k') {
+    filters.price = {
+      gte: 5000,
+      lte: 10000,
+    };
+  } else if (prices === 'above10k') {
+    filters.price = {
+      gte: 10000,
+    };
+  }
+
+  if (bedrooms == 3) {
+    filters.bedrooms = {
+      gte: 3,
+    };
+  } else if (bedrooms == 4) {
+    filters.bedrooms = {
+      gte: 4,
+    };
+  } else if (bedrooms == 5) {
+    filters.bedrooms = {
+      gte: 5,
+    };
+  } else if (bedrooms == 6) {
+    filters.bedrooms = {
+      gte: 6,
+    };
+  }
+
+  const searchTerm = propertiesSearchField.map((field) => ({
+    [field]: {
+      contains: search,
+      mode: 'insensitive',
+    },
+  }));
+  const where: any = {
+    AND: [
+      filters && Object.keys(filters).length ? filters : undefined,
+      search && { OR: searchTerm },
+    ].filter(Boolean),
+  };
+  const properties = await prisma.property.findMany({
+    where,
+    skip,
+    take: limit,
+    orderBy: {
+      [sortBy]: sortOrder,
+    },
+  });
+
+  const total = await prisma.property.count({
+    where,
+  });
+
+  return {
+    properties,
+    metaData: {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
 };
 
 const updateProperty = async (

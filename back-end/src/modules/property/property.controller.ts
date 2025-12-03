@@ -38,7 +38,18 @@ const getMyProperties = createAsyncFn(async (req: Request, res: Response) => {
 });
 
 const getAllProperties = createAsyncFn(async (req: Request, res: Response) => {
-  const properties = await propertyServices.getAllProperties();
+  const options = pickQuery(req.query, [
+    'limit',
+    'page',
+    'search',
+    'sortBy',
+    'sortOrder',
+    'prices',
+    'bedrooms'
+  ]);
+
+  const filters = pickQuery(req.query, [ 'status','price','bedrooms']);
+  const properties = await propertyServices.getAllProperties(filters, options);
   sendResponse(res, {
     success: true,
     statusCode: 200,
