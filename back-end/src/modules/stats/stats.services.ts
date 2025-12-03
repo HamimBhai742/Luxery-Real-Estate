@@ -55,28 +55,30 @@ const getAdminStats = async () => {
     };
   });
 
-
   const paymentCounts = await prisma.payment.groupBy({
-  by: ['status'],
-  _count: {
-    status: true,
-  },
-});
+    by: ['status'],
+    _count: {
+      status: true,
+    },
+  });
 
-const paymentData = paymentCounts.map(p => {
-  let color = '';
-  if (p.status === 'succeeded') color = '#16a34a';
-  else if (p.status === 'failed') color = '#dc2626';
-  else if (p.status === 'canceled') color = '#f59e0b';
+  const paymentData = paymentCounts.map((p) => {
+    let color = '';
+    if (p.status === 'succeeded') color = '#16a34a';
+    else if (p.status === 'failed') color = '#f59e0b';
+    else if (p.status === 'canceled') color = '#dc2626';
 
-  return {
-    name: p.status === 'succeeded' ? 'Success' : p.status === 'failed' ? 'Failed' : 'Canceled',
-    value: p._count.status,
-    color,
-  };
-});
-
-
+    return {
+      name:
+        p.status === 'succeeded'
+          ? 'Success'
+          : p.status === 'failed'
+          ? 'Failed'
+          : 'Canceled',
+      value: p._count.status,
+      color,
+    };
+  });
 
   const recentProperties = await prisma.property.findMany({
     orderBy: {
@@ -89,10 +91,10 @@ const paymentData = paymentCounts.map(p => {
     totalProperties,
     totalUsers,
     totalBookings,
-    totalRevenue,
+    totalRevenue: totalRevenue._sum.amount || 0,
     recentProperties,
     chartData,
-    paymentData
+    paymentData,
   };
 };
 
