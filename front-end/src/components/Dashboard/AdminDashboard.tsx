@@ -137,7 +137,6 @@ const AdminDashboard = () => {
 
         <DashboardCharts/>
 
-
         {/* Quick Actions */}
         <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none'>
           <h2 className='text-xl font-bold text-gray-900 dark:text-white mb-6'>
