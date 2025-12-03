@@ -6,6 +6,8 @@ import {
   FiDollarSign,
   FiEye,
   FiPlus,
+  FiChevronLeft,
+  FiChevronRight,
 } from 'react-icons/fi';
 import PropertyTable from '@/components/PropertyTable';
 import PropertyFilters from '@/components/PropertyFilters';
@@ -20,6 +22,9 @@ interface IData {
     totalPages: number;
     page: number;
     limit: number;
+    totalProperties: number;
+    totalValue: number;
+    totalViews: number;
   };
   properties: Property[];
 }
@@ -31,6 +36,9 @@ const ManageProperty = () => {
       totalPages: 0,
       page: 0,
       limit: 0,
+      totalProperties: 0,
+      totalValue: 0,
+      totalViews: 0,
     },
     properties: [],
   });
@@ -38,16 +46,13 @@ const ManageProperty = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit] = useState(10);
+  const [limit, setLimit] = useState(10);
+
+
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm, selectedStatus]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
+    try {
+      const fetchData = async () => {
         const res = await fetch(
           `${
             process.env.NEXT_PUBLIC_API_URL
@@ -56,52 +61,48 @@ const ManageProperty = () => {
           }&page=${currentPage}&limit=${limit}`
         );
         const json = await res.json();
-        setData(json.data);
-      } catch (err) {
-        console.error('Fetch error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
+        if (!json.success) {
+          setLoading(false);
+        }
+        if (json.success) {
+          setLoading(false);
+          setData(json.data);
+        }
+      };
+      fetchData();
+    } catch (err) {
+      console.error('Fetch error:', err);
+    }
   }, [searchTerm, selectedStatus, currentPage, limit]);
 
   if (loading) return <ManagePropertiesSkeleton />;
-  console.log(data);
 
   const stats = [
     {
       icon: FiHome,
       label: 'Total Properties',
-      value: data.metaData.total.toString(),
+      value: data?.metaData.total.toString(),
       change: '+12%',
       color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: FiTrendingUp,
       label: 'Active Listings',
-      value: data.properties
-        .filter((property: any) => property.status === 'available')
-        .length.toString(),
+      value: data?.metaData.totalProperties.toString(),
       change: '+8%',
       color: 'from-purple-500 to-pink-500',
     },
     {
       icon: FiDollarSign,
       label: 'Total Value',
-      value: `$${data.properties.reduce(
-        (sum: number, p: { price: number }) => sum + p.price,
-        0
-      )}`,
+      value: `$${data?.metaData.totalValue.toFixed(2)}`,
       change: '+15%',
       color: 'from-green-500 to-emerald-500',
     },
     {
       icon: FiEye,
       label: 'Total Views',
-      value: data.properties
-        .reduce((sum: number, p: { views: number }) => sum + p.views, 0)
-        .toString(),
+      value: data?.metaData.totalViews.toString(),
       change: '+23%',
       color: 'from-orange-500 to-red-500',
     },
@@ -174,52 +175,73 @@ const ManageProperty = () => {
               Property Listings
             </h2>
             <p className='text-gray-600 dark:text-gray-400 text-sm mt-1'>
-              {data.properties.length} {data.properties.length === 1 ? 'property' : 'properties'}{' '}
-              found
+              {data.properties.length}{' '}
+              {data.properties.length === 1 ? 'property' : 'properties'} found
             </p>
           </div>
           <PropertyTable properties={data.properties} />
+        </div>
 
-          {/* Pagination */}
-          {data.metaData.totalPages > 1 && (
-            <div className='mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-200 dark:border-white/10'>
+        {data?.metaData && data?.metaData?.totalPages > 1 && (
+          <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-4 shadow-lg dark:shadow-none'>
+            <div className='flex items-center justify-between'>
               <p className='text-sm text-gray-600 dark:text-gray-400'>
-                Showing {((currentPage - 1) * limit) + 1} to {Math.min(currentPage * limit, data.metaData.total)} of {data.metaData.total} properties
+                Page {currentPage} of {data?.metaData.totalPages}
               </p>
+
               <div className='flex items-center gap-2'>
-                <button
-                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                  disabled={currentPage === 1}
-                  className='px-4 py-2 rounded-lg bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
-                >
-                  Previous
-                </button>
-                <div className='flex gap-1'>
-                  {Array.from({ length: data.metaData.totalPages }, (_, i) => i + 1).map(page => (
+                <div className='flex gap-2'>
+                  <button
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                  >
+                    <FiChevronLeft />
+                  </button>
+                  {Array.from(
+                    { length: data?.metaData.totalPages },
+                    (_, i) => i + 1
+                  ).map((page) => (
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-10 h-10 rounded-lg font-medium transition-all ${
+                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
                         currentPage === page
-                          ? 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-lg'
-                          : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                          ? 'bg-linear-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                          : 'bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
                       }`}
                     >
                       {page}
                     </button>
                   ))}
+                  <button
+                    onClick={() =>
+                      setCurrentPage((p) =>
+                        Math.min(data?.metaData.totalPages, p + 1)
+                      )
+                    }
+                    disabled={currentPage === data?.metaData.totalPages}
+                    className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                  >
+                    <FiChevronRight />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setCurrentPage(prev => Math.min(data.metaData.totalPages, prev + 1))}
-                  disabled={currentPage === data.metaData.totalPages}
-                  className='px-4 py-2 rounded-lg bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                <select
+                  onChange={(e) => setLimit(Number(e.target.value))}
+                  name=''
+                  id=''
+                  className='select'
                 >
-                  Next
-                </button>
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={30}>30</option>
+                  <option value={40}>40</option>
+                  <option value={50}>50</option>
+                </select>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

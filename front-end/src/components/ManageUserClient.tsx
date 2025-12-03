@@ -39,6 +39,7 @@ interface ManageUserClientProps {
 const ManageUserClient = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+  const [limit, setLimit] = useState(10);
   const [users, setUsers] = useState<User[]>([]);
   const [metaData, setMetaData] = useState<IMetaDta>();
   const [statusFilter, setStatusFilter] = useState<
@@ -49,7 +50,7 @@ const ManageUserClient = () => {
     try {
       const fetchUsers = async () => {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/user?page=${currentPage}&limit=10`,
+          `${process.env.NEXT_PUBLIC_API_URL}/user?page=${currentPage}&limit=${limit}`,
           {
             method: 'GET',
             headers: {
@@ -61,20 +62,20 @@ const ManageUserClient = () => {
         const data = await response.json();
         if (data.success) {
           setUsers(data.data.data);
-          console.log(data)
+          console.log(data);
           setMetaData(data.data.metaData);
+          setLoading(false);
         }
         if (!data.success) {
+          setLoading(false);
           toast.error(data.message);
         }
       };
       fetchUsers();
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
-  }, [currentPage]);
+  }, [currentPage, limit]);
   console.log(users, metaData);
 
   // Stats
@@ -417,39 +418,55 @@ const ManageUserClient = () => {
               <p className='text-sm text-gray-600 dark:text-gray-400'>
                 Page {currentPage} of {metaData.totalPages}
               </p>
-              <div className='flex gap-2'>
-                <button
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
-                >
-                  <FiChevronLeft />
-                </button>
-                {Array.from(
-                  { length: metaData.totalPages },
-                  (_, i) => i + 1
-                ).map((page) => (
+              <div className='flex items-center gap-2'>
+                <div className='flex gap-2'>
                   <button
-                    key={page}
-                    onClick={() => setCurrentPage(page)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                      currentPage === page
-                        ? 'bg-linear-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                        : 'bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
-                    }`}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
                   >
-                    {page}
+                    <FiChevronLeft />
                   </button>
-                ))}
-                <button
-                  onClick={() =>
-                    setCurrentPage((p) => Math.min(metaData.totalPages, p + 1))
-                  }
-                  disabled={currentPage === metaData.totalPages}
-                  className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                  {Array.from(
+                    { length: metaData.totalPages },
+                    (_, i) => i + 1
+                  ).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                        currentPage === page
+                          ? 'bg-linear-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                          : 'bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() =>
+                      setCurrentPage((p) =>
+                        Math.min(metaData.totalPages, p + 1)
+                      )
+                    }
+                    disabled={currentPage === metaData.totalPages}
+                    className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                  >
+                    <FiChevronRight />
+                  </button>
+                </div>
+                <select
+                  onChange={(e) => setLimit(Number(e.target.value))}
+                  name=''
+                  id=''
+                  className='select'
                 >
-                  <FiChevronRight />
-                </button>
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={30}>30</option>
+                  <option value={40}>40</option>
+                  <option value={50}>50</option>
+                </select>
               </div>
             </div>
           </div>

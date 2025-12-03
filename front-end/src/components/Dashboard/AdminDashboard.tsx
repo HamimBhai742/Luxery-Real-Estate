@@ -14,9 +14,10 @@ import {
 import Link from 'next/link';
 import DashboardCharts from '../Chart/Chart';
 import { DashboardData } from '@/types/admin.dashboard';
+import AdminDashboardLoadinSkeleton from './AdminDashboardLoadinSkeleton';
 
 const AdminDashboard = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [statsData, setStatsData] = useState<DashboardData>();
   useEffect(() => {
     try {
@@ -38,9 +39,6 @@ const AdminDashboard = () => {
       fetchData();
     } catch (error) {
       console.log(error);
-      setLoading(false);
-    } finally {
-      setLoading(false);
     }
   }, []);
   console.log(statsData);
@@ -116,6 +114,10 @@ const AdminDashboard = () => {
         return 'bg-gray-500';
     }
   };
+
+  if (loading) {
+    return <AdminDashboardLoadinSkeleton />;
+  }
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6'>
       <div className='max-w-7xl mx-auto space-y-6'>

@@ -16,6 +16,7 @@
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.8.0",
     "clsx": "^2.1.1",
+    "daisyui": "^5.5.5",
     "lucide-react": "^0.555.0",
     "multer": "^2.0.2",
     "next": "16.0.3",
