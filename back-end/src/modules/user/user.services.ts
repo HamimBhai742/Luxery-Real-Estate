@@ -70,6 +70,20 @@ const getAllUsers = async (filters: any, options: any) => {
   const total = await prisma.user.count({
     where,
   });
+
+  const totalActive = await prisma.user.count({
+    where: {
+      status: 'active',
+      role: 'USER',
+    },
+  });
+
+  const totalInactive = await prisma.user.count({
+    where: {
+      status: 'inactive',
+      role: 'USER',
+    },
+  });
   return {
     data: users,
     metaData: {
@@ -77,6 +91,8 @@ const getAllUsers = async (filters: any, options: any) => {
       limit,
       total,
       totalPages: Math.ceil(total / limit),
+      totalActive,
+      totalInactive,
     },
   };
 };
