@@ -22,6 +22,7 @@ import {
 } from 'react-icons/fi';
 import { ImSpinner9 } from 'react-icons/im';
 import { MdBedroomParent, MdBathtub } from 'react-icons/md';
+import BookingsTableSkeleton from './BookingsTableSkeleton';
 
 export interface BookingStats {
   cancelledBookings: number;
@@ -50,7 +51,12 @@ export default function BookingsTable() {
   useEffect(() => {
     try {
       const fetchBookings = async () => {
-        const data = await getBookings(searchTerm, statusFilter, limit, currentPage);
+        const data = await getBookings(
+          searchTerm,
+          statusFilter,
+          limit,
+          currentPage
+        );
         const bookingsData = data.data.bookings || [];
         const metaData = data.data.metaData;
 
@@ -101,11 +107,7 @@ export default function BookingsTable() {
   };
 
   if (loading) {
-    return (
-      <div className='flex items-center justify-center py-20'>
-        <ImSpinner9 className='w-12 h-12 text-blue-500 animate-spin' />
-      </div>
-    );
+    return <BookingsTableSkeleton />;
   }
 
   if (!bookings || bookings.length === 0) {
