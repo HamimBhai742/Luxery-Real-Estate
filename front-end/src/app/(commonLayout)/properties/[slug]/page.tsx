@@ -32,7 +32,7 @@ const PropertiesDetailsPage = async ({ params }: PageProps) => {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } =await params;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/property/${slug}`
   );

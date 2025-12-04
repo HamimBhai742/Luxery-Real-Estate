@@ -14,6 +14,7 @@ import {
   FiDollarSign
 } from 'react-icons/fi';
 import TimeAgo from 'react-timeago';
+import UserDashboardSkeleton from './UserDashboardSkeleton';
 
 interface DashboardData {
   bookings: any[];
@@ -64,11 +65,7 @@ const UserDashboard = () => {
   const recentPayments = data.payments.slice(0, 3);
 
   if (loading) {
-    return (
-      <div className='min-h-screen flex items-center justify-center'>
-        <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600'></div>
-      </div>
-    );
+    return <UserDashboardSkeleton />;
   }
 
   return (

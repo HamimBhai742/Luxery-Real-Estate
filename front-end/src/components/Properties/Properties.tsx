@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import PropertyCard from './PropertyCard';
-import { PropertiesData } from '@/app/(commonLayout)/properties/page';
 import { Property } from '@/types/property';
 import PropertyCardSkeleton from './PropertyCardSkeleton';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { PropertiesData } from '@/helpers/propertiesData';
 export interface IData {
   metaData: {
     total: number;
