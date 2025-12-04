@@ -6,16 +6,16 @@ import { useState, useEffect } from 'react';
 import {
   FiSearch,
   FiCreditCard,
-  FiFilter,
   FiXCircle,
   FiClock,
   FiCheckCircle,
   FiDollarSign,
+  FiChevronRight,
+  FiChevronLeft,
 } from 'react-icons/fi';
 import Link from 'next/link';
 import TimeAgo from 'react-timeago';
 import { getPayments } from '@/helpers/getPayments';
-import { MdCancel } from 'react-icons/md';
 import PaymentHistoryClientSkeleton from './PaymentHistoryClientSkeleton';
 
 interface PaymentStats {
@@ -33,6 +33,8 @@ export default function PaymentHistoryClient() {
   const [isLoading, setIsLoading] = useState(true);
   const [paymentStats, setPaymentStats] = useState<PaymentStats | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(3);
   const [statusFilter, setStatusFilter] = useState<
     'all' | 'pending' | 'succeeded' | 'failed' | 'canceled'
   >('all');
@@ -40,7 +42,12 @@ export default function PaymentHistoryClient() {
   useEffect(() => {
     try {
       const fetchPayments = async () => {
-        const paymentsData = await getPayments(searchTerm, statusFilter as any);
+        const paymentsData = await getPayments(
+          searchTerm,
+          statusFilter as any,
+          limit,
+          currentPage
+        );
         setPaymentStats(paymentsData.metaData);
         setPayments(paymentsData.payments);
         setIsLoading(false);
@@ -49,7 +56,7 @@ export default function PaymentHistoryClient() {
     } catch (error) {
       console.error('Error fetching payments:', error);
     }
-  }, [searchTerm, statusFilter]);
+  }, [searchTerm, statusFilter, limit, currentPage]);
 
   if (isLoading) {
     return <PaymentHistoryClientSkeleton />;
@@ -250,12 +257,64 @@ export default function PaymentHistoryClient() {
         </table>
       </div>
 
-      {payments?.length === 0 && (
-        <div className='text-center py-12'>
-          <FiFilter className='w-16 h-16 mx-auto mb-4 text-gray-400 dark:text-gray-500' />
-          <p className='text-gray-600 dark:text-gray-400'>
-            No payments match your filters
-          </p>
+      {paymentStats && paymentStats?.totalPages > 1 && (
+        <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-4 shadow-lg dark:shadow-none'>
+          <div className='flex items-center justify-between'>
+            <p className='text-sm text-gray-600 dark:text-gray-400'>
+              Page {currentPage} of {paymentStats?.totalPages}
+            </p>
+
+            <div className='flex items-center gap-2'>
+              <div className='flex gap-2'>
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                >
+                  <FiChevronLeft />
+                </button>
+                {Array.from(
+                  { length: paymentStats?.totalPages },
+                  (_, i) => i + 1
+                ).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                      currentPage === page
+                        ? 'bg-linear-to-r from-amber-500 to-amber-600 text-white shadow-lg'
+                        : 'bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  onClick={() =>
+                    setCurrentPage((p) =>
+                      Math.min(paymentStats?.totalPages, p + 1)
+                    )
+                  }
+                  disabled={currentPage === paymentStats?.totalPages}
+                  className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                >
+                  <FiChevronRight />
+                </button>
+              </div>
+              <select
+                onChange={(e) => setLimit(Number(e.target.value))}
+                name=''
+                id=''
+                className='select'
+              >
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={30}>30</option>
+                <option value={40}>40</option>
+                <option value={50}>50</option>
+              </select>
+            </div>
+          </div>
         </div>
       )}
     </div>

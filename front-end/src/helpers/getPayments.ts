@@ -12,9 +12,9 @@ enum Status {
 
 export async function getPayments(
   search: string,
-  status: Status
-  // limit: number,
-  // page: number
+  status: Status,
+  limit: number,
+  page: number
 ) {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
@@ -23,7 +23,9 @@ export async function getPayments(
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/payment/my-payments?${
         search === '' ? '' : `search=${search}`
-      }&${status === 'all' ? '' : `status=${status}`}`,
+      }&${
+        status === 'all' ? '' : `status=${status}`
+      }&page=${page}&limit=${limit}`,
       {
         cache: 'no-store',
         headers: {

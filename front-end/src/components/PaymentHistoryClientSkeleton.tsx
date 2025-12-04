@@ -61,6 +61,15 @@ const PaymentHistoryClientSkeleton = () => {
           </tbody>
         </table>
       </div>
+       {/* Pagination Skeleton */}
+      <div className='flex items-center justify-between'>
+        <div className='h-10 bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-lg w-32'></div>
+        <div className='flex gap-2'>
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className='w-10 h-10 bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-lg'></div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
