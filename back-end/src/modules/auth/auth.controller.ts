@@ -52,8 +52,21 @@ const logout = createAsyncFn(
   }
 );
 
+const forgetPassword = createAsyncFn(
+  async (req: Request, res: Response) => {
+    const data = await authService.forgetPassword(req.body.email);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatusCodes.OK,
+      message: 'Reset Link Sent Successfully',
+      data: null,
+    });
+  }
+);
+
 export const authController = {
   login,
   verifyUser,
   logout,
+  forgetPassword,
 };

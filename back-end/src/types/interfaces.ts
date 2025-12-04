@@ -7,6 +7,18 @@ export interface IOptions {
   sortOrder?: string;
 }
 
+export interface ISendEmailOptions {
+  to: string;
+  subject: string;
+  templateName: string;
+  templateData: Record<string, any>;
+  attachments?: {
+    filename: string;
+    content: Buffer;
+    contentType: string;
+  }[];
+}
+
 export interface IPagination {
   page: number;
   limit: number;

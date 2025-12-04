@@ -8,7 +8,7 @@ export const ENV = {
 
   JWT_SECRET: process.env.JWT_SECRET as string,
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN as string,
-
+  RESET_TOKEN_EXPIRE_IN: process.env.RESET_TOKEN_EXPIRE_IN as string,
   BCRYPT_SALT_ROUNDS: Number(process.env.BCRYPT_SALT_ROUNDS),
 
   SSL_STORE_ID: process.env.SSL_STORE_ID as string,
@@ -30,4 +30,11 @@ export const ENV = {
   CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY as string,
   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET as string,
   CLOUDINARY_API_URL: process.env.CLOUDINARY_API_URL as string,
+
+  SMTP_HOST: process.env.SMTP_HOST as string,
+  SMTP_PORT: Number(process.env.SMTP_PORT),
+  SMTP_USER: process.env.SMTP_USER as string,
+  SMTP_PASS: process.env.SMTP_PASS as string,
+
+  CLIENT_URL: process.env.CLIENT_URL as string,
 };
