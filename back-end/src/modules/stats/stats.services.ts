@@ -134,9 +134,12 @@ const getUserStats = async (userId: number) => {
       userId,
     },
     orderBy: {
-      createdAt: 'desc',
+      updatedAt: 'desc',
     },
     take: 3,
+    include: {
+      property: true,
+    }
   });
 
   const recentsPayments = await prisma.payment.findMany({
@@ -144,7 +147,7 @@ const getUserStats = async (userId: number) => {
       userId,
     },
     orderBy: {
-      createdAt: 'desc',
+      updatedAt: 'desc',
     },
     take: 3,
   });
