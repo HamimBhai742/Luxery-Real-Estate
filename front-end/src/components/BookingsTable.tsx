@@ -1,44 +1,97 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
+import { getBookings } from '@/helpers/getBookings';
 import { Booking } from '@/types/booking';
 import Link from 'next/link';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { FiSearch, FiCalendar, FiMapPin, FiCreditCard, FiEye, FiFilter } from 'react-icons/fi';
+import {
+  FiSearch,
+  FiCalendar,
+  FiMapPin,
+  FiCreditCard,
+  FiEye,
+  FiFilter,
+  FiXCircle,
+  FiCheckCircle,
+  FiClock,
+  FiChevronRight,
+  FiChevronLeft,
+} from 'react-icons/fi';
 import { ImSpinner9 } from 'react-icons/im';
 import { MdBedroomParent, MdBathtub } from 'react-icons/md';
 
-export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
-  const [loading, setLoading] = useState(false);
-  const [processingBookingId, setProcessingBookingId] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'paid' | 'canceled'>('all');
+export interface BookingStats {
+  cancelledBookings: number;
+  confirmedBookings: number;
+  pendingBookings: number;
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
 
-  const filteredBookings = useMemo(() => {
-    return bookings?.filter((booking) => {
-      const matchesSearch = booking.property.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        booking.property.location.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesStatus = statusFilter === 'all' || booking.status === statusFilter;
-      return matchesSearch && matchesStatus;
-    });
-  }, [bookings, searchTerm, statusFilter]);
+export default function BookingsTable() {
+  const [loading, setLoading] = useState(true);
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(6);
+  const [bookingStats, setBookingStats] = useState<BookingStats | null>(null);
+  const [processingBookingId, setProcessingBookingId] = useState<string | null>(
+    null
+  );
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<
+    'all' | 'pending' | 'paid' | 'canceled'
+  >('all');
+
+  useEffect(() => {
+    try {
+      const fetchBookings = async () => {
+        const data = await getBookings(searchTerm, statusFilter, limit, currentPage);
+        const bookingsData = data.data.bookings || [];
+        const metaData = data.data.metaData;
+
+        console.log(data);
+        if (metaData) {
+          setBookingStats(metaData);
+          setLoading(false);
+        }
+        if (bookingsData.length > 0 || bookingsData) {
+          setLoading(false);
+          setBookings(bookingsData);
+        }
+      };
+      fetchBookings();
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
+  }, [searchTerm, statusFilter, limit, currentPage]);
+
+  console.log(searchTerm, statusFilter);
 
   const handelPayment = async (bookingId: string) => {
     setProcessingBookingId(bookingId);
     try {
       setLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payment/initiate-payment`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ bookingId }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/payment/initiate-payment`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ bookingId }),
+        }
+      );
       const data = await res.json();
       if (data.success) {
         window.location.href = data.data.paymentUrl;
       } else {
-        toast.error(data.message || 'Failed to initiate payment. Please try again.');
+        toast.error(
+          data.message || 'Failed to initiate payment. Please try again.'
+        );
       }
     } catch (error) {
       toast.error('Failed to initiate payment. Please try again.');
@@ -47,15 +100,30 @@ export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
     }
   };
 
+  if (loading) {
+    return (
+      <div className='flex items-center justify-center py-20'>
+        <ImSpinner9 className='w-12 h-12 text-blue-500 animate-spin' />
+      </div>
+    );
+  }
+
   if (!bookings || bookings.length === 0) {
     return (
       <div className='flex flex-col items-center justify-center py-20'>
         <div className='w-24 h-24 mb-6 rounded-full bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center'>
           <FiCalendar className='w-12 h-12 text-blue-500' />
         </div>
-        <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>No Bookings Yet</h3>
-        <p className='text-gray-600 dark:text-gray-400 mb-6'>Start exploring luxury properties</p>
-        <Link href='/properties' className='px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300'>
+        <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
+          No Bookings Yet
+        </h3>
+        <p className='text-gray-600 dark:text-gray-400 mb-6'>
+          Start exploring luxury properties
+        </p>
+        <Link
+          href='/properties'
+          className='px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300'
+        >
           Browse Properties
         </Link>
       </div>
@@ -64,6 +132,76 @@ export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
 
   return (
     <div className='space-y-6'>
+      {/* Stats Cards */}
+      <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
+        <div className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Total
+              </p>
+              <p className='text-3xl font-bold text-gray-900 dark:text-white'>
+                {bookingStats?.total}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center'>
+              <FiCalendar className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+
+        <div className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-yellow-500/10 to-orange-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Pending
+              </p>
+              <p className='text-3xl font-bold text-gray-900 dark:text-white'>
+                {bookingStats?.pendingBookings}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-yellow-500 to-orange-500 flex items-center justify-center'>
+              <FiClock className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+
+        <div className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-green-500/10 to-emerald-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Paid
+              </p>
+              <p className='text-3xl font-bold text-gray-900 dark:text-white'>
+                {bookingStats?.confirmedBookings}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-green-500 to-emerald-500 flex items-center justify-center'>
+              <FiCheckCircle className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+
+        <div className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-red-500/10 to-rose-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Canceled
+              </p>
+              <p className='text-3xl font-bold text-gray-900 dark:text-white'>
+                {bookingStats?.cancelledBookings}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-red-500 to-rose-500 flex items-center justify-center'>
+              <FiXCircle className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Filters */}
       <div className='flex flex-col sm:flex-row gap-4'>
         <div className='flex-1 relative'>
@@ -95,7 +233,7 @@ export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
 
       {/* Bookings Grid */}
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
-        {filteredBookings?.map((booking) => (
+        {bookings?.map((booking) => (
           <div
             key={booking.id}
             className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-500'
@@ -142,16 +280,26 @@ export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
               {/* Amount & Date */}
               <div className='flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700'>
                 <div>
-                  <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>Total Amount</p>
+                  <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                    Total Amount
+                  </p>
                   <p className='text-2xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
                     ${Number(booking.totalAmount).toLocaleString()}
                   </p>
                 </div>
                 <div className='text-right'>
-                  <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>Booked On</p>
+                  <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                    Booked On
+                  </p>
                   <div className='flex items-center gap-2 text-gray-900 dark:text-white font-medium'>
                     <FiCalendar className='w-4 h-4' />
-                    <span>{new Date(booking.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                    <span>
+                      {new Date(booking.createdAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -189,11 +337,63 @@ export default function BookingsTable({ bookings }: { bookings: Booking[] }) {
           </div>
         ))}
       </div>
+      {bookingStats && bookingStats?.totalPages > 1 && (
+        <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-4 shadow-lg dark:shadow-none'>
+          <div className='flex items-center justify-between'>
+            <p className='text-sm text-gray-600 dark:text-gray-400'>
+              Page {currentPage} of {bookingStats?.totalPages}
+            </p>
 
-      {filteredBookings?.length === 0 && (
-        <div className='text-center py-12'>
-          <FiFilter className='w-16 h-16 mx-auto mb-4 text-gray-400' />
-          <p className='text-gray-600 dark:text-gray-400'>No bookings match your filters</p>
+            <div className='flex items-center gap-2'>
+              <div className='flex gap-2'>
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                >
+                  <FiChevronLeft />
+                </button>
+                {Array.from(
+                  { length: bookingStats?.totalPages },
+                  (_, i) => i + 1
+                ).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                      currentPage === page
+                        ? 'bg-linear-to-r from-amber-500 to-amber-600 text-white shadow-lg'
+                        : 'bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  onClick={() =>
+                    setCurrentPage((p) =>
+                      Math.min(bookingStats?.totalPages, p + 1)
+                    )
+                  }
+                  disabled={currentPage === bookingStats?.totalPages}
+                  className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                >
+                  <FiChevronRight />
+                </button>
+              </div>
+              <select
+                onChange={(e) => setLimit(Number(e.target.value))}
+                name=''
+                id=''
+                className='select'
+              >
+                <option value={6}>6</option>
+                <option value={12}>12</option>
+                <option value={24}>24</option>
+                <option value={48}>48</option>
+              </select>
+            </div>
+          </div>
         </div>
       )}
     </div>

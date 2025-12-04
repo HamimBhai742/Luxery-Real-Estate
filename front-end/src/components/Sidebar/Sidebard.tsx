@@ -12,7 +12,6 @@ import {
   FiX,
   FiChevronRight,
   FiCalendar,
-  FiHelpCircle,
   FiCreditCard,
 } from 'react-icons/fi';
 
@@ -104,7 +103,6 @@ const Sidebar = () => {
   const filteredMenuItems = menuItems.filter(
     (item) => item.role === user?.data?.role || !item.role
   );
-console.log(filteredMenuItems)
   const isActive = (href: string) => pathname === href;
 
   return (
