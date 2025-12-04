@@ -149,6 +149,15 @@ const getUserStats = async (userId: number) => {
     take: 3,
   });
 
+  const getMe = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      name: true,
+      email: true,
+      role: true,
+    },
+  });
+
   return {
     totalMyBookings,
     totalMyBookingsCompleted,
@@ -156,6 +165,7 @@ const getUserStats = async (userId: number) => {
     totalSpent: totalSpent._sum.amount || 0,
     recentBookings,
     recentsPayments,
+    user: getMe,
   };
 };
 

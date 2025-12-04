@@ -5,7 +5,7 @@ import { Role } from '@prisma/client';
 
 const router = Router();
 
-router.get('/admin', statsController.getAdminStats);
+router.get('/admin', checkAuth(Role.ADMIN), statsController.getAdminStats);
 
 router.get('/user', checkAuth(Role.USER), statsController.getUserStats);
 
