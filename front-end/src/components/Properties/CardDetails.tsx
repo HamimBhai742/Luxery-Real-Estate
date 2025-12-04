@@ -1,7 +1,8 @@
+'use client';
 import { Property } from '@/types/property';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
 
@@ -9,7 +10,6 @@ const CardDetails = ({ property }: { property: Property }) => {
   console.log(property, 'llll');
   const [activeImage, setActiveImage] = useState(0);
   const [loading, setLoading] = useState(false);
-  const images = [0, 1, 2, 3]; // Mock image indices
   const router = useRouter();
   const handleSubmit = async (id: string) => {
     console.log(id);
