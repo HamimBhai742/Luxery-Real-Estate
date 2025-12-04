@@ -3,11 +3,12 @@ import { createAsyncFn } from '../../utils/create.async.fn';
 import { bookingServices } from './booking.services';
 import { sendResponse } from '../../utils/send.response';
 import { IJwt } from '../../types/user.interface';
+import { pickQuery } from '../../utils/pick.query';
 
 const createBooking = createAsyncFn(
   async (req: Request & { user?: IJwt }, res: Response) => {
     const userId = Number(req?.user?.userId) as number;
-    console.log(req.user)
+    console.log(req.user);
     const propertyId = req?.body?.propertyId as string;
     const booking = await bookingServices.createBooking(userId, propertyId);
     sendResponse(res, {
@@ -22,8 +23,19 @@ const createBooking = createAsyncFn(
 const getMyBookings = createAsyncFn(
   async (req: Request & { user?: IJwt }, res: Response) => {
     const userId = Number(req?.user?.userId) as number;
-    console.log('first')
-    const bookings = await bookingServices.getMyBookings(userId);
+    const options = pickQuery(req.query, [
+      'limit',
+      'page',
+      'search',
+      'sortBy',
+      'sortOrder',
+    ]);
+    const filters = pickQuery(req.query, ['status']);
+    const bookings = await bookingServices.getMyBookings(
+      userId,
+      filters,
+      options
+    );
     sendResponse(res, {
       success: true,
       statusCode: 200,
