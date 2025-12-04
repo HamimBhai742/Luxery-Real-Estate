@@ -1,23 +1,59 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { Payment } from '@/types/payment';
-import { useState, useMemo } from 'react';
-import { FiSearch, FiCreditCard, FiFilter } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
+import {
+  FiSearch,
+  FiCreditCard,
+  FiFilter,
+  FiXCircle,
+  FiClock,
+  FiCheckCircle,
+  FiDollarSign,
+} from 'react-icons/fi';
 import Link from 'next/link';
 import TimeAgo from 'react-timeago';
+import { getPayments } from '@/helpers/getPayments';
+import { MdCancel } from 'react-icons/md';
+import PaymentHistoryClientSkeleton from './PaymentHistoryClientSkeleton';
 
-export default function PaymentHistoryClient({ payments }: { payments: Payment[] }) {
+interface PaymentStats {
+  total: number;
+  totalAmount: string; // or number if you prefer
+  totalCanceled: number;
+  totalFailed: number;
+  totalPages: number;
+  totalPending: number;
+  totalSuccess: number;
+}
+
+export default function PaymentHistoryClient() {
+  const [payments, setPayments] = useState<Payment[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [paymentStats, setPaymentStats] = useState<PaymentStats | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'completed' | 'failed'>('all');
+  const [statusFilter, setStatusFilter] = useState<
+    'all' | 'pending' | 'succeeded' | 'failed' | 'canceled'
+  >('all');
 
-  const filteredPayments = useMemo(() => {
-    return payments?.filter((payment) => {
-      const matchesSearch = payment.transactionId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        payment.amount.includes(searchTerm);
-      const matchesStatus = statusFilter === 'all' || payment.status === statusFilter;
-      return matchesSearch && matchesStatus;
-    });
-  }, [payments, searchTerm, statusFilter]);
+  useEffect(() => {
+    try {
+      const fetchPayments = async () => {
+        const paymentsData = await getPayments(searchTerm, statusFilter as any);
+        setPaymentStats(paymentsData.metaData);
+        setPayments(paymentsData.payments);
+        setIsLoading(false);
+      };
+      fetchPayments();
+    } catch (error) {
+      console.error('Error fetching payments:', error);
+    }
+  }, [searchTerm, statusFilter]);
+
+  if (isLoading) {
+    return <PaymentHistoryClientSkeleton />;
+  }
 
   if (!payments || payments.length === 0) {
     return (
@@ -25,17 +61,94 @@ export default function PaymentHistoryClient({ payments }: { payments: Payment[]
         <div className='w-24 h-24 mb-6 rounded-full bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center'>
           <FiCreditCard className='w-12 h-12 text-blue-500' />
         </div>
-        <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>No Payments Yet</h3>
-        <p className='text-gray-600 dark:text-gray-400 mb-6'>Your payment history will appear here</p>
-        <Link href='/properties' className='px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300'>
+        <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
+          No Payments Yet
+        </h3>
+        <p className='text-gray-600 dark:text-gray-400 mb-6'>
+          Your payment history will appear here
+        </p>
+        <Link
+          href='/properties'
+          className='px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300'
+        >
           Browse Properties
         </Link>
       </div>
     );
   }
-
   return (
     <div className='space-y-6'>
+      {/* Stats Cards */}
+      <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
+        <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Total Amount
+              </p>
+              <p className='text-2xl font-bold text-gray-900 dark:text-white'>
+                ${paymentStats?.totalAmount.toLocaleString()}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center'>
+              <FiDollarSign className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+
+        <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-green-500/10 to-emerald-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Completed
+              </p>
+              <p className='text-2xl font-bold text-gray-900 dark:text-white'>
+                {paymentStats?.totalSuccess}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-green-500 to-emerald-500 flex items-center justify-center'>
+              <FiCheckCircle className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+
+        <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-yellow-500/10 to-orange-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Pending
+              </p>
+              <p className='text-2xl font-bold text-gray-900 dark:text-white'>
+                {paymentStats?.totalPending}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-yellow-500 to-orange-500 flex items-center justify-center'>
+              <FiClock className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+
+        <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
+          <div className='absolute inset-0 bg-linear-to-br from-red-500/10 to-rose-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity' />
+          <div className='relative flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                Failed
+              </p>
+              <p className='text-2xl font-bold text-gray-900 dark:text-white'>
+                {paymentStats?.totalFailed}
+              </p>
+            </div>
+            <div className='w-12 h-12 rounded-xl bg-linear-to-br from-red-500 to-rose-500 flex items-center justify-center'>
+              <FiXCircle className='w-6 h-6 text-white' />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Filters */}
       <div className='flex flex-col sm:flex-row gap-4'>
         <div className='flex-1 relative'>
@@ -49,19 +162,21 @@ export default function PaymentHistoryClient({ payments }: { payments: Payment[]
           />
         </div>
         <div className='flex gap-2 flex-wrap'>
-          {(['all', 'completed', 'pending', 'failed'] as const).map((status) => (
-            <button
-              key={status}
-              onClick={() => setStatusFilter(status)}
-              className={`px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
-                statusFilter === status
-                  ? 'bg-linear-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
-                  : 'bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-300 hover:border-blue-500 dark:hover:border-blue-500'
-              }`}
-            >
-              {status.charAt(0).toUpperCase() + status.slice(1)}
-            </button>
-          ))}
+          {(['all', 'succeeded', 'pending', 'failed', 'canceled'] as const).map(
+            (status) => (
+              <button
+                key={status}
+                onClick={() => setStatusFilter(status)}
+                className={`px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
+                  statusFilter === status
+                    ? 'bg-linear-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
+                    : 'bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-300 hover:border-blue-500 dark:hover:border-blue-500'
+                }`}
+              >
+                {status.charAt(0).toUpperCase() + status.slice(1)}
+              </button>
+            )
+          )}
         </div>
       </div>
 
@@ -88,7 +203,7 @@ export default function PaymentHistoryClient({ payments }: { payments: Payment[]
             </tr>
           </thead>
           <tbody className='divide-y divide-gray-200 dark:divide-slate-700'>
-            {filteredPayments?.map((payment) => (
+            {payments?.map((payment) => (
               <tr
                 key={payment.id}
                 className='hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors duration-200'
@@ -135,10 +250,12 @@ export default function PaymentHistoryClient({ payments }: { payments: Payment[]
         </table>
       </div>
 
-      {filteredPayments?.length === 0 && (
+      {payments?.length === 0 && (
         <div className='text-center py-12'>
           <FiFilter className='w-16 h-16 mx-auto mb-4 text-gray-400 dark:text-gray-500' />
-          <p className='text-gray-600 dark:text-gray-400'>No payments match your filters</p>
+          <p className='text-gray-600 dark:text-gray-400'>
+            No payments match your filters
+          </p>
         </div>
       )}
     </div>
