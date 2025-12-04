@@ -5,6 +5,7 @@ import { sendResponse } from '../../utils/send.response';
 import httpStatusCodes from 'http-status-codes';
 import { ENV } from '../../config/env';
 import { IJwt } from '../../types/user.interface';
+import { pickQuery } from '../../utils/pick.query';
 
 const createPayment = createAsyncFn(async (req: Request, res: Response) => {
   const payment = await paymentServices.initPayment(
@@ -74,8 +75,19 @@ const getAllPayments = createAsyncFn(async (req: Request, res: Response) => {
 
 const getMyPayments = createAsyncFn(
   async (req: Request & { user?: IJwt }, res: Response) => {
+    const options = pickQuery(req.query, [
+      'limit',
+      'page',
+      'search',
+      'sortBy',
+      'sortOrder',
+    ]);
+
+    const filters = pickQuery(req.query, ['status']);
     const payments = await paymentServices.getMyPayments(
-      Number(req?.user?.userId) as number
+      Number(req?.user?.userId) as number,
+      filters,
+      options
     );
     sendResponse(res, {
       success: true,

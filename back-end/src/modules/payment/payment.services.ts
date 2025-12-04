@@ -3,6 +3,8 @@ import { prisma } from '../../config/prisma.configs';
 import { AppError } from '../../error/coustom.error';
 import { BookingStatus, PaymentStatus } from '@prisma/client';
 import { sslCommerzServices } from '../sslcommerz/sslcommerz.services';
+import { paymentSearchFiled } from './payment.constain';
+import { pagination } from '../../utils/pagination';
 
 const initPayment = async (bookingId: string) => {
   console.log(bookingId);
@@ -135,8 +137,76 @@ const getAllPayments = async () => {
   return payments;
 };
 
-const getMyPayments = async (userId: number) => {
-  const payments = await prisma.payment.findMany({ where: { userId } });
+const getMyPayments = async (userId: number, filters: any, options: any) => {
+  const { page, limit, skip, sortBy, sortOrder } = pagination(options);
+  const { search } = options;
+  const searchTerm = paymentSearchFiled.map((field) => ({
+    [field]: {
+      contains: search,
+      mode: 'insensitive',
+    },
+  }));
+  const where: any = {
+    AND: [
+      { userId },
+      filters && Object.keys(filters).length ? filters : undefined,
+      search && { OR: searchTerm },
+    ].filter(Boolean),
+  };
+  const payments = await prisma.payment.findMany({
+    where,
+    skip,
+    take: limit,
+    orderBy: { [sortBy]: sortOrder },
+  });
+
+  const totalAmount = await prisma.payment.aggregate({
+    where,
+    _sum: {
+      amount: true,
+    },
+  });
+
+  const total = await prisma.payment.count({
+    where,
+  });
+
+  const totalSuccess = await prisma.payment.count({
+    where: {
+      status: PaymentStatus.succeeded,
+    },
+  });
+
+  const totalFailed = await prisma.payment.count({
+    where: {
+      status: PaymentStatus.failed,
+    },
+  });
+
+  const totalCanceled = await prisma.payment.count({
+    where: {
+      status: PaymentStatus.canceled,
+    },
+  });
+
+  const totalPending = await prisma.payment.count({
+    where: {
+      status: PaymentStatus.pending,
+    },
+  });
+
+  return {
+    payments,
+    metaData: {
+      total,
+      totalSuccess,
+      totalFailed,
+      totalCanceled,
+      totalAmount: totalAmount._sum.amount,
+      totalPending,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
   return payments;
 };
 
