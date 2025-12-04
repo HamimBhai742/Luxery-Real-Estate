@@ -8,6 +8,7 @@ export const ENV = {
 
   JWT_SECRET: process.env.JWT_SECRET as string,
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN as string,
+  RESET_JWT_SECRET: process.env.RESET_JWT_SECRET as string,
   RESET_TOKEN_EXPIRE_IN: process.env.RESET_TOKEN_EXPIRE_IN as string,
   BCRYPT_SALT_ROUNDS: Number(process.env.BCRYPT_SALT_ROUNDS),
 
