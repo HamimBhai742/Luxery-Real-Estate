@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -17,6 +18,7 @@ import {
 } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { logout } from '@/helpers/logOut';
+import Swal from 'sweetalert2';
 
 interface MenuItem {
   id: string;
@@ -107,26 +109,65 @@ const Sidebar = () => {
   const isActive = (href: string) => pathname === href;
 
   const handleSignOutBtn = async () => {
-    try {
-      const data = await logout();
-      if (data?.success) {
-        toast.success(data?.message);
-        router.replace('/');
-        setUser({
-          success: false,
-          data: {
-            id: null,
-            email: null,
-            name: null,
-            role: null,
-          },
-        });
-      } else {
-        toast.error(data?.message);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to sign out!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#8b5cf6',
+      cancelButtonColor: '#ef4444',
+      confirmButtonText: 'Yes, Sign Out!',
+      background: document.documentElement.classList.contains('dark')
+        ? '#1f2937'
+        : '#ffffff',
+      color: document.documentElement.classList.contains('dark')
+        ? '#ffffff'
+        : '#000000',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const data = await logout();
+          if (data.success) {
+            Swal.fire({
+              title: 'Logout!',
+              text: data.message,
+              icon: 'success',
+              background: document.documentElement.classList.contains('dark')
+                ? '#1f2937'
+                : '#ffffff',
+              color: document.documentElement.classList.contains('dark')
+                ? '#ffffff'
+                : '#000000',
+            });
+            router.replace('/');
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: data.message,
+              icon: 'error',
+              background: document.documentElement.classList.contains('dark')
+                ? '#1f2937'
+                : '#ffffff',
+              color: document.documentElement.classList.contains('dark')
+                ? '#ffffff'
+                : '#000000',
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while logout.',
+            icon: 'error',
+            background: document.documentElement.classList.contains('dark')
+              ? '#1f2937'
+              : '#ffffff',
+            color: document.documentElement.classList.contains('dark')
+              ? '#ffffff'
+              : '#000000',
+          });
+        }
       }
-    } catch (error) {
-      console.log(error);
-    }
+    });
   };
 
   return (
@@ -261,7 +302,10 @@ const Sidebar = () => {
           </nav>
 
           {/* Bottom Section */}
-          <button onClick={handleSignOutBtn} className='mt-auto pt-6 border-t border-white/10 hover:cursor-pointer'>
+          <button
+            onClick={handleSignOutBtn}
+            className='mt-auto pt-6 border-t border-white/10 hover:cursor-pointer'
+          >
             <div className='px-5 flex items-center gap-3 py-4 rounded-2xl bg-linear-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/10'>
               <div className='p-2 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg'>
                 <IoIosLogOut className='text-2xl' />

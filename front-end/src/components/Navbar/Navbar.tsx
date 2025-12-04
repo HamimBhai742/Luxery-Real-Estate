@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ import { TbBrandBooking } from 'react-icons/tb';
 import { logout } from '@/helpers/logOut';
 import toast from 'react-hot-toast';
 import { ModeToggle } from '../toggole-mode';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,26 +54,65 @@ const Navbar = () => {
   }, [setUser]);
 
   const handleSignOutBtn = async () => {
-    try {
-      const data = await logout();
-      if (data?.success) {
-        toast.success(data?.message);
-        router.replace('/');
-        setUser({
-          success: false,
-          data: {
-            id: null,
-            email: null,
-            name: null,
-            role: null,
-          },
-        });
-      } else {
-        toast.error(data?.message);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to sign out!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#8b5cf6',
+      cancelButtonColor: '#ef4444',
+      confirmButtonText: 'Yes, Sign Out!',
+      background: document.documentElement.classList.contains('dark')
+        ? '#1f2937'
+        : '#ffffff',
+      color: document.documentElement.classList.contains('dark')
+        ? '#ffffff'
+        : '#000000',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const data = await logout();
+          if (data.success) {
+            Swal.fire({
+              title: 'Logout!',
+              text: data.message,
+              icon: 'success',
+              background: document.documentElement.classList.contains('dark')
+                ? '#1f2937'
+                : '#ffffff',
+              color: document.documentElement.classList.contains('dark')
+                ? '#ffffff'
+                : '#000000',
+            });
+            router.replace('/');
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: data.message,
+              icon: 'error',
+              background: document.documentElement.classList.contains('dark')
+                ? '#1f2937'
+                : '#ffffff',
+              color: document.documentElement.classList.contains('dark')
+                ? '#ffffff'
+                : '#000000',
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while logout.',
+            icon: 'error',
+            background: document.documentElement.classList.contains('dark')
+              ? '#1f2937'
+              : '#ffffff',
+            color: document.documentElement.classList.contains('dark')
+              ? '#ffffff'
+              : '#000000',
+          });
+        }
       }
-    } catch (error) {
-      console.log(error);
-    }
+    });
   };
   const navLinks = [
     { name: 'Home', href: '/' },
