@@ -98,6 +98,68 @@ const getAdminStats = async () => {
   };
 };
 
+const getUserStats = async (userId: number) => {
+  const totalMyBookings = await prisma.booking.count({
+    where: {
+      userId,
+    },
+  });
+
+  const totalMyBookingsCompleted = await prisma.booking.count({
+    where: {
+      userId,
+      status: 'paid',
+    },
+  });
+
+  const totalMyBookingsPending = await prisma.booking.count({
+    where: {
+      userId,
+      status: 'pending',
+    },
+  });
+
+  const totalSpent = await prisma.payment.aggregate({
+    where: {
+      userId,
+      status: 'succeeded',
+    },
+    _sum: {
+      amount: true,
+    },
+  });
+
+  const recentBookings = await prisma.booking.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: 3,
+  });
+
+  const recentsPayments = await prisma.payment.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: 3,
+  });
+
+  return {
+    totalMyBookings,
+    totalMyBookingsCompleted,
+    totalMyBookingsPending,
+    totalSpent: totalSpent._sum.amount || 0,
+    recentBookings,
+    recentsPayments,
+  };
+};
+
 export const statsServices = {
   getAdminStats,
+  getUserStats,
 };
