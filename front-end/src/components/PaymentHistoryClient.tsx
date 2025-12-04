@@ -34,7 +34,7 @@ export default function PaymentHistoryClient() {
   const [paymentStats, setPaymentStats] = useState<PaymentStats | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(3);
+  const [limit, setLimit] = useState(10);
   const [statusFilter, setStatusFilter] = useState<
     'all' | 'pending' | 'succeeded' | 'failed' | 'canceled'
   >('all');
