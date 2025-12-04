@@ -45,7 +45,7 @@ export default function CancelContent() {
           {/* Action Buttons */}
           <div className='flex flex-col sm:flex-row gap-4'>
             <Link
-              href='/my-bookings'
+              href='/dashboard/my-bookings'
               className='flex-1 flex items-center justify-center gap-2 bg-linear-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/50'
             >
               <FaRedo />

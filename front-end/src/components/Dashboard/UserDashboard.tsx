@@ -283,7 +283,7 @@ console.log(userStats)
                         {booking.status}
                       </span>
                       <p className='text-xs text-gray-500 dark:text-gray-500 mt-1'>
-                        <TimeAgo date={booking.createdAt} />
+                        <TimeAgo date={booking.updatedAt} />
                       </p>
                     </div>
                   </div>
@@ -329,7 +329,7 @@ console.log(userStats)
                         ${Number(payment.amount).toLocaleString()}
                       </p>
                       <p className='text-xs text-gray-500 dark:text-gray-500 mt-1'>
-                        <TimeAgo date={payment.createdAt} />
+                        <TimeAgo date={payment.updatedAt} />
                       </p>
                     </div>
                   </div>

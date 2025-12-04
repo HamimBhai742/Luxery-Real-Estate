@@ -70,7 +70,7 @@ export default function FailedContent() {
           {/* Action Buttons */}
           <div className='flex flex-col sm:flex-row gap-4'>
             <Link
-              href='/my-bookings'
+              href='/dashboard/my-bookings'
               className='flex-1 flex items-center justify-center gap-2 bg-linear-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/50'
             >
               <FaRedo />

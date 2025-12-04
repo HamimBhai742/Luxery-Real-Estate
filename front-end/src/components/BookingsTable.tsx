@@ -36,6 +36,7 @@ export interface BookingStats {
 
 export default function BookingsTable() {
   const [loading, setLoading] = useState(true);
+  const [paymentLoading, setPaymentLoading] = useState(false);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(6);
@@ -81,7 +82,7 @@ export default function BookingsTable() {
   const handelPayment = async (bookingId: string) => {
     setProcessingBookingId(bookingId);
     try {
-      setLoading(true);
+      setPaymentLoading(true);
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/payment/initiate-payment`,
         {
@@ -102,7 +103,7 @@ export default function BookingsTable() {
     } catch (error) {
       toast.error('Failed to initiate payment. Please try again.');
     } finally {
-      setLoading(false);
+      setPaymentLoading(false);
     }
   };
 
@@ -310,11 +311,11 @@ export default function BookingsTable() {
               <div className='flex gap-3 pt-2'>
                 {booking.status === 'pending' && (
                   <button
-                    disabled={loading && processingBookingId === booking.id}
+                    disabled={paymentLoading && processingBookingId === booking.id}
                     onClick={() => handelPayment(booking.id)}
                     className='flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
                   >
-                    {loading && processingBookingId === booking.id ? (
+                    {paymentLoading && processingBookingId === booking.id ? (
                       <>
                         <ImSpinner9 className='animate-spin' />
                         <span>Processing...</span>

@@ -248,7 +248,7 @@ export default function PaymentHistoryClient() {
                 </td>
                 <td className='px-6 py-4'>
                   <span className='text-sm text-gray-600 dark:text-gray-400'>
-                    <TimeAgo date={payment.createdAt} />
+                    <TimeAgo date={payment.updatedAt} />
                   </span>
                 </td>
               </tr>

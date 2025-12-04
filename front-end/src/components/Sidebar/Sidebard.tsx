@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { IoIosLogOut } from 'react-icons/io';
 import {
   FiHome,
   FiPlus,
@@ -14,6 +15,8 @@ import {
   FiCalendar,
   FiCreditCard,
 } from 'react-icons/fi';
+import toast from 'react-hot-toast';
+import { logout } from '@/helpers/logOut';
 
 interface MenuItem {
   id: string;
@@ -25,6 +28,7 @@ interface MenuItem {
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const [user, setUser] = useState({
     success: false,
     data: {
@@ -40,13 +44,10 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/verify`,
-          {
-            method: 'POST',
-            credentials: 'include',
-          }
-        );
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/me`, {
+          method: 'POST',
+          credentials: 'include',
+        });
         const me = await res.json();
         setUser(me);
       } catch (error) {
@@ -105,6 +106,29 @@ const Sidebar = () => {
   );
   const isActive = (href: string) => pathname === href;
 
+  const handleSignOutBtn = async () => {
+    try {
+      const data = await logout();
+      if (data?.success) {
+        toast.success(data?.message);
+        router.replace('/');
+        setUser({
+          success: false,
+          data: {
+            id: null,
+            email: null,
+            name: null,
+            role: null,
+          },
+        });
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {/* Mobile Toggle Button */}
@@ -157,7 +181,9 @@ const Sidebar = () => {
                   <h1 className='text-white font-bold text-xl tracking-tight'>
                     Luxury Estate
                   </h1>
-                  <p className='text-white/60 text-xs'>Admin Dashboard</p>
+                  <p className='text-white/60 text-xs'>
+                    {user?.data?.role === 'ADMIN' ? 'Admin' : 'User'} Dashboard
+                  </p>
                 </div>
               </div>
             </Link>
@@ -235,12 +261,17 @@ const Sidebar = () => {
           </nav>
 
           {/* Bottom Section */}
-          <div className='mt-auto pt-6 border-t border-white/10'>
-            <div className='px-5 py-4 rounded-2xl bg-linear-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/10'>
-              <p className='text-white/60 text-xs mb-1'>Need Help?</p>
-              <p className='text-white text-sm font-medium'>Contact Support</p>
+          <button onClick={handleSignOutBtn} className='mt-auto pt-6 border-t border-white/10 hover:cursor-pointer'>
+            <div className='px-5 flex items-center gap-3 py-4 rounded-2xl bg-linear-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/10'>
+              <div className='p-2 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg'>
+                <IoIosLogOut className='text-2xl' />
+              </div>
+              <div>
+                <h3 className='font-semibold text-left'>{user?.data?.name}</h3>
+                <p className='text-sm text-white/60'>{user?.data?.email}</p>
+              </div>
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Decorative Elements */}
