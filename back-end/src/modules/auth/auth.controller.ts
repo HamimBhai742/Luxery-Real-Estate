@@ -52,33 +52,26 @@ const logout = createAsyncFn(
   }
 );
 
-const forgetPassword = createAsyncFn(
-  async (req: Request, res: Response) => {
-    const data = await authService.forgetPassword(req.body.email);
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatusCodes.OK,
-      message: 'Reset Link Sent Successfully',
-      data: null,
-    });
-  }
-);
+const forgetPassword = createAsyncFn(async (req: Request, res: Response) => {
+  const data = await authService.forgetPassword(req.body.email);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Reset Link Sent Successfully',
+    data: null,
+  });
+});
 
-const resetPassword = createAsyncFn(
-  async (req: Request, res: Response) => {
-    const data = await authService.resetPassword(
-      req.params.token,
-      req.params.id,
-      req.body.newPassword
-    );
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatusCodes.OK,
-      message: 'Password Changed Successfully',
-      data: null,
-    });
-  }
-);
+const resetPassword = createAsyncFn(async (req: Request, res: Response) => {
+  const { token, password } = req.body;
+  const data = await authService.resetPassword(token, password);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Password Changed Successfully',
+    data: null,
+  });
+});
 
 export const authController = {
   login,

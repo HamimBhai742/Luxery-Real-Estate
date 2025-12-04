@@ -66,17 +66,13 @@ const forgetPassword = async (email: string) => {
     subject: 'Reset Password',
     templateName: 'forgetPassword',
     templateData: {
-      name: 'Hamim',
+      name: user.name,
       resetUrl,
     },
   });
 };
 
-const resetPassword = async (
-  token: string,
-  id: string,
-  newPassword: string
-) => {
+const resetPassword = async (token: string, newPassword: string) => {
   if (!token) {
     throw new AppError('Token is missing', httpStatusCode.BAD_REQUEST);
   }
@@ -102,6 +98,16 @@ const resetPassword = async (
     },
     data: {
       password: hashPass,
+    },
+  });
+
+  sendEmail({
+    to: user.email,
+    subject: 'Reset Password Successfully',
+    templateName: 'resetPassword',
+    templateData: {
+      name: user.name,
+      appName: 'Luxery Real Estate',
     },
   });
 };
