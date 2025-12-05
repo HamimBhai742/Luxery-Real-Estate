@@ -80,7 +80,7 @@ const successPayment = async (query: Record<string, string>) => {
         name: user!.name,
         transactionId: updatePayment.transactionId,
         amount: updatePayment.amount,
-        paymentDate: updatePayment.createdAt.toISOString().split('T')[0],
+        paymentDate: updatePayment.updatedAt.toISOString().split('T')[0],
         appName: ENV.APP_NAME,
       },
     });
@@ -130,6 +130,10 @@ const cancelPayment = async (query: Record<string, string>) => {
         status: PaymentStatus.canceled,
       },
     });
+    const user = await tx.user.findUnique({
+      where: { id: updatePayment.userId },
+    });
+
     const booking = await tx.booking.update({
       where: { id: updatePayment.bookingId },
       data: {
@@ -145,7 +149,19 @@ const cancelPayment = async (query: Record<string, string>) => {
       },
     });
 
-    
+    sendEmail({
+      to: user!.email,
+      subject: 'Payment Canceled',
+      templateName: 'paymentCanceled',
+      templateData: {
+        name: user!.name,
+        transactionId: updatePayment.transactionId,
+        amount: updatePayment.amount,
+        canceledDate: updatePayment.updatedAt.toISOString().split('T')[0],
+        appName: ENV.APP_NAME,
+        reason: 'Payment Canceled',
+      },
+    });
     return {
       canceled: true,
       message: 'Payment Canceled & Booking Canceled',
