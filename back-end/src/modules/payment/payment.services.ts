@@ -5,6 +5,8 @@ import { BookingStatus, PaymentStatus } from '@prisma/client';
 import { sslCommerzServices } from '../sslcommerz/sslcommerz.services';
 import { paymentSearchFiled } from './payment.constain';
 import { pagination } from '../../utils/pagination';
+import { sendEmail } from '../../utils/send.email';
+import { ENV } from '../../config/env';
 
 const initPayment = async (bookingId: string) => {
   console.log(bookingId);
@@ -51,6 +53,10 @@ const successPayment = async (query: Record<string, string>) => {
       },
     });
 
+    const user = await tx.user.findUnique({
+      where: { id: updatePayment.userId },
+    });
+
     const booking = await tx.booking.update({
       where: { id: updatePayment.bookingId },
       data: {
@@ -63,6 +69,19 @@ const successPayment = async (query: Record<string, string>) => {
       data: {
         isBooked: true,
         status: 'sold',
+      },
+    });
+
+    sendEmail({
+      to: user!.email,
+      subject: 'Payment Successful',
+      templateName: 'paymentSuccess',
+      templateData: {
+        name: user!.name,
+        transactionId: updatePayment.transactionId,
+        amount: updatePayment.amount,
+        paymentDate: updatePayment.createdAt.toISOString().split('T')[0],
+        appName: ENV.APP_NAME,
       },
     });
     return {
@@ -125,6 +144,8 @@ const cancelPayment = async (query: Record<string, string>) => {
         status: 'available',
       },
     });
+
+    
     return {
       canceled: true,
       message: 'Payment Canceled & Booking Canceled',

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment Successful</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .success-box {
+      background: #e6f7f0;
+      border-left: 5px solid #2ecc71;
+      padding: 12px 15px;
+      margin: 20px 0;
+      border-radius: 6px;
+      color: #1d7d52;
+    }
+    .invoice-box {
+      background: #fafafa;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #eee;
+    }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h2>Payment Successful</h2>
+
+    <p>Hi <%= name %>,</p>
+
+    <div class="success-box">
+      <strong>Your payment was completed successfully.</strong>
+    </div>
+
+    <p>
+      Thank you for your payment. Below are your payment details:
+    </p>
+
+    <div class="invoice-box">
+      <p><strong>Transaction ID:</strong> <%= transactionId %></p>
+      <p><strong>Amount Paid:</strong> $<%= amount %></p>
+      <p><strong>Date:</strong> <%= paymentDate %></p>
+    </div>
+
+    <p>
+      If you did not make this payment, please contact our support team immediately.
+    </p>
+
+    <p>Regards,<br />The <%= appName %> Team</p>
+
+    <div class="footer">
+      © <%= new Date().getFullYear() %> <%= appName %>. All rights reserved.
+    </div>
+
+  </div>
+</body>
+</html>

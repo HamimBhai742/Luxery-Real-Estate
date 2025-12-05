@@ -38,4 +38,5 @@ export const ENV = {
   SMTP_PASS: process.env.SMTP_PASS as string,
 
   CLIENT_URL: process.env.CLIENT_URL as string,
+  APP_NAME: process.env.APP_NAME as string,
 };
