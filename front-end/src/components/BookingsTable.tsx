@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-
 import { getBookings } from '@/helpers/getBookings';
 import { Booking } from '@/types/booking';
 import Link from 'next/link';

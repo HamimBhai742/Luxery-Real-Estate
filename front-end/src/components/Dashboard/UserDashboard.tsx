@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -47,10 +46,10 @@ const UserDashboard = () => {
     return <UserDashboardSkeleton />;
   }
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-8 px-4 sm:px-6 lg:px-8'>
+    <div className='min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-8 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-7xl mx-auto space-y-8'>
         {/* Welcome Section */}
-        <div className='relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 shadow-2xl'>
+        <div className='relative overflow-hidden bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl p-8 shadow-2xl'>
           <div className='absolute inset-0 bg-black/10'></div>
           <div className='relative z-10'>
             <h1 className='text-3xl sm:text-4xl font-bold text-white mb-2'>
@@ -67,10 +66,10 @@ const UserDashboard = () => {
         {/* Stats Cards */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
           <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
-            <div className='absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
             <div className='relative'>
               <div className='flex items-center justify-between mb-4'>
-                <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center'>
+                <div className='w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-blue-600 flex items-center justify-center'>
                   <FiCalendar className='w-6 h-6 text-white' />
                 </div>
                 <FiTrendingUp className='w-5 h-5 text-green-500' />
@@ -85,10 +84,10 @@ const UserDashboard = () => {
           </div>
 
           <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
-            <div className='absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-yellow-500/10 to-orange-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
             <div className='relative'>
               <div className='flex items-center justify-between mb-4'>
-                <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center'>
+                <div className='w-12 h-12 rounded-xl bg-linear-to-br from-yellow-500 to-orange-500 flex items-center justify-center'>
                   <FiClock className='w-6 h-6 text-white' />
                 </div>
               </div>
@@ -102,10 +101,10 @@ const UserDashboard = () => {
           </div>
 
           <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
-            <div className='absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-green-500/10 to-emerald-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
             <div className='relative'>
               <div className='flex items-center justify-between mb-4'>
-                <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center'>
+                <div className='w-12 h-12 rounded-xl bg-linear-to-br from-green-500 to-emerald-500 flex items-center justify-center'>
                   <FiCheckCircle className='w-6 h-6 text-white' />
                 </div>
               </div>
@@ -119,17 +118,17 @@ const UserDashboard = () => {
           </div>
 
           <div className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'>
-            <div className='absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
             <div className='relative'>
               <div className='flex items-center justify-between mb-4'>
-                <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center'>
+                <div className='w-12 h-12 rounded-xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center'>
                   <FiDollarSign className='w-6 h-6 text-white' />
                 </div>
               </div>
               <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
                 Total Spent
               </p>
-              <p className='text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent'>
+              <p className='text-3xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent'>
                 ${userStats?.totalSpent.toLocaleString()}
               </p>
             </div>
@@ -142,10 +141,10 @@ const UserDashboard = () => {
             href='/properties'
             className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'
           >
-            <div className='absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
             <div className='relative flex items-center justify-between'>
               <div className='flex items-center gap-4'>
-                <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center'>
+                <div className='w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center'>
                   <FiHome className='w-6 h-6 text-white' />
                 </div>
                 <div>
@@ -165,10 +164,10 @@ const UserDashboard = () => {
             href='/dashboard/my-bookings'
             className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'
           >
-            <div className='absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-green-500/5 to-emerald-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
             <div className='relative flex items-center justify-between'>
               <div className='flex items-center gap-4'>
-                <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center'>
+                <div className='w-12 h-12 rounded-xl bg-linear-to-br from-green-500 to-emerald-500 flex items-center justify-center'>
                   <FiCalendar className='w-6 h-6 text-white' />
                 </div>
                 <div>
@@ -188,10 +187,10 @@ const UserDashboard = () => {
             href='/dashboard/payment-history'
             className='group relative bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300'
           >
-            <div className='absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity'></div>
             <div className='relative flex items-center justify-between'>
               <div className='flex items-center gap-4'>
-                <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center'>
+                <div className='w-12 h-12 rounded-xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center'>
                   <FiCreditCard className='w-6 h-6 text-white' />
                 </div>
                 <div>

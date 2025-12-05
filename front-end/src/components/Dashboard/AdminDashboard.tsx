@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import {
   FaHome,
   FaUsers,
@@ -117,11 +117,11 @@ const AdminDashboard = () => {
     return <AdminDashboardLoadinSkeleton />;
   }
   return (
-    <div className='min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6'>
+    <div className='min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6'>
       <div className='max-w-7xl mx-auto space-y-6'>
         {/* Header */}
         <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none'>
-          <h1 className='text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent'>
+          <h1 className='text-3xl font-bold bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent'>
             Admin Dashboard
           </h1>
           <p className='text-gray-600 dark:text-gray-400 mt-2'>
@@ -149,7 +149,7 @@ const AdminDashboard = () => {
                   </span>
                 </div>
                 <div
-                  className={`p-4 rounded-xl bg-gradient-to-br ${stat.color} group-hover:scale-110 transition-transform duration-300`}
+                  className={`p-4 rounded-xl bg-linear-to-br ${stat.color} group-hover:scale-110 transition-transform duration-300`}
                 >
                   <stat.icon className='text-white text-2xl' />
                 </div>
@@ -176,7 +176,7 @@ const AdminDashboard = () => {
                 className='group flex items-center gap-4 p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 hover:scale-105 shadow hover:shadow-lg dark:shadow-none'
               >
                 <div
-                  className={`p-3 rounded-lg bg-gradient-to-br ${action.color} group-hover:scale-110 transition-transform duration-300`}
+                  className={`p-3 rounded-lg bg-linear-to-br ${action.color} group-hover:scale-110 transition-transform duration-300`}
                 >
                   <action.icon className='text-white text-xl' />
                 </div>

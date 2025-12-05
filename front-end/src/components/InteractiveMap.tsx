@@ -145,7 +145,7 @@ export default function InteractiveMap() {
             <div className='space-y-2 text-sm text-gray-600 dark:text-gray-400'>
               <p className='flex items-start gap-2'>
                 <svg
-                  className='w-4 h-4 mt-0.5 flex-shrink-0'
+                  className='w-4 h-4 mt-0.5 shrink-0'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -161,7 +161,7 @@ export default function InteractiveMap() {
               </p>
               <p className='flex items-center gap-2'>
                 <svg
-                  className='w-4 h-4 flex-shrink-0'
+                  className='w-4 h-4 shrink-0'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -177,7 +177,7 @@ export default function InteractiveMap() {
               </p>
               <p className='flex items-center gap-2'>
                 <svg
-                  className='w-4 h-4 flex-shrink-0'
+                  className='w-4 h-4 shrink-0'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'

@@ -233,16 +233,16 @@ const CreatePropertyForm = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6'>
+    <div className='min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6'>
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 mb-6 shadow-lg dark:shadow-none'>
           <div className='flex items-center gap-4'>
-            <div className='p-4 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500'>
+            <div className='p-4 rounded-xl bg-linear-to-br from-blue-500 to-purple-500'>
               <FaBuildingColumns className='text-white text-2xl' />
             </div>
             <div>
-              <h1 className='text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent'>
+              <h1 className='text-3xl font-bold bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent'>
                 Create New Property
               </h1>
               <p className='text-gray-600 dark:text-gray-400 mt-1'>
@@ -259,7 +259,7 @@ const CreatePropertyForm = () => {
         >
           {/* Property Name */}
           <div className='group'>
-            <label className='block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
+            <label className=' text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
               <FiHome className='text-blue-600 dark:text-blue-400' />
               Property Name
             </label>
@@ -282,7 +282,7 @@ const CreatePropertyForm = () => {
 
           {/* Description */}
           <div className='group'>
-            <label className='block text-gray-900 dark:text-white font-medium mb-3'>
+            <label className=' text-gray-900 dark:text-white font-medium mb-3'>
               Description
             </label>
             <textarea
@@ -305,7 +305,7 @@ const CreatePropertyForm = () => {
           {/* Location & Price Grid */}
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div className='group'>
-              <label className='block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
+              <label className=' text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
                 <FiMapPin className='text-green-600 dark:text-green-400' />
                 Location
               </label>
@@ -327,7 +327,7 @@ const CreatePropertyForm = () => {
             </div>
 
             <div className='group'>
-              <label className='block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
+              <label className=' text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
                 <FiDollarSign className='text-yellow-600 dark:text-yellow-400' />
                 Price
               </label>
@@ -352,7 +352,7 @@ const CreatePropertyForm = () => {
           {/* Bedrooms & Bathrooms */}
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div className='group'>
-              <label className='block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
+              <label className=' text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
                 <FaBed className='text-purple-600 dark:text-purple-400' />
                 Bedrooms
               </label>
@@ -374,7 +374,7 @@ const CreatePropertyForm = () => {
             </div>
 
             <div className='group'>
-              <label className='block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
+              <label className=' text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
                 <FaBath className='text-cyan-600 dark:text-cyan-400' />
                 Bathrooms
               </label>
@@ -398,7 +398,7 @@ const CreatePropertyForm = () => {
 
           {/* Amenities */}
           <div className='group'>
-            <label className='block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
+            <label className=' text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
               <FaCheckCircle className='text-green-600 dark:text-green-400' />
               Amenities
             </label>
@@ -408,7 +408,7 @@ const CreatePropertyForm = () => {
                   {formData.amenities.map((amenity, index) => (
                     <span
                       key={index}
-                      className='inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-500/20 dark:to-blue-500/20 border border-purple-300 dark:border-purple-500/30 rounded-lg text-gray-900 dark:text-white text-sm font-medium hover:from-purple-200 hover:to-blue-200 dark:hover:from-purple-500/30 dark:hover:to-blue-500/30 transition-all duration-300'
+                      className='inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-purple-100 to-blue-100 dark:from-purple-500/20 dark:to-blue-500/20 border border-purple-300 dark:border-purple-500/30 rounded-lg text-gray-900 dark:text-white text-sm font-medium hover:from-purple-200 hover:to-blue-200 dark:hover:from-purple-500/30 dark:hover:to-blue-500/30 transition-all duration-300'
                     >
                       {amenity}
                       <button
@@ -438,7 +438,7 @@ const CreatePropertyForm = () => {
 
           {/* Property Images */}
           <div className='group'>
-            <label className='block text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
+            <label className=' text-gray-900 dark:text-white font-medium mb-3 flex items-center gap-2'>
               <FiImage className='text-pink-600 dark:text-pink-400' />
               Property Images
             </label>
@@ -490,7 +490,7 @@ const CreatePropertyForm = () => {
                     >
                       <FiX className='w-4 h-4' />
                     </button>
-                    <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 opacity-0 group-hover/image:opacity-100 transition-opacity'>
+                    <div className='absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-2 opacity-0 group-hover/image:opacity-100 transition-opacity'>
                       <p className='text-white text-xs font-medium truncate'>
                         {formData.images[index]?.name}
                       </p>
@@ -510,7 +510,7 @@ const CreatePropertyForm = () => {
             <button
               type='submit'
               disabled={loading}
-              className='group relative w-full py-4 px-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
+              className='group relative w-full py-4 px-6 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
             >
               <span className='relative z-10 flex items-center justify-center gap-3'>
                 {loading ? (
@@ -525,7 +525,7 @@ const CreatePropertyForm = () => {
                   </>
                 )}
               </span>
-              <div className='absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
+              <div className='absolute inset-0 bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
             </button>
           </div>
         </form>
