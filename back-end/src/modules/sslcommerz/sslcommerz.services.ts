@@ -4,7 +4,6 @@ import { AppError } from '../../error/coustom.error';
 import httpStatusCode from 'http-status-codes';
 import { ENV } from '../../config/env';
 const paymentInit = async (payload: ISSLPayment) => {
-  console.log(payload);
   try {
     const data = {
       store_id: ENV.SSL_STORE_ID,
@@ -33,7 +32,6 @@ const paymentInit = async (payload: ISSLPayment) => {
       ship_postcode: 1000,
       ship_country: 'N/A',
     };
-    console.log(data);
 
     const res = await axios({
       method: 'POST',
@@ -43,7 +41,6 @@ const paymentInit = async (payload: ISSLPayment) => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
-console.log(res)
     return res.data;
   } catch (error: any) {
     console.log(error);

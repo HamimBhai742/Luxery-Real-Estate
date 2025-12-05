@@ -22,7 +22,6 @@ const createPayment = createAsyncFn(async (req: Request, res: Response) => {
 //success payment
 const successPayment = createAsyncFn(async (req: Request, res: Response) => {
   const query = req.query;
-  console.log(query);
   const payment = await paymentServices.successPayment(
     query as Record<string, string>
   );
@@ -51,7 +50,6 @@ const failedPayment = createAsyncFn(async (req: Request, res: Response) => {
 //cancel payment
 const cancelPayment = createAsyncFn(async (req: Request, res: Response) => {
   const query = req.query;
-  console.log(query);
   const payment = await paymentServices.cancelPayment(
     query as Record<string, string>
   );

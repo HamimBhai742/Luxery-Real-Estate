@@ -9,7 +9,6 @@ export const checkAuth =
   async (req: Request & { user?: IJwt }, res: Response, next: NextFunction) => {
     try {
       const token = req?.cookies?.accessToken || req?.headers?.authorization;
-      console.log(token);
       if (!token) {
         throw new AppError(
           'You are not login, please login first',

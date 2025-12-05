@@ -8,7 +8,6 @@ import { pickQuery } from '../../utils/pick.query';
 const createBooking = createAsyncFn(
   async (req: Request & { user?: IJwt }, res: Response) => {
     const userId = Number(req?.user?.userId) as number;
-    console.log(req.user);
     const propertyId = req?.body?.propertyId as string;
     const booking = await bookingServices.createBooking(userId, propertyId);
     sendResponse(res, {

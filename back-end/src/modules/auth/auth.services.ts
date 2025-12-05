@@ -73,7 +73,6 @@ const forgetPassword = async (email: string) => {
 };
 
 const resetPassword = async (token: string, newPassword: string) => {
-  console.log(token, newPassword);
   if (!token) {
     throw new AppError('Token is missing', httpStatusCode.BAD_REQUEST);
   }

@@ -40,7 +40,6 @@ const getMe = async (email: string) => {
 const getAllUsers = async (filters: any, options: any) => {
   const { page, limit, skip, sortBy, sortOrder } = pagination(options);
   const { search } = options;
-  console.log(filters, options);
   const searchTerm = userSearchFileds.map((field) => ({
     [field]: {
       contains: search,

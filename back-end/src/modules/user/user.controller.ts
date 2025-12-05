@@ -18,7 +18,6 @@ const registerUser = createAsyncFn(async (req: Request, res: Response) => {
 const getMe = createAsyncFn(
   async (req: Request & { user?: IJwt }, res: Response) => {
     const email = req?.user?.email;
-    console.log(req.user);
     const user = await userService.getMe(email as string);
     sendResponse(res, {
       success: true,
@@ -30,7 +29,6 @@ const getMe = createAsyncFn(
 );
 
 const getAllUsers = createAsyncFn(async (req: Request, res: Response) => {
-  console.log(req.query);
   const options = pickQuery(req.query, [
     'limit',
     'page',
