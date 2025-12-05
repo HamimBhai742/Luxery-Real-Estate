@@ -26,7 +26,18 @@ const getUserStats = createAsyncFn(
   }
 );
 
+const getHomeStats = createAsyncFn(async (req: Request, res: Response) => {
+  const stats = await statsServices.getHomeStats();
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Stats fetched successfully',
+    data: stats,
+  });
+});
+
 export const statsController = {
   getAdminStats,
   getUserStats,
+  getHomeStats,
 };

@@ -139,7 +139,7 @@ const getUserStats = async (userId: number) => {
     take: 3,
     include: {
       property: true,
-    }
+    },
   });
 
   const recentsPayments = await prisma.payment.findMany({
@@ -172,7 +172,30 @@ const getUserStats = async (userId: number) => {
   };
 };
 
+const getHomeStats = async () => {
+  const totalProperties = await prisma.property.count();
+  const totalUsers = await prisma.user.count();
+  const totalBookings = await prisma.booking.count({
+    where: {
+      status: 'pending',
+    },
+  });
+
+  const totalValue = await prisma.property.aggregate({
+    _sum: {
+      price: true,
+    },
+  });
+  return {
+    totalProperties,
+    totalUsers,
+    totalBookings,
+    totalValue: totalValue._sum.price || 0,
+  };
+};
+
 export const statsServices = {
   getAdminStats,
   getUserStats,
+  getHomeStats,
 };

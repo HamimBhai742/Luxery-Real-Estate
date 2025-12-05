@@ -9,4 +9,6 @@ router.get('/admin', checkAuth(Role.ADMIN), statsController.getAdminStats);
 
 router.get('/user', checkAuth(Role.USER), statsController.getUserStats);
 
+router.get('/home', statsController.getHomeStats);
+
 export const statsRoutes = router;
