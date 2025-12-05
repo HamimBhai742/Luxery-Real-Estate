@@ -184,7 +184,6 @@ const CreatePropertyForm = () => {
     };
     setLoading(true);
     try {
-      console.log(formData);
       const formDatas = new FormData();
       formData.images.forEach((img) => formDatas.append('files', img));
       formDatas.append('data', JSON.stringify(payload));
@@ -197,7 +196,6 @@ const CreatePropertyForm = () => {
         }
       );
       const data = await res.json();
-      console.log(data);
       if (data.success) {
         setFormData({
           name: '',

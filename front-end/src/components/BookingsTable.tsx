@@ -61,7 +61,6 @@ export default function BookingsTable() {
         const bookingsData = data.data.bookings || [];
         const metaData = data.data.metaData;
 
-        console.log(data);
         if (metaData) {
           setBookingStats(metaData);
           setLoading(false);
@@ -77,7 +76,6 @@ export default function BookingsTable() {
     }
   }, [searchTerm, statusFilter, limit, currentPage]);
 
-  console.log(searchTerm, statusFilter);
 
   const handelPayment = async (bookingId: string) => {
     setProcessingBookingId(bookingId);

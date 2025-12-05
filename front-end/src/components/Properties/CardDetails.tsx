@@ -7,12 +7,10 @@ import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
 
 const CardDetails = ({ property }: { property: Property }) => {
-  console.log(property, 'llll');
   const [activeImage, setActiveImage] = useState(0);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleSubmit = async (id: string) => {
-    console.log(id);
     try {
       setLoading(true);
       if (property.status === 'unavailable' || property.isBooked) {
@@ -32,7 +30,6 @@ const CardDetails = ({ property }: { property: Property }) => {
         }
       );
       const data = await res.json();
-      console.log(data);
       if (data.success) {
         toast.success('Property booked successfully!');
         router.push('/dashboard/my-bookings');

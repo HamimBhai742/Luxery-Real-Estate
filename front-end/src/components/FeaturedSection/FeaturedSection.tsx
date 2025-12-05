@@ -6,7 +6,6 @@ const FeaturedSection = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/property`);
   const data = await res.json();
   const properties = data.data.properties.slice(0, 3);
-  console.log(properties);
   return (
     <section className='relative py-20 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-7xl mx-auto'>

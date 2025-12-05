@@ -40,7 +40,6 @@ const AdminDashboard = () => {
       console.log(error);
     }
   }, []);
-  console.log(statsData);
   const stats = [
     {
       icon: FaHome,

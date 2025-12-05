@@ -20,7 +20,6 @@ export const PropertiesData = async (
       cache: 'no-store',
     }
   );
-  console.log(currentPage, limit);
   const data = await res.json();
   return data?.data;
 };

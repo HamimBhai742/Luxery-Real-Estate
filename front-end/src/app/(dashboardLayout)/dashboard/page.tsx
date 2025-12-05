@@ -23,8 +23,7 @@ const Dashboard = async () => {
   };
 
   const me = await getMe();
-  console.log(me);
-  
+
   return (
     <div>
       {me.role === 'ADMIN' && (

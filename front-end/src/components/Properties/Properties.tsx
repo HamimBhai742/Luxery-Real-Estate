@@ -46,7 +46,6 @@ const Properties = () => {
           setLoading(false);
           setData(data);
         }
-        console.log(data);
       };
       fetchData();
     } catch (error) {

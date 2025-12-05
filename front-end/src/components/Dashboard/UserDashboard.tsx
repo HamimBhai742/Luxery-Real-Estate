@@ -17,53 +17,22 @@ import TimeAgo from 'react-timeago';
 import UserDashboardSkeleton from './UserDashboardSkeleton';
 import { DashboardData } from '@/types/user.dashboard';
 
-// interface DashboardData {
-//   bookings: any[];
-//   payments: any[];
-//   user: any;
-// }
 
 const UserDashboard = () => {
-  // const [data, setData] = useState<DashboardData>({
-  //   bookings: [],
-  //   payments: [],
-  //   user: null,
-  // });
   const [userStats, setUserStats] = useState<DashboardData>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [bookingsRes, paymentsRes, userRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking/my-bookings`, {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/stats/user`,
+          {
             credentials: 'include',
-          }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/payment/my-payments`, {
-            credentials: 'include',
-          }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify`, {
-            method: 'POST',
-            credentials: 'include',
-          }),
-        ]);
-
-        const bookings = await bookingsRes.json();
-        const payments = await paymentsRes.json();
-        const user = await userRes.json();
-        console.log(bookings);
-        // setData({
-        //   bookings: bookings.data.bookings || [],
-        //   payments: payments.data.payments || [],
-        //   user: user.data,
-        // });
-
-        const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stats/user`, {
-          credentials: 'include',
-        });
-        const data = await r.json();
+          }
+        );
+        const data = await res.json();
         setUserStats(data?.data);
-        console.log(data);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
       } finally {
@@ -77,7 +46,6 @@ const UserDashboard = () => {
   if (loading) {
     return <UserDashboardSkeleton />;
   }
-console.log(userStats)
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-8 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-7xl mx-auto space-y-8'>

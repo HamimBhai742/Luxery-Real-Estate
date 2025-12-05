@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -20,8 +21,7 @@ export default function ContactForm() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    console.log('Contact form:', formData);
-    alert('Message sent successfully!');
+    toast.success('Message sent successfully!');
     setIsSubmitting(false);
     setFormData({ name: '', email: '', phone: '', subject: '', message: '', propertyType: 'buy' });
   };

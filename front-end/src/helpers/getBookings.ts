@@ -9,7 +9,6 @@ export async function getBookings(
 ) {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
-  console.log(status);
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/booking/my-bookings?${

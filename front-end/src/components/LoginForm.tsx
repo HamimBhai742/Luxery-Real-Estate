@@ -26,12 +26,12 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const emailError = validateEmail(formData.email);
     const passwordError = validatePassword(formData.password);
-    
+
     setErrors({ email: emailError, password: passwordError });
-    
+
     if (emailError || passwordError) return;
 
     setIsLoading(true);
@@ -51,7 +51,6 @@ export default function LoginForm() {
       }
       if (user?.success) {
         toast.success(user?.message);
-        console.log(user.data);
         if (user?.data?.role === 'ADMIN') {
           router.push('/dashboard');
         } else {
@@ -126,8 +125,8 @@ export default function LoginForm() {
                 setErrors({ ...errors, email: '' });
               }}
               className={`w-full pl-12 pr-4 py-3 rounded-xl border ${
-                errors.email 
-                  ? 'border-red-500 focus:ring-red-500' 
+                errors.email
+                  ? 'border-red-500 focus:ring-red-500'
                   : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-amber-500'
               } bg-white dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:border-transparent transition-all duration-300 group-hover:border-blue-400 dark:group-hover:border-amber-400 group-hover:shadow-lg`}
               placeholder='john@example.com'
@@ -167,8 +166,8 @@ export default function LoginForm() {
                 setErrors({ ...errors, password: '' });
               }}
               className={`w-full pl-12 pr-12 py-3 rounded-xl border ${
-                errors.password 
-                  ? 'border-red-500 focus:ring-red-500' 
+                errors.password
+                  ? 'border-red-500 focus:ring-red-500'
                   : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-amber-500'
               } bg-white dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:border-transparent transition-all duration-300 group-hover:border-blue-400 dark:group-hover:border-amber-400 group-hover:shadow-lg`}
               placeholder='••••••••'

@@ -62,7 +62,6 @@ const ManageUserClient = () => {
         const data = await response.json();
         if (data.success) {
           setUsers(data.data.data);
-          console.log(data);
           setMetaData(data.data.metaData);
           setLoading(false);
         }
@@ -76,7 +75,6 @@ const ManageUserClient = () => {
       console.log(error);
     }
   }, [currentPage, limit]);
-  console.log(users, metaData);
 
   // Stats
   const stats = {
@@ -90,7 +88,6 @@ const ManageUserClient = () => {
     newStatus: 'active' | 'inactive'
   ) => {
     try {
-      console.log(newStatus);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/user/update-status/${userId}`,
         {
@@ -103,7 +100,6 @@ const ManageUserClient = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user.id === userId ? { ...user, status: newStatus } : user
