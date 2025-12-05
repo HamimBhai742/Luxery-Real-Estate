@@ -62,11 +62,13 @@ const getAdminStats = async () => {
     },
   });
 
+  console.log(paymentCounts);
   const paymentData = paymentCounts.map((p) => {
     let color = '';
-    if (p.status === 'succeeded') color = '#16a34a';
-    else if (p.status === 'failed') color = '#f59e0b';
-    else if (p.status === 'canceled') color = '#dc2626';
+    if (p.status === 'succeeded') color = '#16a34a'; // green
+    else if (p.status === 'failed') color = '#f59e0b'; // amber
+    else if (p.status === 'canceled') color = '#dc2626'; // red
+    else if (p.status === 'pending') color = '#3b82f6'; // blue (Tailwind: blue-500)
 
     return {
       name:
@@ -74,7 +76,9 @@ const getAdminStats = async () => {
           ? 'Success'
           : p.status === 'failed'
           ? 'Failed'
-          : 'Canceled',
+          : p.status === 'canceled'
+          ? 'Canceled'
+          : 'Pending',
       value: p._count.status,
       color,
     };
