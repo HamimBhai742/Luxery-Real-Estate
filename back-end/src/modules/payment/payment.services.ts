@@ -100,6 +100,11 @@ const failedPayment = async (query: Record<string, string>) => {
         status: PaymentStatus.failed,
       },
     });
+
+    const user = await tx.user.findUnique({
+      where: { id: updatePayment.userId },
+    });
+
     const booking = await tx.booking.update({
       where: { id: updatePayment.bookingId },
       data: {
@@ -114,6 +119,21 @@ const failedPayment = async (query: Record<string, string>) => {
         status: 'available',
       },
     });
+
+    sendEmail({
+      to: user!.email,
+      subject: 'Payment Canceled',
+      templateName: 'paymentCanceled',
+      templateData: {
+        name: user!.name,
+        transactionId: updatePayment.transactionId,
+        amount: updatePayment.amount,
+        failedDate: updatePayment.updatedAt.toISOString().split('T')[0],
+        appName: ENV.APP_NAME,
+        reason: 'Insufficient funds',
+      },
+    });
+
     return {
       failed: true,
       message: 'Payment Failed & Booking Failed',
