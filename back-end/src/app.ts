@@ -7,9 +7,6 @@ import { globalErrorHandel } from './middleware/global.error';
 import cookieParser from 'cookie-parser';
 
 export const app = express();
-
-
-// ------------------ CORS FIRST --------------------
 app.use(
   cors({
     origin: [
