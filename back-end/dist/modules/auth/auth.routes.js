@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRoutes = void 0;
+const express_1 = require("express");
+const auth_controller_1 = require("./auth.controller");
+const zod_validation_1 = require("../../middleware/zod.validation");
+const auth_schema_1 = require("./auth.schema");
+const check_auth_1 = require("../../middleware/check.auth");
+const client_1 = require("@prisma/client");
+const router = (0, express_1.Router)();
+router.post('/login', (0, zod_validation_1.validateRequest)(auth_schema_1.loginZodSchema), auth_controller_1.authController.login);
+router.post('/verify', (0, check_auth_1.checkAuth)(...Object.values(client_1.Role)), auth_controller_1.authController.verifyUser);
+router.post('/forgot-password', auth_controller_1.authController.forgetPassword);
+router.post('/reset-password', auth_controller_1.authController.resetPassword);
+router.post('/logout', auth_controller_1.authController.logout);
+exports.authRoutes = router;

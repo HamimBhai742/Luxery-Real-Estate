@@ -192,7 +192,7 @@ const getAllPayments = async () => {
 };
 
 const getMyPayments = async (userId: number, filters: any, options: any) => {
-  const { page, limit, skip, sortBy, sortOrder } = pagination(options);
+  const {  limit, skip, sortBy, sortOrder } = pagination(options);
   const { search } = options;
   const searchTerm = paymentSearchFiled.map((field) => ({
     [field]: {

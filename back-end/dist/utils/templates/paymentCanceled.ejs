@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment Canceled</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h2 {
+      text-align: center;
+      color: #c0392b;
+    }
+    p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .cancel-box {
+      background: #fdecea;
+      border-left: 5px solid #e74c3c;
+      padding: 12px 15px;
+      margin: 20px 0;
+      border-radius: 6px;
+      color: #a3261c;
+    }
+    .details-box {
+      background: #fafafa;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #eee;
+    }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h2>Payment Canceled</h2>
+
+    <p>Hello <%= name %>,</p>
+
+    <div class="cancel-box">
+      <strong>Your payment was canceled and could not be completed.</strong>
+    </div>
+
+    <p>
+      Unfortunately, your recent payment attempt was not successful. Here are the details of the canceled transaction:
+    </p>
+
+    <div class="details-box">
+      <p><strong>Transaction ID:</strong> <%= transactionId %></p>
+      <p><strong>Attempted Amount:</strong> $<%= amount %></p>
+      <p><strong>Date:</strong> <%= canceledDate %></p>
+      <p><strong>Reason:</strong> <%= reason %></p>
+    </div>
+
+    <p>
+      If this was unexpected or you want to try again, please revisit the payment page.
+      If you need help or have questions, our support team is here for you.
+    </p>
+
+    <p>Regards,<br />The <%= appName %> Team</p>
+
+    <div class="footer">
+      © <%= new Date().getFullYear() %> <%= appName %>. All rights reserved.
+    </div>
+
+  </div>
+
+</body>
+</html>

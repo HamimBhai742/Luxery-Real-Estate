@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.propertyRoutes = void 0;
+const express_1 = require("express");
+const property_controller_1 = require("./property.controller");
+const check_auth_1 = require("../../middleware/check.auth");
+const client_1 = require("@prisma/client");
+const zod_validation_1 = require("../../middleware/zod.validation");
+const property_zod_schema_1 = require("./property.zod.schema");
+const multer_config_1 = require("../../config/multer.config");
+const router = (0, express_1.Router)();
+router.post('/create-property', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), multer_config_1.multerUpload.array('files'), (0, zod_validation_1.validateRequest)(property_zod_schema_1.propertyCreateZodSchema), property_controller_1.propertyController.createProperty);
+router.get('/my-properties', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), property_controller_1.propertyController.getMyProperties);
+router.get('/', property_controller_1.propertyController.getAllProperties);
+router.get('/:slug', property_controller_1.propertyController.getSingleProperty);
+router.put('/update-property/:id', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), property_controller_1.propertyController.updateProperty);
+router.delete('/delete-property/:id', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), property_controller_1.propertyController.deleteProperty);
+exports.propertyRoutes = router;

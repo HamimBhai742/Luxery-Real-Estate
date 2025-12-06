@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.bookingRoutes = void 0;
+const express_1 = require("express");
+const booking_controller_1 = require("./booking.controller");
+const check_auth_1 = require("../../middleware/check.auth");
+const client_1 = require("@prisma/client");
+const router = (0, express_1.Router)();
+router.post('/create-booking', (0, check_auth_1.checkAuth)(client_1.Role.USER), booking_controller_1.bookingController.createBooking);
+router.get('/my-bookings', (0, check_auth_1.checkAuth)(client_1.Role.USER), booking_controller_1.bookingController.getMyBookings);
+exports.bookingRoutes = router;
