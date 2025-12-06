@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import {
   FiHome,
@@ -15,6 +14,7 @@ import { useEffect, useState } from 'react';
 import ManagePropertiesSkeleton from '@/components/ManagePropertiesSkeleton';
 import Link from 'next/link';
 import { Property } from '@/types/property';
+import { getMyProperties } from '@/helpers/getMyProperties';
 
 interface IData {
   metaData: {
@@ -48,19 +48,15 @@ const ManageProperty = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-
-
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const res = await fetch(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
-          }/property/my-properties?search=${searchTerm}&${
-            selectedStatus === 'all' ? '' : `status=${selectedStatus}`
-          }&page=${currentPage}&limit=${limit}`
+        const json = await getMyProperties(
+          searchTerm,
+          selectedStatus,
+          limit,
+          currentPage
         );
-        const json = await res.json();
         if (!json.success) {
           setLoading(false);
         }

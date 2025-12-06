@@ -19,6 +19,7 @@ import {
 import toast from 'react-hot-toast';
 import { logout } from '@/helpers/logOut';
 import Swal from 'sweetalert2';
+import { getMe } from '@/helpers/getMe';
 
 interface MenuItem {
   id: string;
@@ -40,17 +41,12 @@ const Sidebar = () => {
       role: null,
     },
   });
-  // Placeholder for user state
   const pathname = usePathname();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/me`, {
-          method: 'POST',
-          credentials: 'include',
-        });
-        const me = await res.json();
+        const me = await getMe();
         setUser(me);
       } catch (error) {
         console.error(error);

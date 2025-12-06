@@ -13,6 +13,7 @@ import { MdAdminPanelSettings, MdVerified } from 'react-icons/md';
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import toast from 'react-hot-toast';
 import ManageUsersSkeleton from './ManageUserSkeleton';
+import { getAllUsers } from '@/helpers/getAllUsers';
 
 interface User {
   id: string;
@@ -49,17 +50,17 @@ const ManageUserClient = () => {
   useEffect(() => {
     try {
       const fetchUsers = async () => {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/user?page=${currentPage}&limit=${limit}`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-          }
-        );
-        const data = await response.json();
+        // const response = await fetch(
+        //   `${process.env.NEXT_PUBLIC_API_URL}/user?page=${currentPage}&limit=${limit}`,
+        //   {
+        //     method: 'GET',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     credentials: 'include',
+        //   }
+        // );
+        const data = await getAllUsers(currentPage, limit);
         if (data.success) {
           setUsers(data.data.data);
           setMetaData(data.data.metaData);

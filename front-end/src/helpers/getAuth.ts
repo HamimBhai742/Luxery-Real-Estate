@@ -1,10 +1,11 @@
 'use server';
 import { cookies } from 'next/headers';
 
-export const getMe = async () => {
+export const getAuth = async () => {
   const cookieStore = await cookies();
-  const token = cookieStore.get('accessToken')?.value;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/me`, {
+const token = cookieStore.get('accessToken')?.value;
+console.log(token,'dd')
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify`, {
     method: 'POST',
     headers: {
       Authorization: `${token}`,

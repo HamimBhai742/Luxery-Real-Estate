@@ -1,5 +1,6 @@
 import AdminDashboard from '@/components/Dashboard/AdminDashboard';
 import UserDashboard from '@/components/Dashboard/UserDashboard';
+import { getAuth } from '@/helpers/getAuth';
 import { cookies } from 'next/headers';
 
 export const metadata = {
@@ -22,14 +23,14 @@ const Dashboard = async () => {
     return data.data;
   };
 
-  const me = await getMe();
+  const me = await getAuth();
 
   return (
     <div>
-      {me.role === 'ADMIN' && (
+      {me.data?.role === 'ADMIN' && (
        <AdminDashboard/>
       )}
-      {me.role === 'USER' && (
+      {me.data?.role === 'USER' && (
        <UserDashboard/>
       )}
     </div>

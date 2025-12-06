@@ -10,7 +10,7 @@ import { logout } from '@/helpers/logOut';
 import toast from 'react-hot-toast';
 import { ModeToggle } from '../toggole-mode';
 import Swal from 'sweetalert2';
-
+import { getAuth } from '@/helpers/getAuth';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
@@ -37,6 +37,8 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const s = await getAuth();
+        console.log(s,'lll');
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/verify`,
           {
@@ -45,7 +47,7 @@ const Navbar = () => {
           }
         );
         const me = await res.json();
-        setUser(me);
+        setUser(s);
       } catch (error) {
         console.error(error);
       }
@@ -73,18 +75,9 @@ const Navbar = () => {
         try {
           const data = await logout();
           if (data.success) {
-            Swal.fire({
-              title: 'Logout!',
-              text: data.message,
-              icon: 'success',
-              background: document.documentElement.classList.contains('dark')
-                ? '#1f2937'
-                : '#ffffff',
-              color: document.documentElement.classList.contains('dark')
-                ? '#ffffff'
-                : '#000000',
-            });
+            toast.success(data.message);
             router.replace('/');
+            window.location.reload();
           } else {
             Swal.fire({
               title: 'Error!',

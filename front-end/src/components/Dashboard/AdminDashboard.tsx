@@ -14,6 +14,7 @@ import Link from 'next/link';
 import DashboardCharts from '../Chart/Chart';
 import { DashboardData } from '@/types/admin.dashboard';
 import AdminDashboardLoadinSkeleton from './AdminDashboardLoadinSkeleton';
+import { getAdminDashboard } from '@/helpers/getAdminDashboard';
 
 const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -21,15 +22,14 @@ const AdminDashboard = () => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        setLoading(true);
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/stats/admin`,
-          {
-            method: 'GET',
-            credentials: 'include',
-          }
-        );
-        const data = await res.json();
+        // const res = await fetch(
+        //   `${process.env.NEXT_PUBLIC_API_URL}/stats/admin`,
+        //   {
+        //     method: 'GET',
+        //     credentials: 'include',
+        //   }
+        // );
+        const data = await getAdminDashboard();
         if (data.success) {
           setStatsData(data.data);
           setLoading(false);

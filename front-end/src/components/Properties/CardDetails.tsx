@@ -1,4 +1,5 @@
 'use client';
+import { createBooking } from '@/helpers/createBooking';
 import { Property } from '@/types/property';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -18,18 +19,18 @@ const CardDetails = ({ property }: { property: Property }) => {
         setLoading(false);
         return;
       }
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/booking/create-booking`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({ propertyId: id }),
-        }
-      );
-      const data = await res.json();
+      // const res = await fetch(
+      //   `${process.env.NEXT_PUBLIC_API_URL}/booking/create-booking`,
+      //   {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     credentials: 'include',
+      //     body: JSON.stringify({ propertyId: id }),
+      //   }
+      // );
+      const data = await createBooking(id);
       if (data.success) {
         toast.success('Property booked successfully!');
         router.push('/dashboard/my-bookings');

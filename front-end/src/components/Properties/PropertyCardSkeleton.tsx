@@ -1,4 +1,3 @@
-import React from 'react';
 
 const PropertyCardSkeleton = () => {
   return (
@@ -12,7 +11,7 @@ const PropertyCardSkeleton = () => {
       <div className='p-6 space-y-4'>
         {/* Title */}
         <div className='h-6 bg-gray-200 dark:bg-gray-800 rounded w-3/4'></div>
-        
+
         {/* Location */}
         <div className='flex items-center gap-2'>
           <div className='w-4 h-4 bg-gray-200 dark:bg-gray-800 rounded'></div>
