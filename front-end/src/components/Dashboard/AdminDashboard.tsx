@@ -22,13 +22,6 @@ const AdminDashboard = () => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        // const res = await fetch(
-        //   `${process.env.NEXT_PUBLIC_API_URL}/stats/admin`,
-        //   {
-        //     method: 'GET',
-        //     credentials: 'include',
-        //   }
-        // );
         const data = await getAdminDashboard();
         if (data.success) {
           setStatsData(data.data);

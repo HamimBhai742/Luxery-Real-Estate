@@ -1,5 +1,4 @@
 "use client"
-
 import Link from 'next/link';
 import { FaTimesCircle, FaHome, FaRedo } from 'react-icons/fa';
 

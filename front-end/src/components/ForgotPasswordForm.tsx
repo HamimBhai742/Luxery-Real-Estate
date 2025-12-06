@@ -49,7 +49,7 @@ const ForgotPasswordForm = () => {
         {!sent ? (
           <>
             {/* Icon */}
-            <div className='w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg'>
+            <div className='w-16 h-16 mx-auto mb-6 rounded-2xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg'>
               <FiMail className='w-8 h-8 text-white' />
             </div>
 
@@ -85,7 +85,7 @@ const ForgotPasswordForm = () => {
               <button
                 type='submit'
                 disabled={loading}
-                className='w-full py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
+                className='w-full py-3.5 bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
               >
                 {loading ? (
                   <>
@@ -105,7 +105,7 @@ const ForgotPasswordForm = () => {
           <>
             {/* Success State */}
             <div className='text-center'>
-              <div className='w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg animate-bounce-once'>
+              <div className='w-20 h-20 mx-auto mb-6 rounded-full bg-linear-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg animate-bounce-once'>
                 <svg className='w-10 h-10 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
                 </svg>
@@ -118,7 +118,7 @@ const ForgotPasswordForm = () => {
               </p>
               <Link
                 href='/login'
-                className='inline-block px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300'
+                className='inline-block px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300'
               >
                 Back to Login
               </Link>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CardDetailsSkeleton = () => {
   return (
     <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>

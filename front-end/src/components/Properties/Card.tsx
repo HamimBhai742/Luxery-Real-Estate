@@ -1,5 +1,3 @@
-import React from 'react';
-
 const PropertiesCard = ({ item }: { item: number }) => {
   return (
     <div className='group relative rounded-2xl overflow-hidden bg-white/60 dark:bg-black/60 backdrop-blur-xl border border-gray-200 dark:border-gray-800 hover:shadow-2xl transition-all duration-300'>

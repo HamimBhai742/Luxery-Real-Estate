@@ -2,15 +2,15 @@ import React from 'react';
 
 const ManagePropertiesSkeleton = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-black p-4 md:p-6 lg:p-8">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-black p-4 md:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-6">
-        
+
         {/* Header Skeleton */}
         <div className="backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-xl animate-pulse"></div>
+            <div className="w-16 h-16 bg-linear-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-xl animate-pulse"></div>
             <div className="flex-1 space-y-3">
-              <div className="h-8 w-64 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg animate-pulse"></div>
+              <div className="h-8 w-64 bg-linear-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg animate-pulse"></div>
               <div className="h-4 w-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
             </div>
           </div>
@@ -20,7 +20,7 @@ const ManagePropertiesSkeleton = () => {
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800/50 dark:to-gray-700/50 rounded-xl p-4 border border-gray-200 dark:border-white/10"
+                className="bg-linear-to-br from-gray-100 to-gray-200 dark:from-gray-800/50 dark:to-gray-700/50 rounded-xl p-4 border border-gray-200 dark:border-white/10"
               >
                 <div className="flex items-center justify-between">
                   <div className="space-y-2 flex-1">

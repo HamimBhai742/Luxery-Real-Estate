@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const HeroSection = () => {
@@ -47,7 +48,7 @@ const HeroSection = () => {
           <span className='block text-gray-900 dark:text-white animate-fade-in-down'>
             Discover Your
           </span>
-          <span className='block bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent min-h-[1.2em]'>
+          <span className='block bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 bg-clip-text text-transparent min-h-[1.2em]'>
             {text}
             <span className='animate-blink'>|</span>
           </span>
@@ -58,7 +59,7 @@ const HeroSection = () => {
         </p>
         <div className='flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up' style={{ animationDelay: '0.3s' }}>
           <Link href='/properties'>
-            <button className='px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 text-white font-semibold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300'>
+            <button className='px-8 py-4 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 text-white font-semibold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300'>
               Explore Properties
             </button>
           </Link>

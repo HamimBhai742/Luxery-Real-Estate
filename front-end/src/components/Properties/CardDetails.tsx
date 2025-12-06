@@ -19,17 +19,6 @@ const CardDetails = ({ property }: { property: Property }) => {
         setLoading(false);
         return;
       }
-      // const res = await fetch(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/booking/create-booking`,
-      //   {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     credentials: 'include',
-      //     body: JSON.stringify({ propertyId: id }),
-      //   }
-      // );
       const data = await createBooking(id);
       if (data.success) {
         toast.success('Property booked successfully!');

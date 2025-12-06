@@ -7,7 +7,6 @@ export const ChartPieLabelList = ({
 }: {
   paymentData: PaymentStatus[];
 }) => {
-  console.log(paymentData)
   return (
     <div className='bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 backdrop-blur-xl bg-opacity-80 dark:bg-opacity-60 h-[480px] flex flex-col'>
       <h2 className='text-2xl font-bold mb-6 tracking-wide'>Payment Status</h2>

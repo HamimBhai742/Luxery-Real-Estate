@@ -1,9 +1,9 @@
 const UserDashboardSkeleton = () => {
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-8 px-4 sm:px-6 lg:px-8'>
+    <div className='min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-8 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-7xl mx-auto space-y-8 animate-pulse'>
         {/* Welcome Section Skeleton */}
-        <div className='relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 shadow-2xl'>
+        <div className='relative overflow-hidden bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl p-8 shadow-2xl'>
           <div className='absolute inset-0 bg-black/10'></div>
           <div className='relative z-10 space-y-3'>
             <div className='h-10 bg-white/20 rounded-lg w-64 sm:w-96'></div>

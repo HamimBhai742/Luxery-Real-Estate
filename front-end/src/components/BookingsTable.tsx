@@ -79,15 +79,6 @@ export default function BookingsTable() {
     setProcessingBookingId(bookingId);
     try {
       setPaymentLoading(true);
-      // const res = await fetch(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/payment/initiate-payment`,
-      //   {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     credentials: 'include',
-      //     body: JSON.stringify({ bookingId }),
-      //   }
-      // );
       const data = await getPayment(bookingId);
       if (data.success) {
         window.location.href = data.data.paymentUrl;

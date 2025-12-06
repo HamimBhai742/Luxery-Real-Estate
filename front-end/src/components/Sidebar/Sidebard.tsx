@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -16,7 +15,6 @@ import {
   FiCalendar,
   FiCreditCard,
 } from 'react-icons/fi';
-import toast from 'react-hot-toast';
 import { logout } from '@/helpers/logOut';
 import Swal from 'sweetalert2';
 import { getMe } from '@/helpers/getMe';

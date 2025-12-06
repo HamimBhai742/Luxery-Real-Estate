@@ -104,13 +104,13 @@ const ManageProperty = () => {
     },
   ];
   return (
-    <div className='min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6 lg:p-8'>
+    <div className='min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black p-6 lg:p-8'>
       <div className='max-w-7xl mx-auto space-y-6'>
         {/* Header */}
         <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-6 shadow-lg dark:shadow-none'>
           <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4'>
             <div>
-              <h1 className='text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent'>
+              <h1 className='text-3xl lg:text-4xl font-bold bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent'>
                 Manage Properties
               </h1>
               <p className='text-gray-600 dark:text-gray-400 mt-2'>
@@ -119,7 +119,7 @@ const ManageProperty = () => {
             </div>
             <Link
               href='/dashboard/create-property'
-              className='group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold hover:shadow-xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300'
+              className='group flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold hover:shadow-xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300'
             >
               <FiPlus className='w-5 h-5' />
               Add Property
@@ -136,7 +136,7 @@ const ManageProperty = () => {
             >
               <div className='flex items-start justify-between mb-4'>
                 <div
-                  className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} group-hover:scale-110 transition-transform duration-300`}
+                  className={`p-3 rounded-xl bg-linear-to-br ${stat.color} group-hover:scale-110 transition-transform duration-300`}
                 >
                   <stat.icon className='w-6 h-6 text-white' />
                 </div>

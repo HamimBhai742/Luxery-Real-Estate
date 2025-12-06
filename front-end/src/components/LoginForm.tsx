@@ -54,10 +54,8 @@ export default function LoginForm() {
       }
       if (user?.success) {
         toast.success(user?.message);
-        setTimeout(() => {
-          setIsLoading(false);
-          router.push(user?.data?.role === 'ADMIN' ? '/dashboard' : '/');
-        }, 2000);
+        setIsLoading(false);
+        router.push(user?.data?.role === 'ADMIN' ? '/dashboard' : '/');
       }
     } catch (error) {
       console.log(error);

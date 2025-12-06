@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
@@ -24,12 +23,6 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const res = await fetch(
-        //   `${process.env.NEXT_PUBLIC_API_URL}/stats/user`,
-        //   {
-        //     credentials: 'include',
-        //   }
-        // );
         const data = await getUserDashboard();
         setUserStats(data?.data);
       } catch (error) {
