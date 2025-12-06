@@ -13,18 +13,8 @@ import {
 } from 'react-icons/fi';
 import { ImSpinner9 } from 'react-icons/im';
 import Image from 'next/image';
-
-interface PropertyFormData {
-  name: string;
-  description: string;
-  location: string;
-  price: string;
-  bedrooms: string;
-  bathrooms: string;
-  amenities: string[];
-  images: File[];
-  status: string;
-}
+import { createProperty } from '@/helpers/createProperty';
+import { PropertyFormData } from '@/types/property';
 
 const CreatePropertyForm = () => {
   const [formData, setFormData] = useState<PropertyFormData>({
@@ -164,7 +154,7 @@ const CreatePropertyForm = () => {
       location: validateField('location', formData.location),
       price: validateField('price', formData.price),
       bedrooms: validateField('bedrooms', formData.bedrooms),
-      bathrooms: validateField('bathrooms', formData.bathrooms),
+      bathrooms: validateField('bathrooms', formData.bathrooms)
     };
 
     setErrors(newErrors);
@@ -187,15 +177,7 @@ const CreatePropertyForm = () => {
       const formDatas = new FormData();
       formData.images.forEach((img) => formDatas.append('files', img));
       formDatas.append('data', JSON.stringify(payload));
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/property/create-property`,
-        {
-          method: 'POST',
-          credentials: 'include',
-          body: formDatas,
-        }
-      );
-      const data = await res.json();
+      const data = await createProperty(formData,payload);
       if (data.success) {
         setFormData({
           name: '',

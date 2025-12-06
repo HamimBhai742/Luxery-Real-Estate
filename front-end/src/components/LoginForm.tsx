@@ -4,6 +4,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { ImSpinner9 } from 'react-icons/im';
+import { setCookies } from '@/helpers/setCookies';
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -46,12 +47,7 @@ export default function LoginForm() {
         body: JSON.stringify(formData),
       });
       const user = await res.json();
-      const r = await fetch('/api/proxy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: user.data.accessToken }),
-      });
-      console.log(r.json);
+      await setCookies(user?.data?.accessToken);
       if (!user?.success) {
         setIsLoading(false);
         toast.error(user?.message);

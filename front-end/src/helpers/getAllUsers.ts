@@ -1,7 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 
-export const getAllUsers = async (currentPage, limit) => {
+export const getAllUsers = async (currentPage: number, limit: number) => {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
   const res = await fetch(

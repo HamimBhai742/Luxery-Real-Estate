@@ -12,17 +12,19 @@ const login = createAsyncFn(async (req: Request, res: Response) => {
   const email = req.body.email;
   const password = req.body.password;
   const user = await authService.login({ email, password });
-  if (user) {
-    const token = await createUserToken(user);
 
-    setCookies(res, token);
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatusCodes.OK,
-      message: 'User logged in successfully',
-      data: user,
-    });
-  }
+  const token = await createUserToken(user);
+
+  // setCookies(res, token);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'User logged in successfully',
+    data: {
+      accessToken: token.accessToken,
+      role: user.role,
+    },
+  });
 });
 
 const verifyUser = createAsyncFn(

@@ -51,12 +51,12 @@ const ManageProperty = () => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const json = await getMyProperties(
+        const json = await getMyProperties({
           searchTerm,
           selectedStatus,
           limit,
-          currentPage
-        );
+          currentPage,
+        });
         if (!json.success) {
           setLoading(false);
         }

@@ -1,12 +1,19 @@
 'use server';
 import { cookies } from 'next/headers';
 
-export const getMyProperties = async (
+interface Props {
+  searchTerm: string;
+  selectedStatus: string;
+  limit: number;
+  currentPage: number;
+}
+
+export const getMyProperties = async ({
   searchTerm,
   selectedStatus,
   limit,
-  currentPage
-) => {
+  currentPage,
+}: Props) => {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
   const res = await fetch(

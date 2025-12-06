@@ -37,17 +37,8 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const s = await getAuth();
-        console.log(s,'lll');
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/verify`,
-          {
-            method: 'POST',
-            credentials: 'include',
-          }
-        );
-        const me = await res.json();
-        setUser(s);
+        const me = await getAuth();
+        setUser(me);
       } catch (error) {
         console.error(error);
       }
@@ -74,6 +65,7 @@ const Navbar = () => {
       if (result.isConfirmed) {
         try {
           const data = await logout();
+          console.log(data)
           if (data.success) {
             toast.success(data.message);
             router.replace('/');

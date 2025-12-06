@@ -21,6 +21,7 @@ import {
 import { ImSpinner9 } from 'react-icons/im';
 import { MdBedroomParent, MdBathtub } from 'react-icons/md';
 import BookingsTableSkeleton from './BookingsTableSkeleton';
+import { getPayment } from '@/helpers/getPayment';
 
 export interface BookingStats {
   cancelledBookings: number;
@@ -74,21 +75,20 @@ export default function BookingsTable() {
     }
   }, [searchTerm, statusFilter, limit, currentPage]);
 
-
   const handelPayment = async (bookingId: string) => {
     setProcessingBookingId(bookingId);
     try {
       setPaymentLoading(true);
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/payment/initiate-payment`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ bookingId }),
-        }
-      );
-      const data = await res.json();
+      // const res = await fetch(
+      //   `${process.env.NEXT_PUBLIC_API_URL}/payment/initiate-payment`,
+      //   {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json' },
+      //     credentials: 'include',
+      //     body: JSON.stringify({ bookingId }),
+      //   }
+      // );
+      const data = await getPayment(bookingId);
       if (data.success) {
         window.location.href = data.data.paymentUrl;
       } else {
@@ -307,7 +307,9 @@ export default function BookingsTable() {
               <div className='flex gap-3 pt-2'>
                 {booking.status === 'pending' && (
                   <button
-                    disabled={paymentLoading && processingBookingId === booking.id}
+                    disabled={
+                      paymentLoading && processingBookingId === booking.id
+                    }
                     onClick={() => handelPayment(booking.id)}
                     className='flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
                   >
