@@ -23,8 +23,9 @@ const getAdminStats = (0, create_async_fn_1.createAsyncFn)((req, res) => __await
     });
 }));
 const getUserStats = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const stats = yield stats_services_1.statsServices.getUserStats(Number((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a.userId));
+    const user = req.user;
+    const userId = Number(user === null || user === void 0 ? void 0 : user.userId);
+    const stats = yield stats_services_1.statsServices.getUserStats(userId);
     (0, send_response_1.sendResponse)(res, {
         success: true,
         statusCode: 200,

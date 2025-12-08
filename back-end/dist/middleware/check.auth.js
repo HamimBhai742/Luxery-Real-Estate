@@ -17,6 +17,7 @@ const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const create_token_1 = require("../utils/create.token");
 const env_1 = require("../config/env");
 const coustom_error_1 = require("../error/coustom.error");
+const prisma_configs_1 = require("../config/prisma.configs");
 const checkAuth = (...roles) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     try {
@@ -25,9 +26,22 @@ const checkAuth = (...roles) => (req, res, next) => __awaiter(void 0, void 0, vo
             throw new coustom_error_1.AppError('You are not login, please login first', http_status_codes_1.default.UNAUTHORIZED);
         }
         const decod = (0, create_token_1.verifyJwtToken)(token, env_1.ENV.JWT_SECRET);
-        if (!roles.includes(decod.role)) {
-            throw new coustom_error_1.AppError('You are not authorized to access this route', http_status_codes_1.default.UNAUTHORIZED);
+        const user = yield prisma_configs_1.prisma.user.findUnique({
+            where: { email: decod.email },
+        });
+        if (!user) {
+            throw new coustom_error_1.AppError('User not found', http_status_codes_1.default.NOT_FOUND);
         }
+        if (user.status === 'inactive') {
+            throw new coustom_error_1.AppError('User is inactive', http_status_codes_1.default.NOT_ACCEPTABLE);
+        }
+        if (user.isDeleted) {
+            throw new coustom_error_1.AppError('User is deleted', http_status_codes_1.default.NOT_ACCEPTABLE);
+        }
+        if (user.provider)
+            if (!roles.includes(decod.role)) {
+                throw new coustom_error_1.AppError('You are not authorized to access this route', http_status_codes_1.default.UNAUTHORIZED);
+            }
         req.user = decod;
         next();
     }

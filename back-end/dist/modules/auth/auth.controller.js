@@ -17,23 +17,45 @@ const create_async_fn_1 = require("../../utils/create.async.fn");
 const auth_services_1 = require("./auth.services");
 const create_jwt_1 = require("../../utils/create.jwt");
 const send_response_1 = require("../../utils/send.response");
+const set_cookies_1 = require("../../utils/set.cookies");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const env_1 = require("../../config/env");
-const login = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.body.email;
-    const password = req.body.password;
-    const user = yield auth_services_1.authService.login({ email, password });
-    const token = yield (0, create_jwt_1.createUserToken)(user);
-    // setCookies(res, token);
-    (0, send_response_1.sendResponse)(res, {
-        success: true,
-        statusCode: http_status_codes_1.default.OK,
-        message: 'User logged in successfully',
-        data: {
-            accessToken: token.accessToken,
-            role: user.role,
-        },
-    });
+const coustom_error_1 = require("../../error/coustom.error");
+const passport_1 = __importDefault(require("passport"));
+const login = (0, create_async_fn_1.createAsyncFn)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    passport_1.default.authenticate('local', (err, user, info) => __awaiter(void 0, void 0, void 0, function* () {
+        if (err) {
+            return next(new coustom_error_1.AppError(err, 403));
+        }
+        if (!user) {
+            return next(new coustom_error_1.AppError(info.message, 401));
+        }
+        const userToken = (0, create_jwt_1.createUserToken)(user);
+        delete user.password;
+        //send response
+        (0, send_response_1.sendResponse)(res, {
+            statusCode: http_status_codes_1.default.OK,
+            success: true,
+            message: 'You have successfully logged in.',
+            data: {
+                accessToken: userToken.accessToken,
+                user,
+            },
+        });
+    }))(req, res, next);
+}));
+const googleCallback = (0, create_async_fn_1.createAsyncFn)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = req.user;
+    if (!user) {
+        throw new coustom_error_1.AppError('User not found', http_status_codes_1.default.NOT_FOUND);
+    }
+    const tokenInfo = (0, create_jwt_1.createUserToken)(user);
+    (0, set_cookies_1.setCookies)(res, tokenInfo);
+    let redirectTo = req.query.state ? req.query.state : '';
+    if (redirectTo.startsWith('/')) {
+        redirectTo = redirectTo.slice(1);
+    }
+    res.redirect(`${env_1.ENV.CLIENT_URL}/${redirectTo}`);
 }));
 const verifyUser = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     (0, send_response_1.sendResponse)(res, {
@@ -81,4 +103,5 @@ exports.authController = {
     logout,
     forgetPassword,
     resetPassword,
+    googleCallback,
 };

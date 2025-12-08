@@ -9,6 +9,7 @@ const createUserToken = (payload) => {
         email: payload.email,
         role: payload.role,
     };
+    console.log(jsonPayload);
     const accessToken = (0, create_token_1.createJwtToken)(jsonPayload, env_1.ENV.JWT_SECRET, env_1.ENV.JWT_EXPIRES_IN);
     return {
         accessToken,

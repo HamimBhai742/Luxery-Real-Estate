@@ -30,9 +30,11 @@ const seedAdmin = () => __awaiter(void 0, void 0, void 0, function* () {
             name: 'Admin',
             email,
             password: hashedPass,
+            provider: client_1.Auth_Provider.creadintial,
+            providerId: email,
             role: client_1.Role.ADMIN,
         };
-        const newAdmin = yield prisma_configs_1.prisma.user.create({
+        yield prisma_configs_1.prisma.user.create({
             data: payload,
         });
     }

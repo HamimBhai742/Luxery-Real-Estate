@@ -39,4 +39,10 @@ export const ENV = {
 
   CLIENT_URL: process.env.CLIENT_URL as string,
   APP_NAME: process.env.APP_NAME as string,
+
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
+
+  EXPRESS_SESSION_SECRET: process.env.EXPRESS_SESSION_SECRET as string,
+  CALL_BACK_URL: process.env.CALL_BACK_URL as string,
 };

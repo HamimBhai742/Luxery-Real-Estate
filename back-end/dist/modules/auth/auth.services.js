@@ -21,22 +21,6 @@ const client_1 = require("@prisma/client");
 const create_token_1 = require("../../utils/create.token");
 const env_1 = require("../../config/env");
 const send_email_1 = require("../../utils/send.email");
-const login = (_a) => __awaiter(void 0, [_a], void 0, function* ({ email, password, }) {
-    const user = yield prisma_configs_1.prisma.user.findUnique({ where: { email } });
-    if (!user) {
-        throw new coustom_error_1.AppError('User not found', http_status_codes_1.default.NOT_FOUND);
-    }
-    const isMatchPassword = yield bcryptjs_1.default.compare(password, user.password);
-    if (!isMatchPassword) {
-        throw new coustom_error_1.AppError('Invalid password', http_status_codes_1.default.UNAUTHORIZED);
-    }
-    return {
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        id: user.id,
-    };
-});
 const forgetPassword = (email) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield prisma_configs_1.prisma.user.findUnique({
         where: {
@@ -102,7 +86,6 @@ const resetPassword = (token, newPassword) => __awaiter(void 0, void 0, void 0, 
     });
 });
 exports.authService = {
-    login,
     forgetPassword,
     resetPassword,
 };

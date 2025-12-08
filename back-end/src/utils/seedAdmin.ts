@@ -1,4 +1,4 @@
-import { Role } from '@prisma/client';
+import { Auth_Provider, Role } from '@prisma/client';
 import { ENV } from '../config/env';
 import { prisma } from '../config/prisma.configs';
 import bcrypt from 'bcryptjs';
@@ -19,9 +19,11 @@ export const seedAdmin = async () => {
       name: 'Admin',
       email,
       password: hashedPass,
+      provider: Auth_Provider.creadintial,
+      providerId: email,
       role: Role.ADMIN,
     };
-    const newAdmin = await prisma.user.create({
+    await prisma.user.create({
       data: payload,
     });
   } catch (error) {

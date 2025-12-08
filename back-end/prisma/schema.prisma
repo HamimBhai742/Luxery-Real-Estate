@@ -7,13 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Auth_Provider {
+  google
+  creadintial
+}
 
 model User {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
+  profile   String?
+  address   String?
   phone     String?  @unique
-  password  String
+  password  String?
+  provider   Auth_Provider @default(creadintial)
+  providerId String  @unique
   role      Role    @default(USER)
   status    Status   @default(active)
   isDeleted Boolean  @default(false)

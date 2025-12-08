@@ -31,10 +31,10 @@ const getAdminStats = () => __awaiter(void 0, void 0, void 0, function* () {
     const last7days = new Date();
     last7days.setDate(today.getDate() - 6);
     const dailyRevenue = yield prisma_configs_1.prisma.payment.groupBy({
-        by: ['createdAt'],
+        by: ['updatedAt'],
         where: {
             status: 'succeeded',
-            createdAt: {
+            updatedAt: {
                 gte: last7days,
                 lt: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1),
             },
@@ -47,7 +47,7 @@ const getAdminStats = () => __awaiter(void 0, void 0, void 0, function* () {
         const date = new Date();
         date.setDate(today.getDate() - (6 - i));
         const formatted = date.toISOString().split('T')[0];
-        const found = dailyRevenue.find((d) => d.createdAt.toISOString().split('T')[0] === formatted);
+        const found = dailyRevenue.find((d) => d.updatedAt.toISOString().split('T')[0] === formatted);
         return {
             date: formatted,
             revenue: (found === null || found === void 0 ? void 0 : found._sum.amount) || 0,

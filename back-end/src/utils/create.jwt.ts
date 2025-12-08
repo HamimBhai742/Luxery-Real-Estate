@@ -7,7 +7,7 @@ export const createUserToken = (payload: any) => {
     email: payload.email,
     role: payload.role,
   };
-
+console.log(jsonPayload)
   const accessToken = createJwtToken(
     jsonPayload,
     ENV.JWT_SECRET,

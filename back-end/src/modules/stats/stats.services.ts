@@ -22,10 +22,10 @@ const getAdminStats = async () => {
   last7days.setDate(today.getDate() - 6);
 
   const dailyRevenue = await prisma.payment.groupBy({
-    by: ['createdAt'],
+    by: ['updatedAt'],
     where: {
       status: 'succeeded',
-      createdAt: {
+      updatedAt: {
         gte: last7days,
         lt: new Date(
           today.getFullYear(),
@@ -46,7 +46,7 @@ const getAdminStats = async () => {
     const formatted = date.toISOString().split('T')[0];
 
     const found = dailyRevenue.find(
-      (d) => d.createdAt.toISOString().split('T')[0] === formatted
+      (d) => d.updatedAt.toISOString().split('T')[0] === formatted
     );
 
     return {

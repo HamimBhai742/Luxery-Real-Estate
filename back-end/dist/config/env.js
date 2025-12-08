@@ -33,4 +33,8 @@ exports.ENV = {
     SMTP_PASS: process.env.SMTP_PASS,
     CLIENT_URL: process.env.CLIENT_URL,
     APP_NAME: process.env.APP_NAME,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    EXPRESS_SESSION_SECRET: process.env.EXPRESS_SESSION_SECRET,
+    CALL_BACK_URL: process.env.CALL_BACK_URL,
 };

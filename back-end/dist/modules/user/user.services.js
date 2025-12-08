@@ -35,7 +35,7 @@ const registerUser = (payload) => __awaiter(void 0, void 0, void 0, function* ()
     const { password } = payload, rest = __rest(payload, ["password"]);
     const hashedPass = yield bcryptjs_1.default.hash(password, env_1.ENV.BCRYPT_SALT_ROUNDS);
     const user = yield prisma_configs_1.prisma.user.create({
-        data: Object.assign(Object.assign({}, rest), { password: hashedPass }),
+        data: Object.assign(Object.assign({}, rest), { password: hashedPass, provider: 'creadintial', providerId: rest.email }),
     });
     return {
         name: user.name,

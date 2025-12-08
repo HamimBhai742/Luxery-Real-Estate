@@ -15,9 +15,10 @@ const booking_services_1 = require("./booking.services");
 const send_response_1 = require("../../utils/send.response");
 const pick_query_1 = require("../../utils/pick.query");
 const createBooking = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
-    const userId = Number((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a.userId);
-    const propertyId = (_b = req === null || req === void 0 ? void 0 : req.body) === null || _b === void 0 ? void 0 : _b.propertyId;
+    var _a;
+    const user = req.user;
+    const userId = Number(user === null || user === void 0 ? void 0 : user.userId);
+    const propertyId = (_a = req === null || req === void 0 ? void 0 : req.body) === null || _a === void 0 ? void 0 : _a.propertyId;
     const booking = yield booking_services_1.bookingServices.createBooking(userId, propertyId);
     (0, send_response_1.sendResponse)(res, {
         success: true,
@@ -27,8 +28,8 @@ const createBooking = (0, create_async_fn_1.createAsyncFn)((req, res) => __await
     });
 }));
 const getMyBookings = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const userId = Number((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a.userId);
+    const user = req.user;
+    const userId = Number(user === null || user === void 0 ? void 0 : user.userId);
     const options = (0, pick_query_1.pickQuery)(req.query, [
         'limit',
         'page',

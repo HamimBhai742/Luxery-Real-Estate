@@ -28,9 +28,8 @@ const registerUser = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaite
     });
 }));
 const getMe = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const email = (_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a.email;
-    const user = yield user_services_1.userService.getMe(email);
+    const userInfo = req.user;
+    const user = yield user_services_1.userService.getMe(userInfo === null || userInfo === void 0 ? void 0 : userInfo.email);
     (0, send_response_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_codes_1.default.OK,

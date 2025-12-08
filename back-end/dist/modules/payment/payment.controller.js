@@ -62,7 +62,8 @@ const getAllPayments = (0, create_async_fn_1.createAsyncFn)((req, res) => __awai
     });
 }));
 const getMyPayments = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    const user = req.user;
+    const userId = Number(user === null || user === void 0 ? void 0 : user.userId);
     const options = (0, pick_query_1.pickQuery)(req.query, [
         'limit',
         'page',
@@ -71,7 +72,7 @@ const getMyPayments = (0, create_async_fn_1.createAsyncFn)((req, res) => __await
         'sortOrder',
     ]);
     const filters = (0, pick_query_1.pickQuery)(req.query, ['status']);
-    const payments = yield payment_services_1.paymentServices.getMyPayments(Number((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a.userId), filters, options);
+    const payments = yield payment_services_1.paymentServices.getMyPayments(userId, filters, options);
     (0, send_response_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_codes_1.default.OK,

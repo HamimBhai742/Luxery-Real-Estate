@@ -5,44 +5,42 @@ import { sendResponse } from '../../utils/send.response';
 import { IJwt } from '../../types/user.interface';
 import { pickQuery } from '../../utils/pick.query';
 
-const createBooking = createAsyncFn(
-  async (req: Request & { user?: IJwt }, res: Response) => {
-    const userId = Number(req?.user?.userId) as number;
-    const propertyId = req?.body?.propertyId as string;
-    const booking = await bookingServices.createBooking(userId, propertyId);
-    sendResponse(res, {
-      success: true,
-      statusCode: 200,
-      message: 'Booking created successfully',
-      data: booking,
-    });
-  }
-);
+const createBooking = createAsyncFn(async (req: Request, res: Response) => {
+  const user = req.user as IJwt;
+  const userId = Number(user?.userId) as number;
+  const propertyId = req?.body?.propertyId as string;
+  const booking = await bookingServices.createBooking(userId, propertyId);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Booking created successfully',
+    data: booking,
+  });
+});
 
-const getMyBookings = createAsyncFn(
-  async (req: Request & { user?: IJwt }, res: Response) => {
-    const userId = Number(req?.user?.userId) as number;
-    const options = pickQuery(req.query, [
-      'limit',
-      'page',
-      'search',
-      'sortBy',
-      'sortOrder',
-    ]);
-    const filters = pickQuery(req.query, ['status']);
-    const bookings = await bookingServices.getMyBookings(
-      userId,
-      filters,
-      options
-    );
-    sendResponse(res, {
-      success: true,
-      statusCode: 200,
-      message: 'Bookings fetched successfully',
-      data: bookings,
-    });
-  }
-);
+const getMyBookings = createAsyncFn(async (req: Request, res: Response) => {
+  const user = req.user as IJwt;
+  const userId = Number(user?.userId) as number;
+  const options = pickQuery(req.query, [
+    'limit',
+    'page',
+    'search',
+    'sortBy',
+    'sortOrder',
+  ]);
+  const filters = pickQuery(req.query, ['status']);
+  const bookings = await bookingServices.getMyBookings(
+    userId,
+    filters,
+    options
+  );
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Bookings fetched successfully',
+    data: bookings,
+  });
+});
 
 export const bookingController = {
   createBooking,

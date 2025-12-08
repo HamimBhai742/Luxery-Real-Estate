@@ -13,6 +13,8 @@ const registerUser = async (payload: IUser) => {
     data: {
       ...rest,
       password: hashedPass,
+      provider: 'creadintial',
+      providerId: rest.email,
     },
   });
 

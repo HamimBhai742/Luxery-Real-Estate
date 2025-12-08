@@ -71,30 +71,30 @@ const getAllPayments = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
-const getMyPayments = createAsyncFn(
-  async (req: Request & { user?: IJwt }, res: Response) => {
-    const options = pickQuery(req.query, [
-      'limit',
-      'page',
-      'search',
-      'sortBy',
-      'sortOrder',
-    ]);
+const getMyPayments = createAsyncFn(async (req: Request, res: Response) => {
+  const user = req.user as IJwt;
+  const userId = Number(user?.userId) as number;
+  const options = pickQuery(req.query, [
+    'limit',
+    'page',
+    'search',
+    'sortBy',
+    'sortOrder',
+  ]);
 
-    const filters = pickQuery(req.query, ['status']);
-    const payments = await paymentServices.getMyPayments(
-      Number(req?.user?.userId) as number,
-      filters,
-      options
-    );
-    sendResponse(res, {
-      success: true,
-      statusCode: httpStatusCodes.OK,
-      message: 'My Payments',
-      data: payments,
-    });
-  }
-);
+  const filters = pickQuery(req.query, ['status']);
+  const payments = await paymentServices.getMyPayments(
+    userId,
+    filters,
+    options
+  );
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'My Payments',
+    data: payments,
+  });
+});
 
 export const paymentController = {
   createPayment,

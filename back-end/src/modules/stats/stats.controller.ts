@@ -14,17 +14,17 @@ const getAdminStats = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
-const getUserStats = createAsyncFn(
-  async (req: Request & { user?: IJwt }, res: Response) => {
-    const stats = await statsServices.getUserStats(Number(req?.user?.userId));
-    sendResponse(res, {
-      success: true,
-      statusCode: 200,
-      message: 'Stats fetched successfully',
-      data: stats,
-    });
-  }
-);
+const getUserStats = createAsyncFn(async (req: Request, res: Response) => {
+  const user = req.user as IJwt;
+  const userId = Number(user?.userId) as number;
+  const stats = await statsServices.getUserStats(userId);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Stats fetched successfully',
+    data: stats,
+  });
+});
 
 const getHomeStats = createAsyncFn(async (req: Request, res: Response) => {
   const stats = await statsServices.getHomeStats();
