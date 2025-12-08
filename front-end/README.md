@@ -284,10 +284,6 @@ Then deploy to Vercel or your preferred hosting platform.
 - Custom animations
 - Dark mode support
 
-## 📄 License
-
-This project is private and proprietary.
-
 ## 🤝 Support
 
 For support, contact the development team or open an issue in the repository.
@@ -306,3 +302,5 @@ For support, contact the development team or open an issue in the repository.
 ---
 
 **Built with ❤️ using Next.js 16 and React 19**
+
+**Develop By HAMIM**
