@@ -97,6 +97,18 @@ const resetPassword = (0, create_async_fn_1.createAsyncFn)((req, res) => __await
         data: null,
     });
 }));
+const changePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { oldPass, newPass } = req.body;
+    console.log(oldPass, newPass);
+    const decodedToken = req.user;
+    yield auth_services_1.authService.changePassword(oldPass, newPass, decodedToken);
+    (0, send_response_1.sendResponse)(res, {
+        statusCode: http_status_codes_1.default.OK,
+        success: true,
+        message: 'Password Chanange Successfully.',
+        data: null,
+    });
+});
 exports.authController = {
     login,
     verifyUser,
@@ -104,4 +116,5 @@ exports.authController = {
     forgetPassword,
     resetPassword,
     googleCallback,
+    changePassword,
 };

@@ -49,10 +49,13 @@ const getMe = (email) => __awaiter(void 0, void 0, void 0, function* () {
         throw new coustom_error_1.AppError('User not found', http_status_codes_1.default.NOT_FOUND);
     }
     return {
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        id: user.id,
+        name: user === null || user === void 0 ? void 0 : user.name,
+        email: user === null || user === void 0 ? void 0 : user.email,
+        role: user === null || user === void 0 ? void 0 : user.role,
+        id: user === null || user === void 0 ? void 0 : user.id,
+        address: user === null || user === void 0 ? void 0 : user.address,
+        phone: user === null || user === void 0 ? void 0 : user.phone,
+        profile: user === null || user === void 0 ? void 0 : user.profile,
     };
 });
 const getAllUsers = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
@@ -118,9 +121,17 @@ const updateUser = (id, status) => __awaiter(void 0, void 0, void 0, function* (
     });
     return user;
 });
+const updateProfile = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield prisma_configs_1.prisma.user.update({
+        where: { id },
+        data: payload,
+    });
+    return user;
+});
 exports.userService = {
     registerUser,
     getMe,
     getAllUsers,
     updateUser,
+    updateProfile,
 };

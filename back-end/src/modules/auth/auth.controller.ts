@@ -95,6 +95,19 @@ const resetPassword = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const changePassword = async (req: Request, res: Response) => {
+  const { oldPass, newPass } = req.body;
+  console.log(oldPass,newPass)
+  const decodedToken = req.user;
+  await authService.changePassword(oldPass, newPass, decodedToken as IJwt);
+  sendResponse(res, {
+    statusCode: httpStatusCodes.OK,
+    success: true,
+    message: 'Password Chanange Successfully.',
+    data: null,
+  });
+};
+
 export const authController = {
   login,
   verifyUser,
@@ -102,4 +115,5 @@ export const authController = {
   forgetPassword,
   resetPassword,
   googleCallback,
+  changePassword,
 };

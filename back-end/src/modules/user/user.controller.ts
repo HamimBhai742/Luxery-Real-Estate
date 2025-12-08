@@ -6,7 +6,6 @@ import httpStatusCodes from 'http-status-codes';
 import { IJwt } from '../../types/user.interface';
 import { pickQuery } from '../../utils/pick.query';
 const registerUser = createAsyncFn(async (req: Request, res: Response) => {
-  
   const user = await userService.registerUser(req.body);
   sendResponse(res, {
     success: true,
@@ -59,9 +58,26 @@ const updateUser = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const updateProfile = createAsyncFn(async (req: Request, res: Response) => {
+  const userInfo = req.user as IJwt;
+  const userId = Number(userInfo?.userId);
+  const payload = {
+    ...req.body,
+    profile: req.file?.path,
+  };
+  const user = await userService.updateProfile(userId, payload);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'User updated successfully',
+    data: user,
+  });
+});
+
 export const userController = {
   registerUser,
   getMe,
   getAllUsers,
   updateUser,
+  updateProfile,
 };

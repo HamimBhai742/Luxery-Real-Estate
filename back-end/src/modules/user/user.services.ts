@@ -32,10 +32,13 @@ const getMe = async (email: string) => {
   }
 
   return {
-    name: user.name,
-    email: user.email,
-    role: user.role,
-    id: user.id,
+    name: user?.name,
+    email: user?.email,
+    role: user?.role,
+    id: user?.id,
+    address: user?.address,
+    phone: user?.phone,
+    profile: user?.profile,
   };
 };
 
@@ -108,9 +111,18 @@ const updateUser = async (id: number, status: 'active' | 'inactive') => {
   return user;
 };
 
+const updateProfile = async (id: number, payload: any) => {
+  const user = await prisma.user.update({
+    where: { id },
+    data: payload,
+  });
+  return user;
+};
+
 export const userService = {
   registerUser,
   getMe,
   getAllUsers,
   updateUser,
+  updateProfile,
 };

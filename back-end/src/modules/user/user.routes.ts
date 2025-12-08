@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { userController } from './user.controller';
 import { validateRequest } from '../../middleware/zod.validation';
-import { userZodSchema } from './user.zod.schema';
+import { updateUserZodSchema, userZodSchema } from './user.zod.schema';
 import { checkAuth } from '../../middleware/check.auth';
 import { Role } from '@prisma/client';
+import { multerUpload } from '../../config/multer.config';
 
 const router = Router();
 
@@ -21,6 +22,14 @@ router.patch(
   '/update-status/:id',
   checkAuth(Role.ADMIN),
   userController.updateUser
+);
+
+router.patch(
+  '/update-profile',
+  multerUpload.single('file'),
+  validateRequest(updateUserZodSchema),
+  checkAuth(...Object.values(Role)),
+  userController.updateProfile
 );
 
 export const userRoutes = router;

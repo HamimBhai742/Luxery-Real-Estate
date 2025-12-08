@@ -21,6 +21,7 @@ const client_1 = require("@prisma/client");
 const create_token_1 = require("../../utils/create.token");
 const env_1 = require("../../config/env");
 const send_email_1 = require("../../utils/send.email");
+const bcryptjs_2 = __importDefault(require("bcryptjs"));
 const forgetPassword = (email) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield prisma_configs_1.prisma.user.findUnique({
         where: {
@@ -85,7 +86,32 @@ const resetPassword = (token, newPassword) => __awaiter(void 0, void 0, void 0, 
         },
     });
 });
+const changePassword = (oldPass, newPass, decoded) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield prisma_configs_1.prisma.user.findUnique({
+        where: {
+            email: decoded.email,
+        },
+    });
+    const matchPass = yield bcryptjs_2.default.compare(oldPass, user === null || user === void 0 ? void 0 : user.password);
+    if (!matchPass) {
+        throw new coustom_error_1.AppError("Old password doesn't match", http_status_codes_1.default.BAD_REQUEST);
+    }
+    if (newPass === oldPass) {
+        throw new coustom_error_1.AppError("New password can't be same as old password", http_status_codes_1.default.BAD_REQUEST);
+    }
+    const hashedPass = yield bcryptjs_2.default.hash(newPass, env_1.ENV.BCRYPT_SALT_ROUNDS);
+    yield prisma_configs_1.prisma.user.update({
+        where: {
+            email: decoded.email,
+        },
+        data: {
+            password: hashedPass,
+        },
+    });
+    return true;
+});
 exports.authService = {
     forgetPassword,
     resetPassword,
+    changePassword,
 };

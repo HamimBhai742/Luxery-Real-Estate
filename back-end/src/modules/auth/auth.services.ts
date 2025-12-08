@@ -6,7 +6,8 @@ import { Status } from '@prisma/client';
 import { createJwtToken, verifyJwtToken } from '../../utils/create.token';
 import { ENV } from '../../config/env';
 import { sendEmail } from '../../utils/send.email';
-
+import { IJwt } from '../../types/user.interface';
+import bcryptjs from 'bcryptjs';
 const forgetPassword = async (email: string) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -85,7 +86,45 @@ const resetPassword = async (token: string, newPassword: string) => {
   });
 };
 
+const changePassword = async (
+  oldPass: string,
+  newPass: string,
+  decoded: IJwt
+) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: decoded.email,
+    },
+  });
+  const matchPass = await bcryptjs.compare(oldPass, user?.password as string);
+
+  if (!matchPass) {
+    throw new AppError(
+      "Old password doesn't match",
+      httpStatusCode.BAD_REQUEST
+    );
+  }
+
+  if (newPass === oldPass) {
+    throw new AppError(
+      "New password can't be same as old password",
+      httpStatusCode.BAD_REQUEST
+    );
+  }
+  const hashedPass = await bcryptjs.hash(newPass, ENV.BCRYPT_SALT_ROUNDS);
+  await prisma.user.update({
+    where: {
+      email: decoded.email,
+    },
+    data: {
+      password: hashedPass,
+    },
+  });
+  return true;
+};
+
 export const authService = {
   forgetPassword,
   resetPassword,
+  changePassword,
 };

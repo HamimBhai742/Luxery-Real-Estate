@@ -9,8 +9,6 @@ const ResetPasswordForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
-  const id = searchParams.get('id');
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -64,7 +62,7 @@ const ResetPasswordForm = () => {
           </div>
           <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-3'>Invalid Reset Link</h2>
           <p className='text-gray-600 dark:text-gray-400 mb-6'>This password reset link is invalid or has expired.</p>
-          <Link href='/forgot-password' className='inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all'>
+          <Link href='/forgot-password' className='inline-block px-6 py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all'>
             Request New Link
           </Link>
         </div>
@@ -76,7 +74,7 @@ const ResetPasswordForm = () => {
     <div className='w-full max-w-md'>
       <div className='bg-white/90 dark:bg-white/5 backdrop-blur-2xl rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 p-8 lg:p-10 animate-fade-in-up'>
         {/* Icon */}
-        <div className='w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg'>
+        <div className='w-16 h-16 mx-auto mb-6 rounded-2xl bg-linear-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg'>
           <FiLock className='w-8 h-8 text-white' />
         </div>
 
@@ -152,7 +150,7 @@ const ResetPasswordForm = () => {
           <button
             type='submit'
             disabled={loading || password !== confirmPassword}
-            className='w-full py-3.5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
+            className='w-full py-3.5 bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
           >
             {loading ? (
               <>

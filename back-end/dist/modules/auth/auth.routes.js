@@ -37,4 +37,5 @@ router.get('/google/callback', passport_1.default.authenticate('google', {
 router.post('/forgot-password', auth_controller_1.authController.forgetPassword);
 router.post('/reset-password', auth_controller_1.authController.resetPassword);
 router.post('/logout', auth_controller_1.authController.logout);
+router.patch('/change-password', (0, check_auth_1.checkAuth)(...Object.values(client_1.Role)), auth_controller_1.authController.changePassword);
 exports.authRoutes = router;

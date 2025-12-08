@@ -63,9 +63,23 @@ const updateUser = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(
         data: user,
     });
 }));
+const updateProfile = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const userInfo = req.user;
+    const userId = Number(userInfo === null || userInfo === void 0 ? void 0 : userInfo.userId);
+    const payload = Object.assign(Object.assign({}, req.body), { profile: (_a = req.file) === null || _a === void 0 ? void 0 : _a.path });
+    const user = yield user_services_1.userService.updateProfile(userId, payload);
+    (0, send_response_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: 'User updated successfully',
+        data: user,
+    });
+}));
 exports.userController = {
     registerUser,
     getMe,
     getAllUsers,
     updateUser,
+    updateProfile,
 };

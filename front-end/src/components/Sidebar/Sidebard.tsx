@@ -18,6 +18,7 @@ import {
 import { logout } from '@/helpers/logOut';
 import Swal from 'sweetalert2';
 import { getMe } from '@/helpers/getMe';
+import { ImProfile } from 'react-icons/im';
 
 interface MenuItem {
   id: string;
@@ -94,6 +95,20 @@ const Sidebar = () => {
       icon: <FiCreditCard className='w-5 h-5' />,
       href: '/dashboard/payment-history',
       role: 'USER',
+    },
+    {
+      id: 'profile',
+      label: 'Profile',
+      icon: <ImProfile className='w-5 h-5' />,
+      href: '/dashboard/profile',
+      role: 'USER',
+    },
+    {
+      id: 'profile',
+      label: 'Profile',
+      icon: <ImProfile className='w-5 h-5' />,
+      href: '/dashboard/profile',
+      role: 'ADMIN',
     },
   ];
 
