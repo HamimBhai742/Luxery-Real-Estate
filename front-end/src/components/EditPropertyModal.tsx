@@ -1,5 +1,6 @@
 'use client';
 
+import { updateProperty } from '@/helpers/updateProperty';
 import { Property } from '@/types/property';
 import { SaveIcon } from 'lucide-react';
 import React, { useState } from 'react';
@@ -30,18 +31,7 @@ const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/property/update-property/${property.id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify(formData),
-        }
-      );
-      const data = await res.json();
+      const data = await updateProperty(property.id, formData);
       if (data.success) {
         toast.success(data.message);
         window.location.reload();

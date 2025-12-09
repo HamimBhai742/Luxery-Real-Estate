@@ -14,6 +14,7 @@ import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import toast from 'react-hot-toast';
 import ManageUsersSkeleton from './ManageUserSkeleton';
 import { getAllUsers } from '@/helpers/getAllUsers';
+import { updateUserStatus } from '@/helpers/updateStatus';
 
 interface User {
   id: string;
@@ -50,17 +51,12 @@ const ManageUserClient = () => {
   useEffect(() => {
     try {
       const fetchUsers = async () => {
-        // const response = await fetch(
-        //   `${process.env.NEXT_PUBLIC_API_URL}/user?page=${currentPage}&limit=${limit}`,
-        //   {
-        //     method: 'GET',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     credentials: 'include',
-        //   }
-        // );
-        const data = await getAllUsers(currentPage, limit);
+        const data = await getAllUsers(
+          currentPage,
+          limit,
+          searchTerm,
+          statusFilter
+        );
         if (data.success) {
           setUsers(data.data.data);
           setMetaData(data.data.metaData);
@@ -75,7 +71,7 @@ const ManageUserClient = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [currentPage, limit]);
+  }, [currentPage, limit, searchTerm, statusFilter]);
 
   // Stats
   const stats = {
@@ -89,24 +85,19 @@ const ManageUserClient = () => {
     newStatus: 'active' | 'inactive'
   ) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/update-status/${userId}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({ status: newStatus }),
-        }
-      );
-      const data = await response.json();
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === userId ? { ...user, status: newStatus } : user
-        )
-      );
-      toast.success(`Status updated to ${newStatus}`);
+      const data = await updateUserStatus(newStatus, userId);
+      console.log(data);
+      if (data.success) {
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user.id === userId ? { ...user, status: newStatus } : user
+          )
+        );
+        toast.success(`Status updated to ${newStatus}`);
+      }
+      if (!data.success) {
+        toast.error(data.message);
+      }
     } catch (error) {
       toast.error('Failed to update status');
     }
@@ -207,7 +198,7 @@ const ManageUserClient = () => {
                   );
                   setCurrentPage(1);
                 }}
-                className='pl-11 pr-10 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl text-gray-900 dark:text-white focus:bg-white dark:focus:bg-white/10 focus:border-blue-500 dark:focus:border-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none cursor-pointer'
+                className='select rounded-lg'
               >
                 <option value='ALL'>All Status</option>
                 <option value='active'>Active</option>
@@ -316,7 +307,7 @@ const ManageUserClient = () => {
                             e.target.value as 'active' | 'inactive'
                           )
                         }
-                        className='px-3 py-1.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-lg text-sm text-gray-900 dark:text-white focus:border-blue-500 dark:focus:border-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer'
+                        className='px-3 py-1.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-white/10 rounded-lg text-sm text-gray-900 dark:text-white focus:border-blue-500 dark:focus:border-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer'
                       >
                         <option value='active'>Active</option>
                         <option value='inactive'>Inactive</option>

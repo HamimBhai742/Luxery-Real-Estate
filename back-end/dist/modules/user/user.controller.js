@@ -45,7 +45,7 @@ const getAllUsers = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter
         'sortBy',
         'sortOrder',
     ]);
-    const filters = (0, pick_query_1.pickQuery)(req.query, ['email', 'phone', 'status']);
+    const filters = (0, pick_query_1.pickQuery)(req.query, ['status']);
     const users = yield user_services_1.userService.getAllUsers(filters, options);
     (0, send_response_1.sendResponse)(res, {
         success: true,

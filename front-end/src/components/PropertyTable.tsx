@@ -6,6 +6,7 @@ import EditPropertyModal from './EditPropertyModal';
 import Swal from 'sweetalert2';
 import Image from 'next/image';
 import { Property } from '@/types/property';
+import { deleteProperty } from '@/helpers/deleteProperty';
 
 const PropertyTable = ({ properties }: { properties: Property[] }) => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(
@@ -36,15 +37,7 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/property/delete-property/${id}`,
-            {
-              method: 'DELETE',
-              headers: { 'Content-Type': 'application/json' },
-              credentials: 'include',
-            }
-          );
-          const data = await res.json();
+          const data = await deleteProperty(id);
           if (data.success) {
             Swal.fire({
               title: 'Deleted!',
@@ -191,6 +184,7 @@ const PropertyTable = ({ properties }: { properties: Property[] }) => {
                   <div className='flex items-center justify-end gap-2'>
                     <button
                       onClick={() => handleEdit(property)}
+                      disabled={property.status === 'sold'}
                       className='p-2 rounded-lg bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-500/20 transition-all duration-300 hover:scale-110'
                       title='Edit'
                     >

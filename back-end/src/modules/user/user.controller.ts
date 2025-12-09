@@ -35,7 +35,7 @@ const getAllUsers = createAsyncFn(async (req: Request, res: Response) => {
     'sortOrder',
   ]);
 
-  const filters = pickQuery(req.query, ['email', 'phone', 'status']);
+  const filters = pickQuery(req.query, ['status']);
   const users = await userService.getAllUsers(filters, options);
   sendResponse(res, {
     success: true,

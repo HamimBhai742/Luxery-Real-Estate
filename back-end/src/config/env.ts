@@ -45,4 +45,7 @@ export const ENV = {
 
   EXPRESS_SESSION_SECRET: process.env.EXPRESS_SESSION_SECRET as string,
   CALL_BACK_URL: process.env.CALL_BACK_URL as string,
+
+  RESEND_API_KEY: process.env.RESEND_API_KEY as string,
+  RESEND_EMAIL: process.env.RESEND_EMAIL as string,
 };
