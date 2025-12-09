@@ -2,6 +2,11 @@
 import StatsCounter from '@/components/StatsCounter';
 import TeamCard from '@/components/TeamCard';
 
+export const metadata = {
+  title: 'About Us - Luxury Real Estate',
+  description: 'Learn more about our company and our team',
+};
+
 const stats = [
   { value: 15, suffix: '+', label: 'Years Experience', prefix: '' },
   { value: 10000, suffix: '+', label: 'Properties Sold', prefix: '' },
@@ -80,7 +85,6 @@ export default function AboutPage() {
 
         {/* Content */}
         <div className='relative z-10 max-w-4xl mx-auto px-4 text-center pt-20'>
-
           <h1 className='text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight'>
             Redefining Luxury
             <br />
@@ -89,8 +93,8 @@ export default function AboutPage() {
             </span>
           </h1>
           <p className='text-xl md:text-2xl text-gray-700 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto'>
-            For over 15 years, we&apos;ve been connecting discerning clients with the
-            world&apos;s most exceptional properties.
+            For over 15 years, we&apos;ve been connecting discerning clients
+            with the world&apos;s most exceptional properties.
           </p>
         </div>
 

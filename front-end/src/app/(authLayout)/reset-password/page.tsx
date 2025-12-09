@@ -1,6 +1,11 @@
 import ResetPasswordForm from '@/components/ResetPasswordForm';
 import { Suspense } from 'react';
 
+export const metadata = {
+  title: 'Reset Password - Luxury Real Estate',
+  description: 'Reset Passwordc to access your account',
+};
+
 const ResetPasswordPage = () => {
   return (
     <div className='min-h-screen relative overflow-hidden'>

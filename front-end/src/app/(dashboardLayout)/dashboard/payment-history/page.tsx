@@ -1,5 +1,10 @@
 import PaymentHistoryClient from '@/components/PaymentHistoryClient';
 
+export const metadata = {
+  title: 'Payment History - Luxury Real Estate',
+  description: 'Track all your transactions and payment status',
+}
+
 export default async function PaymentHistory() {
   return (
     <div className='min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-8 px-4 sm:px-6 lg:px-8'>

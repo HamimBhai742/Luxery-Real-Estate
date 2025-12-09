@@ -1,6 +1,12 @@
 import ContactForm from '@/components/ContactForm';
 import InteractiveMap from '@/components/InteractiveMap';
 
+export const metadata = {
+  title: 'Contact - Luxury Real Estate',
+  description:
+    'Get in touch with us for any inquiries or to learn more about our services.',
+};
+
 const contactMethods = [
   {
     icon: (

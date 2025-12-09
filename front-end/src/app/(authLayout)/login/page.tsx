@@ -1,5 +1,8 @@
 import LoginForm from '@/components/LoginForm';
-
+export const metadata = {
+  title: 'Login - Luxury Real Estate',
+  description: 'Sign in to your account to access our services',
+};
 export default function LoginPage() {
   return (
     <div className='min-h-screen relative overflow-hidden'>

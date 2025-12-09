@@ -1,5 +1,8 @@
 import ForgotPasswordForm from '@/components/ForgotPasswordForm';
-
+export const metadata = {
+  title: 'Forgot Password - Luxury Real Estate',
+  description: 'Reset your password to access your account',
+}
 const ForgotPasswordPage = () => {
   return (
     <div className='min-h-screen relative overflow-hidden'>

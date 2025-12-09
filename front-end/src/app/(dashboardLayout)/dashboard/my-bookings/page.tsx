@@ -1,6 +1,6 @@
 import BookingsTable from '@/components/BookingsTable';
 export const metadata = {
-  title: 'My Bookings',
+  title: 'My Bookings ',
   description: 'Manage and track all your property reservations',
 };
 

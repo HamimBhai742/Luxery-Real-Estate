@@ -1,6 +1,11 @@
 import RegisterForm from '@/components/RegisterForm';
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Register - Luxury Real Estate',
+  description: 'Create an account to access our services',
+};
+
 export default function RegisterPage() {
   return (
     <div className="min-h-screen relative overflow-hidden">
