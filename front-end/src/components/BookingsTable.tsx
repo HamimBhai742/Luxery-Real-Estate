@@ -98,27 +98,7 @@ export default function BookingsTable() {
     return <BookingsTableSkeleton />;
   }
 
-  if (!bookings || bookings.length === 0) {
-    return (
-      <div className='flex flex-col items-center justify-center py-20'>
-        <div className='w-24 h-24 mb-6 rounded-full bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center'>
-          <FiCalendar className='w-12 h-12 text-blue-500' />
-        </div>
-        <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
-          No Bookings Yet
-        </h3>
-        <p className='text-gray-600 dark:text-gray-400 mb-6'>
-          Start exploring luxury properties
-        </p>
-        <Link
-          href='/properties'
-          className='px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300'
-        >
-          Browse Properties
-        </Link>
-      </div>
-    );
-  }
+
 
   return (
     <div className='space-y-6'>
@@ -222,113 +202,138 @@ export default function BookingsTable() {
       </div>
 
       {/* Bookings Grid */}
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
-        {bookings?.map((booking) => (
-          <div
-            key={booking.id}
-            className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-500'
-          >
-            <div className='absolute inset-0 bg-linear-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+      {bookings.length > 0 ? (
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
+          {bookings?.map((booking) => (
+            <div
+              key={booking.id}
+              className='group relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-500'
+            >
+              <div className='absolute inset-0 bg-linear-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
 
-            <div className='relative p-6 space-y-4'>
-              {/* Header */}
-              <div className='flex items-start justify-between'>
-                <div className='flex-1'>
-                  <h3 className='text-xl font-bold text-gray-900 dark:text-white mb-1 line-clamp-1'>
-                    {booking.property.name}
-                  </h3>
-                  <div className='flex items-center gap-2 text-gray-600 dark:text-gray-400'>
-                    <FiMapPin className='w-4 h-4' />
-                    <span className='text-sm'>{booking.property.location}</span>
+              <div className='relative p-6 space-y-4'>
+                {/* Header */}
+                <div className='flex items-start justify-between'>
+                  <div className='flex-1'>
+                    <h3 className='text-xl font-bold text-gray-900 dark:text-white mb-1 line-clamp-1'>
+                      {booking.property.name}
+                    </h3>
+                    <div className='flex items-center gap-2 text-gray-600 dark:text-gray-400'>
+                      <FiMapPin className='w-4 h-4' />
+                      <span className='text-sm'>
+                        {booking.property.location}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <span
-                  className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${
-                    booking.status === 'pending'
-                      ? 'bg-linear-to-r from-yellow-400 to-orange-500 text-white shadow-lg shadow-yellow-500/50'
-                      : booking.status === 'paid'
-                      ? 'bg-linear-to-r from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50'
-                      : 'bg-linear-to-r from-red-400 to-rose-500 text-white shadow-lg shadow-red-500/50'
-                  }`}
-                >
-                  {booking.status}
-                </span>
-              </div>
-
-              {/* Property Details */}
-              <div className='flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400'>
-                <div className='flex items-center gap-2'>
-                  <MdBedroomParent className='w-5 h-5' />
-                  <span>{booking.property.bedrooms} Beds</span>
-                </div>
-                <div className='flex items-center gap-2'>
-                  <MdBathtub className='w-5 h-5' />
-                  <span>{booking.property.bathrooms} Baths</span>
-                </div>
-              </div>
-
-              {/* Amount & Date */}
-              <div className='flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700'>
-                <div>
-                  <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
-                    Total Amount
-                  </p>
-                  <p className='text-2xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
-                    ${Number(booking.totalAmount).toLocaleString()}
-                  </p>
-                </div>
-                <div className='text-right'>
-                  <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
-                    Booked On
-                  </p>
-                  <div className='flex items-center gap-2 text-gray-900 dark:text-white font-medium'>
-                    <FiCalendar className='w-4 h-4' />
-                    <span>
-                      {new Date(booking.createdAt).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric',
-                      })}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className='flex gap-3 pt-2'>
-                {booking.status === 'pending' && (
-                  <button
-                    disabled={
-                      paymentLoading && processingBookingId === booking.id
-                    }
-                    onClick={() => handelPayment(booking.id)}
-                    className='flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
+                  <span
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${
+                      booking.status === 'pending'
+                        ? 'bg-linear-to-r from-yellow-400 to-orange-500 text-white shadow-lg shadow-yellow-500/50'
+                        : booking.status === 'paid'
+                        ? 'bg-linear-to-r from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50'
+                        : 'bg-linear-to-r from-red-400 to-rose-500 text-white shadow-lg shadow-red-500/50'
+                    }`}
                   >
-                    {paymentLoading && processingBookingId === booking.id ? (
-                      <>
-                        <ImSpinner9 className='animate-spin' />
-                        <span>Processing...</span>
-                      </>
-                    ) : (
-                      <>
-                        <FiCreditCard />
-                        <span>Pay Now</span>
-                      </>
-                    )}
-                  </button>
-                )}
-                <Link
-                  href={`/properties/${booking.property.slug}`}
-                  className='flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white rounded-xl font-semibold hover:border-blue-500 hover:shadow-lg hover:scale-105 transition-all duration-300'
-                >
-                  <FiEye />
-                  <span>View</span>
-                </Link>
+                    {booking.status}
+                  </span>
+                </div>
+
+                {/* Property Details */}
+                <div className='flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400'>
+                  <div className='flex items-center gap-2'>
+                    <MdBedroomParent className='w-5 h-5' />
+                    <span>{booking.property.bedrooms} Beds</span>
+                  </div>
+                  <div className='flex items-center gap-2'>
+                    <MdBathtub className='w-5 h-5' />
+                    <span>{booking.property.bathrooms} Baths</span>
+                  </div>
+                </div>
+
+                {/* Amount & Date */}
+                <div className='flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700'>
+                  <div>
+                    <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                      Total Amount
+                    </p>
+                    <p className='text-2xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                      ${Number(booking.totalAmount).toLocaleString()}
+                    </p>
+                  </div>
+                  <div className='text-right'>
+                    <p className='text-sm text-gray-600 dark:text-gray-400 mb-1'>
+                      Booked On
+                    </p>
+                    <div className='flex items-center gap-2 text-gray-900 dark:text-white font-medium'>
+                      <FiCalendar className='w-4 h-4' />
+                      <span>
+                        {new Date(booking.createdAt).toLocaleDateString(
+                          'en-US',
+                          {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric',
+                          }
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className='flex gap-3 pt-2'>
+                  {booking.status === 'pending' && (
+                    <button
+                      disabled={
+                        paymentLoading && processingBookingId === booking.id
+                      }
+                      onClick={() => handelPayment(booking.id)}
+                      className='flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
+                    >
+                      {paymentLoading && processingBookingId === booking.id ? (
+                        <>
+                          <ImSpinner9 className='animate-spin' />
+                          <span>Processing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <FiCreditCard />
+                          <span>Pay Now</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+                  <Link
+                    href={`/properties/${booking.property.slug}`}
+                    className='flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white rounded-xl font-semibold hover:border-blue-500 hover:shadow-lg hover:scale-105 transition-all duration-300'
+                  >
+                    <FiEye />
+                    <span>View</span>
+                  </Link>
+                </div>
               </div>
             </div>
+          ))}
+        </div>
+      ) : (
+        <div className='flex flex-col items-center justify-center '>
+          <div className='w-24 h-24 mb-6 rounded-full bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center'>
+            <FiCalendar className='w-12 h-12 text-blue-500' />
           </div>
-        ))}
-      </div>
+          <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
+            No Bookings Yet
+          </h3>
+          <p className='text-gray-600 dark:text-gray-400 mb-6'>
+            Start exploring luxury properties
+          </p>
+          <Link
+            href='/properties'
+            className='px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300'
+          >
+            Browse Properties
+          </Link>
+        </div>
+      )}
       {bookingStats && bookingStats?.totalPages > 1 && (
         <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-4 shadow-lg dark:shadow-none'>
           <div className='flex items-center justify-between'>

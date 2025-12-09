@@ -65,7 +65,7 @@ const Navbar = () => {
       if (result.isConfirmed) {
         try {
           const data = await logout();
-          console.log(data)
+          console.log(data);
           if (data.success) {
             toast.success(data.message);
             router.replace('/');
@@ -105,6 +105,7 @@ const Navbar = () => {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Blog', href: '/blog' },
   ];
   return (
     <div
