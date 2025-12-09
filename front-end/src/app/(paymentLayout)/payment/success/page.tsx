@@ -1,9 +1,10 @@
+import PaymentLoding from '@/components/PaymentLoding';
 import SuccessContent from '@/components/SuccessContent';
 import { Suspense } from 'react';
 
 export default function SuccessPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<PaymentLoding/>}>
       <SuccessContent />
     </Suspense>
   );

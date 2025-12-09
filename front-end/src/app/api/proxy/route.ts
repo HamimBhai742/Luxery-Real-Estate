@@ -2,31 +2,20 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export async function POST(req: Request) {
-  const url = new URL(req.url);
-  const endpoint = url.searchParams.get('endpoint');
-
-  if (!endpoint) {
-    const { accessToken } = await req.json();
-    if (!accessToken) {
-      return NextResponse.json({ message: 'No token provided' }, { status: 400 });
-    }
-    const response = NextResponse.json({ message: 'Cookie set successfully!' });
-    response.cookies.set({ name: 'accessToken', value: accessToken, httpOnly: true, secure: false });
-    return response;
+  const { accessToken } = await req.json();
+  if (!accessToken) {
+    return NextResponse.json({ message: 'No token provided' }, { status: 400 });
   }
-
-  const cookieStore = await cookies();
-  const token = cookieStore.get('accessToken')?.value;
-  
-  const body = req.headers.get('content-type')?.includes('application/json') ? await req.json() : null;
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `${token}` },
-    body: body ? JSON.stringify(body) : undefined,
+  const response = NextResponse.json({ message: 'Cookie set successfully!' });
+  response.cookies.set({
+    name: 'accessToken',
+    value: accessToken,
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/',
   });
-
-  return NextResponse.json(await res.json());
+  return response;
 }
 
 export async function PUT(req: Request) {
