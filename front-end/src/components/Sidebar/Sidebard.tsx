@@ -69,6 +69,13 @@ const Sidebar = () => {
       role: 'ADMIN',
     },
     {
+      id: 'create-blog',
+      label: 'Create Bolg',
+      icon: <FiPlus className='w-5 h-5' />,
+      href: '/dashboard/create-blog',
+      role: 'ADMIN',
+    },
+    {
       id: 'manage-property',
       label: 'Manage Property',
       icon: <FiGrid className='w-5 h-5' />,
