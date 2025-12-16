@@ -1,12 +1,19 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { FiSearch, FiCalendar, FiClock, FiArrowRight } from 'react-icons/fi';
+import {
+  FiSearch,
+  FiCalendar,
+  FiClock,
+  FiArrowRight,
+  FiChevronRight,
+  FiChevronLeft,
+} from 'react-icons/fi';
 import Link from 'next/link';
 import { getAllBlogs } from '@/helpers/getAllBlogs';
 import Image from 'next/image';
 import { format } from 'timeago.js';
 import toast from 'react-hot-toast';
-import BlogContenSkeleton from './BlogContenSkeleton';
+import BlogContentSkeleton from './BlogContentSkeleton';
 
 interface Blog {
   id: string;
@@ -21,11 +28,21 @@ interface Blog {
   updatedAt: string;
 }
 
+interface IMetaData {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
 const BlogClient = () => {
   const [blogs, setBlogs] = useState<Blog[]>();
+  const [metaData, setMetaData] = useState<IMetaData>();
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
   const categories = [
     'Real Estate Tips',
@@ -38,11 +55,13 @@ const BlogClient = () => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const data = await getAllBlogs(searchTerm, selectedCategory, 1, 10);
+        setLoading(true);
+        const data = await getAllBlogs(searchTerm, selectedCategory, currentPage, limit);
         console.log(data);
         if (data.success) {
           setLoading(false);
           setBlogs(data.data);
+          setMetaData(data.metaData);
         }
         if (!data.success) {
           setLoading(false);
@@ -53,7 +72,7 @@ const BlogClient = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, currentPage, limit]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -112,7 +131,11 @@ const BlogClient = () => {
           Latest Articles
         </h2>
         {loading ? (
-          <BlogContenSkeleton />
+          <div className='space-y-6'>
+            {[...Array(3)].map((_, index) => (
+              <BlogContentSkeleton key={index} />
+            ))}
+          </div>
         ) : blogs && blogs.length > 0 ? (
           <>
             <div className='grid grid-cols-1 gap-8'>
@@ -204,6 +227,70 @@ const BlogClient = () => {
             </button>
           </div>
         )}
+
+        {/* Pagenation */}
+        <div className='pt-8'>
+          {metaData && metaData?.totalPages > 1 && (
+            <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-4 shadow-lg dark:shadow-none'>
+              <div className='flex items-center justify-between'>
+                <p className='text-sm text-gray-600 dark:text-gray-400'>
+                  Page {currentPage} of {metaData.totalPages}
+                </p>
+
+                <div className='flex items-center gap-2'>
+                  <div className='flex gap-2'>
+                    <button
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                    >
+                      <FiChevronLeft />
+                    </button>
+                    {Array.from(
+                      { length: metaData.totalPages },
+                      (_, i) => i + 1
+                    ).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                          currentPage === page
+                            ? 'bg-linear-to-r from-amber-500 to-amber-600 text-white shadow-lg'
+                            : 'bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                    <button
+                      onClick={() =>
+                        setCurrentPage((p) =>
+                          Math.min(metaData.totalPages, p + 1)
+                        )
+                      }
+                      disabled={currentPage === metaData.totalPages}
+                      className='p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+                    >
+                      <FiChevronRight />
+                    </button>
+                  </div>
+                  <select
+                    onChange={(e) => setLimit(Number(e.target.value))}
+                    name=''
+                    id=''
+                    className='select'
+                  >
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={30}>30</option>
+                    <option value={40}>40</option>
+                    <option value={50}>50</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -64,7 +64,6 @@ const Properties = () => {
             Discover your dream home from our exclusive collection
           </p>
         </div>
-
         {/* Filters */}
         <div className='bg-white dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 p-6 mb-8'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
@@ -142,7 +141,6 @@ const Properties = () => {
             Showing {data.properties.length} of {data.metaData.total} properties
           </div>
         </div>
-
         {/* Properties Grid */}
         {loading ? (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
@@ -179,7 +177,7 @@ const Properties = () => {
             </p>
           </div>
         )}
-
+        {/* pagination */}
         <div className='mt-8'>
           {data?.metaData && data?.metaData?.totalPages > 1 && (
             <div className='backdrop-blur-xl bg-white/80 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 p-4 shadow-lg dark:shadow-none'>
