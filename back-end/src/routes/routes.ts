@@ -5,6 +5,7 @@ import { propertyRoutes } from '../modules/property/property.routes';
 import { bookingRoutes } from '../modules/booking/booking.routes';
 import { paymentRoutes } from '../modules/payment/payment.routes';
 import { statsRoutes } from '../modules/stats/stats.routes';
+import { blogRoutes } from '../modules/blog/blog.routes';
 export const router = Router();
 const routes = [
   {
@@ -30,7 +31,11 @@ const routes = [
   {
     path: '/stats',
     route: statsRoutes,
-  }
+  },
+  {
+    path: '/blog',
+    route: blogRoutes,
+  },
 ];
 
 routes.forEach((route) => {

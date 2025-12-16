@@ -15,3 +15,5 @@ router.post(
   validateRequest(createBlogSchema),
   blogController.createBlog
 );
+
+export const blogRoutes = router;
