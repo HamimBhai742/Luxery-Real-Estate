@@ -100,7 +100,7 @@ const getAllProperties = (filters, options) => __awaiter(void 0, void 0, void 0,
             lte: 10000,
         };
     }
-    else if (prices === 'above10k') {
+    else if (prices === 'over10k') {
         filters.price = {
             gte: 10000,
         };

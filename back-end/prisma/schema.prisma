@@ -82,6 +82,21 @@ model Property {
   @@map("properties")
 }
 
+model Blog{
+  id          String    @id @default(uuid())
+  title       String
+  image       String
+  description String
+  slug        String    @unique
+  excerpt     String
+  content     String
+  status      BlogStatus @default(draft)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+
+
 
 model Booking {
   id           String           @id @default(uuid())
@@ -132,6 +147,11 @@ enum PaymentStatus {
   succeeded
   failed
   canceled
+}
+
+enum BlogStatus {
+  draft
+  published
 }
 
 
