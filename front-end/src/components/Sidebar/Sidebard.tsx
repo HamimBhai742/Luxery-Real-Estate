@@ -19,6 +19,7 @@ import { logout } from '@/helpers/logOut';
 import Swal from 'sweetalert2';
 import { getMe } from '@/helpers/getMe';
 import { ImProfile } from 'react-icons/im';
+import { FaBlog } from 'react-icons/fa6';
 
 interface MenuItem {
   id: string;
@@ -87,6 +88,13 @@ const Sidebar = () => {
       label: 'Manage Users',
       icon: <FiUsers className='w-5 h-5' />,
       href: '/dashboard/manage-users',
+      role: 'ADMIN',
+    },
+    {
+      id: 'manage-blog',
+      label: 'Manage Blog',
+      icon: <FaBlog className='w-5 h-5' />,
+      href: '/dashboard/manage-blog',
       role: 'ADMIN',
     },
     {

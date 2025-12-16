@@ -1,16 +1,12 @@
-import { ImSpinner9 } from "react-icons/im";
+import BlogClient from '@/components/Blog/BlogClient';
 
 export const metadata = {
   title: 'Blog - Luxury Real Estate',
-  description: ' Get the latest news and updates from Luxury Real Estate',
+  description: 'Get the latest news and updates from Luxury Real Estate',
 };
-const BlogPage = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center gap-4  bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black">
-      <ImSpinner9 className="animate-spin text-4xl text-gray-900 dark:text-white" />
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Comming Soon..........</h1>
-    </div>
-  );
+
+const BlogPage = async () => {
+  return <BlogClient/>;
 };
 
 export default BlogPage;

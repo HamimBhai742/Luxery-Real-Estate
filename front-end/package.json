@@ -17,6 +17,9 @@
     "cloudinary": "^2.8.0",
     "clsx": "^2.1.1",
     "daisyui": "^5.5.5",
+    "date-fn": "^0.0.2",
+    "date-fns": "^4.1.0",
+    "javascript-time-ago": "^2.5.12",
     "lucide-react": "^0.555.0",
     "multer": "^2.0.2",
     "next": "^16.0.7",
@@ -28,7 +31,8 @@
     "react-timeago": "^8.3.0",
     "recharts": "^2.15.4",
     "sweetalert2": "^11.26.3",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
