@@ -29,5 +29,10 @@ router.put(
   blogController.updateBlog
 );
 
+router.delete(
+  '/delete-blog/:id',
+  checkAuth(Role.ADMIN),
+  blogController.deleteBlog
+);
 
 export const blogRoutes = router;

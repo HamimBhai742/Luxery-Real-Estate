@@ -79,10 +79,21 @@ const updateBlog = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const deleteBlog = createAsyncFn(async (req: Request, res: Response) => {
+  const blog = await blogServices.deleteBlog(req.params.id);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Blog deleted successfully',
+    data: null,
+  });
+});
+
 export const blogController = {
   createBlog,
   getAllBlogs,
   getSingleBlog,
   getMyBlogs,
   updateBlog,
+  deleteBlog,
 };
