@@ -39,7 +39,39 @@ const getAllBlogs = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleBlog = createAsyncFn(async (req: Request, res: Response) => {
+  const blog = await blogServices.getSingleBlog(req.params.slug);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Blog Retrived Successfully',
+    data: blog,
+  });
+});
+
+const getMyBlogs = createAsyncFn(async (req: Request, res: Response) => {
+  const options = pickQuery(req.query, [
+    'limit',
+    'page',
+    'search',
+    'sortBy',
+    'sortOrder',
+  ]);
+  const filters = pickQuery(req.query, ['category', 'status']);
+  const blogs = await blogServices.getMyBlogs(filters, options);
+  console.log(blogs,filters);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Blogs Retrived Successfully',
+    data: blogs.blog,
+    metaData: blogs.metaData,
+  });
+});
+
 export const blogController = {
   createBlog,
   getAllBlogs,
+  getSingleBlog,
+  getMyBlogs,
 };

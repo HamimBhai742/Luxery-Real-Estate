@@ -49,7 +49,52 @@ const getAllBlogs = async (filters: any, options: any) => {
   };
 };
 
+const getSingleBlog = async (slug: string) => {
+  const blog = await prisma.blog.findUnique({ where: { slug } });
+  return blog;
+};
+
+const getMyBlogs = async (filters: any, options: any) => {
+  const { page, limit, skip, sortBy, sortOrder } = pagination(options);
+  const { search } = options;
+  const searchTerm = blogSearchField.map((field) => ({
+    [field]: {
+      contains: search,
+      mode: 'insensitive',
+    },
+  }));
+  const where: any = {
+    AND: [
+      filters && Object.keys(filters).length ? filters : undefined,
+      search && { OR: searchTerm },
+    ].filter(Boolean),
+  };
+  const blog = await prisma.blog.findMany({
+    where,
+    skip,
+    take: limit,
+    orderBy: {
+      [sortBy]: sortOrder,
+    },
+  });
+  const total = await prisma.blog.count({
+    where,
+  });
+
+  return {
+    blog,
+    metaData: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+};
+
 export const blogServices = {
   createBlog,
   getAllBlogs,
+  getSingleBlog,
+  getMyBlogs,
 };

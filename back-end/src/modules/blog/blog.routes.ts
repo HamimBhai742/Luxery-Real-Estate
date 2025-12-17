@@ -15,7 +15,11 @@ router.post(
   validateRequest(createBlogSchema),
   blogController.createBlog
 );
+router.get('/my-blogs', checkAuth(Role.ADMIN), blogController.getMyBlogs);
 
 router.get('/', blogController.getAllBlogs);
+
+router.get('/:slug', blogController.getSingleBlog);
+
 
 export const blogRoutes = router;
