@@ -21,7 +21,7 @@ export default BlogDetailsPage;
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } =await  params;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}`);
   const { data: blog } = await res.json();
   if (!blog) {

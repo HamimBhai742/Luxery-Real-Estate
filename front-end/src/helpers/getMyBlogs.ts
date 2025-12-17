@@ -21,7 +21,7 @@ export const getMyBlogs = async (
       headers: {
         Authorization: `${token}`,
       },
-      cache: 'no-store',
+      cache: 'no-cache',
     }
   );
   const data = await res.json();
