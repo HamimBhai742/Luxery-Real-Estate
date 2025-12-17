@@ -1,8 +1,9 @@
 import { prisma } from '../../config/prisma.configs';
+import { AppError } from '../../error/coustom.error';
 import { generateUniqueSlug } from '../../utils/generate.uniqe.slug';
 import { pagination } from '../../utils/pagination';
 import { blogSearchField } from './blog.constain';
-
+import httpStatusCodes from 'http-status-codes';
 const createBlog = async (payload: any) => {
   const slug = await generateUniqueSlug(payload.title);
   payload.slug = slug;
@@ -92,9 +93,23 @@ const getMyBlogs = async (filters: any, options: any) => {
   };
 };
 
+const updateBlog = async (id: string, payload: any) => {
+  const findBlog = await prisma.blog.findUnique({ where: { id } });
+  if (!findBlog) {
+    throw new AppError('Blog not found', httpStatusCodes.NOT_FOUND);
+  }
+  if (payload.title) {
+    const slug = await generateUniqueSlug(payload.title as string);
+    payload.slug = slug;
+  }
+  const blog = await prisma.blog.update({ where: { id }, data: payload });
+  return blog;
+};
+
 export const blogServices = {
   createBlog,
   getAllBlogs,
   getSingleBlog,
   getMyBlogs,
+  updateBlog,
 };

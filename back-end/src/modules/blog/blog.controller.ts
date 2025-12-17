@@ -59,7 +59,7 @@ const getMyBlogs = createAsyncFn(async (req: Request, res: Response) => {
   ]);
   const filters = pickQuery(req.query, ['category', 'status']);
   const blogs = await blogServices.getMyBlogs(filters, options);
-  console.log(blogs,filters);
+  console.log(blogs, filters);
   sendResponse(res, {
     success: true,
     statusCode: httpStatusCodes.OK,
@@ -69,9 +69,20 @@ const getMyBlogs = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const updateBlog = createAsyncFn(async (req: Request, res: Response) => {
+  const blog = await blogServices.updateBlog(req.params.id, req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Blog updated successfully',
+    data: blog,
+  });
+});
+
 export const blogController = {
   createBlog,
   getAllBlogs,
   getSingleBlog,
   getMyBlogs,
+  updateBlog,
 };

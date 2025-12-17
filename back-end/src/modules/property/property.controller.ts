@@ -67,6 +67,7 @@ const getSingleProperty = createAsyncFn(async (req: Request, res: Response) => {
     data: property,
   });
 });
+
 const updateProperty = createAsyncFn(async (req: Request, res: Response) => {
   const property = await propertyServices.updateProperty(
     req.params.id,

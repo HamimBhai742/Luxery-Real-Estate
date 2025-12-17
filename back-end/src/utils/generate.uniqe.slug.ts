@@ -1,7 +1,7 @@
 import { prisma } from '../config/prisma.configs';
 
 export const generateUniqueSlug = async (title: string) => {
-  const baseSlug: string = title.toLowerCase().split(' ').join('-');
+  const baseSlug: string = title.toLowerCase().trim().split(' ').join('-');
   let counter = 0;
   let slug = baseSlug;
   while (
