@@ -217,7 +217,7 @@ const EditModal: React.FC<EditModalProps> = ({
           <div className='flex gap-3 pt-4'>
             <button
               type='submit'
-              className='flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300'
+              className='flex-1 bg-linear-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300'
             >
               Update Blog
             </button>
@@ -318,7 +318,7 @@ const ManageBlog = () => {
 
   if (loading) {
     return (
-      <div className='min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4'>
+      <div className='min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4'>
         <div className='max-w-7xl mx-auto'>
           <div className='animate-pulse space-y-6'>
             <div className='h-8 bg-gray-300 dark:bg-gray-700 rounded w-1/4'></div>
@@ -345,11 +345,11 @@ const ManageBlog = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4'>
+    <div className='min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4'>
       <div className='max-w-7xl mx-auto'>
         {/* Header */}
         <div className='mb-8'>
-          <h1 className='text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2'>
+          <h1 className='text-3xl md:text-4xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2'>
             Manage Blog Posts
           </h1>
           <p className='text-gray-600 dark:text-gray-400'>
@@ -396,7 +396,7 @@ const ManageBlog = () => {
               ))}
             </select>
 
-            <button className='bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-2'>
+            <button className='bg-linear-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-2'>
               <FiPlus size={18} />
               New Blog
             </button>
