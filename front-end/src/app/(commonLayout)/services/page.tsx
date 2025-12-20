@@ -133,7 +133,7 @@ export default function ServicesPage() {
   return (
     <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black'>
       {/* Hero Section with Parallax */}
-      <section className='relative min-h-[60vh] flex items-center justify-center overflow-hidden'>
+      <section className='relative min-h-[60vh] flex items-center justify-center overflow-hidden '>
         {/* Animated Background */}
         <div className='absolute inset-0'>
           <div className='absolute top-10 right-20 w-64 h-64 bg-blue-300/40 dark:bg-amber-600/20 rounded-full blur-3xl animate-parallax-float'></div>
@@ -165,8 +165,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className='py-20 px-4'>
-        <div className='max-w-7xl mx-auto'>
+      <section className='py-20 '>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
             {services.map((service, idx) => (
               <ServiceCard key={idx} service={service} index={idx} />
@@ -176,21 +176,27 @@ export default function ServicesPage() {
       </section>
 
       {/* Benefits Bar */}
-      <section className='py-16 px-4 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 relative overflow-hidden'>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
-        <div className='relative z-10 max-w-7xl mx-auto'>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
-            {benefits.map((benefit, idx) => (
-              <div key={idx} className='text-center'>
-                <div className='text-4xl mb-2'>{benefit.icon}</div>
-                <div className='text-3xl md:text-4xl font-bold text-white mb-1'>
-                  {benefit.value}
+      <section
+        className='py-20 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 relative overflow-hidden
+       max-w-7xl mx-auto rounded-xl 
+'
+      >
+        <div className=' max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
+          <div className='relative z-10 '>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
+              {benefits.map((benefit, idx) => (
+                <div key={idx} className='text-center'>
+                  <div className='text-4xl mb-2'>{benefit.icon}</div>
+                  <div className='text-3xl md:text-4xl font-bold text-white mb-1'>
+                    {benefit.value}
+                  </div>
+                  <div className='text-white/90 text-sm md:text-base'>
+                    {benefit.title}
+                  </div>
                 </div>
-                <div className='text-white/90 text-sm md:text-base'>
-                  {benefit.title}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -212,7 +218,7 @@ export default function ServicesPage() {
 
       {/* Why Choose Us */}
       <section className='py-20 px-4 bg-linear-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-16'>
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
               Why Choose Us
@@ -260,8 +266,8 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className='py-20 px-4'>
-        <div className='max-w-4xl mx-auto'>
+      <section className='py-20 px-4 bg-linear-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'>
+        <div className='max-w-4xl mx-auto '>
           <div className='bg-linear-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-black rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden'>
             <div className='absolute inset-0 bg-linear-to-r from-blue-500/10 to-indigo-500/10 dark:from-amber-500/10 dark:to-orange-500/10'></div>
             <div className='relative z-10'>

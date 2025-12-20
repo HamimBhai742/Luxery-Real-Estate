@@ -84,7 +84,7 @@ export default function AboutPage() {
         </div>
 
         {/* Content */}
-        <div className='relative z-10 max-w-4xl mx-auto px-4 text-center pt-20'>
+        <div className='relative z-10 max-w-4xl mx-auto px-4 lg:px-8 text-center pt-20'>
           <h1 className='text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight'>
             Redefining Luxury
             <br />
@@ -117,15 +117,15 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className='py-20 px-4'>
-        <div className='max-w-7xl mx-auto'>
+      <section className='py-20'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <StatsCounter stats={stats} />
         </div>
       </section>
 
       {/* Story Section */}
-      <section className='py-20 px-4'>
-        <div className='max-w-7xl mx-auto'>
+      <section className='py-20 '>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div className='space-y-6'>
               <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white'>
@@ -174,8 +174,8 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className='py-20 px-4 bg-linear-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'>
-        <div className='max-w-7xl mx-auto'>
+      <section className='py-20 bg-linear-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-16'>
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
               Our Core Values
@@ -206,8 +206,8 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className='py-20 px-4'>
-        <div className='max-w-7xl mx-auto'>
+      <section className='py-20'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-16'>
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
               Meet Our Team
@@ -225,8 +225,8 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className='py-20 px-4'>
-        <div className='max-w-4xl mx-auto'>
+      <section className='py-20'>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='bg-linear-to-r from-blue-600 to-indigo-600 dark:from-amber-500 dark:to-amber-600 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden'>
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
             <div className='relative z-10'>

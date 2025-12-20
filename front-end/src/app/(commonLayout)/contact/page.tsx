@@ -155,7 +155,7 @@ export default function ContactPage() {
 
       {/* Contact Methods */}
       <section className='py-20 px-4'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
             {contactMethods.map((method, idx) => (
               <a
@@ -183,7 +183,7 @@ export default function ContactPage() {
 
       {/* Form & Info Section */}
       <section className='py-20 px-4'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-12'>
             {/* Contact Form */}
             <div className='lg:col-span-3'>
@@ -267,7 +267,7 @@ export default function ContactPage() {
         id='map'
         className='py-20 px-4 bg-linear-to-b from-white to-slate-50 dark:from-black dark:to-gray-900'
       >
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-12'>
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
               Our Locations

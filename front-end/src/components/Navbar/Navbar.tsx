@@ -11,6 +11,8 @@ import toast from 'react-hot-toast';
 import { ModeToggle } from '../toggole-mode';
 import Swal from 'sweetalert2';
 import { getAuth } from '@/helpers/getAuth';
+import { useTheme } from 'next-themes';
+import { FiMoon, FiSun } from 'react-icons/fi';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
@@ -24,6 +26,7 @@ const Navbar = () => {
     },
   });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
   const pathName = usePathname();
 
   useEffect(() => {
@@ -153,9 +156,17 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-
-          {/* CTA Buttons */}
-          <ModeToggle />
+          {/* <ModeToggle /> */}
+          <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className='p-3 '
+          >
+            {theme === 'dark' ? (
+              <FiSun className='text-amber-500 text-xl' />
+            ) : (
+              <FiMoon className='text-blue-600 text-xl' />
+            )}
+          </button>
           <div className='max-sm:hidden'>
             {user?.success ? (
               <div className='hidden md:flex items-center space-x-4'>

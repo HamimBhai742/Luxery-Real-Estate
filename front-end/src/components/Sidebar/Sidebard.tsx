@@ -20,6 +20,9 @@ import Swal from 'sweetalert2';
 import { getMe } from '@/helpers/getMe';
 import { ImProfile } from 'react-icons/im';
 import { FaBlog } from 'react-icons/fa6';
+import { useTheme } from 'next-themes';
+import { FiSun, FiMoon } from 'react-icons/fi';
+import { ModeToggle } from '../toggole-mode';
 
 interface MenuItem {
   id: string;
@@ -32,6 +35,7 @@ interface MenuItem {
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
   const [user, setUser] = useState({
     success: false,
     data: {
@@ -199,13 +203,13 @@ const Sidebar = () => {
       {/* Mobile Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='lg:hidden fixed top-4 left-4 z-50 p-3 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300'
+        className='lg:hidden fixed top-4 left-4 z-50 p-3 rounded-xl bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-gray-700 shadow-2xl hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300'
         aria-label='Toggle Sidebar'
       >
         {isOpen ? (
-          <FiX className='w-6 h-6 text-white' />
+          <FiX className='w-6 h-6 text-white dark:text-gray-200' />
         ) : (
-          <FiMenu className='w-6 h-6 text-white' />
+          <FiMenu className='w-6 h-6 text-white dark:text-gray-200' />
         )}
       </button>
 
@@ -222,9 +226,9 @@ const Sidebar = () => {
         className={`
           fixed top-0 left-0 h-screen z-40
           w-72 lg:w-80
-          bg-linear-to-br from-white/10 via-white/5 to-transparent
+          bg-white/10 dark:bg-gray-900/90
           backdrop-blur-2xl
-          border-r border-white/20
+          border-r border-white/20 dark:border-gray-700
           shadow-2xl
           transition-transform duration-500 ease-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
@@ -236,22 +240,34 @@ const Sidebar = () => {
         {/* Content Container */}
         <div className='relative h-full flex flex-col p-6'>
           {/* Logo Section */}
-          <div className='mb-12 mt-4'>
+          <div className='mb-12 mt-4 flex items-center justify-between'>
             <Link href='/' className='group block'>
               <div className='flex items-center space-x-3'>
                 <div className='w-12 h-12 rounded-2xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300'>
                   <span className='text-white font-bold text-xl'>L</span>
                 </div>
                 <div>
-                  <h1 className='text-white font-bold text-xl tracking-tight'>
+                  <h1 className='text-white dark:text-gray-100 font-bold text-xl tracking-tight'>
                     Luxury Estate
                   </h1>
-                  <p className='text-white/60 text-xs'>
+                  <p className='text-white/60 dark:text-gray-400 text-xs'>
                     {user?.data?.role === 'ADMIN' ? 'Admin' : 'User'} Dashboard
                   </p>
                 </div>
               </div>
             </Link>
+            <div>
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+               
+              >
+                {theme === 'dark' ? (
+                  <FiSun className='text-yellow-300 text-xl' />
+                ) : (
+                  <FiMoon className='text-white text-xl' />
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Navigation Menu */}
@@ -266,8 +282,8 @@ const Sidebar = () => {
                   transition-all duration-300
                   ${
                     isActive(item.href)
-                      ? 'bg-white/20 shadow-lg shadow-blue-500/20'
-                      : 'hover:bg-white/10'
+                      ? 'bg-white/20 dark:bg-gray-700/50 shadow-lg shadow-blue-500/20'
+                      : 'hover:bg-white/10 dark:hover:bg-gray-700/30'
                   }
                 `}
                 style={{
@@ -285,8 +301,8 @@ const Sidebar = () => {
                   shrink-0 transition-all duration-300
                   ${
                     isActive(item.href)
-                      ? 'text-white scale-110'
-                      : 'text-white/70 group-hover:text-white group-hover:scale-110'
+                      ? 'text-white dark:text-gray-100 scale-110'
+                      : 'text-white/70 dark:text-gray-300 group-hover:text-white dark:group-hover:text-gray-100 group-hover:scale-110'
                   }
                 `}
                 >
@@ -299,8 +315,8 @@ const Sidebar = () => {
                   flex-1 font-medium transition-all duration-300
                   ${
                     isActive(item.href)
-                      ? 'text-white'
-                      : 'text-white/70 group-hover:text-white'
+                      ? 'text-white dark:text-gray-100'
+                      : 'text-white/70 dark:text-gray-300 group-hover:text-white dark:group-hover:text-gray-100'
                   }
                 `}
                 >
@@ -313,8 +329,8 @@ const Sidebar = () => {
                   w-4 h-4 transition-all duration-300
                   ${
                     isActive(item.href)
-                      ? 'text-white opacity-100 translate-x-0'
-                      : 'text-white/50 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
+                      ? 'text-white dark:text-gray-100 opacity-100 translate-x-0'
+                      : 'text-white/50 dark:text-gray-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'
                   }
                 `}
                 />
@@ -328,15 +344,19 @@ const Sidebar = () => {
           {/* Bottom Section */}
           <button
             onClick={handleSignOutBtn}
-            className='mt-auto pt-6 border-t border-white/10 hover:cursor-pointer'
+            className='mt-auto pt-6 border-t border-white/10 dark:border-gray-700 hover:cursor-pointer'
           >
-            <div className='px-5 flex items-center gap-3 py-4 rounded-2xl bg-linear-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/10'>
+            <div className='px-5 flex items-center gap-3 py-4 rounded-2xl bg-white/10 dark:bg-gray-700/30 backdrop-blur-xl border border-white/10 dark:border-gray-600'>
               <div className='p-2 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg'>
-                <IoIosLogOut className='text-2xl' />
+                <IoIosLogOut className='text-2xl text-white' />
               </div>
               <div>
-                <h3 className='font-semibold text-left'>{user?.data?.name}</h3>
-                <p className='text-sm text-white/60'>{user?.data?.email}</p>
+                <h3 className='font-semibold text-left text-white dark:text-gray-100'>
+                  {user?.data?.name}
+                </h3>
+                <p className='text-sm text-white/60 dark:text-gray-400'>
+                  {user?.data?.email}
+                </p>
               </div>
             </div>
           </button>
