@@ -42,7 +42,7 @@ export default function InteractiveMap() {
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
   return (
-    <div className='relative w-full h-[500px] bg-linear-to-br from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl overflow-hidden border border-white/20 dark:border-gray-700/20 shadow-2xl'>
+    <div className='relative w-full h-[500px] bg-linear-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl overflow-hidden border border-white/20 dark:border-gray-700/20 shadow-2xl'>
       {/* Map Background Pattern */}
       <div className='absolute inset-0 opacity-20'>
         <svg
@@ -62,7 +62,7 @@ export default function InteractiveMap() {
                 fill='none'
                 stroke='currentColor'
                 strokeWidth='0.5'
-                className='text-amber-400 dark:text-amber-600'
+                className='text-blue-400 dark:text-amber-600'
               />
             </pattern>
           </defs>
@@ -80,7 +80,7 @@ export default function InteractiveMap() {
           stroke='currentColor'
           strokeWidth='2'
           strokeDasharray='5,5'
-          className='text-amber-400/50 dark:text-amber-600/50'
+          className='text-blue-400/50 dark:text-amber-600/50'
         />
         <line
           x1='85%'
@@ -90,7 +90,7 @@ export default function InteractiveMap() {
           stroke='currentColor'
           strokeWidth='2'
           strokeDasharray='5,5'
-          className='text-amber-400/50 dark:text-amber-600/50'
+          className='text-blue-400/50 dark:text-amber-600/50'
         />
       </svg>
 
@@ -105,11 +105,11 @@ export default function InteractiveMap() {
         >
           {/* Pulse Ring */}
           <div className='absolute inset-0 w-12 h-12 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2'>
-            <div className='absolute inset-0 bg-amber-500 rounded-full animate-ping opacity-75'></div>
+            <div className='absolute inset-0 bg-blue-500 dark:bg-amber-500 rounded-full animate-ping opacity-75'></div>
           </div>
 
           {/* Marker Pin */}
-          <div className='relative z-10 w-12 h-12 bg-linear-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/50 group-hover:scale-125 transition-transform duration-300'>
+          <div className='relative z-10 w-12 h-12 bg-linear-to-br from-blue-500 to-purple-600 dark:from-amber-400 dark:to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/50 group-hover:scale-125 transition-transform duration-300'>
             <svg
               className='w-6 h-6 text-white'
               fill='none'
@@ -199,7 +199,7 @@ export default function InteractiveMap() {
       {/* Legend */}
       <div className='absolute bottom-6 left-6 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-xl p-4 border border-white/20 dark:border-gray-800/20 shadow-lg'>
         <div className='flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300'>
-          <div className='w-3 h-3 bg-amber-500 rounded-full animate-pulse'></div>
+          <div className='w-3 h-3 bg-blue-500 dark:bg-amber-500 rounded-full animate-pulse'></div>
           <span>Our Office Locations</span>
         </div>
       </div>
