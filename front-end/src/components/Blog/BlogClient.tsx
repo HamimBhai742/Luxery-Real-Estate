@@ -87,7 +87,7 @@ const BlogClient = () => {
       {/* Hero Section */}
       <div className='relative pt-20 px-4'>
         <div className='container mx-auto text-center'>
-          <h1 className='text-3xl md:text-6xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6'>
+          <h1 className='text-3xl md:text-6xl font-bold bg-linear-to-r dark:from-amber-400 dark:to-amber-600 from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6'>
             Real Estate Insights
           </h1>
           <p className='text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8'>
@@ -150,12 +150,7 @@ const BlogClient = () => {
                           fill
                           className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
                         />
-                        {/* <div className='absolute top-6 left-6'>
-                          <span className='px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-full'>
-                            Featured
-                          </span>
-                        </div> */}
-                      </div>
+                                             </div>
                       <div className='p-8 lg:px-12 flex flex-col justify-center'>
                         <div className='flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4'>
                           <div className='flex items-center gap-2'>
@@ -172,9 +167,9 @@ const BlogClient = () => {
                           {blog.category}
                         </span>
 
-                        <h3 className='text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 leading-tight'>
+                        <Link href={`/blog/${blog.slug}`} className='text-2xl lg:text-3xl font-bold text-gray-900 bg-linear-to-r dark:from-amber-400 dark:to-amber-600 dark:text-white mb-4 leading-tight dark:hover:from-amber-500 dark:hover:to-amber-600 bg-clip-text dark:hover:text-transparent'>
                           {blog.title}
-                        </h3>
+                        </Link>
 
                         <p className='text-gray-600 dark:text-gray-400 mb-6 leading-relaxed'>
                           {blog.excerpt}
@@ -193,7 +188,7 @@ const BlogClient = () => {
 
                         <Link
                           href={`/blog/${blog.slug}`}
-                          className='inline-flex text-sm items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:gap-3 transition-all duration-300'
+                          className='inline-flex text-sm items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:gap-3 transition-all duration-300 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text dark:hover:from-blue-700 dark:hover:to-purple-700 dark:hover:text-transparent'
                         >
                           Read more
                           <FiArrowRight size={14} />
