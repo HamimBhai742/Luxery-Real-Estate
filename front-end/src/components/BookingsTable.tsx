@@ -22,6 +22,7 @@ import { ImSpinner9 } from 'react-icons/im';
 import { MdBedroomParent, MdBathtub } from 'react-icons/md';
 import BookingsTableSkeleton from './BookingsTableSkeleton';
 import { getPayment } from '@/helpers/getPayment';
+import { useRouter } from 'next/navigation';
 
 export interface BookingStats {
   cancelledBookings: number;
@@ -39,6 +40,7 @@ export default function BookingsTable() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(6);
+  const router = useRouter();
   const [bookingStats, setBookingStats] = useState<BookingStats | null>(null);
   const [processingBookingId, setProcessingBookingId] = useState<string | null>(
     null
@@ -79,14 +81,15 @@ export default function BookingsTable() {
     setProcessingBookingId(bookingId);
     try {
       setPaymentLoading(true);
-      const data = await getPayment(bookingId);
-      if (data.success) {
-        window.location.href = data.data.paymentUrl;
-      } else {
-        toast.error(
-          data.message || 'Failed to initiate payment. Please try again.'
-        );
-      }
+      router.push(`/payment/check-out/${bookingId}`);
+      // const data = await getPayment(bookingId);
+      // if (data.success) {
+      //   window.location.href = data.data.paymentUrl;
+      // } else {
+      //   toast.error(
+      //     data.message || 'Failed to initiate payment. Please try again.'
+      //   );
+      // }
     } catch (error) {
       toast.error('Failed to initiate payment. Please try again.');
     } finally {
@@ -97,8 +100,6 @@ export default function BookingsTable() {
   if (loading) {
     return <BookingsTableSkeleton />;
   }
-
-
 
   return (
     <div className='space-y-6'>

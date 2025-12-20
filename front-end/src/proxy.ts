@@ -13,7 +13,6 @@ export async function proxy(request: NextRequest) {
   // ---- FIXED COOKIE READ ----
   const cookieStore = await cookies();
   const token = await cookieStore.get('accessToken')?.value;
-  console.log(token)
   if (!token) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
