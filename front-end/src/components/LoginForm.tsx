@@ -230,6 +230,29 @@ export default function LoginForm() {
           </Link>
         </div>
 
+        {/* Demo Credentials */}
+        <div className='bg-blue-50 dark:bg-gray-800/50 rounded-xl p-4 border border-blue-200 dark:border-gray-700'>
+          <h3 className='text-sm font-semibold text-blue-800 dark:text-blue-400 mb-3'>
+            Demo Credentials
+          </h3>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+            <button
+              type='button'
+              onClick={() => setFormData({ email: 'mdhamim5088@gmail.com', password: 'Hamim@742' })}
+              className='px-3 py-2 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-200 dark:hover:bg-gray-600 transition-colors'
+            >
+              Admin Login
+            </button>
+            <button
+              type='button'
+              onClick={() => setFormData({ email: 'mdhamim3388@gmail.com', password: 'Hamim@3093' })}
+              className='px-3 py-2 bg-green-100 dark:bg-gray-700 text-green-800 dark:text-green-400 rounded-lg text-sm font-medium hover:bg-green-200 dark:hover:bg-gray-600 transition-colors'
+            >
+              User Login
+            </button>
+          </div>
+        </div>
+
         {/* Submit Button */}
         <button
           type='submit'
@@ -245,17 +268,6 @@ export default function LoginForm() {
           )}
         </button>
 
-        {/* Divider */}
-        <div className='relative my-6'>
-          <div className='absolute inset-0 flex items-center'>
-            <div className='w-full border-t border-gray-300 dark:border-gray-600'></div>
-          </div>
-          <div className='relative flex justify-center text-sm'>
-            <span className='px-4 bg-transparent text-gray-600 dark:text-gray-400'>
-              Or continue with
-            </span>
-          </div>
-        </div>
       </form>
 
       {/* Register Link */}

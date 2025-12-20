@@ -160,17 +160,16 @@ export default function Profile() {
       <div className='max-w-5xl mx-auto'>
         {/* Header Card */}
         <div className='bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20 dark:border-gray-700/50'>
-          <div className='relative h-48 bg-linear-to-r from-gray-600 via-purple-600 to-gray-600'>
+          <div className='relative h-48 bg-linear-to-r dark:from-gray-600 dark:via-purple-600 dark:to-gray-600 '>
             <div className='absolute inset-0 bg-black/10'></div>
             <div className='absolute top-4 right-4 flex gap-2'>
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className='p-3 rounded-xl bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all'
               >
                 {theme === 'dark' ? (
                   <FiSun className='text-yellow-300 text-xl' />
                 ) : (
-                  <FiMoon className='text-white text-xl' />
+                  <FiMoon className='text-blue-500 text-xl' />
                 )}
               </button>
             </div>

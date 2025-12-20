@@ -3,8 +3,8 @@ import React from 'react';
 
 const SingleBlogSkeleton: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="min-h-screen py-20 bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
         {/* Back Button Skeleton */}
         <div className="flex items-center gap-2 mb-8">
           <div className="w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
@@ -28,7 +28,7 @@ const SingleBlogSkeleton: React.FC = () => {
               <div className="w-full h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
               <div className="w-3/4 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
             </div>
-            
+
             {/* Excerpt Skeleton */}
             <div className="space-y-2 mb-6">
               <div className="w-full h-5 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
@@ -67,7 +67,7 @@ const SingleBlogSkeleton: React.FC = () => {
               <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
               <div className="w-4/5 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
             </div>
-            
+
             <div className="space-y-3">
               <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
               <div className="w-5/6 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
@@ -77,7 +77,7 @@ const SingleBlogSkeleton: React.FC = () => {
 
             {/* Heading Skeleton */}
             <div className="w-2/3 h-6 bg-gray-300 dark:bg-gray-600 rounded animate-pulse mt-8" />
-            
+
             <div className="space-y-3">
               <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
               <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />

@@ -227,7 +227,7 @@ const Properties = () => {
                     onChange={(e) => setLimit(Number(e.target.value))}
                     name=''
                     id=''
-                    className='select'
+                    className='select bg-white  dark:bg-white/5'
                   >
                     <option value={10}>10</option>
                     <option value={20}>20</option>

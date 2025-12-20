@@ -12,6 +12,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'timeago.js';
+import { useRouter } from 'next/navigation';
 
 interface Blog {
   id: string;
@@ -32,7 +33,8 @@ interface SingleBlogClientProps {
 
 const SingleBlogClient: React.FC<SingleBlogClientProps> = ({ blog }) => {
   const blogUrl = `${window.location.origin}/blog/${blog.slug}`;
-  const openSharePopup = (url:string) => {
+  const router = useRouter();
+  const openSharePopup = (url: string) => {
     window.open(url, '_blank', 'width=600,height=500,scrollbars=yes');
   };
 
@@ -48,15 +50,29 @@ const SingleBlogClient: React.FC<SingleBlogClientProps> = ({ blog }) => {
   )}&text=${encodeURIComponent(blog.title)}`;
   return (
     <div className='min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900'>
-      <div className='container mx-auto px-4 py-20 max-w-4xl'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20'>
         {/* Back Button */}
-        <Link
-          href='/blog'
-          className='inline-flex items-center gap-2 mb-4 text-blue-600 dark:text-amber-600 hover:text-blue-800 dark:hover:text-amber-500 transition-colors group'
-        >
-          <FiArrowLeft className='group-hover:-translate-x-1 transition-transform' />
-          Back to Blog
-        </Link>
+        <div>
+          <button
+            onClick={() => router.back()}
+            className='inline-flex items-center gap-2 mb-6 text-blue-600 dark:text-amber-600 hover:text-blue-800 dark:hover:text-amber-500 transition-colors'
+          >
+            <svg
+              className='w-5 h-5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 19l-7-7 7-7'
+              />
+            </svg>
+            Back to Blogs
+          </button>
+        </div>
 
         {/* Hero Section */}
         <div className='bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/30 overflow-hidden mb-8'>
@@ -142,20 +158,26 @@ const SingleBlogClient: React.FC<SingleBlogClientProps> = ({ blog }) => {
             Share this article
           </h3>
           <div className='flex flex-wrap gap-3'>
-            <button className='px-4 py-2 bg-linear-to-r from-blue-500 to-blue-600 dark:from-amber-500 dark:to-amber-600 dark:hover:opacity-85 text-white rounded-lg transition-colors flex items-center gap-2'  onClick={() => openSharePopup(twitterShareUrl)}>
-              <FiTwitter className='w-5 h-5' />
-              <span>Share on Twitter</span>{' '}
+            <button
+              className='px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-amber-500 dark:to-amber-600 text-white rounded-lg transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-lg hover:-translate-y-1 group'
+              onClick={() => openSharePopup(twitterShareUrl)}
+            >
+              <FiTwitter className='w-5 h-5 group-hover:rotate-12 transition-transform duration-300' />
+              <span>Share on Twitter</span>
             </button>
             <button
-              className='px-4 py-2 bg-linear-to-r from-blue-500 to-blue-600 dark:from-amber-500 dark:to-amber-600 dark:hover:opacity-85 text-white rounded-lg transition-colors flex items-center gap-2'
+              className='px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-amber-500 dark:to-amber-600 text-white rounded-lg transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-lg hover:-translate-y-1 group'
               onClick={() => openSharePopup(fbShareUrl)}
             >
-              <FiFacebook className='w-5 h-5' />
+              <FiFacebook className='w-5 h-5 group-hover:rotate-12 transition-transform duration-300' />
               <span>Share on Facebook</span>
             </button>
-            <button className='px-4 py-2 bg-linear-to-r from-blue-500 to-blue-600 dark:from-amber-500 dark:to-amber-600 dark:hover:opacity-85 text-white rounded-lg transition-colors flex items-center gap-2'  onClick={() => openSharePopup(linkedinShareUrl)}>
-              <FiLinkedin className='w-5 h-5' />
-              <span>Share on LinkedIn</span>{' '}
+            <button
+              className='px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-amber-500 dark:to-amber-600 text-white rounded-lg transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-lg hover:-translate-y-1 group'
+              onClick={() => openSharePopup(linkedinShareUrl)}
+            >
+              <FiLinkedin className='w-5 h-5 group-hover:rotate-12 transition-transform duration-300' />
+              <span>Share on LinkedIn</span>
             </button>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { createBooking } from '@/helpers/createBooking';
 import { Property } from '@/types/property';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import  { useState } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
 
@@ -39,14 +39,33 @@ const CardDetails = ({ property }: { property: Property }) => {
   return (
     <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div>
+          <button
+            onClick={() => router.back()}
+            className='inline-flex items-center gap-2 mb-6 text-blue-600 dark:text-amber-600 hover:text-blue-800 dark:hover:text-amber-500 transition-colors'
+          >
+            <svg
+              className='w-5 h-5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 19l-7-7 7-7'
+              />
+            </svg>
+            Back to Properties
+          </button>
+        </div>
         {/* Image Gallery */}
         <div className='mb-12'>
           <div className='relative h-[500px] bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-2xl overflow-hidden mb-4'>
             <div className='absolute inset-0 flex items-center justify-center text-blue-600 dark:text-amber-400'>
               <Image
-                src={
-                  property?.images[activeImage] || '/placeholder-image.png'
-                }
+                src={property?.images[activeImage] || '/placeholder-image.png'}
                 alt={`Property Image ${activeImage + 1}`}
                 fill
                 className='object-cover'
@@ -59,18 +78,19 @@ const CardDetails = ({ property }: { property: Property }) => {
           <div className='grid grid-cols-4 gap-4'>
             {property?.images.map((_, idx) => (
               <Image
-                src={property?.images[idx]|| '/placeholder-image.png'}
+                src={property?.images[idx] || '/placeholder-image.png'}
                 width={100}
                 height={100}
                 alt={`Property Image ${idx + 1}`}
                 key={idx}
                 onClick={() => setActiveImage(idx)}
                 className={`h-24 w-full bg-linear-to-br from-blue-100 to-indigo-200 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg ${
-                  activeImage === idx ? 'ring-4 ring-blue-500 dark:ring-amber-500' : ''
+                  activeImage === idx
+                    ? 'ring-4 ring-blue-500 dark:ring-amber-500'
+                    : ''
                 }`}
               />
             ))}
-
           </div>
         </div>
 

@@ -167,7 +167,7 @@ const BlogClient = () => {
                           {blog.category}
                         </span>
 
-                        <Link href={`/blog/${blog.slug}`} className='text-2xl lg:text-3xl font-bold text-gray-900 bg-linear-to-r dark:from-amber-400 dark:to-amber-600 dark:text-white mb-4 leading-tight dark:hover:from-amber-500 dark:hover:to-amber-600 bg-clip-text dark:hover:text-transparent'>
+                        <Link href={`/blog/${blog.slug}`} className='text-2xl lg:text-3xl font-bold text-gray-900 bg-linear-to-r dark:from-amber-400 dark:to-amber-600 dark:text-white mb-4 leading-tight dark:hover:from-amber-500 dark:hover:to-amber-600 bg-clip-text dark:hover:text-transparent hover:from-blue-500 hover:to-purple-600 hover:text-transparent hover:underline'>
                           {blog.title}
                         </Link>
 
@@ -188,7 +188,7 @@ const BlogClient = () => {
 
                         <Link
                           href={`/blog/${blog.slug}`}
-                          className='inline-flex text-sm items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:gap-3 transition-all duration-300 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text dark:hover:from-blue-700 dark:hover:to-purple-700 dark:hover:text-transparent'
+                          className='inline-flex text-sm items-center gap-2 text-blue-600 dark:text-amber-500 font-medium hover:gap-3 transition-all duration-300 bg-linear-to-r from-blue-500 to-purple-600 bg-clip-text dark:hover:from-amber-500 dark:hover:to-amber-600 dark:hover:text-transparent'
                         >
                           Read more
                           <FiArrowRight size={14} />
