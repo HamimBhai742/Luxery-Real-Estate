@@ -42,7 +42,19 @@ const getMyBookings = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleBooking = createAsyncFn(async (req: Request, res: Response) => {
+  const { bookingId } = req.params;
+  const booking = await bookingServices.getSingleBooking(bookingId);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Booking fetched successfully',
+    data: booking,
+  });
+});
+
 export const bookingController = {
   createBooking,
   getMyBookings,
+  getSingleBooking,
 };

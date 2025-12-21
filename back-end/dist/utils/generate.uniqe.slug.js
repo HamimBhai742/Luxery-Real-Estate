@@ -12,10 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateUniqueSlug = void 0;
 const prisma_configs_1 = require("../config/prisma.configs");
 const generateUniqueSlug = (title) => __awaiter(void 0, void 0, void 0, function* () {
-    const baseSlug = title.toLowerCase().split(' ').join('-');
+    const baseSlug = title.toLowerCase().trim().split(' ').join('-');
     let counter = 0;
     let slug = baseSlug;
-    while (yield prisma_configs_1.prisma.property.findUnique({ where: { slug } })) {
+    while ((yield prisma_configs_1.prisma.property.findUnique({ where: { slug } })) ||
+        (yield prisma_configs_1.prisma.blog.findUnique({ where: { slug } }))) {
         counter++;
         slug = `${baseSlug}-${counter}`;
     }

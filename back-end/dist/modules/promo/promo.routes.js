@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.promoRoutes = void 0;
+const express_1 = require("express");
+const zod_validation_1 = require("../../middleware/zod.validation");
+const promo_schema_1 = require("./promo.schema");
+const promo_controller_1 = require("./promo.controller");
+const check_auth_1 = require("../../middleware/check.auth");
+const client_1 = require("@prisma/client");
+const router = (0, express_1.Router)();
+router.post('/create', (0, zod_validation_1.validateRequest)(promo_schema_1.promoSchema), (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), promo_controller_1.promoController.createPromo);
+router.post('/use', (0, check_auth_1.checkAuth)(client_1.Role.USER), promo_controller_1.promoController.usePromo);
+router.post('/usage-promo', (0, check_auth_1.checkAuth)(client_1.Role.USER), promo_controller_1.promoController.createUsePromo);
+exports.promoRoutes = router;

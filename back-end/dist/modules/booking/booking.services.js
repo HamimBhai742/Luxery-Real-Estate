@@ -34,7 +34,7 @@ const createBooking = (userId, propertyId) => __awaiter(void 0, void 0, void 0, 
         const data = {
             userId: Number(userId),
             propertyId,
-            totalAmount: property === null || property === void 0 ? void 0 : property.price,
+            totalAmount: Number(property === null || property === void 0 ? void 0 : property.price),
         };
         const booking = yield tx.booking.create({ data });
         yield tx.property.update({
@@ -49,7 +49,7 @@ const createBooking = (userId, propertyId) => __awaiter(void 0, void 0, void 0, 
                 bookingId: booking.id,
                 transactionId: tranx(),
                 userId,
-                amount: property === null || property === void 0 ? void 0 : property.price,
+                amount: Number(property === null || property === void 0 ? void 0 : property.price),
             },
         });
         return booking;
@@ -118,7 +118,15 @@ const getMyBookings = (userId, filters, options) => __awaiter(void 0, void 0, vo
         },
     };
 });
+const getSingleBooking = (bookingId) => __awaiter(void 0, void 0, void 0, function* () {
+    const booking = yield prisma_configs_1.prisma.booking.findUnique({
+        where: { id: bookingId },
+        include: { property: true },
+    });
+    return booking;
+});
 exports.bookingServices = {
     createBooking,
     getMyBookings,
+    getSingleBooking,
 };

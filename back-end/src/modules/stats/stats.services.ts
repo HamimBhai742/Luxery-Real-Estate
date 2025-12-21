@@ -20,18 +20,18 @@ const getAdminStats = async () => {
   const today = new Date();
   const last7days = new Date();
   last7days.setDate(today.getDate() - 6);
-
+  const endOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 1
+  );
   const dailyRevenue = await prisma.payment.groupBy({
     by: ['updatedAt'],
     where: {
       status: 'succeeded',
       updatedAt: {
         gte: last7days,
-        lt: new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          today.getDate() + 1
-        ),
+        lt: endOfToday,
       },
     },
     _sum: {
@@ -39,19 +39,24 @@ const getAdminStats = async () => {
     },
   });
 
+  // 🧠 JS level re-group by date
+  const revenueByDate = dailyRevenue.reduce(
+    (acc: Record<string, number>, item) => {
+      const date = item.updatedAt.toISOString().split('T')[0];
+      acc[date] = (acc[date] || 0) + Number(item._sum.amount);
+      return acc;
+    },
+    {}
+  );
+
   const chartData = Array.from({ length: 7 }).map((_, i) => {
     const date = new Date();
     date.setDate(today.getDate() - (6 - i));
-
     const formatted = date.toISOString().split('T')[0];
-
-    const found = dailyRevenue.find(
-      (d) => d.updatedAt.toISOString().split('T')[0] === formatted
-    );
 
     return {
       date: formatted,
-      revenue: found?._sum.amount || 0,
+      revenue: revenueByDate[formatted] || 0,
     };
   });
 

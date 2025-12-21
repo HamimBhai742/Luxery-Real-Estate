@@ -8,4 +8,5 @@ const client_1 = require("@prisma/client");
 const router = (0, express_1.Router)();
 router.post('/create-booking', (0, check_auth_1.checkAuth)(client_1.Role.USER), booking_controller_1.bookingController.createBooking);
 router.get('/my-bookings', (0, check_auth_1.checkAuth)(client_1.Role.USER), booking_controller_1.bookingController.getMyBookings);
+router.get('/:bookingId', (0, check_auth_1.checkAuth)(client_1.Role.USER), booking_controller_1.bookingController.getSingleBooking);
 exports.bookingRoutes = router;

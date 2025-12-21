@@ -17,4 +17,9 @@ router.get(
   bookingController.getMyBookings
 );
 
+router.get(
+  '/:bookingId',
+  checkAuth(Role.USER),
+  bookingController.getSingleBooking
+);
 export const bookingRoutes = router;

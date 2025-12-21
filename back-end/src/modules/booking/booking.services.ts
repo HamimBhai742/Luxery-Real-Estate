@@ -24,7 +24,7 @@ const createBooking = async (userId: number, propertyId: string) => {
     const data = {
       userId: Number(userId),
       propertyId,
-      totalAmount: property?.price as number,
+      totalAmount: Number(property?.price),
     };
     const booking = await tx.booking.create({ data });
     await tx.property.update({
@@ -39,7 +39,7 @@ const createBooking = async (userId: number, propertyId: string) => {
         bookingId: booking.id,
         transactionId: tranx(),
         userId,
-        amount: property?.price as number,
+        amount: Number(property?.price),
       },
     });
     return booking;
@@ -114,7 +114,16 @@ const getMyBookings = async (userId: number, filters: any, options: any) => {
   };
 };
 
+const getSingleBooking = async (bookingId: string) => {
+  const booking = await prisma.booking.findUnique({
+    where: { id: bookingId },
+    include: { property: true },
+  });
+  return booking;
+};
+
 export const bookingServices = {
   createBooking,
   getMyBookings,
+  getSingleBooking,
 };

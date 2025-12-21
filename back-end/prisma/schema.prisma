@@ -27,6 +27,7 @@ model User {
   isDeleted Boolean  @default(false)
   bookings  Booking[]
   payments  Payment[]
+  promos   PromoUsage[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -96,6 +97,29 @@ model Blog{
   updatedAt   DateTime  @updatedAt
 }
 
+model Promo {
+  id          String    @id @default(uuid())
+  code        String    @unique
+  discount    Float
+  validFrom   DateTime
+  validTo     DateTime
+
+  usage      PromoUsage[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model PromoUsage{
+  id          String    @id @default(uuid())
+  promoId     String
+  userId      Int
+  usedAt      DateTime  @default(now())
+
+  promo       Promo     @relation(fields: [promoId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+
+  @@unique([promoId, userId])
+}
 
 
 

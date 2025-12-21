@@ -6,6 +6,7 @@ import { bookingRoutes } from '../modules/booking/booking.routes';
 import { paymentRoutes } from '../modules/payment/payment.routes';
 import { statsRoutes } from '../modules/stats/stats.routes';
 import { blogRoutes } from '../modules/blog/blog.routes';
+import { promoRoutes } from '../modules/promo/promo.routes';
 export const router = Router();
 const routes = [
   {
@@ -35,6 +36,10 @@ const routes = [
   {
     path: '/blog',
     route: blogRoutes,
+  },
+  {
+    path: '/promo',
+    route: promoRoutes,
   },
 ];
 

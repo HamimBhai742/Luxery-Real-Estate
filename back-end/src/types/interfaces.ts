@@ -26,3 +26,5 @@ export interface IPagination {
   sortBy: string;
   sortOrder: string;
 }
+
+

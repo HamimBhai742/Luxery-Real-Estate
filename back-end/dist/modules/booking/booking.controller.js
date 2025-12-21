@@ -46,7 +46,18 @@ const getMyBookings = (0, create_async_fn_1.createAsyncFn)((req, res) => __await
         data: bookings,
     });
 }));
+const getSingleBooking = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { bookingId } = req.params;
+    const booking = yield booking_services_1.bookingServices.getSingleBooking(bookingId);
+    (0, send_response_1.sendResponse)(res, {
+        success: true,
+        statusCode: 200,
+        message: 'Booking fetched successfully',
+        data: booking,
+    });
+}));
 exports.bookingController = {
     createBooking,
     getMyBookings,
+    getSingleBooking,
 };
