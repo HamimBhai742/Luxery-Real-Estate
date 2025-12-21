@@ -82,15 +82,7 @@ export default function BookingsTable() {
     try {
       setPaymentLoading(true);
       router.push(`/payment/check-out/${bookingId}`);
-      // const data = await getPayment(bookingId);
-      // if (data.success) {
-      //   window.location.href = data.data.paymentUrl;
-      // } else {
-      //   toast.error(
-      //     data.message || 'Failed to initiate payment. Please try again.'
-      //   );
-      // }
-    } catch (error) {
+       } catch (error) {
       toast.error('Failed to initiate payment. Please try again.');
     } finally {
       setPaymentLoading(false);

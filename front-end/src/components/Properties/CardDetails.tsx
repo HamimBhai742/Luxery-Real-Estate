@@ -1,8 +1,9 @@
 'use client';
 import { createBooking } from '@/helpers/createBooking';
+import { getMe } from '@/helpers/getMe';
 import { Property } from '@/types/property';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
@@ -10,6 +11,7 @@ import { ImSpinner9 } from 'react-icons/im';
 const CardDetails = ({ property }: { property: Property }) => {
   const [activeImage, setActiveImage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const pathname = usePathname();
   const router = useRouter();
   const handleSubmit = async (id: string) => {
     try {
@@ -17,6 +19,13 @@ const CardDetails = ({ property }: { property: Property }) => {
       if (property.status === 'unavailable' || property.isBooked) {
         toast.error('This property is not available for booking.');
         setLoading(false);
+        return;
+      }
+      const user = await getMe();
+      if (!user?.data?.email) {
+        toast.error('Please login to book a property.');
+        setLoading(false);
+        router.push(`/login?redirect=${pathname}`);
         return;
       }
       const data = await createBooking(id);

@@ -1,5 +1,6 @@
 import CardDetails from '@/components/Properties/CardDetails';
 import { Property } from '@/types/property';
+
 interface PageProps {
   params: {
     slug: string;
@@ -15,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 const PropertiesDetailsPage = async ({ params }: PageProps) => {
-  const { slug } =await params;
+  const { slug } = await params;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/property/${slug}`,
     {
@@ -30,7 +31,7 @@ const PropertiesDetailsPage = async ({ params }: PageProps) => {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } =await params;
+  const { slug } = await params;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/property/${slug}`
   );

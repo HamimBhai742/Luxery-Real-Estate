@@ -13,6 +13,7 @@ export interface Booking {
     description: string;
     location: string;
     price: number;
+    images: string[];
     bedrooms: number;
     bathrooms: number;
     amenities: string[];

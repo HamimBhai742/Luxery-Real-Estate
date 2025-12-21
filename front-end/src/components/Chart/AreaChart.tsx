@@ -3,11 +3,7 @@
 import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
@@ -30,7 +26,12 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartAreaInteractive({ chartData }: { chartData: DailyRevenue[] }) {
+export function ChartAreaInteractive({
+  chartData,
+}: {
+  chartData: DailyRevenue[];
+}) {
+  console.log(chartData);
   const [timeRange] = React.useState('90d');
 
   const filteredData = chartData.filter((item) => {
@@ -46,7 +47,7 @@ export function ChartAreaInteractive({ chartData }: { chartData: DailyRevenue[] 
     startDate.setDate(startDate.getDate() - daysToSubtract);
     return date >= startDate;
   });
-
+  console.log(filteredData);
   return (
     <Card className='pt-0'>
       <CardHeader>

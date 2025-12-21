@@ -1,7 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 
-export const getPayment = async (bookingId: string) => {
+export const getPayment = async (bookingId: string, amount?: number) => {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
   const res = await fetch(
@@ -12,8 +12,7 @@ export const getPayment = async (bookingId: string) => {
         'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
-
-      body: JSON.stringify({ bookingId }),
+      body: JSON.stringify({ bookingId, amount }),
     }
   );
   const data = await res.json();

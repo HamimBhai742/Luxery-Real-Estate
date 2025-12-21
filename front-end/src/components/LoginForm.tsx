@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ImSpinner9 } from 'react-icons/im';
 import { setCookies } from '@/helpers/setCookies';
 
@@ -12,6 +12,7 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const validateEmail = (email: string) => {
     if (!email) return 'Email is required';
@@ -47,7 +48,7 @@ export default function LoginForm() {
         body: JSON.stringify(formData),
       });
       const user = await res.json();
-      console.log(user)
+      console.log(user);
       await setCookies(user?.data?.accessToken);
       if (!user?.success) {
         setIsLoading(false);
@@ -55,9 +56,14 @@ export default function LoginForm() {
       }
       if (user?.success) {
         toast.success(user?.message);
+        const redirectUrl = searchParams.get('redirect');
+        if (redirectUrl) {
+          setIsLoading(false);
+          router.push(redirectUrl);
+          return;
+        }
         setIsLoading(false);
-        // router.push(user?.data?.user?.role === 'ADMIN' ? '/dashboard' : '/');
-        window.location.replace(user?.data?.user?.role === 'ADMIN' ? '/dashboard' : '/')
+        router.push(user?.data?.user?.role === 'ADMIN' ? '/dashboard' : '/');
       }
     } catch (error) {
       console.log(error);
@@ -238,14 +244,24 @@ export default function LoginForm() {
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
             <button
               type='button'
-              onClick={() => setFormData({ email: 'mdhamim5088@gmail.com', password: 'Hamim@742' })}
+              onClick={() =>
+                setFormData({
+                  email: 'mdhamim5088@gmail.com',
+                  password: 'Hamim@742',
+                })
+              }
               className='px-3 py-2 bg-blue-100 dark:bg-gray-700 text-blue-800 dark:text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-200 dark:hover:bg-gray-600 transition-colors'
             >
               Admin Login
             </button>
             <button
               type='button'
-              onClick={() => setFormData({ email: 'mdhamim3388@gmail.com', password: 'Hamim@3093' })}
+              onClick={() =>
+                setFormData({
+                  email: 'mdhamim3388@gmail.com',
+                  password: 'Hamim@3093',
+                })
+              }
               className='px-3 py-2 bg-green-100 dark:bg-gray-700 text-green-800 dark:text-green-400 rounded-lg text-sm font-medium hover:bg-green-200 dark:hover:bg-gray-600 transition-colors'
             >
               User Login
@@ -267,7 +283,6 @@ export default function LoginForm() {
             'Sign In'
           )}
         </button>
-
       </form>
 
       {/* Register Link */}
