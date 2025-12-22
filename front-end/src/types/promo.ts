@@ -4,6 +4,7 @@ export interface Promo {
   discount: number;
   validFrom: string;
   validTo: string;
+  isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
 }

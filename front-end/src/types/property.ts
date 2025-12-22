@@ -1,3 +1,5 @@
+import { Review } from './review';
+
 export interface Property {
   id: string;
   name: string;
@@ -10,6 +12,7 @@ export interface Property {
   bathrooms: number;
   views: number;
   amenities: string[];
+  review?: Review;
   status: 'available' | 'unavailable' | 'booked' | 'sold';
   isBooked: boolean;
   createdAt: string;

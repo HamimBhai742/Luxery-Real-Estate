@@ -231,7 +231,7 @@ const Sidebar = () => {
       {/* Sidebar */}
       <aside
         className={`
-           top-0 left-0 h-screen z-40
+          fixed top-0 left-0 h-screen z-40
           w-72 lg:w-80
           bg-white/10 dark:bg-gray-900/90
           backdrop-blur-2xl

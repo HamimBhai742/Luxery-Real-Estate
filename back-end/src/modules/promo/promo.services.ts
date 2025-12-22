@@ -23,7 +23,11 @@ const usePromo = async (code: string, bookingId: string, userId: number) => {
   if (!promos) {
     throw new AppError('Invalid Promo', httpStatusCodes.NOT_FOUND);
   }
-  //check expirey
+  //is deleted
+  if (promos.isDeleted) {
+    throw new AppError('Promo is deleted', httpStatusCodes.NOT_FOUND);
+  }
+  //is expired
   const currentDate = new Date();
   if (promos.validTo < currentDate) {
     throw new AppError('Promo Expired', httpStatusCodes.NOT_FOUND);
@@ -81,6 +85,33 @@ const createUsePromo = async (code: string, userId: number) => {
   });
 };
 
+const updatePromo = async (id: string, payload: any) => {
+  const promoCode = payload.code.toUpperCase();
+  const discount = Number(payload.discount);
+  const validFrom = new Date(payload.validFrom);
+  const validTo = new Date(payload.validTo);
+  const promos = await prisma.promo.update({
+    where: { id },
+    data: {
+      code: promoCode,
+      discount,
+      validFrom,
+      validTo,
+    },
+  });
+  return promos;
+};
+
+const deletePromo = async (id: string) => {
+  const promos = await prisma.promo.update({
+    where: { id },
+    data: {
+      isDeleted: true,
+    },
+  });
+  return promos;
+};
+
 const getAllPromos = async () => {
   return await prisma.promo.findMany();
 };
@@ -89,5 +120,7 @@ export const promoServices = {
   createPromo,
   usePromo,
   createUsePromo,
-  getAllPromos
+  getAllPromos,
+  updatePromo,
+  deletePromo,
 };

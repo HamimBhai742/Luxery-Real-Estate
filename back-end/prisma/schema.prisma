@@ -104,7 +104,7 @@ model Promo {
   discount    Float
   validFrom   DateTime
   validTo     DateTime
-
+isDeleted   Boolean   @default(false)
   usage      PromoUsage[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

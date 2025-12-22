@@ -47,7 +47,7 @@ const createUsePromo = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
-const getAllPromo= createAsyncFn(async (req: Request, res: Response) => {
+const getAllPromo = createAsyncFn(async (req: Request, res: Response) => {
   const promos = await promoServices.getAllPromos();
   sendResponse(res, {
     success: true,
@@ -57,9 +57,34 @@ const getAllPromo= createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const updatePromo = createAsyncFn(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const payload = req.body;
+  const promos = await promoServices.updatePromo(id, payload);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Promo updated successfully',
+    data: promos,
+  });
+});
+
+const deletePromo = createAsyncFn(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const promos = await promoServices.deletePromo(id);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Promo deleted successfully',
+    data: promos,
+  });
+});
+
 export const promoController = {
   createPromo,
   usePromo,
   createUsePromo,
-  getAllPromo
+  getAllPromo,
+  updatePromo,
+  deletePromo,
 };

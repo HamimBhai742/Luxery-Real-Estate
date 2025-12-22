@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { validateRequest } from '../../middleware/zod.validation';
-import { promoSchema } from './promo.schema';
+import { promoSchema, promoupdateSchema } from './promo.schema';
 import { promoController } from './promo.controller';
 import { checkAuth } from '../../middleware/check.auth';
 import { Role } from '@prisma/client';
@@ -23,5 +23,18 @@ router.post(
 );
 
 router.get('/', checkAuth(Role.ADMIN), promoController.getAllPromo);
+
+router.put(
+  '/update/:id',
+  checkAuth(Role.ADMIN),
+  validateRequest(promoupdateSchema),
+  promoController.updatePromo
+);
+
+router.delete(
+  '/delete/:id',
+  checkAuth(Role.ADMIN),
+  promoController.deletePromo
+);
 
 export const promoRoutes = router;

@@ -45,6 +45,8 @@ const CardDetails = ({ property }: { property: Property }) => {
       setLoading(false);
     }
   };
+  console.log(property)
+  console.log(property?.review)
   return (
     <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>

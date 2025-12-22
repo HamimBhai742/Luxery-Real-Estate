@@ -179,7 +179,10 @@ const getSingleProperty = async (slug: string) => {
       },
     });
 
-    return await tx.property.findUnique({ where: { slug } });
+    return await tx.property.findUnique({
+      where: { slug },
+      include: { review: true },
+    });
   });
 };
 const deleteProperty = async (id: string) => {
