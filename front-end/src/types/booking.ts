@@ -3,6 +3,7 @@ export interface Booking {
   userId: number;
   propertyId: string;
   totalAmount: string;
+  isReviewed: boolean;
   status: 'pending' | 'paid' | 'canceled';
   createdAt: string;
   updatedAt: string;

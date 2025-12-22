@@ -17,12 +17,14 @@ import {
   FiClock,
   FiChevronRight,
   FiChevronLeft,
+  FiStar,
 } from 'react-icons/fi';
 import { ImSpinner9 } from 'react-icons/im';
 import { MdBedroomParent, MdBathtub } from 'react-icons/md';
 import BookingsTableSkeleton from './BookingsTableSkeleton';
 import { getPayment } from '@/helpers/getPayment';
 import { useRouter } from 'next/navigation';
+import ReviewModal from './ReviewModal';
 
 export interface BookingStats {
   cancelledBookings: number;
@@ -49,6 +51,17 @@ export default function BookingsTable() {
   const [statusFilter, setStatusFilter] = useState<
     'all' | 'pending' | 'paid' | 'canceled'
   >('all');
+  const [reviewModal, setReviewModal] = useState<{
+    isOpen: boolean;
+    bookingId: string;
+    propertyName: string;
+    propertyId: string;
+  }>({
+    isOpen: false,
+    bookingId: '',
+    propertyName: '',
+    propertyId: '',
+  });
 
   useEffect(() => {
     try {
@@ -82,17 +95,39 @@ export default function BookingsTable() {
     try {
       setPaymentLoading(true);
       router.push(`/payment/check-out/${bookingId}`);
-       } catch (error) {
+    } catch (error) {
       toast.error('Failed to initiate payment. Please try again.');
     } finally {
       setPaymentLoading(false);
     }
   };
 
+  const openReviewModal = (
+    bookingId: string,
+    propertyName: string,
+    propertyId: string
+  ) => {
+    setReviewModal({
+      isOpen: true,
+      bookingId,
+      propertyName,
+      propertyId,
+    });
+  };
+
+  const closeReviewModal = () => {
+    setReviewModal({
+      isOpen: false,
+      bookingId: '',
+      propertyName: '',
+      propertyId: '',
+    });
+  };
+
   if (loading) {
     return <BookingsTableSkeleton />;
   }
-
+console.log(bookings)
   return (
     <div className='space-y-6'>
       {/* Stats Cards */}
@@ -296,6 +331,21 @@ export default function BookingsTable() {
                       )}
                     </button>
                   )}
+                  {booking.status === 'paid' && booking.isReviewed === false && (
+                    <button
+                      onClick={() =>
+                        openReviewModal(
+                          booking.id,
+                          booking.property.name,
+                          booking.property.id
+                        )
+                      }
+                      className='flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-yellow-500 to-orange-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300'
+                    >
+                      <FiStar />
+                      <span>Review</span>
+                    </button>
+                  )}
                   <Link
                     href={`/properties/${booking.property.slug}`}
                     className='flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white rounded-xl font-semibold hover:border-blue-500 hover:shadow-lg hover:scale-105 transition-all duration-300'
@@ -386,6 +436,15 @@ export default function BookingsTable() {
           </div>
         </div>
       )}
+
+      {/* Review Modal */}
+      <ReviewModal
+        isOpen={reviewModal.isOpen}
+        onClose={closeReviewModal}
+        bookingId={reviewModal.bookingId}
+        propertyName={reviewModal.propertyName}
+        propertyId={reviewModal.propertyId}
+      />
     </div>
   );
 }

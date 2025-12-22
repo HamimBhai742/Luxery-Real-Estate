@@ -1,8 +1,11 @@
 import LoginForm from '@/components/LoginForm';
+import { Suspense } from 'react';
+
 export const metadata = {
   title: 'Login - Luxury Real Estate',
   description: 'Sign in to your account to access our services',
 };
+
 export default function LoginPage() {
   return (
     <div className='min-h-screen relative overflow-hidden'>
@@ -29,7 +32,9 @@ export default function LoginPage() {
       <div className='relative z-10 flex items-center justify-center min-h-screen px-4 py-12'>
         <div className='flex justify-center lg:justify-start order-2 lg:order-1'>
           <div className='w-full max-w-xl bg-white/90 dark:bg-white/5 backdrop-blur-2xl rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 p-8 lg:p-10'>
-            <LoginForm />
+            <Suspense fallback={<div>Loading...</div>}>
+              <LoginForm />
+            </Suspense>
           </div>
         </div>
       </div>

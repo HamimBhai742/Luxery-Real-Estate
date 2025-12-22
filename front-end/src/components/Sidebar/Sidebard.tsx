@@ -22,7 +22,7 @@ import { ImProfile } from 'react-icons/im';
 import { FaBlog } from 'react-icons/fa6';
 import { useTheme } from 'next-themes';
 import { FiSun, FiMoon } from 'react-icons/fi';
-import { ModeToggle } from '../toggole-mode';
+import { MdDiscount } from 'react-icons/md';
 
 interface MenuItem {
   id: string;
@@ -107,6 +107,13 @@ const Sidebar = () => {
       icon: <FiCalendar className='w-5 h-5' />,
       href: '/dashboard/my-bookings',
       role: 'USER',
+    },
+    {
+      id: 'manage-promo',
+      label: 'Manage Promo',
+      icon: <MdDiscount className='w-5 h-5' />,
+      href: '/dashboard/manage-promo',
+      role: 'ADMIN',
     },
     {
       id: 'payment-history',
@@ -224,7 +231,7 @@ const Sidebar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 h-screen z-40
+           top-0 left-0 h-screen z-40
           w-72 lg:w-80
           bg-white/10 dark:bg-gray-900/90
           backdrop-blur-2xl
@@ -259,7 +266,6 @@ const Sidebar = () => {
             <div>
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-               
               >
                 {theme === 'dark' ? (
                   <FiSun className='text-yellow-300 text-xl' />

@@ -1,24 +1,15 @@
-const TestimonialsSection = () => {
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Property Investor",
-      image: "👩‍💼",
-      text: "Exceptional service and expertise. Found my dream luxury property within weeks!"
-    },
-    {
-      name: "Michael Chen",
-      role: "Business Owner", 
-      image: "👨‍💼",
-      text: "Professional team that understands luxury real estate market perfectly."
-    },
-    {
-      name: "Emma Davis",
-      role: "Real Estate Developer",
-      image: "👩‍🏭",
-      text: "Outstanding investment advice that maximized my portfolio returns."
-    }
-  ];
+import { Review } from '@/types/review';
+import Link from 'next/link';
+import ReviewCard from './ReviewCard';
+
+const TestimonialsSection = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review`, {
+    cache: 'no-store',
+  });
+  const data = await res.json();
+
+  const reviews: Review[] = data?.data;
+  console.log(data);
 
   return (
     <section className='relative py-20 px-4 sm:px-6 lg:px-8'>
@@ -35,18 +26,18 @@ const TestimonialsSection = () => {
           </p>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className='group bg-white/80 dark:bg-black/40 backdrop-blur-xl border border-gray-200 dark:border-gray-800 rounded-2xl p-8 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500'>
-              <div className='text-6xl mb-4 group-hover:scale-110 transition-transform duration-300'>{testimonial.image}</div>
-              <p className='text-gray-600 dark:text-gray-400 mb-6 italic'>"{testimonial.text}"</p>
-              <div>
-                <h4 className='font-bold text-gray-900 dark:text-white'>{testimonial.name}</h4>
-                <p className='text-sm text-blue-600 dark:text-amber-500'>{testimonial.role}</p>
-              </div>
-            </div>
+          {reviews.map((review: Review, index) => (
+            <ReviewCard review={review} key={index} />
           ))}
         </div>
       </div>
+
+      <Link
+        href='/reviews'
+        className='px-6  py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg transition-all dark:from-amber-500 dark:to-amber-600 flex items-center mx-auto mt-12 w-fit'
+      >
+        Sell All Reviwes
+      </Link>
     </section>
   );
 };
