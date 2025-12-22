@@ -10,6 +10,7 @@ const payment_routes_1 = require("../modules/payment/payment.routes");
 const stats_routes_1 = require("../modules/stats/stats.routes");
 const blog_routes_1 = require("../modules/blog/blog.routes");
 const promo_routes_1 = require("../modules/promo/promo.routes");
+const review_routes_1 = require("../modules/review/review.routes");
 exports.router = (0, express_1.Router)();
 const routes = [
     {
@@ -43,6 +44,10 @@ const routes = [
     {
         path: '/promo',
         route: promo_routes_1.promoRoutes,
+    },
+    {
+        path: '/review',
+        route: review_routes_1.reviewRoutes,
     },
 ];
 routes.forEach((route) => {

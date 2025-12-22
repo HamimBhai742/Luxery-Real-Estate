@@ -11,4 +11,7 @@ const router = (0, express_1.Router)();
 router.post('/create', (0, zod_validation_1.validateRequest)(promo_schema_1.promoSchema), (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), promo_controller_1.promoController.createPromo);
 router.post('/use', (0, check_auth_1.checkAuth)(client_1.Role.USER), promo_controller_1.promoController.usePromo);
 router.post('/usage-promo', (0, check_auth_1.checkAuth)(client_1.Role.USER), promo_controller_1.promoController.createUsePromo);
+router.get('/', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), promo_controller_1.promoController.getAllPromo);
+router.put('/update/:id', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), (0, zod_validation_1.validateRequest)(promo_schema_1.promoupdateSchema), promo_controller_1.promoController.updatePromo);
+router.delete('/delete/:id', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), promo_controller_1.promoController.deletePromo);
 exports.promoRoutes = router;

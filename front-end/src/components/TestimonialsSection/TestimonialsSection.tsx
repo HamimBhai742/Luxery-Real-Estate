@@ -8,7 +8,7 @@ const TestimonialsSection = async () => {
   });
   const data = await res.json();
 
-  const reviews: Review[] = data?.data;
+  const reviews: Review[] = data?.data.slice(0, 3) || [];
   console.log(data);
 
   return (

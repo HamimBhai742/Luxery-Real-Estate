@@ -15,4 +15,5 @@ router.get('/', property_controller_1.propertyController.getAllProperties);
 router.get('/:slug', property_controller_1.propertyController.getSingleProperty);
 router.put('/update-property/:id', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), property_controller_1.propertyController.updateProperty);
 router.delete('/delete-property/:id', (0, check_auth_1.checkAuth)(client_1.Role.ADMIN), property_controller_1.propertyController.deleteProperty);
+router.get('/find-single-property/:id', property_controller_1.propertyController.findSingleProperty);
 exports.propertyRoutes = router;

@@ -35,6 +35,15 @@ const usePromo = (code, bookingId, userId) => __awaiter(void 0, void 0, void 0, 
     if (!promos) {
         throw new coustom_error_1.AppError('Invalid Promo', http_status_codes_1.default.NOT_FOUND);
     }
+    //is deleted
+    if (promos.isDeleted) {
+        throw new coustom_error_1.AppError('Promo is deleted', http_status_codes_1.default.NOT_FOUND);
+    }
+    //is expired
+    const currentDate = new Date();
+    if (promos.validTo < currentDate) {
+        throw new coustom_error_1.AppError('Promo Expired', http_status_codes_1.default.NOT_FOUND);
+    }
     const promosUsages = yield prisma_configs_1.prisma.promoUsage.findUnique({
         where: { promoId_userId: { promoId: promos.id, userId } },
     });
@@ -78,8 +87,39 @@ const createUsePromo = (code, userId) => __awaiter(void 0, void 0, void 0, funct
         },
     });
 });
+const updatePromo = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const promoCode = payload.code.toUpperCase();
+    const discount = Number(payload.discount);
+    const validFrom = new Date(payload.validFrom);
+    const validTo = new Date(payload.validTo);
+    const promos = yield prisma_configs_1.prisma.promo.update({
+        where: { id },
+        data: {
+            code: promoCode,
+            discount,
+            validFrom,
+            validTo,
+        },
+    });
+    return promos;
+});
+const deletePromo = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const promos = yield prisma_configs_1.prisma.promo.update({
+        where: { id },
+        data: {
+            isDeleted: true,
+        },
+    });
+    return promos;
+});
+const getAllPromos = () => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prisma_configs_1.prisma.promo.findMany();
+});
 exports.promoServices = {
     createPromo,
     usePromo,
     createUsePromo,
+    getAllPromos,
+    updatePromo,
+    deletePromo,
 };

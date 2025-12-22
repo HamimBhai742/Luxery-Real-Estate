@@ -183,7 +183,16 @@ const getSingleProperty = (slug) => __awaiter(void 0, void 0, void 0, function* 
                 },
             },
         });
-        return yield tx.property.findUnique({ where: { slug } });
+        return yield tx.property.findUnique({
+            where: { slug },
+            include: {
+                review: {
+                    include: {
+                        user: true,
+                    },
+                },
+            },
+        });
     }));
 });
 const deleteProperty = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -194,6 +203,9 @@ const deleteProperty = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const deletedProperty = yield prisma_configs_1.prisma.property.delete({ where: { id } });
     return deletedProperty;
 });
+const findSingleProperty = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prisma_configs_1.prisma.property.findUnique({ where: { id } });
+});
 exports.propertyServices = {
     createProperty,
     getMyProperty,
@@ -201,4 +213,5 @@ exports.propertyServices = {
     deleteProperty,
     getAllProperties,
     getSingleProperty,
+    findSingleProperty,
 };

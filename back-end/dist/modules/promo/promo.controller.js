@@ -50,8 +50,41 @@ const createUsePromo = (0, create_async_fn_1.createAsyncFn)((req, res) => __awai
         data: promos,
     });
 }));
+const getAllPromo = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const promos = yield promo_services_1.promoServices.getAllPromos();
+    (0, send_response_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: 'Promo used successfully',
+        data: promos,
+    });
+}));
+const updatePromo = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const payload = req.body;
+    const promos = yield promo_services_1.promoServices.updatePromo(id, payload);
+    (0, send_response_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: 'Promo updated successfully',
+        data: promos,
+    });
+}));
+const deletePromo = (0, create_async_fn_1.createAsyncFn)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const promos = yield promo_services_1.promoServices.deletePromo(id);
+    (0, send_response_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: 'Promo deleted successfully',
+        data: promos,
+    });
+}));
 exports.promoController = {
     createPromo,
     usePromo,
-    createUsePromo
+    createUsePromo,
+    getAllPromo,
+    updatePromo,
+    deletePromo,
 };
