@@ -22,4 +22,6 @@ router.post(
   promoController.createUsePromo
 );
 
+router.get('/', checkAuth(Role.ADMIN), promoController.getAllPromo);
+
 export const promoRoutes = router;

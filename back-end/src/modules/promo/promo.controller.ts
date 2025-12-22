@@ -47,8 +47,19 @@ const createUsePromo = createAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const getAllPromo= createAsyncFn(async (req: Request, res: Response) => {
+  const promos = await promoServices.getAllPromos();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatusCodes.OK,
+    message: 'Promo used successfully',
+    data: promos,
+  });
+});
+
 export const promoController = {
   createPromo,
   usePromo,
-  createUsePromo
+  createUsePromo,
+  getAllPromo
 };

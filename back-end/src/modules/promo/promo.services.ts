@@ -23,6 +23,11 @@ const usePromo = async (code: string, bookingId: string, userId: number) => {
   if (!promos) {
     throw new AppError('Invalid Promo', httpStatusCodes.NOT_FOUND);
   }
+  //check expirey
+  const currentDate = new Date();
+  if (promos.validTo < currentDate) {
+    throw new AppError('Promo Expired', httpStatusCodes.NOT_FOUND);
+  }
   const promosUsages = await prisma.promoUsage.findUnique({
     where: { promoId_userId: { promoId: promos.id, userId } },
   });
@@ -76,8 +81,13 @@ const createUsePromo = async (code: string, userId: number) => {
   });
 };
 
+const getAllPromos = async () => {
+  return await prisma.promo.findMany();
+};
+
 export const promoServices = {
   createPromo,
   usePromo,
   createUsePromo,
+  getAllPromos
 };
