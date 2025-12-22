@@ -38,4 +38,9 @@ router.delete(
   propertyController.deleteProperty
 );
 
+router.get(
+  '/find-single-property/:id',
+  propertyController.findSingleProperty
+);
+
 export const propertyRoutes = router;

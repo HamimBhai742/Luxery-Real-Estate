@@ -7,6 +7,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
+import RatingStars from '../TestimonialsSection/RatingStart';
+import Link from 'next/link';
 
 const CardDetails = ({ property }: { property: Property }) => {
   const [activeImage, setActiveImage] = useState(0);
@@ -45,8 +47,18 @@ const CardDetails = ({ property }: { property: Property }) => {
       setLoading(false);
     }
   };
-  console.log(property)
-  console.log(property?.review)
+
+  const formatDateTime = (isoDate: string) => {
+    console.log(isoDate);
+    return new Date(isoDate).toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    });
+  };
   return (
     <div className='min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-gray-900 dark:to-black py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -176,7 +188,7 @@ const CardDetails = ({ property }: { property: Property }) => {
                 </p>
               </div>
 
-              <div>
+              <div className='mb-8'>
                 <h2 className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white mb-4'>
                   Amenities
                 </h2>
@@ -202,6 +214,79 @@ const CardDetails = ({ property }: { property: Property }) => {
                   ))}
                 </div>
               </div>
+
+              {/* Reviews Section */}
+              {property?.review && (
+                <div>
+                  <h2 className='sm:text-2xl text-xl font-bold text-gray-900 dark:text-white mb-6'>
+                    Client Review
+                  </h2>
+
+                  {/* Review Card */}
+                  <div className='bg-linear-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 border border-blue-100 dark:border-gray-600'>
+                    <div className='flex items-center gap-4 mb-4'>
+                      <div className='relative'>
+                        {property?.review?.user?.profile ? (
+                          <Image
+                            src={property?.review?.user?.profile}
+                            alt='User Avatar'
+                            width={64}
+                            height={64}
+                            className='w-16 h-16 rounded-full flex items-center justify-center object-cover text-white font-bold text-lg shadow-lg'
+                          />
+                        ) : (
+                          '👤'
+                        )}
+                        <div className='absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white dark:border-gray-800'></div>
+                      </div>
+                      <div className='flex-1'>
+                        <h4 className='font-bold text-lg text-gray-900 dark:text-white'>
+                          {property?.review?.user?.name}
+                        </h4>
+                        <p className='text-gray-600 dark:text-gray-300 text-sm'>
+                          {} {property?.review?.user?.email}{' '}
+                        </p>
+                      </div>
+                      <div className='text-right'>
+                        <RatingStars
+                          rating={(property?.review?.rating as number) || 0}
+                        />
+                        <span className='text-xs text-gray-500 dark:text-gray-400'>
+                          {formatDateTime(property?.review?.createdAt || '')}
+                        </span>
+                      </div>
+                    </div>
+
+                    <blockquote className='text-gray-700 dark:text-gray-300 italic text-lg leading-relaxed border-l-4 border-blue-400 pl-4'>
+                      {property?.review?.comment}
+                    </blockquote>
+
+                    <div className='flex items-center justify-between mt-4 pt-4 border-t border-blue-200 dark:border-gray-600'>
+                      <div className='flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400'>
+                        <svg
+                          className='w-4 h-4'
+                          fill='currentColor'
+                          viewBox='0 0 20 20'
+                        >
+                          <path d='M10 12a2 2 0 100-4 2 2 0 000 4z' />
+                          <path
+                            fillRule='evenodd'
+                            d='M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z'
+                            clipRule='evenodd'
+                          />
+                        </svg>
+                        Stayed {property?.views} nights
+                      </div>
+                      <Link
+                        href={`/reviews`}
+                        className='text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium transition-colors'
+                      >
+                        View All Reviews →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

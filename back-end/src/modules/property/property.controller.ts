@@ -3,7 +3,7 @@ import { createAsyncFn } from '../../utils/create.async.fn';
 import { sendResponse } from '../../utils/send.response';
 import { propertyServices } from './property.services';
 import { pickQuery } from '../../utils/pick.query';
-
+import httpStatusCodes from 'http-status-codes';
 const createProperty = createAsyncFn(async (req: Request, res: Response) => {
   const payload = {
     ...req.body,
@@ -12,7 +12,7 @@ const createProperty = createAsyncFn(async (req: Request, res: Response) => {
   const property = await propertyServices.createProperty(payload);
   sendResponse(res, {
     success: true,
-    statusCode: 200,
+    statusCode: httpStatusCodes.CREATED,
     message: 'Property created successfully',
     data: property,
   });
@@ -27,11 +27,11 @@ const getMyProperties = createAsyncFn(async (req: Request, res: Response) => {
     'sortOrder',
   ]);
 
-  const filters = pickQuery(req.query, [ 'status']);
+  const filters = pickQuery(req.query, ['status']);
   const properties = await propertyServices.getMyProperty(filters, options);
   sendResponse(res, {
     success: true,
-    statusCode: 200,
+    statusCode: httpStatusCodes.OK,
     message: 'Properties Retrived Successfully',
     data: properties,
   });
@@ -45,14 +45,14 @@ const getAllProperties = createAsyncFn(async (req: Request, res: Response) => {
     'sortBy',
     'sortOrder',
     'prices',
-    'bedrooms'
+    'bedrooms',
   ]);
 
-  const filters = pickQuery(req.query, [ 'status','price','bedrooms']);
+  const filters = pickQuery(req.query, ['status', 'price', 'bedrooms']);
   const properties = await propertyServices.getAllProperties(filters, options);
   sendResponse(res, {
     success: true,
-    statusCode: 200,
+    statusCode: httpStatusCodes.OK,
     message: 'Properties Retrived Successfully',
     data: properties,
   });
@@ -62,7 +62,7 @@ const getSingleProperty = createAsyncFn(async (req: Request, res: Response) => {
   const property = await propertyServices.getSingleProperty(req.params.slug);
   sendResponse(res, {
     success: true,
-    statusCode: 200,
+    statusCode: httpStatusCodes.OK,
     message: 'Property Retrived Successfully',
     data: property,
   });
@@ -75,7 +75,7 @@ const updateProperty = createAsyncFn(async (req: Request, res: Response) => {
   );
   sendResponse(res, {
     success: true,
-    statusCode: 200,
+    statusCode: httpStatusCodes.OK,
     message: 'Property updated successfully',
     data: property,
   });
@@ -85,11 +85,23 @@ const deleteProperty = createAsyncFn(async (req: Request, res: Response) => {
   const property = await propertyServices.deleteProperty(req.params.id);
   sendResponse(res, {
     success: true,
-    statusCode: 200,
+    statusCode: httpStatusCodes.OK,
     message: 'Property deleted successfully',
     data: property,
   });
 });
+
+const findSingleProperty = createAsyncFn(
+  async (req: Request, res: Response) => {
+    const property = await propertyServices.findSingleProperty(req.params.id);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatusCodes.ACCEPTED,
+      message: 'Property Retrived Successfully',
+      data: property,
+    });
+  }
+);
 
 export const propertyController = {
   createProperty,
@@ -98,4 +110,5 @@ export const propertyController = {
   deleteProperty,
   getAllProperties,
   getSingleProperty,
+  findSingleProperty,
 };

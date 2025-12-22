@@ -181,7 +181,13 @@ const getSingleProperty = async (slug: string) => {
 
     return await tx.property.findUnique({
       where: { slug },
-      include: { review: true },
+      include: {
+        review: {
+          include: {
+            user: true,
+          },
+        },
+      },
     });
   });
 };
@@ -194,6 +200,10 @@ const deleteProperty = async (id: string) => {
   return deletedProperty;
 };
 
+const findSingleProperty = async (id: string) => {
+  return await prisma.property.findUnique({ where: { id } });
+};
+
 export const propertyServices = {
   createProperty,
   getMyProperty,
@@ -201,4 +211,5 @@ export const propertyServices = {
   deleteProperty,
   getAllProperties,
   getSingleProperty,
+  findSingleProperty,
 };
